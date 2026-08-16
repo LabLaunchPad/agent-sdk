@@ -1,0 +1,27 @@
+{
+  "coverage": "4 of 17 sources",
+  "licenses": {
+    "openai-agents-sdk": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "OpenAI, 2025"
+    },
+    "microsoft-agent-framework": {
+      "license": "MIT",
+      "status": "INFERENCE_NOT_FACT",
+      "note": "confirmed for Samples repo, not primary repo LICENSE file - LICENSE_UNKNOWN pending re-verification"
+    },
+    "pydantic-ai": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "Pydantic Services Inc., 2024-present"
+    },
+    "kimi-agent-sdk": {
+      "license": "Apache-2.0",
+      "status": "FACT (license identity); copyright holder is INFERENCE"
+    }
+  },
+  "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",
+  "source": "research/licensing/MATRIX.md",
+  "generated_at": "2026-08-16T00:00:00Z"
+}

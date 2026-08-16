@@ -1,0 +1,52 @@
+pattern:
+  id: tool-boundary-guardrails
+  name: Tool-boundary guardrails, independent of agent-level guardrails
+  problem: >
+    A single agent-level input/output guardrail cannot guarantee a check
+    happens at every downstream tool invocation. A tool call can occur
+    mid-turn, with arguments and side effects an agent-level guardrail never
+    directly inspects, so relying solely on system-prompt instructions or a
+    final-output guardrail leaves a real gap at the exact point a side
+    effect happens.
+  observed_solution: >
+    OpenAI Agents SDK implements two independent guardrail layers: agent-level
+    guardrails on overall input/output, and tool guardrails
+    (ToolInputGuardrail / ToolOutputGuardrail) attached directly to specific
+    function tools, running immediately before and after each invocation.
+    A tool guardrail can reject the call/output and continue with a message
+    to the model, or raise to halt execution outright.
+  source:
+    framework: OpenAI Agents SDK
+    resource: https://openai.github.io/openai-agents-python/ref/tool_guardrails/
+    evidence_level: E3
+  strengths:
+    - Validation happens at the exact point a real-world action is about to
+      occur, not several reasoning steps removed from it.
+    - Composable per-tool — a sensitive tool (send email, spend money) can
+      carry stricter guardrails than a read-only tool without touching the
+      agent-level policy.
+    - Two independent failure modes (agent-level vs tool-level) reduce the
+      chance a single missed check lets a bad action through.
+  weaknesses:
+    - Two guardrail layers means two places policy can drift out of sync if
+      not deliberately kept consistent.
+    - Does not by itself solve remote-agent or MCP-server trust — it is
+      scoped to first-party function tools in the reference implementation.
+  applicability: >
+    Directly applicable to LabLaunchPad's Policy Gate requirement that
+    policy be checked at the capability/tool execution boundary, not only at
+    agent input/output.
+  lablaunchpad_adaptation: >
+    Adopt the two-layer split as a contract requirement in the Capability
+    spec (Phase 8): every Capability invocation passes through a policy
+    check independent of any agent-level guardrail, and tool output remains
+    DATA, never AUTHORITY, per this repository's existing security rule.
+    Extend beyond OpenAI's scope to also cover MCP tool calls and
+    remote-agent (A2A) capability invocations, which OpenAI's reference
+    implementation does not explicitly address.
+  benchmark: >
+    Not yet run. Planned: adversarial test where a malicious tool output
+    attempts to override policy via embedded instructions — must be rejected
+    at the tool-output guardrail regardless of what the agent-level guardrail
+    concludes.
+  status: CANDIDATE

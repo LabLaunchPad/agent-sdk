@@ -1,0 +1,35 @@
+{
+  "decisions": [
+    {
+      "id": "adopt-tool-boundary-guardrails",
+      "pattern": "tool-boundary-guardrails",
+      "status": "CANDIDATE",
+      "note": "confirms existing AGENTS.md Policy Gate requirement rather than introducing a new one"
+    },
+    {
+      "id": "confirm-agent-harness-workflow-layering",
+      "pattern": "agent-harness-workflow-layering",
+      "status": "CANDIDATE",
+      "note": "no architectural change; independent E3 confirmation of existing PACKAGE-MAP.md layering"
+    },
+    {
+      "id": "confirm-thin-sdk-strategy",
+      "pattern": "thin-sdk-shared-runtime",
+      "status": "CANDIDATE",
+      "note": "confirms ADR-0001 binding strategy; no action until ADR-0001's revisit trigger fires"
+    },
+    {
+      "id": "reject-uniform-runtime-swap-assumption",
+      "contradiction": "runtime-abstraction-uniform",
+      "status": "ACTION_REQUIRED",
+      "note": "Phase 17 RuntimeAdapter conformance suite must test mid-execution backend swap explicitly"
+    },
+    {
+      "id": "reject-local-always-cheaper",
+      "contradiction": "local-execution-cheaper",
+      "status": "ACTION_REQUIRED",
+      "note": "Phase 19 SandboxProvider spec must define isolation guarantee independent of local-vs-hosted preference"
+    }
+  ],
+  "generated_at": "2026-08-16T00:00:00Z"
+}

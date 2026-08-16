@@ -1,0 +1,7 @@
+{
+  "coverage": "1 finding, not a full audit",
+  "key_finding": "shared-interface does not guarantee uniform cross-backend behaviour",
+  "evidence": "research/contradictions/runtime-abstraction-uniform.md",
+  "action_required": "Phase 17 RuntimeAdapter conformance suite must test edge-of-interface behaviour (e.g. mid-execution backend swap), not only steady-state execution",
+  "generated_at": "2026-08-16T00:00:00Z"
+}

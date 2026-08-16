@@ -5,11 +5,21 @@ Ecosystem research, extracted patterns and the claims they support.
 **Source-of-truth status: DERIVED** — research informs decisions; it does not
 override specs or ADRs.
 
-- `patterns/` — reusable architectural patterns, with source and tradeoffs
-- `claims/` — claims made about other systems, each with evidence
-- `decisions/` — adopt / adapt / reject outcomes feeding into ADRs
+- `frameworks/<name>/` — per-framework research (overview, local-first,
+  capabilities, licensing; other dimensions added incrementally)
+- `local-first/`, `built-in-capabilities/`, `licensing/` — cross-framework
+  matrices
+- `contradictions/` — counterexamples to proposed LabLaunchPad claims
+- `patterns/`, `claims/`, `decisions/` — reusable architectural patterns,
+  sourced claims, adopt/adapt/reject outcomes feeding into ADRs
 
-## Phase 0 contents
+Every concept file here is an [OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+document — see [ADR-0007](../ADR/0007-adopt-okf-v0-2.md).
 
-Empty. **Phase 1 has not started.** Populating this directory is Phase 1 work
-and must not begin until Phase 0 is verified PASS.
+## Coverage status
+
+**Partial.** Research began in Phase 1A Workstream B (gap audit) and covers
+4 of the ~17 sources named in the research brief so far — see
+`local-first/SCORECARD.md`'s coverage note and `.context/research/gaps.json`
+for exactly what remains. An unresearched framework is recorded as
+`UNKNOWN`, never silently assumed.

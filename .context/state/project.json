@@ -4,14 +4,20 @@
   "phase": {
     "id": "P1A",
     "name": "OKF v0.2 Adoption + Gap Audit",
-    "workstream": "A",
-    "workstreamName": "OKF Adoption",
+    "workstream": "B",
+    "workstreamName": "Gap Audit / Local-First Research",
     "status": "IN_PROGRESS",
     "stopAfter": true,
     "previousPhase": {
       "id": "P00",
       "status": "PASS",
       "receipt": "docs/agent/RECEIPT-P00.md"
+    },
+    "previousWorkstream": {
+      "id": "A",
+      "name": "OKF Adoption",
+      "status": "PASS",
+      "receipt": "docs/agent/RECEIPT-P1A-WORKSTREAM-A.md"
     }
   },
   "productBoundary": {

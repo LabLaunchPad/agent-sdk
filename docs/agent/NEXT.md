@@ -4,16 +4,24 @@ Queued work. Nothing here may start before its gate opens.
 
 ## Current phase
 
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream A (OKF adoption) in
-progress. Workstream B (90-dimension gap audit) begins only once Workstream
-A's no-regression gate passes — see the Phase 1A sub-receipts.
+**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 1
+complete. Workstream A passed its no-regression gate (CI green, run #4,
+commit fb615ed) — see `docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`. Workstream
+B's concrete scope is recorded in `docs/agent/NOW.md`'s scope-reconciliation
+note, superseding the earlier abstract 90-dimension sketch.
 
 ## Next gate
 
+**Workstream B, installment 2** — research the remaining sources
+(`.context/research/gaps.json`), prioritized Qwen-Agent and Youtu-Agent
+offline/local patterns next per the operating prompt's own priority order,
+then the rest of the primary set, then MCP/A2A/Agent Skills.
+
 **P02 — System Specification.**
-Entry condition: the Phase 1A receipt (both sub-receipts) reports `STATUS:
-PASS`, CI green, and Workstream B's spec/benchmark deltas are reconciled into
-this repository's governing documents.
+Entry condition: Workstream B's research is judged sufficient to derive the
+LabLaunchPad target architecture and spec/benchmark deltas the operating
+prompt calls for, and those deltas are reconciled into this repository's
+governing documents.
 
 **Phase 2 has NOT started.**
 

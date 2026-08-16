@@ -1,37 +1,40 @@
 {
-  "id": "P1A-workstream-A-okf-adoption",
+  "id": "P1A-workstream-B-local-first-research-installment-1",
   "phase": "P1A",
-  "title": "Adopt OKF v0.2 for agent-facing knowledge; no-regression gate",
-  "status": "IN_PROGRESS",
-  "governingAdrs": ["ADR-0007", "ADR-0008"],
+  "title": "Local-first + built-in-capability + licensing research, installment 1 of N",
+  "status": "COMPLETE",
+  "governingPrompt": "local-first-agent-sdk-intelligence-legal-reverse-engineering",
+  "scopeReconciliation": "docs/agent/NOW.md",
+  "researched": [
+    "openai-agents-sdk",
+    "microsoft-agent-framework",
+    "pydantic-ai",
+    "kimi-agent-sdk"
+  ],
+  "notYetResearched": [
+    "langgraph",
+    "mastra",
+    "qwen-agent",
+    "tencent-youtu-agent",
+    "volcengine-agentkit",
+    "baidu-appbuilder-sdk",
+    "mcp",
+    "a2a",
+    "agent-skills"
+  ],
   "acceptance": [
-    "all 5 original validators still PASS",
-    "all original adversarial negative fixtures still reject (migrated, not deleted)",
-    "the 5 live negative probes from the Phase 0 receipt still fail-then-revert",
-    "pnpm verify green on Node 24.19.0, CI green",
-    "every .context record's hash check still functions",
-    "no knowledge fact exists in two formats simultaneously at phase end",
-    "okf-conformance validator (6th) passes and rejects its negative fixtures AND accepts its leniency fixtures"
+    "every claim backed by real primary-source evidence (WebSearch/WebFetch), not model-knowledge recall",
+    "evidence level recorded per claim",
+    "UNKNOWN used honestly for unresearched dimensions, never inferred",
+    "all new research/ and knowledge/ content OKF-conformant (validated)",
+    "no production Agent SDK behaviour implemented"
   ],
   "prohibited": [
-    "Agent",
-    "Planner",
-    "Harness",
-    "Workflow",
-    "Memory",
-    "Context compiler",
-    "Runtime",
-    "Model gateway",
-    "MCP",
-    "A2A",
-    "Fast Path",
-    "Workstream B (gap audit) starting before Workstream A's gate passes"
+    "implementing newly discovered SDK functionality",
+    "fabricating coverage of unresearched sources"
   ],
   "openCommitments": [
-    "run full no-regression gate",
-    "commit, push, update PR",
-    "emit Workstream A sub-receipt",
-    "begin Workstream B only after Workstream A PASS"
+    "installment 2: research remaining ~13 sources, prioritized per docs/agent/NEXT.md"
   ],
-  "priorTask": "P00-foundation (COMPLETE, docs/agent/RECEIPT-P00.md)"
+  "priorTask": "P1A-workstream-A-okf-adoption (COMPLETE, docs/agent/RECEIPT-P1A-WORKSTREAM-A.md)"
 }

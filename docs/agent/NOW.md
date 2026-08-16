@@ -5,44 +5,63 @@ here, stop and reconcile before continuing.
 
 ## Phase
 
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream A (OKF adoption)
+**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 1
 
 ## Objective
 
-Migrate agent-facing knowledge (`.context/`, `research/`, `specs/`, `ADR/`) to
-[OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
-with a full no-regression gate, then hand off to Workstream B (the 90-dimension
-gap audit). See [ADR-0007](../../ADR/0007-adopt-okf-v0-2.md) and
-[ADR-0008](../../ADR/0008-cache-trust-tiers.md).
+Determine strongest proven patterns for a local-first Agent SDK with rich
+built-in capabilities, via evidence-gated primary-source research across the
+current agent-ecosystem, plus licensing/legal review — see
+`docs/agent/DECISIONS.md` for the scope reconciliation note below.
 
-Phase 0 proved the engineering environment. Phase 1A adopts a vendor-neutral
-knowledge format and audits the plan against the current ecosystem. Only
-Phase 2+ implements Agent SDK behaviour.
+## Scope reconciliation (explicit, not silent)
 
-## In scope (Workstream A)
+Workstream A's plan sketched Workstream B abstractly as a "90-dimension
+self-audit (1A-1) then targeted research (1A-2)." A subsequent, far more
+detailed operating prompt specified Workstream B concretely instead: a
+local-first scorecard, built-in-capability matrix, licensing matrix,
+pattern library and contradiction matrix across ~17 named sources
+(OpenAI Agents SDK, Microsoft Agent Framework, LangGraph, PydanticAI,
+Mastra, Qwen-Agent, Tencent Youtu-Agent, Volcengine AgentKit, Baidu
+AppBuilder, Kimi Agent SDK, MCP, A2A, Agent Skills).
 
-Envelope migration for the four `.context/` cache records; OKF frontmatter on
-`ADR/*.md` and `specs/persistence/STORE-INTERFACES.md`; the sixth validator
-(`okf-conformance`, structural OKF conformance including required leniency);
-the rewritten `context-staleness` validator (derived freshness + trust tier);
-fixtures proving both validators reject their negative cases and do NOT
-over-reject the spec's explicit leniency cases; governance-doc updates.
+**This detailed prompt is adopted as the operative Workstream B design**,
+superseding the abstract 90-dimension sketch — recorded here per AGENTS.md's
+"do not silently replace an architectural decision" rule, not swapped
+without a trace. The abstract 90-dimension audit's underlying goal (find
+what the plan still misses) is preserved; the concrete research structure
+just replaces the abstract classification exercise as the mechanism.
+
+## In scope (installment 1, complete)
+
+Real primary-source research (WebSearch/WebFetch, evidence level E3) for 4
+of ~17 named sources: OpenAI Agents SDK, Microsoft Agent Framework,
+PydanticAI, Kimi Agent SDK — chosen because the operating prompt weights
+local-first relevance most heavily and these four are its own named
+high-priority local-first references. Produced: per-framework OKF concept
+docs, local-first scorecard, capability matrix, licensing matrix, 3
+extracted patterns (`knowledge/patterns/`), 2 contradiction-matrix entries,
+machine-facing `.context/research/*.json` summaries.
+
+## Explicitly deferred (installment 2+)
+
+LangGraph, Mastra, Qwen-Agent, Tencent Youtu-Agent, Volcengine AgentKit,
+Baidu AppBuilder SDK, MCP, A2A, Agent Skills — all recorded `UNKNOWN`, never
+silently assumed. Full per-framework 14-dimension depth (state, memory,
+context, security, evaluation, DX, UX) for the 4 already-researched
+frameworks — installment 1 covered local-first, capabilities and licensing
+only. See `.context/research/gaps.json` for the complete remaining list and
+prioritization.
 
 ## Out of scope
 
-Any Agent SDK product behaviour. Workstream B (the gap audit itself) — begins
-only once Workstream A's no-regression gate passes. Any change to `docs/` or
-directory `README.md`/`TEMPLATE*.md` files — deliberately excluded from OKF
-scope (see `docs/agent/DECISIONS.md`).
+Any Agent SDK product implementation — this is a research phase per the
+operating prompt's own "NO IMPLEMENTATION... STOP after producing the final
+audit" rule. No code in `packages/` changes as part of this installment.
 
-## Definition of done (Workstream A no-regression gate)
+## Definition of done (installment 1)
 
-1. All 5 original validators still `PASS`.
-2. All original adversarial negative fixtures still reject — migrated, not
-   deleted.
-3. The 5 live negative probes from the Phase 0 receipt still fail-then-revert.
-4. `pnpm verify` green on Node 24.19.0, CI green.
-5. Every `.context` record's hash check still functions.
-6. No knowledge fact exists in two formats simultaneously at phase end.
-
-Not "the validators run" — see AGENTS.md's evidence principle.
+Real evidence (not model-knowledge recall) for every claim; evidence level
+recorded per claim; `UNKNOWN` used honestly rather than inferred; all new
+knowledge OKF-conformant (validated); no fabricated coverage of
+unresearched sources. **Status: met** — see the installment receipt.

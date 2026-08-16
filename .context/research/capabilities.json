@@ -1,0 +1,27 @@
+{
+  "coverage": "3 of 17 sources; only capability dimensions explicitly documented in this installment",
+  "confirmed_patterns": {
+    "tool_boundary_guardrails_distinct_from_agent_guardrails": {
+      "source": "openai-agents-sdk",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "tool-boundary-guardrails"
+    },
+    "agent_harness_workflow_three_layers": {
+      "source": "microsoft-agent-framework",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "agent-harness-workflow-layering"
+    },
+    "thin_sdk_over_shared_runtime": {
+      "source": "kimi-agent-sdk",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "thin-sdk-shared-runtime"
+    },
+    "durable_execution_as_attachable_capability": {
+      "source": "pydantic-ai",
+      "evidence_level": "E3",
+      "caveat": "not a uniform interface across backends - see research/contradictions/runtime-abstraction-uniform.md"
+    }
+  },
+  "source": "research/built-in-capabilities/MATRIX.md",
+  "generated_at": "2026-08-16T00:00:00Z"
+}

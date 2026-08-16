@@ -1,0 +1,52 @@
+pattern:
+  id: thin-sdk-shared-runtime
+  name: Thin per-language SDK bindings over one shared runtime
+  problem: >
+    Supporting multiple language ecosystems (Python, Node, Go, etc.) by
+    reimplementing full agent logic in each language multiplies maintenance
+    cost, risks behavioural drift between languages, and slows every future
+    feature by a factor of N languages.
+  observed_solution: >
+    Kimi Agent SDK ships thin, language-native client bindings that reuse
+    one shared execution runtime (the Kimi CLI) rather than reimplementing
+    agent logic per language. Configuration, custom tools, skills, MCP
+    server connections, session orchestration and approval handling are all
+    defined once in the CLI runtime and merely exposed through each
+    language's binding.
+  source:
+    framework: Kimi Agent SDK
+    resource: https://github.com/MoonshotAI/kimi-agent-sdk
+    evidence_level: E3
+  strengths:
+    - New language support is a binding-writing exercise, not a
+      reimplementation exercise — much lower marginal cost per language.
+    - Behavioural consistency across languages is structural (one runtime),
+      not achieved by keeping N implementations in sync by discipline.
+  weaknesses:
+    - Requires the shared runtime to be reachable from every binding's
+      language/platform target — a constraint that does not apply equally
+      to every deployment shape (e.g. a language binding that must run
+      inside a browser or a Worker without spawning a subprocess).
+    - Ties the binding's feature set to whatever the shared runtime exposes;
+      a language-specific ergonomic feature not modeled by the runtime's own
+      interface cannot be added without changing the runtime.
+  applicability: >
+    Directly validates ADR-0001's stated binding strategy: TypeScript
+    canonical implementation, JSON Schema canonical contract, other
+    languages arrive later as bindings validated against the same
+    conformance suite — never as parallel implementations of the
+    architecture. This is independent, real-world confirmation the strategy
+    is viable, from a shipping multi-language agent SDK.
+  lablaunchpad_adaptation: >
+    Do not adopt the specific CLI-process mechanism (LabLaunchPad's runtime
+    is a library, not necessarily a CLI process) — adapt the underlying
+    idea: when a Python or Go binding is eventually built (deferred per
+    ADR-0001's revisit trigger), it should be a thin client against the
+    same JSON Schema contracts and conformance suite the TypeScript
+    implementation already satisfies, not a second implementation of Task/
+    State/Capability semantics.
+  benchmark: >
+    Not applicable until a second-language binding is actually built
+    (ADR-0001's revisit trigger has not fired). Recorded now so the decision
+    is pre-made rather than re-derived when that phase arrives.
+  status: CANDIDATE

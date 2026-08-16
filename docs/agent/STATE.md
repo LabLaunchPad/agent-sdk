@@ -13,7 +13,7 @@ and this file is the human summary — reconcile both before proceeding.
 | Repository            | `LabLaunchPad/agent-sdk`             |
 | npm namespace         | `@lablaunchpad/*`                    |
 | Current phase         | P00 — Foundation + Working Toolchain |
-| Phase status          | PASS — receipt emitted, awaiting CI  |
+| Phase status          | PASS — CI green, receipt complete    |
 | Canonical language    | TypeScript                           |
 | Canonical wire format | JSON Schema                          |
 

@@ -107,12 +107,12 @@ BUILD:
   Emitted ESM preserves explicit .js specifiers and loads directly under Node.
 
 TESTS:
-  unit:          5 passed / 5
+  unit:          7 passed / 7
   contract:      7 passed / 7
   integration:   n/a — no cross-package behaviour exists yet (Phase 3)
   adversarial:  18 passed / 18
   portability:   n/a — requires a runtime adapter (Phase 17)
-  total:        30 passed / 30, 3 files
+  total:        32 passed / 32, 4 files
 
 LINT:
   eslint . — 0 errors, 0 warnings (type-aware, strictTypeChecked +
@@ -147,9 +147,18 @@ CONTEXT CACHE:
   entries:  4 records — ACTIVE 3, STALE 0, INVALID 0, NOT_REQUIRED 1
 
 CI:
-  .github/workflows/ci.yml — authored, not yet run. Verified locally by
-  executing the identical command sequence on the pinned baseline. Status will
-  be confirmed on the pull request.
+  .github/workflows/ci.yml — GREEN on run #2 (commit 8b5ca81), PR #1.
+
+  Run #1 (commit 40a08be) FAILED, and correctly so. A blanket `dist/` rule in
+  .gitignore had silently excluded a package-exports fixture, so the suite
+  passed locally against a file git had never seen and failed in CI where it
+  did not exist. Fixed by negating the ignore for tests/fixtures/**/dist/ only,
+  and guarded by fixtures-tracked.unit.test.ts, which was confirmed to fail
+  when the fix is reverted. Tests 30 -> 32.
+
+  Recorded rather than quietly amended: the first CI run caught a real defect
+  that local verification structurally could not, which is the argument for
+  the CI gate existing at all.
 
 EVIDENCE:
   - TypeScript 7 is unusable here ← npm registry query: typescript-eslint
@@ -221,32 +230,32 @@ NEXT GATE:
 
 ## Exit criteria
 
-| #   | Criterion                                        | Result                                                         |
-| --- | ------------------------------------------------ | -------------------------------------------------------------- |
-| 1   | Clean install reproducible with frozen lockfile  | PASS                                                           |
-| 2   | Node 24.19.0 baseline verified                   | PASS                                                           |
-| 3   | TypeScript 6.0.3 pinned and verified             | PASS                                                           |
-| 4   | `tsc` builds all buildable packages              | PASS                                                           |
-| 5   | Lint clean                                       | PASS                                                           |
-| 6   | Format check clean                               | PASS                                                           |
-| 7   | Vitest passes                                    | PASS                                                           |
-| 8   | Modern Vitest `projects` configuration validated | PASS                                                           |
-| 9   | Schema/contract harness passes                   | PASS                                                           |
-| 10  | All 5 validators pass                            | PASS                                                           |
-| 11  | All 5 provably reject negative fixtures          | PASS                                                           |
-| 12  | `.context` operational                           | PASS                                                           |
-| 13  | Staleness detection works                        | PASS                                                           |
-| 14  | Stale required cache causes non-zero exit        | PASS                                                           |
-| 15  | `AGENTS.md` is canonical                         | PASS                                                           |
-| 16  | Adapters do not duplicate canonical architecture | PASS                                                           |
-| 17  | Package dependency direction enforced            | PASS                                                           |
-| 18  | Namespace is `@lablaunchpad/*`                   | PASS                                                           |
-| 19  | dist ESM loads directly under Node               | PASS                                                           |
-| 20  | Exports map works from a clean consumer          | PASS                                                           |
-| 21  | Packed tarball works                             | PASS                                                           |
-| 22  | Declaration files resolve                        | PASS                                                           |
-| 23  | No Agent SDK product logic exists                | PASS                                                           |
-| 24  | CI green                                         | PENDING — authored and locally equivalent; confirmed on the PR |
-| 25  | Phase 0 receipt generated                        | PASS                                                           |
+| #   | Criterion                                        | Result                        |
+| --- | ------------------------------------------------ | ----------------------------- |
+| 1   | Clean install reproducible with frozen lockfile  | PASS                          |
+| 2   | Node 24.19.0 baseline verified                   | PASS                          |
+| 3   | TypeScript 6.0.3 pinned and verified             | PASS                          |
+| 4   | `tsc` builds all buildable packages              | PASS                          |
+| 5   | Lint clean                                       | PASS                          |
+| 6   | Format check clean                               | PASS                          |
+| 7   | Vitest passes                                    | PASS                          |
+| 8   | Modern Vitest `projects` configuration validated | PASS                          |
+| 9   | Schema/contract harness passes                   | PASS                          |
+| 10  | All 5 validators pass                            | PASS                          |
+| 11  | All 5 provably reject negative fixtures          | PASS                          |
+| 12  | `.context` operational                           | PASS                          |
+| 13  | Staleness detection works                        | PASS                          |
+| 14  | Stale required cache causes non-zero exit        | PASS                          |
+| 15  | `AGENTS.md` is canonical                         | PASS                          |
+| 16  | Adapters do not duplicate canonical architecture | PASS                          |
+| 17  | Package dependency direction enforced            | PASS                          |
+| 18  | Namespace is `@lablaunchpad/*`                   | PASS                          |
+| 19  | dist ESM loads directly under Node               | PASS                          |
+| 20  | Exports map works from a clean consumer          | PASS                          |
+| 21  | Packed tarball works                             | PASS                          |
+| 22  | Declaration files resolve                        | PASS                          |
+| 23  | No Agent SDK product logic exists                | PASS                          |
+| 24  | CI green                                         | PASS — run #2, commit 8b5ca81 |
+| 25  | Phase 0 receipt generated                        | PASS                          |
 
 **STOP after Phase 0.** Do not automatically continue to Phase 1.

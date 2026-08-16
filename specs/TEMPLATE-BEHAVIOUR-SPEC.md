@@ -1,16 +1,32 @@
+---
+type: Behaviour Specification
+title: <Concept, as a short noun phrase>
+description: <One sentence — what this spec governs>
+sources:
+  - resource: /ADR/<governing-adr>.md
+    id: <adr-id>
+generated:
+  by: process:claude-code-session
+  at: <ISO 8601 datetime>
+status: draft
+---
+
 # <Concept> — Behaviour Specification
 
 > Copy this file. Fill every section. `UNKNOWN` is a valid answer; a blank
 > section is not. A spec is written **before** implementation — writing it
 > afterwards documents what happened rather than what was required.
 
-| Field          | Value                         |
-| -------------- | ----------------------------- |
-| Spec ID        | `SPEC-<AREA>-<NNN>`           |
-| Version        | `0.1.0`                       |
-| Status         | Draft / Accepted / Superseded |
-| Governing ADRs |                               |
-| Earliest phase |                               |
+OKF `status` maps: `Draft` → `draft`, `Accepted` → `stable`,
+`Superseded` → `deprecated`. Omit the `sources` entry above if this spec has
+no governing ADR yet.
+
+| Field          | Value               |
+| -------------- | ------------------- |
+| Spec ID        | `SPEC-<AREA>-<NNN>` |
+| Version        | `0.1.0`             |
+| Governing ADRs |                     |
+| Earliest phase |                     |
 
 ## 1. Purpose
 

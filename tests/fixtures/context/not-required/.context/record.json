@@ -1,8 +1,0 @@
-{
-  "source": "source.md",
-  "version": "0.0.0",
-  "sha256": null,
-  "generated_at": null,
-  "freshness": "NOT_REQUIRED",
-  "summary": { "note": "deliberately unmaintained; must NOT fail CI" }
-}

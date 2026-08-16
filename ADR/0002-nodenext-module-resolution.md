@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: Nodenext Module Resolution
+description: nodenext module resolution is required for all packages; no bundler in the SDK core.
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0002 — `nodenext` module resolution; no bundler in the core
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

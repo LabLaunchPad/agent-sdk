@@ -6,7 +6,7 @@ nothing from it.
 
 ## Session start
 
-1. Open `.context/INDEX.md`, then `.context/state/active-task.json`.
+1. Open `.context/index.md`, then `.context/state/active-task.json`.
 2. Confirm the gate you are on before touching any file.
 3. Use the Node baseline (`.nvmrc`) — a green run on another Node is not proof.
 

@@ -1,10 +1,22 @@
+---
+type: Behaviour Specification
+title: Store Interfaces
+description: Constraint specification for StateStore, SessionStore, CheckpointStore, MemoryStore, EvidenceStore and EventStore
+sources:
+  - resource: /ADR/0006-persistence-interfaces-deferred.md
+    id: adr-0006
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: draft
+---
+
 # Store Interfaces — Constraint Specification
 
 | Field          | Value                                                         |
 | -------------- | ------------------------------------------------------------- |
 | Spec ID        | `SPEC-PERSIST-001`                                            |
 | Version        | `0.1.0`                                                       |
-| Status         | Draft                                                         |
 | Governing ADRs | [ADR-0006](../../ADR/0006-persistence-interfaces-deferred.md) |
 | Earliest phase | P04 (state), P07 (memory)                                     |
 

@@ -23,7 +23,7 @@ trusting any result.
 In this order, and stop when you have enough:
 
 1. [`AGENTS.md`](../../AGENTS.md) — the canonical operating contract
-2. [`.context/INDEX.md`](../../.context/INDEX.md) — navigation layer
+2. [`.context/index.md`](../../.context/index.md) — navigation layer
 3. [`.context/state/active-task.json`](../../.context/state/active-task.json) — what is actually in flight
 4. [`NOW.md`](NOW.md) — current gate, in prose
 5. The governing spec for your task, and only that spec

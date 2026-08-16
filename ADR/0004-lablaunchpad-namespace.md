@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: LabLaunchPad npm Namespace
+description: '@lablaunchpad/* is the canonical npm namespace for all published packages.'
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0004 — `@lablaunchpad/*` is the canonical npm namespace
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

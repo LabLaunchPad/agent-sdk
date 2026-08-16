@@ -8,14 +8,15 @@ and this file is the human summary — reconcile both before proceeding.
 
 ## Repository
 
-| Field                 | Value                                |
-| --------------------- | ------------------------------------ |
-| Repository            | `LabLaunchPad/agent-sdk`             |
-| npm namespace         | `@lablaunchpad/*`                    |
-| Current phase         | P00 — Foundation + Working Toolchain |
-| Phase status          | PASS — CI green, receipt complete    |
-| Canonical language    | TypeScript                           |
-| Canonical wire format | JSON Schema                          |
+| Field                      | Value                                                 |
+| -------------------------- | ----------------------------------------------------- |
+| Repository                 | `LabLaunchPad/agent-sdk`                              |
+| npm namespace              | `@lablaunchpad/*`                                     |
+| Current phase              | P1A — OKF v0.2 Adoption + Gap Audit (Workstream A)    |
+| Phase status               | IN PROGRESS                                           |
+| Canonical language         | TypeScript                                            |
+| Canonical wire format      | JSON Schema                                           |
+| Canonical knowledge format | OKF v0.2 (`.context/`, `research/`, `specs/`, `ADR/`) |
 
 ## Toolchain baseline
 
@@ -41,6 +42,11 @@ and this file is the human summary — reconcile both before proceeding.
 
 ## Open commitments
 
-- Phase 0 exit criteria must all pass before Phase 1 may begin.
+- Phase 0 exit criteria all passed (CI green) — see [`RECEIPT-P00.md`](RECEIPT-P00.md).
+- Workstream A's no-regression gate must pass before Workstream B (gap audit)
+  may begin — see [`NOW.md`](NOW.md).
 - `TYPESCRIPT_7_REVISIT` gate is open — see ADR-0003.
+- OKF v0.3 revisit gate is open — see ADR-0007.
+- `.context/` verification backlog (all entries currently `unverified`) — see
+  ADR-0008 and [`NEXT.md`](NEXT.md).
 - workerd portability proof deferred to Phase 17 — see [`NEXT.md`](NEXT.md).

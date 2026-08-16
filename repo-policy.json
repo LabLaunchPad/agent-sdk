@@ -21,10 +21,11 @@
     "CODEX.md",
     "boundaries.json",
     "repo-policy.json",
+    "okf.json",
     ".nvmrc",
     "pnpm-workspace.yaml",
     "tsconfig.base.json",
-    ".context/INDEX.md",
+    ".context/index.md",
     "ADR/TEMPLATE.md",
     "specs/TEMPLATE-BEHAVIOUR-SPEC.md",
     "docs/agent/TEMPLATE-PHASE-RECEIPT.md"

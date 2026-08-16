@@ -31,7 +31,7 @@ Read **[`AGENTS.md`](AGENTS.md)** — the canonical operating contract for human
 and AI coding agents alike. `CLAUDE.md`, `OPENCODE.md` and `CODEX.md` are thin
 tool-specific adapters that intentionally repeat nothing from it.
 
-Then start at [`.context/INDEX.md`](.context/INDEX.md) rather than reading the
+Then start at [`.context/index.md`](.context/index.md) rather than reading the
 repository. New here? [`docs/agent/BOOTSTRAP.md`](docs/agent/BOOTSTRAP.md).
 
 ## Layout

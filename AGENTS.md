@@ -40,7 +40,7 @@ LabLaunchPad/agencyos-platform  →  consumes  @lablaunchpad/*
 Work proceeds one gated phase at a time. Never skip a phase, never silently
 merge phases, never implement a future phase's features early.
 
-Current phase and objective live in [`.context/INDEX.md`](.context/INDEX.md).
+Current phase and objective live in [`.context/index.md`](.context/index.md).
 
 Each phase runs this loop:
 
@@ -95,7 +95,7 @@ No blind implementation.
 ## Drift prevention
 
 Before every task, read
-[`.context/INDEX.md`](.context/INDEX.md) and
+[`.context/index.md`](.context/index.md) and
 [`.context/state/active-task.json`](.context/state/active-task.json), inspect
 actual repository state, then identify the governing spec, relevant ADRs, known
 failures, required tests and the current benchmark baseline.
@@ -127,24 +127,36 @@ affected tests and migration impact.
 
 `.context/` is a **compiled AI working cache**, never canonical truth.
 Canonical truth lives in `specs/`, `packages/`, `tests/`, `ADR/` and recorded
-benchmark results.
+benchmark results. `.context/` knowledge concepts are
+[OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+documents — see [ADR-0007](ADR/0007-adopt-okf-v0-2.md).
 
-| Rule    | Statement                                                     |
-| ------- | ------------------------------------------------------------- |
-| **C1**  | Never read the entire repository unless explicitly required.  |
-| **C2**  | Start from `.context/INDEX.md`.                               |
-| **C3**  | Read the active task and its direct dependencies first.       |
-| **C4**  | Expand context only when evidence shows it is necessary.      |
-| **C5**  | Never use stale cache as canonical truth.                     |
-| **C6**  | Every cache entry carries source + timestamp + hash/version.  |
-| **C7**  | When a source changes, invalidate the affected cache entries. |
-| **C8**  | After completing work, update the cache.                      |
-| **C9**  | Never copy large source files into summaries.                 |
-| **C10** | Prefer structured facts over prose.                           |
+| Rule    | Statement                                                                    |
+| ------- | ---------------------------------------------------------------------------- |
+| **C1**  | Never read the entire repository unless explicitly required.                 |
+| **C2**  | Start from `.context/index.md`.                                              |
+| **C3**  | Read the active task and its direct dependencies first.                      |
+| **C4**  | Expand context only when evidence shows it is necessary.                     |
+| **C5**  | Never use stale cache as canonical truth.                                    |
+| **C6**  | Every cache entry carries `sources[]`, `generated.at` and `x_source_sha256`. |
+| **C7**  | When a source changes, invalidate the affected cache entries.                |
+| **C8**  | After completing work, update the cache.                                     |
+| **C9**  | Never copy large source files into summaries.                                |
+| **C10** | Prefer structured facts over prose.                                          |
 
-Cache freshness is one of `ACTIVE`, `STALE`, `INVALID`, `NOT_REQUIRED`. A stale
-_required_ entry fails CI. Refreshing hashes is an explicit command
-(`pnpm context:refresh`) and never runs in CI.
+Freshness (`ACTIVE`, `STALE`, `INVALID`, `NOT_REQUIRED`) is **derived** from
+the hash and `stale_after`, never stored. A stale _required_ entry fails CI.
+Refreshing hashes is an explicit command (`pnpm context:refresh`) and never
+runs in CI — it never writes `verified`, since refreshing a hash is
+mechanical and marking something reviewed is not (see
+[ADR-0008](ADR/0008-cache-trust-tiers.md)).
+
+Every entry also carries a derived trust tier — `unverified`,
+`machine-confirmed`, or `human-reviewed` — from OKF's `verified` field. A
+higher tier means more scrutiny, not permission to skip verification: the
+"never cite `.context/` as evidence for a material claim" rule in
+[`docs/architecture/SOURCE-OF-TRUTH.md`](docs/architecture/SOURCE-OF-TRUTH.md)
+applies at every tier.
 
 ## Token efficiency rules
 

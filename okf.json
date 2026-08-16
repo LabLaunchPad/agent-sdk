@@ -1,0 +1,8 @@
+{
+  "$comment": "OKF v0.2 conformance manifest for okf-conformance-validator. See ADR-0007.",
+  "specVersion": "0.2",
+  "scopes": [".context", "research", "specs", "ADR"],
+  "reservedFilenames": ["index.md", "log.md"],
+  "excludeFilenames": ["README.md", "TEMPLATE.md", "TEMPLATE-BEHAVIOUR-SPEC.md"],
+  "requiredField": "type"
+}

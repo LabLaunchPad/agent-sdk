@@ -13,6 +13,7 @@ import {
   contextStalenessValidator,
   refreshContext,
 } from './validators/context-staleness.js';
+import { okfConformanceValidator } from './validators/okf-conformance.js';
 import { packageBoundaryValidator } from './validators/package-boundary.js';
 import { packageExportsValidator } from './validators/package-exports.js';
 import { repositoryPolicyValidator } from './validators/repository-policy.js';
@@ -22,6 +23,7 @@ const VALIDATORS = {
   'schema-contract': schemaContractValidator,
   'package-boundary': packageBoundaryValidator,
   'context-staleness': contextStalenessValidator,
+  'okf-conformance': okfConformanceValidator,
   'package-exports': packageExportsValidator,
   'repository-policy': repositoryPolicyValidator,
 } as const satisfies Record<

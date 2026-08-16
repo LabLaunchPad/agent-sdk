@@ -19,7 +19,9 @@ Which artifact wins when two disagree.
 ## `.context/` is never truth
 
 `.context/` is a compiled working cache that exists to make retrieval cheap for
-AI agents. It is a projection of the canonical sources above.
+AI agents. It is a projection of the canonical sources above, expressed as
+[OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+concept documents — see [ADR-0007](../../ADR/0007-adopt-okf-v0-2.md).
 
 - Never cite `.context/` as evidence for a material claim.
 - Verify against the source file when the claim matters.
@@ -27,7 +29,21 @@ AI agents. It is a projection of the canonical sources above.
   source is right and the cache must be refreshed.
 
 This is enforced: `context-staleness-validator` recomputes each entry's source
-hash and fails CI on a stale required entry.
+hash (`x_source_sha256`) and fails CI on a stale required entry.
+
+### Trust tiers are a mechanism, not a substitute for the rule above
+
+Every `.context/` entry also carries a **derived** trust tier —
+`unverified` / `machine-confirmed` / `human-reviewed` — computed from OKF's
+`verified` field (see [ADR-0008](../../ADR/0008-cache-trust-tiers.md)). This
+closes a real gap: hash freshness alone proves a source hasn't changed since
+compilation, not that the summary was ever accurate. A `human-reviewed` entry
+has been checked by a person; an `unverified` one has not.
+
+**The "never cite `.context/` as evidence" rule still applies to every tier,
+including `human-reviewed`.** A trust tier tells you how much scrutiny a
+summary has received, not that it is now safe to treat as canonical — verify
+against the source when a claim is material, regardless of tier.
 
 ## Resolving a conflict
 

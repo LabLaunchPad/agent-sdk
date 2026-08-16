@@ -1,8 +1,0 @@
-{
-  "source": "source.md",
-  "version": "1.0.0",
-  "sha256": "deadbeef",
-  "generated_at": "2026-01-01T00:00:00.000Z",
-  "freshness": "PROBABLY_FINE",
-  "summary": { "note": "freshness is not one of the four states" }
-}

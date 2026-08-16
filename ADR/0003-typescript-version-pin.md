@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: TypeScript Version Pin
+description: TypeScript is pinned to 6.0.3 pending the TYPESCRIPT_7_REVISIT gate.
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0003 — Pin TypeScript to 6.0.3; gate the TypeScript 7 upgrade
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

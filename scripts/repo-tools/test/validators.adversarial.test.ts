@@ -2,6 +2,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { ValidatorResult } from '../src/lib/types.js';
 import { contextStalenessValidator } from '../src/validators/context-staleness.js';
+import { okfConformanceValidator } from '../src/validators/okf-conformance.js';
 import { packageBoundaryValidator } from '../src/validators/package-boundary.js';
 import { packageExportsValidator } from '../src/validators/package-exports.js';
 import { repositoryPolicyValidator } from '../src/validators/repository-policy.js';
@@ -88,22 +89,98 @@ describe('context-staleness-validator — negative fixtures', () => {
     expect(rules(result)).toContain('context/source-missing');
   });
 
-  it('rejects a record missing its hash and timestamp', async () => {
+  it('rejects a record missing x_source_sha256', async () => {
     const result = await contextStalenessValidator({
       rootDir: fixture('context', 'malformed'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('context/missing-hash-fields');
+  });
+
+  it('rejects a record whose frontmatter does not parse as YAML', async () => {
+    // The exact defect class caught live in ADR-0004 during this migration: an
+    // unquoted `@` at the start of a plain scalar is invalid YAML.
+    const result = await contextStalenessValidator({
+      rootDir: fixture('context', 'malformed-frontmatter'),
     });
 
     expect(result.status).toBe('FAIL');
     expect(rules(result)).toContain('context/malformed-record');
   });
 
-  it('rejects a freshness value outside the four defined states', async () => {
+  it('rejects a record whose stale_after date has elapsed, even with a matching hash', async () => {
     const result = await contextStalenessValidator({
-      rootDir: fixture('context', 'invalid-freshness'),
+      rootDir: fixture('context', 'stale-after-elapsed'),
     });
 
     expect(result.status).toBe('FAIL');
-    expect(rules(result)).toContain('context/invalid-freshness');
+    expect(rules(result)).toContain('context/stale-after-elapsed');
+  });
+});
+
+describe('okf-conformance-validator — negative fixtures', () => {
+  it('rejects a concept document with no type field', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'missing-type'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/missing-type');
+  });
+
+  it('rejects a concept document with no frontmatter block at all', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'no-frontmatter'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/missing-frontmatter');
+  });
+
+  it('rejects a frontmatter block that does not parse as YAML', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'malformed-frontmatter'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/malformed-frontmatter');
+  });
+
+  it('rejects a status value outside draft/stable/deprecated', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'invalid-status'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/invalid-status');
+  });
+
+  it('rejects a stale_after value that is not a YYYY-MM-DD date', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'invalid-stale-after'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/invalid-stale-after');
+  });
+
+  it('rejects a generated.by actor that matches none of the three conventions', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'invalid-generated'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/invalid-generated-by');
+  });
+
+  it('rejects a verified field that is neither a mapping nor a list of mappings', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'invalid-verified'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('okf/invalid-verified');
   });
 });
 

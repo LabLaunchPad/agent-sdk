@@ -1,11 +1,24 @@
+---
+type: Architecture Decision
+title: <Decision, as a short noun phrase>
+description: <One sentence — what was decided>
+generated:
+  by: process:claude-code-session
+  at: <ISO 8601 datetime>
+status: draft
+---
+
 # ADR-NNNN — <Decision>
 
-| Field      | Value                                        |
-| ---------- | -------------------------------------------- |
-| Status     | Proposed / Accepted / Superseded by ADR-NNNN |
-| Date       | YYYY-MM-DD                                   |
-| Phase      | P<NN>                                        |
-| Supersedes | —                                            |
+OKF `status` maps: `Proposed` → `draft`, `Accepted` → `stable`,
+`Superseded` → `deprecated` (add a `Superseded by` line below when so).
+`generated.by` uses `human:<id>` if a person authored this ADR directly
+rather than an AI coding agent.
+
+| Field      | Value |
+| ---------- | ----- |
+| Phase      | P<NN> |
+| Supersedes | —     |
 
 ## Context
 

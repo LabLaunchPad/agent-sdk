@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: Persistence Interfaces Deferred
+description: Persistence interfaces are specified now in specs/, implemented in Phases 4 and 7.
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0006 — Persistence interfaces are specified in Phase 0, implemented in Phases 4 and 7
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

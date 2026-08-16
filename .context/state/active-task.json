@@ -1,19 +1,17 @@
 {
-  "id": "P00-foundation",
-  "phase": "P00",
-  "title": "Establish engineering substrate and anti-drift machinery",
-  "status": "COMPLETE",
+  "id": "P1A-workstream-A-okf-adoption",
+  "phase": "P1A",
+  "title": "Adopt OKF v0.2 for agent-facing knowledge; no-regression gate",
+  "status": "IN_PROGRESS",
+  "governingAdrs": ["ADR-0007", "ADR-0008"],
   "acceptance": [
-    "clean frozen-lockfile install reproducible",
-    "tsc builds all buildable packages",
-    "lint and format:check clean",
-    "vitest passes using projects configuration",
-    "all five validators pass",
-    "all five validators provably reject their negative fixtures",
-    ".context operational with working staleness detection",
-    "packed tarball imports by public name from a clean consumer",
-    "no Agent SDK product logic exists",
-    "CI green"
+    "all 5 original validators still PASS",
+    "all original adversarial negative fixtures still reject (migrated, not deleted)",
+    "the 5 live negative probes from the Phase 0 receipt still fail-then-revert",
+    "pnpm verify green on Node 24.19.0, CI green",
+    "every .context record's hash check still functions",
+    "no knowledge fact exists in two formats simultaneously at phase end",
+    "okf-conformance validator (6th) passes and rejects its negative fixtures AND accepts its leniency fixtures"
   ],
   "prohibited": [
     "Agent",
@@ -27,8 +25,13 @@
     "MCP",
     "A2A",
     "Fast Path",
-    "Phase 1 research"
+    "Workstream B (gap audit) starting before Workstream A's gate passes"
   ],
-  "openCommitments": ["confirm CI green on the pull request", "stop after Phase 0"],
-  "receipt": "docs/agent/RECEIPT-P00.md"
+  "openCommitments": [
+    "run full no-regression gate",
+    "commit, push, update PR",
+    "emit Workstream A sub-receipt",
+    "begin Workstream B only after Workstream A PASS"
+  ],
+  "priorTask": "P00-foundation (COMPLETE, docs/agent/RECEIPT-P00.md)"
 }

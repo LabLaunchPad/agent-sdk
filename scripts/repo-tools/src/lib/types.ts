@@ -7,6 +7,7 @@ export type ValidatorName =
   | 'schema-contract'
   | 'package-boundary'
   | 'context-staleness'
+  | 'okf-conformance'
   | 'package-exports'
   | 'repository-policy';
 
@@ -14,6 +15,7 @@ export const VALIDATOR_NAMES: readonly ValidatorName[] = [
   'schema-contract',
   'package-boundary',
   'context-staleness',
+  'okf-conformance',
   'package-exports',
   'repository-policy',
 ];

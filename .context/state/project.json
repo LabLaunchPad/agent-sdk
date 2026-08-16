@@ -2,10 +2,17 @@
   "repository": "LabLaunchPad/agent-sdk",
   "namespace": "@lablaunchpad",
   "phase": {
-    "id": "P00",
-    "name": "Foundation + Working Toolchain Only",
-    "status": "PASS",
-    "stopAfter": true
+    "id": "P1A",
+    "name": "OKF v0.2 Adoption + Gap Audit",
+    "workstream": "A",
+    "workstreamName": "OKF Adoption",
+    "status": "IN_PROGRESS",
+    "stopAfter": true,
+    "previousPhase": {
+      "id": "P00",
+      "status": "PASS",
+      "receipt": "docs/agent/RECEIPT-P00.md"
+    }
   },
   "productBoundary": {
     "isStandaloneSdk": true,
@@ -23,7 +30,9 @@
   "canonical": {
     "implementationLanguage": "TypeScript",
     "wireFormat": "JSON Schema",
-    "runtimeRepresentation": "Zod"
+    "runtimeRepresentation": "Zod",
+    "knowledgeFormat": "OKF v0.2",
+    "knowledgeFormatScope": [".context", "research", "specs", "ADR"]
   },
   "materializedPackages": ["@lablaunchpad/contracts", "@lablaunchpad/repo-tools"]
 }

@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: TypeScript Canonical Language
+description: TypeScript is the canonical implementation language; contracts remain language-neutral JSON Schema.
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0001 — TypeScript is the canonical implementation; contracts are language-neutral
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

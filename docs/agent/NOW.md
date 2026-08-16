@@ -5,32 +5,44 @@ here, stop and reconcile before continuing.
 
 ## Phase
 
-**P00 — Foundation + Working Toolchain Only**
+**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream A (OKF adoption)
 
 ## Objective
 
-Establish the engineering substrate and anti-drift machinery for the Agent SDK,
-prove the red/green loop on a placeholder package, and stop.
+Migrate agent-facing knowledge (`.context/`, `research/`, `specs/`, `ADR/`) to
+[OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+with a full no-regression gate, then hand off to Workstream B (the 90-dimension
+gap audit). See [ADR-0007](../../ADR/0007-adopt-okf-v0-2.md) and
+[ADR-0008](../../ADR/0008-cache-trust-tiers.md).
 
-Phase 0 proves the engineering environment. Phase 1 proves the architecture.
-Only Phase 2+ implements it.
+Phase 0 proved the engineering environment. Phase 1A adopts a vendor-neutral
+knowledge format and audits the plan against the current ecosystem. Only
+Phase 2+ implements Agent SDK behaviour.
 
-## In scope
+## In scope (Workstream A)
 
-Repository structure, governance documents, the `.context` compiled cache, the
-root toolchain, one placeholder package, the five validators with negative
-fixtures, templates, seed ADRs, and CI.
+Envelope migration for the four `.context/` cache records; OKF frontmatter on
+`ADR/*.md` and `specs/persistence/STORE-INTERFACES.md`; the sixth validator
+(`okf-conformance`, structural OKF conformance including required leniency);
+the rewritten `context-staleness` validator (derived freshness + trust tier);
+fixtures proving both validators reject their negative cases and do NOT
+over-reject the spec's explicit leniency cases; governance-doc updates.
 
 ## Out of scope
 
-Any Agent SDK product behaviour: Agent, Task engine, Planner, Harness,
-Workflow, Memory, Context compiler, Runtime, Model gateway, MCP/A2A, Fast Path.
-Also out of scope: Phase 1 ecosystem research.
+Any Agent SDK product behaviour. Workstream B (the gap audit itself) — begins
+only once Workstream A's no-regression gate passes. Any change to `docs/` or
+directory `README.md`/`TEMPLATE*.md` files — deliberately excluded from OKF
+scope (see `docs/agent/DECISIONS.md`).
 
-## Definition of done
+## Definition of done (Workstream A no-regression gate)
 
-Every exit criterion in the Phase 0 receipt passes, the receipt is emitted, and
-work stops. Not "the build is green".
+1. All 5 original validators still `PASS`.
+2. All original adversarial negative fixtures still reject — migrated, not
+   deleted.
+3. The 5 live negative probes from the Phase 0 receipt still fail-then-revert.
+4. `pnpm verify` green on Node 24.19.0, CI green.
+5. Every `.context` record's hash check still functions.
+6. No knowledge fact exists in two formats simultaneously at phase end.
 
-**Status: met.** See [`RECEIPT-P00.md`](RECEIPT-P00.md). The only open item is CI
-confirmation on the pull request. Phase 1 has not started.
+Not "the validators run" — see AGENTS.md's evidence principle.

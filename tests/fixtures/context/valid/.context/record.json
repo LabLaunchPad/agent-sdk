@@ -1,8 +1,0 @@
-{
-  "source": "source.md",
-  "version": "1.0.0",
-  "sha256": "96701d910f6194e074e50e2cfedc026eca9456e9131c552540a60ed41afc04fe",
-  "generated_at": "2026-01-01T00:00:00.000Z",
-  "freshness": "ACTIVE",
-  "summary": { "note": "hash matches source" }
-}

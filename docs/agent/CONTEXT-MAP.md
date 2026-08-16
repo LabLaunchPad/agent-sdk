@@ -21,7 +21,7 @@ _not_ to read.
 ## Reading order for a new task
 
 ```
-.context/INDEX.md
+.context/index.md
   → .context/state/active-task.json
     → governing spec (one file)
       → affected package source (targeted ranges)

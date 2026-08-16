@@ -1,10 +1,18 @@
+---
+type: Architecture Decision
+title: Context Is a Compiled Cache
+description: .context/ is a compiled AI working cache and never canonical truth.
+generated:
+  by: process:claude-code-session
+  at: 2026-08-16T00:00:00Z
+status: stable
+---
+
 # ADR-0005 — `.context/` is a compiled cache, never canonical truth
 
-| Field  | Value      |
-| ------ | ---------- |
-| Status | Accepted   |
-| Date   | 2026-08-16 |
-| Phase  | P00        |
+| Field | Value |
+| ----- | ----- |
+| Phase | P00   |
 
 ## Context
 

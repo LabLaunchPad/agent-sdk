@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { contextStalenessValidator } from '../src/validators/context-staleness.js';
+import { okfConformanceValidator } from '../src/validators/okf-conformance.js';
 import { packageBoundaryValidator } from '../src/validators/package-boundary.js';
 import { repositoryPolicyValidator } from '../src/validators/repository-policy.js';
 import { schemaContractValidator } from '../src/validators/schema-contract.js';
@@ -64,5 +65,47 @@ describe('schema-contract-validator — positive', () => {
     expect(result.findings).toEqual([]);
     expect(result.stats?.contractsChecked).toBe(1);
     expect(result.stats?.samplesChecked).toBe(6);
+  });
+});
+
+describe('okf-conformance-validator — positive', () => {
+  it('accepts a concept document with valid frontmatter', async () => {
+    const result = await okfConformanceValidator({ rootDir: fixture('okf', 'valid') });
+
+    expect(result.findings).toEqual([]);
+    expect(result.status).toBe('PASS');
+  });
+});
+
+describe('okf-conformance-validator — leniency (must NOT reject)', () => {
+  // OKF v0.2 is explicit that consumers must not reject unknown `type` values,
+  // unknown additional keys, or broken cross-links. A validator stricter than
+  // the spec it claims to enforce breaks portability as surely as one that is
+  // too lax — these fixtures exist to catch exactly that regression.
+  it('accepts an unknown type value, an unknown key, and a broken link', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'leniency-unknown-type-and-keys'),
+    });
+
+    expect(result.findings).toEqual([]);
+    expect(result.status).toBe('PASS');
+  });
+
+  it('accepts a bare `verified` mapping as a one-element list', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'leniency-bare-verified'),
+    });
+
+    expect(result.findings).toEqual([]);
+    expect(result.status).toBe('PASS');
+  });
+
+  it('accepts index.md/log.md with and without the one frontmatter field they permit', async () => {
+    const result = await okfConformanceValidator({
+      rootDir: fixture('okf', 'leniency-reserved-files'),
+    });
+
+    expect(result.findings).toEqual([]);
+    expect(result.status).toBe('PASS');
   });
 });

@@ -1,0 +1,44 @@
+{
+  "name": "@lablaunchpad/agent-sdk-repo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Standalone, local-first AI Agent SDK. Monorepo root.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LabLaunchPad/agent-sdk.git"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "scripts": {
+    "build": "pnpm -r --sequential build",
+    "typecheck": "pnpm -r --sequential typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "tools:build": "pnpm --filter @lablaunchpad/repo-tools build",
+    "validate": "pnpm tools:build && node scripts/repo-tools/dist/cli.js validate",
+    "context:check": "pnpm tools:build && node scripts/repo-tools/dist/cli.js context check",
+    "context:refresh": "pnpm tools:build && node scripts/repo-tools/dist/cli.js context refresh",
+    "smoke": "pnpm tools:build && node scripts/repo-tools/dist/cli.js smoke",
+    "verify": "pnpm build && pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm validate && pnpm smoke"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.0",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "@vitest/coverage-v8": "4.1.10",
+    "eslint": "10.8.1",
+    "eslint-plugin-import-x": "4.17.1",
+    "prettier": "3.9.6",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.67.0",
+    "vitest": "4.1.10"
+  }
+}

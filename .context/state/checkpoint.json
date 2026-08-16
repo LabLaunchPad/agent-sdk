@@ -1,0 +1,11 @@
+{
+  "checkpointVersion": 1,
+  "phase": "P00",
+  "recordedAt": null,
+  "lastCompletedMilestone": null,
+  "resumeHint": "Phase 0 has no durable execution state. Checkpointing becomes meaningful in Phase 4 (Durable State); this file establishes the location and shape only.",
+  "environmentFingerprint": {
+    "node": "24.19.0",
+    "pnpm": "10.33.0"
+  }
+}

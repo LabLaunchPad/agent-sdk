@@ -1,0 +1,43 @@
+{
+  "$comment": "Layer manifest for package-boundary-validator. See docs/architecture/DEPENDENCY-DIRECTION.md. Dependencies point outward only: a package may depend on a strictly lower layer, never a higher or equal-but-cyclic one.",
+  "layers": [
+    { "index": 0, "name": "contracts" },
+    { "index": 1, "name": "core" },
+    { "index": 2, "name": "composition" },
+    { "index": 3, "name": "runtime" },
+    { "index": 4, "name": "adapters" },
+    { "index": 99, "name": "tooling" }
+  ],
+  "namespace": "@lablaunchpad",
+  "packages": {
+    "@lablaunchpad/contracts": {
+      "path": "packages/contracts",
+      "layer": "contracts",
+      "runtimeNeutral": true,
+      "published": true,
+      "smoke": {
+        "import": "@lablaunchpad/contracts",
+        "export": "scaffoldEcho",
+        "call": ["smoke"],
+        "expect": "@lablaunchpad/contracts:smoke"
+      }
+    },
+    "@lablaunchpad/repo-tools": {
+      "path": "scripts/repo-tools",
+      "layer": "tooling",
+      "runtimeNeutral": false,
+      "published": false
+    }
+  },
+  "forbiddenInNonAdapterLayers": [
+    "openai",
+    "@anthropic-ai/sdk",
+    "@google/genai",
+    "@cloudflare/workers-types",
+    "wrangler",
+    "langchain",
+    "@langchain/core",
+    "mastra",
+    "@agencyos/platform"
+  ]
+}

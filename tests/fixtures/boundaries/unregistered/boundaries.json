@@ -1,0 +1,6 @@
+{
+  "layers": [{ "index": 0, "name": "contracts" }],
+  "namespace": "@fixture",
+  "packages": {},
+  "forbiddenInNonAdapterLayers": []
+}

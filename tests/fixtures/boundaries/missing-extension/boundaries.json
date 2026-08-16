@@ -1,0 +1,8 @@
+{
+  "layers": [{ "index": 0, "name": "contracts" }],
+  "namespace": "@fixture",
+  "packages": {
+    "@fixture/neutral": { "path": "packages/neutral", "layer": "contracts", "runtimeNeutral": true, "published": false }
+  },
+  "forbiddenInNonAdapterLayers": []
+}

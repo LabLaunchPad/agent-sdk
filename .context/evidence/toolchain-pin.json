@@ -1,0 +1,14 @@
+{
+  "source": "ADR/0003-typescript-version-pin.md",
+  "version": "1.0.0",
+  "sha256": "b1c6599f08068c8c9ebdf9b6943c99b2d567a1b803140a7642f757ef62d559be",
+  "generated_at": "2026-08-16T20:24:26.189Z",
+  "freshness": "ACTIVE",
+  "summary": {
+    "pinned": "typescript@6.0.3",
+    "latestAvailable": "7.0.2",
+    "blocker": "typescript-eslint peer range >=4.8.4 <6.1.0",
+    "gate": "TYPESCRIPT_7_REVISIT",
+    "overridesProhibited": true
+  }
+}

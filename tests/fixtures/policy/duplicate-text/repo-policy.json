@@ -1,0 +1,9 @@
+{
+  "namespace": "@fixture",
+  "requiredDirectories": ["docs"],
+  "requiredFiles": ["AGENTS.md"],
+  "directoryReadmes": ["docs"],
+  "canonicalDocument": "AGENTS.md",
+  "adapterDocuments": ["CLAUDE.md"],
+  "adapterRules": { "maxLines": 40, "mustReferenceCanonical": true, "forbidSharedHeadings": true, "maxSharedNgram": 8 }
+}

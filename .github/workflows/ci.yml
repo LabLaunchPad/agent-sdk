@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        # Version comes from the `packageManager` field, so CI and local cannot drift.
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Record toolchain baseline
+        # A green run on the wrong Node version is not evidence. Print what
+        # actually ran so the receipt can cite it.
+        run: |
+          node -v
+          pnpm -v
+          pnpm exec tsc -v
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        # Check only. CI never rewrites source.
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Test
+        run: pnpm test
+
+      # The five mandatory validators run as separate steps so a red CI names
+      # the failing check without anyone reading the log.
+      - name: 'Validator 1/5 — schema-contract'
+        run: node scripts/repo-tools/dist/cli.js validate schema-contract
+
+      - name: 'Validator 2/5 — package-boundary'
+        run: node scripts/repo-tools/dist/cli.js validate package-boundary
+
+      - name: 'Validator 3/5 — context-staleness'
+        # Mandatory, never advisory. `context refresh` must NOT run here:
+        # auto-refresh would rubber-stamp drift instead of reporting it.
+        run: node scripts/repo-tools/dist/cli.js validate context-staleness
+
+      - name: 'Validator 4/5 — package-exports (publication smoke test)'
+        # Packs the tarball, installs it into a clean consumer, imports by public
+        # package name and executes an export.
+        run: node scripts/repo-tools/dist/cli.js validate package-exports
+
+      - name: 'Validator 5/5 — repository-policy'
+        run: node scripts/repo-tools/dist/cli.js validate repository-policy

@@ -1,0 +1,29 @@
+{
+  "repository": "LabLaunchPad/agent-sdk",
+  "namespace": "@lablaunchpad",
+  "phase": {
+    "id": "P00",
+    "name": "Foundation + Working Toolchain Only",
+    "status": "PASS",
+    "stopAfter": true
+  },
+  "productBoundary": {
+    "isStandaloneSdk": true,
+    "isNotPlatform": "AgencyOS Platform is a separate consuming repository",
+    "prohibited": [
+      "organizations",
+      "billing",
+      "SaaS administration",
+      "employee marketplace",
+      "business dashboards",
+      "client tenancy",
+      "vertical business logic"
+    ]
+  },
+  "canonical": {
+    "implementationLanguage": "TypeScript",
+    "wireFormat": "JSON Schema",
+    "runtimeRepresentation": "Zod"
+  },
+  "materializedPackages": ["@lablaunchpad/contracts", "@lablaunchpad/repo-tools"]
+}

@@ -1,0 +1,23 @@
+{
+  "source": "AGENTS.md",
+  "version": "1.0.0",
+  "sha256": "555105c0993f67b2f13479b8cafb4142ac00fa23d46b44cbb4ea7af3bd98f15f",
+  "generated_at": "2026-08-16T20:25:37.320Z",
+  "freshness": "ACTIVE",
+  "summary": {
+    "role": "canonical cross-agent operating contract",
+    "adapters": ["CLAUDE.md", "OPENCODE.md", "CODEX.md"],
+    "adaptersMayNotDuplicate": true,
+    "cacheRules": "C1-C10",
+    "efficiencyOrder": [
+      "deterministic function",
+      "compiled workflow",
+      "local model",
+      "normal model",
+      "frontier model",
+      "multi-agent",
+      "human"
+    ],
+    "unknownIsValid": true
+  }
+}

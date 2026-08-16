@@ -1,0 +1,52 @@
+{
+  "$comment": "Repository policy manifest for repository-policy-validator. Structure, namespace and governance-document rules.",
+  "namespace": "@lablaunchpad",
+  "requiredDirectories": [
+    "packages",
+    "specs",
+    "ADR",
+    "benchmarks",
+    "golden-cases",
+    "tests",
+    "research",
+    ".context",
+    "scripts",
+    "examples",
+    "docs"
+  ],
+  "requiredFiles": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "OPENCODE.md",
+    "CODEX.md",
+    "boundaries.json",
+    "repo-policy.json",
+    ".nvmrc",
+    "pnpm-workspace.yaml",
+    "tsconfig.base.json",
+    ".context/INDEX.md",
+    "ADR/TEMPLATE.md",
+    "specs/TEMPLATE-BEHAVIOUR-SPEC.md",
+    "docs/agent/TEMPLATE-PHASE-RECEIPT.md"
+  ],
+  "directoryReadmes": [
+    "packages",
+    "specs",
+    "ADR",
+    "benchmarks",
+    "golden-cases",
+    "tests",
+    "research",
+    "scripts",
+    "examples",
+    "docs"
+  ],
+  "canonicalDocument": "AGENTS.md",
+  "adapterDocuments": ["CLAUDE.md", "OPENCODE.md", "CODEX.md"],
+  "adapterRules": {
+    "maxLines": 40,
+    "mustReferenceCanonical": true,
+    "forbidSharedHeadings": true,
+    "maxSharedNgram": 12
+  }
+}

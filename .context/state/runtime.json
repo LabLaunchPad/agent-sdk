@@ -1,0 +1,29 @@
+{
+  "baseline": {
+    "node": "24.19.0",
+    "nodeChannel": "LTS Krypton",
+    "pnpm": "10.33.0",
+    "npm": "11.17.0"
+  },
+  "toolchain": {
+    "typescript": "6.0.3",
+    "typescriptLatestAvailable": "7.0.2",
+    "typescriptPinReason": "typescript-eslint peer range is >=4.8.4 <6.1.0; TS 7 breaks type-aware linting. See ADR-0003.",
+    "typescriptEslint": "8.67.0",
+    "eslint": "10.8.1",
+    "prettier": "3.9.6",
+    "vitest": "4.1.10",
+    "zod": "4.4.3",
+    "ajv": "8.20.0",
+    "changesets": "3.0.0"
+  },
+  "moduleSystem": {
+    "type": "module",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "build": "tsc",
+    "bundler": null,
+    "relativeImportsRequireJsExtension": true
+  },
+  "evidenceRule": "A green run on a Node version other than the baseline is not evidence."
+}

@@ -1,0 +1,9 @@
+{
+  "layers": [{ "index": 0, "name": "contracts" }],
+  "namespace": "@fixture",
+  "packages": {
+    "@fixture/published": { "path": "packages/published", "layer": "contracts", "runtimeNeutral": true, "published": true,
+      "smoke": { "import": "@fixture/published", "export": "value", "call": [], "expect": 1 } }
+  },
+  "forbiddenInNonAdapterLayers": []
+}

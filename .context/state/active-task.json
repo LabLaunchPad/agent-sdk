@@ -1,0 +1,34 @@
+{
+  "id": "P00-foundation",
+  "phase": "P00",
+  "title": "Establish engineering substrate and anti-drift machinery",
+  "status": "COMPLETE",
+  "acceptance": [
+    "clean frozen-lockfile install reproducible",
+    "tsc builds all buildable packages",
+    "lint and format:check clean",
+    "vitest passes using projects configuration",
+    "all five validators pass",
+    "all five validators provably reject their negative fixtures",
+    ".context operational with working staleness detection",
+    "packed tarball imports by public name from a clean consumer",
+    "no Agent SDK product logic exists",
+    "CI green"
+  ],
+  "prohibited": [
+    "Agent",
+    "Planner",
+    "Harness",
+    "Workflow",
+    "Memory",
+    "Context compiler",
+    "Runtime",
+    "Model gateway",
+    "MCP",
+    "A2A",
+    "Fast Path",
+    "Phase 1 research"
+  ],
+  "openCommitments": ["confirm CI green on the pull request", "stop after Phase 0"],
+  "receipt": "docs/agent/RECEIPT-P00.md"
+}

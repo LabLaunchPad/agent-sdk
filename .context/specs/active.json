@@ -1,0 +1,10 @@
+{
+  "phase": "P00",
+  "governingSpecs": [],
+  "note": "Phase 0 has no behaviour specifications: it establishes the substrate, not the SDK. specs/persistence/ holds constraint stubs that bind Phases 4 and 7. Behaviour specs are written in Phase 2.",
+  "templates": [
+    "specs/TEMPLATE-BEHAVIOUR-SPEC.md",
+    "ADR/TEMPLATE.md",
+    "docs/agent/TEMPLATE-PHASE-RECEIPT.md"
+  ]
+}

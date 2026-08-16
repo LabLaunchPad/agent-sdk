@@ -1,0 +1,12 @@
+{
+  "layers": [
+    { "index": 0, "name": "contracts" },
+    { "index": 4, "name": "adapters" }
+  ],
+  "namespace": "@fixture",
+  "packages": {
+    "@fixture/low": { "path": "packages/low", "layer": "contracts", "runtimeNeutral": true, "published": false },
+    "@fixture/high": { "path": "packages/high", "layer": "adapters", "runtimeNeutral": false, "published": false }
+  },
+  "forbiddenInNonAdapterLayers": ["openai"]
+}

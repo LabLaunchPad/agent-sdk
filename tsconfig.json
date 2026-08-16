@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": [
+    "vitest.config.ts",
+    "packages/*/src/**/*.ts",
+    "packages/*/test/**/*.ts",
+    "scripts/repo-tools/src/**/*.ts",
+    "scripts/repo-tools/test/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": ["**/dist/**", "**/node_modules/**", "tests/fixtures/**"]
+}

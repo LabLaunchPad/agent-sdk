@@ -75,7 +75,7 @@ NO-REGRESSION GATE (A6):
   3. All 5 live negative probes from RECEIPT-P00.md re-run,
      each fails then reverts to green ................................ PASS
   4. pnpm verify green on Node 24.19.0 .............................. PASS
-     CI green ........................................................ PENDING (this push)
+     CI green ........................................................ PASS (run #4, commit fb615ed)
   5. .context hash check still functions (proven live: editing
      ADR-0003 to add frontmatter produced a real STALE finding,
      caught before this receipt was written) ......................... PASS

@@ -1,10 +1,8 @@
 {
-  "gap": "13 of 17 named sources not yet researched",
+  "gap": "11 of 17 named sources not yet researched",
   "remaining_primary": [
     "langgraph",
     "mastra",
-    "qwen-agent",
-    "tencent-youtu-agent",
     "volcengine-agentkit",
     "baidu-appbuilder-sdk"
   ],
@@ -20,6 +18,6 @@
     "runtime deployment matrix",
     "model portability matrix"
   ],
-  "prioritization_for_next_installment": "Qwen-Agent and Youtu-Agent offline/local patterns next, per the brief's own HIGH-PRIORITY LOCAL-FIRST REFERENCES list",
+  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then LangGraph/Mastra, then protocol layer",
   "generated_at": "2026-08-16T00:00:00Z"
 }

@@ -12,10 +12,10 @@ note, superseding the earlier abstract 90-dimension sketch.
 
 ## Next gate
 
-**Workstream B, installment 2** — research the remaining sources
-(`.context/research/gaps.json`), prioritized Qwen-Agent and Youtu-Agent
-offline/local patterns next per the operating prompt's own priority order,
-then the rest of the primary set, then MCP/A2A/Agent Skills.
+**Workstream B, installment 3** — research the remaining 11 sources
+(`.context/research/gaps.json`), prioritized Volcengine AgentKit and Baidu
+AppBuilder SDK next (completing the primary local-first-relevant set), then
+LangGraph/Mastra, then the protocol layer (MCP/A2A/Agent Skills).
 
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the

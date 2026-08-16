@@ -1,5 +1,5 @@
 {
-  "coverage": "4 of 17 sources",
+  "coverage": "6 of 17 sources",
   "licenses": {
     "openai-agents-sdk": {
       "license": "MIT",
@@ -19,6 +19,15 @@
     "kimi-agent-sdk": {
       "license": "Apache-2.0",
       "status": "FACT (license identity); copyright holder is INFERENCE"
+    },
+    "qwen-agent": {
+      "license": "Apache-2.0",
+      "status": "FACT (type); copyright holder UNFILLED in source LICENSE file"
+    },
+    "tencent-youtu-agent": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "Tencent, 2025"
     }
   },
   "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",

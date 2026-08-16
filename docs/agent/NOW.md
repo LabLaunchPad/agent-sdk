@@ -5,7 +5,7 @@ here, stop and reconcile before continuing.
 
 ## Phase
 
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 1
+**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 2
 
 ## Objective
 
@@ -32,25 +32,32 @@ without a trace. The abstract 90-dimension audit's underlying goal (find
 what the plan still misses) is preserved; the concrete research structure
 just replaces the abstract classification exercise as the mechanism.
 
-## In scope (installment 1, complete)
+## In scope (installments 1-2, complete)
 
-Real primary-source research (WebSearch/WebFetch, evidence level E3) for 4
-of ~17 named sources: OpenAI Agents SDK, Microsoft Agent Framework,
-PydanticAI, Kimi Agent SDK — chosen because the operating prompt weights
-local-first relevance most heavily and these four are its own named
-high-priority local-first references. Produced: per-framework OKF concept
-docs, local-first scorecard, capability matrix, licensing matrix, 3
-extracted patterns (`knowledge/patterns/`), 2 contradiction-matrix entries,
+Real primary-source research (WebSearch/WebFetch, evidence level E3) for 6
+of ~17 named sources. Installment 1: OpenAI Agents SDK, Microsoft Agent
+Framework, PydanticAI, Kimi Agent SDK. Installment 2: Qwen-Agent, Tencent
+Youtu-Agent — the operating prompt's own named "high-priority local-first
+references." Produced across both: per-framework OKF concept docs,
+local-first scorecard, capability matrix, licensing matrix, 4 extracted
+patterns (`knowledge/patterns/`), 3 contradiction-matrix entries,
 machine-facing `.context/research/*.json` summaries.
 
-## Explicitly deferred (installment 2+)
+**Notable installment 2 finding**: Youtu-Agent, despite being named
+high-priority for local-first relevance in the operating prompt itself, was
+found to be cloud-configured by default on direct evidence — recorded as a
+correction (`research/contradictions/priority-list-not-infallible.md`), not
+smoothed over. Qwen-Agent, by contrast, is the strongest local-first
+reference found across all 6 frameworks researched so far.
 
-LangGraph, Mastra, Qwen-Agent, Tencent Youtu-Agent, Volcengine AgentKit,
-Baidu AppBuilder SDK, MCP, A2A, Agent Skills — all recorded `UNKNOWN`, never
-silently assumed. Full per-framework 14-dimension depth (state, memory,
-context, security, evaluation, DX, UX) for the 4 already-researched
-frameworks — installment 1 covered local-first, capabilities and licensing
-only. See `.context/research/gaps.json` for the complete remaining list and
+## Explicitly deferred (installment 3+)
+
+LangGraph, Mastra, Volcengine AgentKit, Baidu AppBuilder SDK, MCP, A2A,
+Agent Skills — all recorded `UNKNOWN`, never silently assumed. Full
+per-framework 14-dimension depth (state, memory, context, security,
+evaluation, DX, UX) for all 6 already-researched frameworks — installments
+1-2 covered local-first, capabilities and licensing only. See
+`.context/research/gaps.json` for the complete remaining list and
 prioritization.
 
 ## Out of scope
@@ -59,7 +66,7 @@ Any Agent SDK product implementation — this is a research phase per the
 operating prompt's own "NO IMPLEMENTATION... STOP after producing the final
 audit" rule. No code in `packages/` changes as part of this installment.
 
-## Definition of done (installment 1)
+## Definition of done (installments 1-2)
 
 Real evidence (not model-knowledge recall) for every claim; evidence level
 recorded per claim; `UNKNOWN` used honestly rather than inferred; all new

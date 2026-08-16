@@ -1,5 +1,5 @@
 {
-  "coverage": "3 of 17 sources; only capability dimensions explicitly documented in this installment",
+  "coverage": "5 of 17 sources (installment 2 added qwen-agent, youtu-agent capability findings)",
   "confirmed_patterns": {
     "tool_boundary_guardrails_distinct_from_agent_guardrails": {
       "source": "openai-agents-sdk",
@@ -20,6 +20,16 @@
       "source": "pydantic-ai",
       "evidence_level": "E3",
       "caveat": "not a uniform interface across backends - see research/contradictions/runtime-abstraction-uniform.md"
+    },
+    "local_model_gateway_with_hosted_fallback": {
+      "source": "qwen-agent",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "local-model-gateway-with-hosted-fallback"
+    },
+    "environment_and_contextmanager_as_first_class_abstractions": {
+      "source": "tencent-youtu-agent",
+      "evidence_level": "E3",
+      "note": "confirms LabLaunchPad's own planned adapters/tools boundary and Phase 6 Context Compiler; not yet promoted to a knowledge/patterns/ file"
     }
   },
   "source": "research/built-in-capabilities/MATRIX.md",

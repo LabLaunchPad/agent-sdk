@@ -29,6 +29,18 @@
       "contradiction": "local-execution-cheaper",
       "status": "ACTION_REQUIRED",
       "note": "Phase 19 SandboxProvider spec must define isolation guarantee independent of local-vs-hosted preference"
+    },
+    {
+      "id": "adopt-local-model-gateway-pattern",
+      "pattern": "local-model-gateway-with-hosted-fallback",
+      "status": "CANDIDATE",
+      "note": "informs Phase 16 Model Gateway spec - document at least one concrete local deployment target, not only an abstract interface"
+    },
+    {
+      "id": "correct-youtu-agent-local-first-assumption",
+      "contradiction": "priority-list-not-infallible",
+      "status": "CORRECTION_RECORDED",
+      "note": "operating-prompt framing is E0 until independently verified, exactly like any other external claim - applies symmetrically to future research installments"
     }
   ],
   "generated_at": "2026-08-16T00:00:00Z"

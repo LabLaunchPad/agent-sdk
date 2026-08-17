@@ -100,5 +100,15 @@
     "E5 reproduction for any of the 10+ benchmark plans accumulated across corpora (GAP-E5-ZERO, P0 in research/canonical/canonical-research.json) - requires a runnable pinned LabLaunchPad implementation, not further desk research"
   ],
   "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then Agent Skills (the last remaining original-brief protocol). The formal ADR-writing pass over research/canonical/ARCHITECTURE-DECISIONS.md's 3 ADD_CANDIDATE boundaries (WorkspaceEngine, SandboxEngine, SideEffectEngine) is the highest-priority architecture-track item, since it is the one item blocking Phase 2 spec work rather than expanding research breadth. Independent re-verification of the 14+ imported-corpus frameworks/topics remains a separate, lower-priority track since it is already real evidence, just not re-fetched by this session.",
+  "knowledge_os_reconciliation_watch_notes": [
+    {
+      "id": "sqlite-file-first-persistence-external-claim",
+      "source": "A user-supplied 'Decision Operating System / Knowledge OS' package's ledgers/canonical-decisions.jsonl (ADR-CORE-004), evaluated in research/reconciliation/KNOWLEDGE-OS-RECONCILIATION.md",
+      "claim": "SQLite/file-first local persistence as the default backend",
+      "status": "WATCH_NOTE_NOT_ADOPTED",
+      "reason": "ADR-0006 explicitly defers persistence-interface decisions to Phase 4/7; this repository has no binding position yet. The external claim is unsourced and compressed (one line in a JSONL ledger), so it is not adopted now - recorded as a candidate to weigh, with the same evidence discipline as every other claim, when ADR-0006's Phase 4/7 revisit trigger fires.",
+      "revisit_trigger": "ADR-0006's own Phase 4/7 persistence-interface specification work begins"
+    }
+  ],
   "generated_at": "2026-08-17T00:00:00Z"
 }

@@ -84,6 +84,22 @@ is recorded, regression coverage is added, and documentation is updated.
 
 Compilation is not completion.
 
+**Claim classification** (refinement, not a new evidence system —
+evaluated and adopted from a user-supplied external package, see
+`research/reconciliation/KNOWLEDGE-OS-RECONCILIATION.md`): when precision
+matters, label a claim as one of `FACT` (directly observed/verified),
+`INFERENCE` (derived from facts, not directly observed), `ASSUMPTION`
+(taken as given, unverified), `HYPOTHESIS` (a testable guess),
+`RECOMMENDATION` (a proposed action, not itself a fact), `DECISION` (a
+binding choice, belongs in an ADR or `docs/agent/DECISIONS.md`), or
+`UNKNOWN`. This sharpens the paragraph above; it does not replace the
+E0-E5 evidence-level hierarchy used throughout `research/` or the
+`Verdict` lifecycle (`VERIFIED`/`SUPPORTED`/`INFERRED`/`UNKNOWN`/
+`NOT_EXECUTED`) in `docs/architecture/KERNEL-CONSTITUTION.md` — those
+remain the canonical scales for research evidence and kernel verdicts
+respectively; this vocabulary is for classifying prose claims in
+discussion and documents.
+
 ## Adversarial principle
 
 For every important architectural decision: propose → attack the proposal →

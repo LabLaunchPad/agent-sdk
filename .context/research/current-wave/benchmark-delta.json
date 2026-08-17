@@ -1,0 +1,12 @@
+{
+  "required": [
+    "E5-A durable restart",
+    "E5-B multi-agent economics",
+    "E5-C context compression",
+    "E5-D tool-output injection",
+    "E5-E offline local-first",
+    "E5-F model portability",
+    "E5-G sandbox boundary",
+    "E5-H CI/CD lifecycle"
+  ]
+}

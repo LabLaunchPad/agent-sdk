@@ -1,0 +1,25 @@
+{
+  "add": [
+    "Workflow/Checkpoint runtime boundary",
+    "MCP 2026-07-28 stateless adapter assumptions",
+    "A2A adapter + remote trust boundary",
+    "Workspace/Sandbox contracts",
+    "source-to-sink security policy",
+    "ModelCapability release artifact",
+    "UNKNOWN_OUTCOME mutation state"
+  ],
+  "retain": [
+    "small semantic kernel",
+    "explicit side-effect contracts",
+    "evaluation infrastructure",
+    "provenance",
+    "honest degradation"
+  ],
+  "remove_or_defer": [
+    "universal swarm",
+    "universal scheduler",
+    "universal vector DB",
+    "transcript-as-state",
+    "autonomous self-modification"
+  ]
+}

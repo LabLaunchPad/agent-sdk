@@ -1,0 +1,51 @@
+[
+  {
+    "id": "ADR-CANDIDATE-001",
+    "decision": "First-class durable workflow subsystem",
+    "status": "INVESTIGATE",
+    "evidence": ["Microsoft Agent Framework", "OpenAI sandbox/session surfaces"],
+    "benchmark": "E5-A/E5-H"
+  },
+  {
+    "id": "ADR-CANDIDATE-002",
+    "decision": "MCP as stateless protocol adapter",
+    "status": "ADOPT",
+    "evidence": ["MCP 2026-07-28"],
+    "benchmark": "protocol compatibility"
+  },
+  {
+    "id": "ADR-CANDIDATE-003",
+    "decision": "A2A remote-agent trust boundary",
+    "status": "ADOPT",
+    "evidence": ["A2A opaque remote agents", "OWASP inter-agent threats"],
+    "benchmark": "interop/auth/malicious peer"
+  },
+  {
+    "id": "ADR-CANDIDATE-004",
+    "decision": "Explicit Workspace/Sandbox contracts",
+    "status": "ADOPT",
+    "evidence": ["OpenAI sandbox", "Docker/Firecracker/WASM"],
+    "benchmark": "E5-G/E5-E"
+  },
+  {
+    "id": "ADR-CANDIDATE-005",
+    "decision": "Source-to-sink security policy",
+    "status": "ADOPT",
+    "evidence": ["OpenAI prompt injection research", "OWASP 2026"],
+    "benchmark": "E5-D"
+  },
+  {
+    "id": "ADR-CANDIDATE-006",
+    "decision": "Model capability matrix as release artifact",
+    "status": "ADOPT",
+    "evidence": ["OpenAI provider documentation"],
+    "benchmark": "E5-F"
+  },
+  {
+    "id": "ADR-CANDIDATE-007",
+    "decision": "UNKNOWN_OUTCOME mutation state",
+    "status": "ADOPT",
+    "evidence": ["Durable workflow idempotency pattern"],
+    "benchmark": "E5-A/E5-H"
+  }
+]

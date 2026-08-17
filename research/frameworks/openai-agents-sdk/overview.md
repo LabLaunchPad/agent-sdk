@@ -100,3 +100,31 @@ guardrail cannot guarantee for every downstream tool call.
   the local mode, or is a fully separate implementation — UNKNOWN, requires
   reading source rather than docs.
 - Full evaluation/tracing local-first posture — not yet researched.
+
+## External refresh check (2026-08-17, imported, unverified)
+
+A user-supplied "current wave" corpus independently re-researched this
+framework the same day, without access to this file (its own README
+states no LabLaunchPad corpus was mounted). Cross-checked against the
+content above; genuinely new facts not already captured here, tagged
+`IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED` since this session did not
+re-verify them:
+
+- **Version tracking inconsistency across the SDK's own sources**: Python
+  docs, the GitHub release page (indexed v0.17.4), the main branch's
+  release notes (0.19.0), and the TypeScript repo (v0.11.6) do not agree
+  with each other at the time of the external pass — the SDK's own
+  documentation surfaces are not internally consistent about "current"
+  version. Worth a direct pinned-version check before citing a version
+  number from this framework as fact anywhere else in this repository.
+- **Agents-as-tools / handoffs** named explicitly as a primitive, distinct
+  from the tool-guardrails/sessions dimensions this file's own research
+  already covered — not previously captured here.
+- **Provider abstraction with best-effort Any-LLM/LiteLLM adapters** —
+  not previously researched in this file; relevant to a future Phase 16
+  Model Gateway comparison.
+- **Tool guardrails have scope limitations that vary by tool type** — a
+  nuance beyond this file's existing "tool-level guardrails distinct from
+  agent-level" finding, not yet detailed here.
+
+See `research/imported-corpus/SOURCE-RECEIPT-3.md` for full provenance.

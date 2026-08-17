@@ -12,28 +12,34 @@ note, superseding the earlier abstract 90-dimension sketch.
 
 ## Next gate
 
-**Workstream B, installment 4** — research the remaining 4 primary/protocol
+**Workstream B, installment 4** — research the remaining **3** primary/protocol
 sources (`.context/research/gaps.json`): Volcengine AgentKit and Baidu
-AppBuilder SDK (completing the primary local-first-relevant set), then A2A
-and Agent Skills (completing the protocol layer alongside MCP, now done).
+AppBuilder SDK (completing the primary local-first-relevant set), then
+Agent Skills (the last remaining protocol — MCP and A2A are now both
+done, A2A closed via live research prompted by a user-supplied lead).
 Also queued: PydanticAI/Kimi Agent SDK deepening passes, the full
 40-dimension checklist, comparative network-disabled testing, and the
 token/context-efficiency and UX/DX audit files — all explicitly deferred
 from installment 3, not dropped.
 
 **Also queued, lower priority**: independent re-verification (live
-WebFetch/WebSearch) of both imported supplementary corpora — batch 1
-(OpenHands, Letta, Google ADK, Browser Use, CrewAI) and batch 2 (Strands
+WebFetch/WebSearch) of three imported supplementary corpora — batch 1
+(OpenHands, Letta, Google ADK, Browser Use, CrewAI), batch 2 (Strands
 Agents, smolagents, AG2, LlamaIndex, Llama Agents, Haystack, DSPy,
-AutoGen, Semantic Kernel), 14 frameworks total — and reconciliation of
-their combined 12 ADR-CANDIDATEs (6 in `.context/research/decisions.json`
-from batch 1, 6 in `research/decisions/ADR-CANDIDATE-*.md` from batch 2)
-plus batch 2's `spec-delta.json` (6 proposed spec changes) and
-`gap-delta.json` (8 prioritized gaps) against the existing locked
-architecture. Both corpora expand scope beyond the original 17-source
-brief and were not requested by the operating prompt — queued because
-supplied, not because completing them blocks the original brief's
-remaining 4 sources (Volcengine, Baidu, A2A, Agent Skills).
+AutoGen, Semantic Kernel), and batch 3 / "current wave" (2 new topics —
+sandbox-execution, security-2026 — plus 3 refresh-check appendices), 14
+frameworks + 2 topics total — and reconciliation of their combined 19
+ADR-CANDIDATEs (6 in `.context/research/decisions.json` from batch 1, 6
+in `research/decisions/ADR-CANDIDATE-*.md` from batch 2, 7 more from
+batch 3) plus each batch's own `spec-delta.json`/`gap-delta.json` against
+the existing locked architecture — and now also against the separately-
+imported post-commit-ops governance bundle. All three research corpora
+expand scope beyond the original 17-source brief and were not requested
+by the operating prompt — queued because supplied, not because completing
+them blocks the original brief's remaining 3 sources (Volcengine, Baidu,
+Agent Skills). A2A is the one exception: it was pulled forward and
+resolved live this session specifically because it closed a real brief
+gap, not deferred with the rest.
 
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the

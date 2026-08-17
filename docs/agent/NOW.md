@@ -138,6 +138,36 @@ candidates (none auto-adopted); **both imported corpora's ADR-CANDIDATEs
 (12 total) remain unreconciled against the existing locked architecture**
 — now the standing follow-up item across both batches, not just one.
 
+## "Current wave" import — mixed: one real gap closure, plus refresh/topics (not silent)
+
+A fourth corpus, distinct in kind from batches 1-2: not purely new
+frameworks. It contained (1) **A2A** — genuinely new, the first evidence
+for one of the original 17-source brief's 4 remaining `UNKNOWN` sources.
+Unlike every other imported framework/protocol so far, this session
+**independently re-verified A2A live** via WebSearch/WebFetch rather than
+trusting the import — the imported okf.md was thin (a lead, not a final
+record) and A2A was important enough to warrant the same live-research
+discipline as installments 1-3. Result: `research/protocols/a2a-1.0.1.md`,
+9 of 17 original-brief sources now researched live (was 8), 3 remaining
+(was 4). (2) **Refresh/delta checks** on 3 sources already live-researched
+this session (OpenAI Agents SDK, Microsoft Agent Framework, MCP) —
+appended as short, dated "External refresh check" sections to the
+existing canonical files, not duplicated as competing new files; one
+genuinely actionable lead surfaced (Microsoft Agent Framework's latest
+Python release reportedly adds local/Docker shell support — not
+independently confirmed, recorded as a lead in the local-first scorecard).
+(3) Two new cross-cutting topics, `research/topics/sandbox-execution.md`
+and `research/topics/security-2026.md` (new directory — neither
+framework- nor protocol-shaped). 7 more ADR-CANDIDATEs recorded, several
+now showing 3-4-way independent convergence across separate corpora (most
+notably `UNKNOWN_OUTCOME`-as-first-class-state and source-to-sink
+security, both promoted to `ACTION_REQUIRED` given the evidence density —
+still not ADRs, but no longer single-source candidates either). See
+`research/imported-corpus/SOURCE-RECEIPT-3.md` and
+`.context/research/gaps.json`'s `imported_corpus_batch_3_current_wave`
+entry for the full breakdown — **the A2A closure and the beyond-brief
+additions are recorded separately, not conflated into one figure.**
+
 ## Post-commit operations bundle import (out of Workstream B scope, tracked separately)
 
 The user also supplied a third corpus, different in kind from the two

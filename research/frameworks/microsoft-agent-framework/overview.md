@@ -88,3 +88,28 @@ pattern** relevant to this repository's own State Gate requirements
   not yet researched.
 - Full built-in capability inventory (tools, MCP, memory) — not yet
   researched.
+
+## External refresh check (2026-08-17, imported, unverified)
+
+A user-supplied "current wave" corpus independently re-researched this
+framework the same day (no LabLaunchPad corpus mounted on its end).
+Genuinely new facts, tagged `IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED`:
+
+- **"Latest Python release adds local and Docker shell support"** — this
+  is the single most relevant new fact for this file's own open local-first
+  question above. It does not by itself resolve `research/local-first/SCORECARD.md`'s
+  `UNKNOWN` verdict for Microsoft Agent Framework (not independently
+  re-verified this session), but it is a concrete lead: local shell
+  execution support existing would push the framework toward
+  `LOCAL_CAPABLE`, not `UNKNOWN`. Worth a direct check before the next
+  installment touches this framework again.
+- **Version observation**: Python 1.6.0, .NET 1.10.0 latest releases
+  observed by the external pass — not previously pinned in this file.
+- **Confirms, independently, that this framework is the direct successor
+  to AutoGen and Semantic Kernel** — this repository's own batch 2 import
+  (`research/frameworks/autogen/overview.md`,
+  `research/frameworks/semantic-kernel/overview.md`) already recorded the
+  same relationship from a different source. Two independent corpora
+  agreeing is stronger evidence than either alone.
+
+See `research/imported-corpus/SOURCE-RECEIPT-3.md` for full provenance.

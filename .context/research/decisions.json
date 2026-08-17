@@ -183,6 +183,60 @@
       "status": "CANDIDATE",
       "source": "docs/operations/post-commit-ops/08-recovery/unknown-outcome-protocol.md",
       "note": "The post-commit-ops bundle's UNKNOWN_OUTCOME/RECONCILING states (for merges, deployments, and any side effect with an ambiguous remote result) independently converge with research corpus batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect model, decisions.json id adr-candidate-006-durable-side-effect-reconciliation) - two separately-supplied corpora, one about external framework patterns and one about this repository's own git/CI/deploy operations, both landing on 'never blindly retry an operation whose side effect has an unknown outcome, reconcile actual state first' as a hard rule. Worth treating as reinforcing evidence when Phase 4/7 persistence work and any future CI/release automation are designed, not yet adopted as an ADR."
+    },
+    {
+      "id": "adopt-a2a-opaque-remote-agent-boundary",
+      "status": "CANDIDATE",
+      "source": "research/protocols/a2a-1.0.1.md (independently live-researched this session, not merely imported)",
+      "note": "A2A closes an original-brief gap. Its core design decision - remote agents are opaque black-boxes, internal state/memory/tools never exposed across the boundary - is directly actionable: treat A2A as an external-agent adapter at the edge of LabLaunchPad's architecture, never assume a remote peer's internals are inspectable or trustworthy. Same dependency-direction discipline already applied to MCP."
+    },
+    {
+      "id": "current-wave-cw-001-durable-workflow-subsystem",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-001",
+      "note": "INVESTIGATE->ADOPT: Microsoft Agent Framework's first-class graph workflows + checkpointing vs OpenAI's separated agent-loop/sessions/sandbox split, cited as evidence for a first-class durable workflow subsystem. Overlaps substantially with batch-2's own adr-candidate-001-small-kernel-optional-workflow and this session's own LangGraph/Mastra installment-3 finding (workflow orchestration core-vs-attached varies by framework family) - a third independent convergence on the same theme. Numbering disambiguation: this is 'CW-ADR-001', distinct from batch-2's ADR-CANDIDATE-001.md. Imported claim, DOCUMENTED_NOT_REPRODUCED."
+    },
+    {
+      "id": "current-wave-cw-002-mcp-stateless-adapter",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-002",
+      "note": "ADOPT: reinforces this session's own protocol-application-agent-state-distinction decision (from the live MCP 2026-07-28 audit) with independent confirmation from a separate corpus pass the same day. No new information, good corroboration."
+    },
+    {
+      "id": "current-wave-cw-003-a2a-trust-boundary",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-003",
+      "note": "ADOPT adapter, reject shared-state coupling - same conclusion this session reached independently via live A2A research, see adopt-a2a-opaque-remote-agent-boundary above. Corroborating, not new."
+    },
+    {
+      "id": "current-wave-cw-004-workspace-sandbox-contracts",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-004",
+      "note": "ADOPT: reinforces adopt-runtime-and-sandbox-as-explicit-contracts (batch 1) - now a 4th independent convergence (OpenHands/Browser Use/Letta, Mastra's Workspace, Youtu-Agent's Environment, and this current-wave corpus's own sandbox-execution topic research at research/topics/sandbox-execution.md) on 'workspace/sandbox as an explicit, named contract.' Strong enough evidence density to seriously consider promoting past CANDIDATE when Phase 19 (SandboxProvider) design starts, though still not an ADR yet."
+    },
+    {
+      "id": "current-wave-cw-005-source-to-sink-security",
+      "status": "ACTION_REQUIRED",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-005; research/topics/security-2026.md",
+      "note": "ADOPT: source-to-sink capability containment over prompt-injection text classification. This is now the THIRD independent source reaching the same conclusion as reject-llm-only-security-judgement (OpenHands's own docs; this security-2026 topic's OpenAI citation; and MCP's own 2026-07-28 spec security section per the refresh-check appended to research/protocols/mcp-2026-07-28.md). Promoted to ACTION_REQUIRED given the evidence density - this repository's own Policy Gate design should treat capability/source-to-sink containment as the primary control, not an optional layer, when it is actually specified."
+    },
+    {
+      "id": "current-wave-cw-006-model-capability-matrix",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-006",
+      "note": "ADOPT: a model/provider capability matrix as a release artifact, not just an abstract interface - directly relevant to Phase 16 Model Gateway spec, consistent with the existing adopt-local-model-gateway-pattern decision's own note to document concrete deployment targets, not only abstractions."
+    },
+    {
+      "id": "current-wave-cw-007-unknown-outcome-mutation-state",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-007",
+      "note": "ADOPT: UNKNOWN_OUTCOME as a first-class mutation state for side effects - the SAME conclusion as batch-2's adr-candidate-006-durable-side-effect-reconciliation and the post-commit-ops bundle's post-commit-ops-unknown-outcome-convergence. This is now the THIRD independent corpus landing on this exact requirement (framework research batch 2, this repository's own operations-protocol import, and now this framework research batch 3) - the single most corroborated candidate across all imports so far."
+    },
+    {
+      "id": "current-wave-corpus-not-yet-reconciled-with-architecture",
+      "status": "ACTION_REQUIRED",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-3.md, .context/research/current-wave/spec-delta.json",
+      "note": "Same standing item as batch 1 and batch 2: current-wave's 7 ADR-CANDIDATEs, spec-delta.json, and gap-delta.json have not been reconciled against the existing locked architecture, against each other, or against the post-commit-ops bundle. Three research corpora plus one governance corpus now have unreconciled architectural proposals - this reconciliation is a real, growing backlog item, not decreasing with each import."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

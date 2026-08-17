@@ -2,7 +2,7 @@
   "id": "P2-kernel-constitution-and-e5-02",
   "phase": "P2",
   "title": "Phase 2: Kernel Constitution (spec synthesis) + E5-02 UNKNOWN_OUTCOME/side-effect reconciliation harness",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "governingPrompt": "LabLaunchPadClaudeCodeOneShotPhase2Kernelv1 one-shot spec, adopted per the plan at /root/.claude/plans/yes-the-right-next-starry-truffle.md",
   "scopeReconciliation": "docs/agent/NOW.md",
   "scopedModules": ["M01", "M02", "M03", "M04", "M05", "M15", "M16"],
@@ -20,17 +20,25 @@
     {
       "id": "step2",
       "title": "Build + run E5-02 UNKNOWN_OUTCOME harness (benchmarks/e5-02-unknown-outcome/)",
-      "status": "PENDING"
+      "status": "COMPLETE",
+      "result": "9/9 executed cases pass, 7/15 NOT_EXECUTED with stated reasons - research/benchmarks/E5-02-RESULT.md"
     },
     {
       "id": "step3",
       "title": "Write .context/scenarios/kernel-core.json adversarial matrix",
-      "status": "PENDING"
+      "status": "COMPLETE"
     },
     {
       "id": "step4",
       "title": "Final receipt (.context/evidence/phase-2-kernel-receipt.json) + gates + NOW/NEXT update",
-      "status": "PENDING"
+      "status": "COMPLETE",
+      "result": "GATE_A_SPEC PASS, GATE_B_E5_02 PASS_SIMULATED, GATE_C_HARNESS PARTIAL, GATE_D_GOVERNANCE PASS - .context/research/reconciliation/phase-gate.json#phase_2_gates"
+    },
+    {
+      "id": "step5",
+      "title": "Knowledge OS reconciliation (follow-on, not part of the original Phase 2 scope) - evaluate a user-supplied 94-file external package against AGENTS.md/KERNEL-CONSTITUTION.md/ADR system; extract 4 small non-competing items, reject the rest",
+      "status": "COMPLETE",
+      "result": "research/reconciliation/KNOWLEDGE-OS-RECONCILIATION.md, commit 17c1c8d"
     }
   ],
   "acceptance": [

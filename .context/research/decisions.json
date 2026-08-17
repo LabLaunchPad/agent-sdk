@@ -41,7 +41,31 @@
       "contradiction": "priority-list-not-infallible",
       "status": "CORRECTION_RECORDED",
       "note": "operating-prompt framing is E0 until independently verified, exactly like any other external claim - applies symmetrically to future research installments"
+    },
+    {
+      "id": "adopt-checkpointer-pluggable-backend",
+      "pattern": "checkpointer-as-pluggable-backend-interface",
+      "status": "CANDIDATE",
+      "note": "LangGraph evidence for ADR-0006's deferred persistence-interface constraint (Phase 4/7); also motivates validating caller-supplied filters on state/checkpoint query paths per the disclosed LangGraph checkpointer CVEs"
+    },
+    {
+      "id": "adopt-libsql-local-storage-precedent",
+      "pattern": "embedded-sqlite-compatible-local-storage",
+      "status": "CANDIDATE",
+      "note": "Mastra's LibSQL file-DB path is a concrete, zero-infra local storage example to cite alongside Qwen-Agent's local model path when Phase 4/7 persistence work starts"
+    },
+    {
+      "id": "protocol-application-agent-state-distinction",
+      "source": "research/protocols/mcp-2026-07-28.md",
+      "status": "ACTION_REQUIRED_AT_PHASE_18",
+      "note": "PROTOCOL STATE (MCP's own, deliberately minimized) != APPLICATION STATE (server-minted/task handles) != AGENT STATE (LabLaunchPad's own Task/State/Checkpoint model). Recorded as a decision candidate, not an ADR - do not collapse these when Phase 18 (Protocols) designs the MCP adapter."
+    },
+    {
+      "id": "reject-root-license-file-sufficiency",
+      "contradiction": "license-split-by-directory",
+      "status": "ACTION_REQUIRED",
+      "note": "Any future dependency-review process must check server/deployment/enterprise subdirectories, not just the root LICENSE file, before extracting even pattern-only knowledge - confirmed by LangGraph (langgraph-api Elastic 2.0) and Mastra (ee/ Enterprise License) independently"
     }
   ],
-  "generated_at": "2026-08-16T00:00:00Z"
+  "generated_at": "2026-08-17T00:00:00Z"
 }

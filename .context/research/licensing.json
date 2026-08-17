@@ -1,36 +1,57 @@
 {
-  "coverage": "6 of 17 sources",
+  "coverage": "7 of 17 sources",
   "licenses": {
     "openai-agents-sdk": {
       "license": "MIT",
       "status": "FACT",
-      "copyright": "OpenAI, 2025"
+      "copyright": "OpenAI, 2025",
+      "whole_tree_checked": false
     },
     "microsoft-agent-framework": {
       "license": "MIT",
       "status": "INFERENCE_NOT_FACT",
-      "note": "confirmed for Samples repo, not primary repo LICENSE file - LICENSE_UNKNOWN pending re-verification"
+      "note": "confirmed for Samples repo, not primary repo LICENSE file - LICENSE_UNKNOWN pending re-verification",
+      "whole_tree_checked": false
     },
     "pydantic-ai": {
       "license": "MIT",
       "status": "FACT",
-      "copyright": "Pydantic Services Inc., 2024-present"
+      "copyright": "Pydantic Services Inc., 2024-present",
+      "whole_tree_checked": false
     },
     "kimi-agent-sdk": {
       "license": "Apache-2.0",
-      "status": "FACT (license identity); copyright holder is INFERENCE"
+      "status": "FACT (license identity); copyright holder is INFERENCE",
+      "whole_tree_checked": false
     },
     "qwen-agent": {
       "license": "Apache-2.0",
-      "status": "FACT (type); copyright holder UNFILLED in source LICENSE file"
+      "status": "FACT (type); copyright holder UNFILLED in source LICENSE file",
+      "whole_tree_checked": false
     },
     "tencent-youtu-agent": {
       "license": "MIT",
       "status": "FACT",
-      "copyright": "Tencent, 2025"
+      "copyright": "Tencent, 2025",
+      "whole_tree_checked": false
+    },
+    "langgraph": {
+      "license": "SPLIT - core (langgraph, langchain-core, model integrations) MIT; langgraph-api Elastic License 2.0",
+      "status": "FACT",
+      "copyright": "LangChain, Inc., 2024",
+      "whole_tree_checked": true,
+      "note": "see research/contradictions/license-split-by-directory.md"
+    },
+    "mastra": {
+      "license": "SPLIT - core framework Apache-2.0; ee/ directories Mastra Enterprise License",
+      "status": "FACT",
+      "copyright": "Kepler Software (Mastra maintainers)",
+      "whole_tree_checked": true,
+      "note": "see research/contradictions/license-split-by-directory.md"
     }
   },
   "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",
+  "installment_3_rule": "Check the whole tree, not just the root LICENSE file - confirmed necessary by two independent frameworks (LangGraph, Mastra) both splitting license by directory/package.",
   "source": "research/licensing/MATRIX.md",
-  "generated_at": "2026-08-16T00:00:00Z"
+  "generated_at": "2026-08-17T00:00:00Z"
 }

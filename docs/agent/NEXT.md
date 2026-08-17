@@ -4,7 +4,7 @@ Queued work. Nothing here may start before its gate opens.
 
 ## Current phase
 
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 1
+**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 3
 complete. Workstream A passed its no-regression gate (CI green, run #4,
 commit fb615ed) — see `docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`. Workstream
 B's concrete scope is recorded in `docs/agent/NOW.md`'s scope-reconciliation
@@ -12,10 +12,14 @@ note, superseding the earlier abstract 90-dimension sketch.
 
 ## Next gate
 
-**Workstream B, installment 3** — research the remaining 11 sources
-(`.context/research/gaps.json`), prioritized Volcengine AgentKit and Baidu
-AppBuilder SDK next (completing the primary local-first-relevant set), then
-LangGraph/Mastra, then the protocol layer (MCP/A2A/Agent Skills).
+**Workstream B, installment 4** — research the remaining 4 primary/protocol
+sources (`.context/research/gaps.json`): Volcengine AgentKit and Baidu
+AppBuilder SDK (completing the primary local-first-relevant set), then A2A
+and Agent Skills (completing the protocol layer alongside MCP, now done).
+Also queued: PydanticAI/Kimi Agent SDK deepening passes, the full
+40-dimension checklist, comparative network-disabled testing, and the
+token/context-efficiency and UX/DX audit files — all explicitly deferred
+from installment 3, not dropped.
 
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the

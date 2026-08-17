@@ -1,5 +1,5 @@
 {
-  "coverage": "5 of 17 sources (installment 2 added qwen-agent, youtu-agent capability findings)",
+  "coverage": "7 of 17 sources (installment 3 added langgraph, mastra capability findings)",
   "confirmed_patterns": {
     "tool_boundary_guardrails_distinct_from_agent_guardrails": {
       "source": "openai-agents-sdk",
@@ -30,8 +30,18 @@
       "source": "tencent-youtu-agent",
       "evidence_level": "E3",
       "note": "confirms LabLaunchPad's own planned adapters/tools boundary and Phase 6 Context Compiler; not yet promoted to a knowledge/patterns/ file"
+    },
+    "checkpointer_as_pluggable_backend_interface": {
+      "source": "langgraph",
+      "evidence_level": "E3",
+      "note": "memory/SQLite/Postgres/Redis behind one Checkpointer interface - relevant to ADR-0006's deferred persistence-interface constraint; not yet promoted to a knowledge/patterns/ file"
+    },
+    "workflow_orchestration_and_checkpointing_as_core_not_attached": {
+      "source": "langgraph, mastra",
+      "evidence_level": "E3",
+      "note": "both graph-based frameworks treat these as first-party, contrasted with PydanticAI/Microsoft Agent Framework treating durable execution/checkpointing as attached capabilities"
     }
   },
   "source": "research/built-in-capabilities/MATRIX.md",
-  "generated_at": "2026-08-16T00:00:00Z"
+  "generated_at": "2026-08-17T00:00:00Z"
 }

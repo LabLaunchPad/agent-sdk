@@ -1,12 +1,8 @@
 {
-  "gap": "11 of 17 named sources not yet researched",
-  "remaining_primary": [
-    "langgraph",
-    "mastra",
-    "volcengine-agentkit",
-    "baidu-appbuilder-sdk"
-  ],
-  "remaining_protocols": ["mcp", "a2a", "agent-skills"],
+  "gap": "9 of 17 named sources not yet researched",
+  "remaining_primary": ["volcengine-agentkit", "baidu-appbuilder-sdk"],
+  "remaining_protocols": ["a2a", "agent-skills"],
+  "researched_this_installment": ["langgraph", "mastra", "mcp-2026-07-28"],
   "remaining_dimensions_even_for_researched_frameworks": [
     "state.md",
     "memory.md",
@@ -16,8 +12,14 @@
     "dx.md",
     "ux.md",
     "runtime deployment matrix",
-    "model portability matrix"
+    "model portability matrix",
+    "full 40-dimension checklist (DOCUMENTED/OBSERVED-IN-SOURCE/OBSERVED-IN-TESTS/REPRODUCED-BY-US/UNKNOWN precision) - not yet applied to any source",
+    "comparative network-disabled test - not performed for any source",
+    "token/context efficiency audit file - not created",
+    "UX/DX audit file - not created",
+    "PydanticAI deepening (installment 1 was shallow per user feedback)",
+    "Kimi Agent SDK deepening (installment 1 left local-first as UNKNOWN)"
   ],
-  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then LangGraph/Mastra, then protocol layer",
-  "generated_at": "2026-08-16T00:00:00Z"
+  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then A2A and Agent Skills (remaining protocol layer), then the deepening passes and the 40-dimension/comparative/token/UX audit files",
+  "generated_at": "2026-08-17T00:00:00Z"
 }

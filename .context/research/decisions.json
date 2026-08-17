@@ -64,7 +64,29 @@
       "id": "reject-root-license-file-sufficiency",
       "contradiction": "license-split-by-directory",
       "status": "ACTION_REQUIRED",
-      "note": "Any future dependency-review process must check server/deployment/enterprise subdirectories, not just the root LICENSE file, before extracting even pattern-only knowledge - confirmed by LangGraph (langgraph-api Elastic 2.0) and Mastra (ee/ Enterprise License) independently"
+      "note": "Any future dependency-review process must check the whole tree/offering, not just the root LICENSE file, before extracting even pattern-only knowledge - confirmed by LangGraph (langgraph-api Elastic 2.0) and Mastra (three tiers: framework/platform/enterprise) independently"
+    },
+    {
+      "id": "reject-checkpointer-solves-persistence",
+      "contradiction": "checkpointing-vs-persistence-lifecycle",
+      "status": "ACTION_REQUIRED",
+      "note": "Phase 4/7 CheckpointStore spec must treat retention/archival and schema-versioning/migration as first-class parts of the contract, not implementation details deferred to whichever backend is chosen - LangGraph's own open issues (#536 schema migration, #1138 unbounded growth) are direct evidence this is unsolved even in a mature, genuinely local-capable checkpointer"
+    },
+    {
+      "id": "adopt-workspace-composable-tool-boundary",
+      "pattern": "workspace-as-composable-filesystem-command-search-skills-with-per-tool-approval",
+      "status": "CANDIDATE",
+      "note": "Mastra's Workspace is the strongest match found to LabLaunchPad's planned adapters/tools boundary combined with a policy layer - worth citing directly when Phase 8 (Capability Registry) and the tool-boundary Policy Gate design are formalized"
+    },
+    {
+      "id": "correct-langgraph-local-first-classification",
+      "status": "CORRECTION_RECORDED",
+      "note": "First draft of the LangGraph local-first verdict (HYBRID, citing a Postgres/Redis production requirement) overstated the SDK's own dependency; corrected to LOCAL_CAPABLE after re-reading the Checkpointer interface directly, per user feedback. Applies the same evidence-discipline rule used for the Youtu-Agent correction: re-check a finding against primary sources before treating it as settled, regardless of source (a user's steer is not exempt from this either - the correction itself was verified against LangGraph's own docs, not accepted on assertion alone)"
+    },
+    {
+      "id": "correct-mastra-licensing-two-tier-to-three-tier",
+      "status": "CORRECTION_RECORDED",
+      "note": "First draft recorded a simple core/ee two-way license split for Mastra; deeper research found a third, distinguishable platform tier (Studio/observability/Memory Gateway, commercially metered). Corrected in research/licensing/MATRIX.md and .context/research/licensing.json, not silently overwritten."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

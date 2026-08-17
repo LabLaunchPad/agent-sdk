@@ -34,12 +34,22 @@
     "checkpointer_as_pluggable_backend_interface": {
       "source": "langgraph",
       "evidence_level": "E3",
-      "note": "memory/SQLite/Postgres/Redis behind one Checkpointer interface - relevant to ADR-0006's deferred persistence-interface constraint; not yet promoted to a knowledge/patterns/ file"
+      "note": "memory/SQLite/Postgres/Mongo behind one Checkpointer interface, in-memory/SQLite genuinely first-class (corrected from an initial framing that implied Postgres/Redis were required) - relevant to ADR-0006's deferred persistence-interface constraint; not yet promoted to a knowledge/patterns/ file"
     },
     "workflow_orchestration_and_checkpointing_as_core_not_attached": {
       "source": "langgraph, mastra",
       "evidence_level": "E3",
       "note": "both graph-based frameworks treat these as first-party, contrasted with PydanticAI/Microsoft Agent Framework treating durable execution/checkpointing as attached capabilities"
+    },
+    "workspace_as_composable_filesystem_command_search_skills_with_per_tool_approval": {
+      "source": "mastra",
+      "evidence_level": "E3",
+      "note": "strongest match found across all 8 frameworks researched to LabLaunchPad's planned adapters/tools boundary combined with a policy layer in one abstraction; not yet promoted to a knowledge/patterns/ file"
+    },
+    "persistence_lifecycle_distinct_from_storage_backend_choice": {
+      "source": "langgraph",
+      "evidence_level": "E3",
+      "note": "checkpoint retention/archival and state-schema migration are open, unsolved problems in LangGraph independent of which backend (local or cloud) is used - see research/contradictions/checkpointing-vs-persistence-lifecycle.md"
     }
   },
   "source": "research/built-in-capabilities/MATRIX.md",

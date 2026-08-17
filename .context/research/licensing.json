@@ -43,11 +43,12 @@
       "note": "see research/contradictions/license-split-by-directory.md"
     },
     "mastra": {
-      "license": "SPLIT - core framework Apache-2.0; ee/ directories Mastra Enterprise License",
+      "license": "THREE-TIER (corrected from an initial two-way split) - (1) core framework Apache-2.0; (2) platform layer (Studio/observability/Memory Gateway) self-hostable or hosted, commercially metered; (3) Enterprise Edition under a separate Mastra Enterprise Edition License",
       "status": "FACT",
       "copyright": "Kepler Software (Mastra maintainers)",
       "whole_tree_checked": true,
-      "note": "see research/contradictions/license-split-by-directory.md"
+      "note": "see research/contradictions/license-split-by-directory.md",
+      "correction_note": "first draft recorded only a two-way core/ee split; the platform layer is a distinguishable third tier, not covered by either the Apache-2.0 grant or the ee/ Enterprise License alone"
     }
   },
   "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",

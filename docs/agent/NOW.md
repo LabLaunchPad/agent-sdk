@@ -43,9 +43,22 @@ Mastra, and the MCP 2026-07-28 special audit (moved up in priority per the
 user's explicit instruction that the current spec materially changed the
 protocol's architecture). Produced across all three: per-framework OKF
 concept docs, local-first scorecard, capability matrix, licensing matrix,
-6 extracted patterns/precedents (`knowledge/patterns/` +
-`.context/research/decisions.json` candidates), 4 contradiction-matrix
+7 extracted patterns/precedents (`knowledge/patterns/` +
+`.context/research/decisions.json` candidates), 5 contradiction-matrix
 entries, machine-facing `.context/research/*.json` summaries.
+
+**Self-correction within installment 3**: LangGraph's local-first verdict
+and Mastra's licensing tier count were both corrected after further
+evidence review — LangGraph's checkpointer was initially mischaracterized
+as requiring PostgreSQL/Redis for production (corrected to `LOCAL_CAPABLE`:
+in-memory/SQLite are first-class, not a fallback), and Mastra's licensing
+was initially recorded as a simple two-way split (corrected to three
+distinguishable tiers: framework/platform/enterprise). Both corrections are
+recorded explicitly in the affected files, not silently overwritten — the
+same evidence-discipline rule applied to the Youtu-Agent correction in
+installment 2 applies symmetrically here, including to steers from any
+source, human included: re-verify against primary evidence, don't accept a
+characterization on assertion.
 
 **Notable installment 2 finding**: Youtu-Agent, despite being named
 high-priority for local-first relevance in the operating prompt itself, was

@@ -48,15 +48,16 @@
       "evidence": "research/frameworks/tencent-youtu-agent/overview.md"
     },
     "langgraph": {
-      "verdict": "HYBRID - genuine local single-process checkpointer path (SQLite) but production guidance requires PostgreSQL+Redis, and the server component (langgraph-api) is separately licensed",
-      "evidence": "research/frameworks/langgraph/overview.md"
+      "verdict": "LOCAL_CAPABLE (corrected) - the Checkpointer interface is genuinely local-native (in-memory/SQLite first-class, not a degraded fallback); Postgres/Mongo are optional production backends, not a mandatory dependency. Real caveats: langgraph-api is separately licensed (Elastic 2.0), and persistence-lifecycle (retention, schema migration) is unresolved independent of backend choice",
+      "evidence": "research/frameworks/langgraph/overview.md",
+      "correction_note": "first draft incorrectly framed Postgres/Redis as a production requirement implied by the SDK; corrected on user feedback with direct re-reading of the checkpointer interface"
     },
     "mastra": {
-      "verdict": "LOCAL_CAPABLE - strongest local-first storage story of the graph-based frameworks (LibSQL local file DB, no external infra); model-execution local-first status remains UNKNOWN",
+      "verdict": "LOCAL_CAPABLE - strongest combined storage-plus-tools local-first story researched (LibSQL local file DB + Workspace filesystem/command-execution/search, both local-native with per-tool approval gating); model-execution local-first status remains UNKNOWN",
       "evidence": "research/frameworks/mastra/overview.md"
     }
   },
-  "installment_3_observation": "local-first is not one axis; LangGraph and Mastra are each strong on one dimension (checkpointing / storage) and unresolved on model execution - per-capability columns are load-bearing, not the single verdict",
+  "installment_3_observation": "local-first is not one axis; LangGraph and Mastra are each strong on checkpointing/storage-plus-tools and unresolved on model execution - per-capability columns are load-bearing, not the single verdict. LangGraph's more precise finding is persistence LIFECYCLE risk (retention, schema migration), not a local-vs-cloud backend gap.",
   "source": "research/local-first/SCORECARD.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

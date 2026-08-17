@@ -144,6 +144,21 @@ TypeScript is the *starting hypothesis* for orchestration; it must be earned, an
 - **Horizon 2:** Kernel V1 (event-sourced replay), Tool Runtime V1 (Tier 2 default, adaptive consent); extract Graph ergonomics only if real usage shows standalone value; Model + Model Router SDKs begin.
 - **Horizon 3+:** Memory/Knowledge/Evaluation/Trust/Observability per their own evidence-gated passes; optional self-hostable Control Plane last.
 
+### Horizon 1 gate
+
+No scaffolding or implementation code should be written until every row below is frozen, not just some:
+
+| Decision | Status |
+|---|---|
+| Module boundaries (L2 — Kernel merges Graph/State/Context; Tool Runtime+Security is one SDK) | **FROZEN** — ADR-C, ADR-D |
+| Priority SDK selection (Kernel + Tool Runtime as the first two) | **FROZEN** — dependency-centrality + risk justification, this document |
+| Language/runtime — orchestration layer of both SDKs | **FROZEN** — TypeScript/Node, ADR-A |
+| Language/runtime — Tool Runtime sandbox substrate | **NOT FROZEN** — EXPERIMENTAL, blocked on the Tier 1 vs Tier 2 prototype (see Verification section) |
+| Kernel durability contract (MVP checkpoint/restore vs V1 event-sourcing) | **FROZEN for MVP shape** — ADR-B |
+| Control Plane sequencing | **FROZEN** — deferred, ADR-E |
+
+Horizon 1 implementation stays blocked until the sandbox-substrate row also reaches FROZEN. That prototype is research/benchmarking work, not package scaffolding, and should be scoped as its own follow-up pass before any `packages/` directory is created.
+
 ## Open questions carried forward (not blocking, but should be revisited)
 
 - Sandbox-substrate prototype (Tier 1 vs Tier 2, which existing runtime to wrap) is unresolved — first concrete build task in Horizon 1.

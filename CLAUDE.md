@@ -31,6 +31,8 @@ Key decisions already made there (see the doc for full reasoning and confidence 
 - The Graph/State/Context/Event-bus concerns live inside the Kernel SDK as internally namespaced modules, not as separate packages.
 - A hosted Control Plane is deferred (Horizon 3+); nothing before that should assume a required remote service, consistent with local-first.
 
+**Horizon 1 (actual Kernel/Tool Runtime code) is gated, not started.** The blueprint's module boundaries, priority-SDK selection, orchestration-layer language choice, MVP durability contract, and Control Plane sequencing are frozen — but the Tool Runtime sandbox substrate (Tier 1 vs Tier 2, which existing isolation runtime to wrap) is still EXPERIMENTAL pending a prototype. Do not create a `packages/` directory or scaffold `packages/kernel` / `packages/tool-runtime` until that row is also frozen (see "Horizon 1 gate" in the blueprint doc) — and even then, confirm with the user first, since package-manager/build/test tooling remain open per the section below.
+
 ## Conventions to establish
 
 Beyond the above, package manager, monorepo tooling, build system, linter, and test framework are still unfixed. Before adding those, confirm with the user rather than inferring — the first commit that adds tooling sets that choice for everything after it.

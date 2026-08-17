@@ -1,0 +1,7 @@
+{
+  "specVersion": "0.2",
+  "scopes": ["research"],
+  "reservedFilenames": ["index.md", "log.md"],
+  "excludeFilenames": ["README.md"],
+  "requiredField": "type"
+}

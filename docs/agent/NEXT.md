@@ -4,61 +4,61 @@ Queued work. Nothing here may start before its gate opens.
 
 ## Current phase
 
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 3
-complete. Workstream A passed its no-regression gate (CI green, run #4,
-commit fb615ed) — see `docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`. Workstream
-B's concrete scope is recorded in `docs/agent/NOW.md`'s scope-reconciliation
-note, superseding the earlier abstract 90-dimension sketch.
+**Phase 1B — Architecture Reconciliation & ADR Freeze, complete.** See
+`docs/agent/NOW.md`'s Phase 1B section and
+`.context/research/reconciliation/phase-gate.json` for the full gate
+result (`ADR_GATE`/`BOUNDARY_GATE`/`ACTION_GATE`/`CONTEXT_GATE` PASS;
+`E5_GATE`/`SPEC_GATE` PARTIAL). Before it: **P1A — OKF v0.2 Adoption + Gap
+Audit**, Workstream B (research), installment 3 complete. Workstream A
+passed its no-regression gate (CI green, run #4, commit fb615ed) — see
+`docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`.
 
 ## Next gate
 
-**Workstream B, installment 4** — research the remaining **3** primary/protocol
-sources (`.context/research/gaps.json`): Volcengine AgentKit and Baidu
-AppBuilder SDK (completing the primary local-first-relevant set), then
-Agent Skills (the last remaining protocol — MCP and A2A are now both
-done, A2A closed via live research prompted by a user-supplied lead).
-Also queued: PydanticAI/Kimi Agent SDK deepening passes, the full
-40-dimension checklist, comparative network-disabled testing, and the
+**Phase 2 spec-preparation may begin**, per `SPEC_GATE: PARTIAL` — the ADR/
+boundary/action prerequisites are all clear, so spec/contract/invariant
+work referencing `ADR-0009` through `ADR-0016` directly is unblocked. Full
+architectural confidence stays gated on further E5 execution
+(`E5_GATE: PARTIAL` — 1 of 10+ named benchmarks run) as Phase 8/9/12/16/
+17/19 implementation surfaces come online; `BEN-TOOL-INJECTION` and
+`BEN-SANDBOX-BOUNDARY` were explicitly deferred this phase for exactly
+that reason, not forgotten.
+
+Deferred, lower priority, still queued: Volcengine AgentKit and Baidu
+AppBuilder SDK (`.context/research/gaps.json` — deliberately not
+researched in Phase 1B since no pending ADR needs them; see
+`research/reconciliation/RESEARCH-REOPEN-GATES.md` for the actual reopen
+conditions). Also queued: PydanticAI/Kimi Agent SDK deepening passes, the
+full 40-dimension checklist, comparative network-disabled testing, and the
 token/context-efficiency and UX/DX audit files — all explicitly deferred
 from installment 3, not dropped.
 
-**Also queued, lower priority**: independent re-verification (live
-WebFetch/WebSearch) of four imported supplementary corpora — batch 1
-(OpenHands, Letta, Google ADK, Browser Use, CrewAI), batch 2 (Strands
-Agents, smolagents, AG2, LlamaIndex, Llama Agents, Haystack, DSPy,
-AutoGen, Semantic Kernel), batch 3 / "current wave" (2 new topics —
-sandbox-execution, security-2026 — plus 3 refresh-check appendices), and
-wave1 (3 new topics — durability-exactly-once, e5-evidence-levels,
-capability-aware-routing), 14 frameworks + 5 topics total — and
-reconciliation of their combined 22 ADR-CANDIDATEs (6 batch 1, 6 batch 2,
-7 batch 3, 3 wave1) plus each batch's own `spec-delta.json`/`gap-delta.json`
-against the existing locked architecture — and now also against the
-separately-imported post-commit-ops governance bundle. A **first pass** at
-this reconciliation now exists: `research/canonical/ARCHITECTURE-DECISIONS.md`
-applies a `delete_test` to 25 candidate boundaries and surfaces 3
-evidenced-but-unplanned `ADD_CANDIDATE` boundaries (`WorkspaceEngine`,
-`SandboxEngine`, `SideEffectEngine`) — this is NOT a formal ADR-writing
-pass, still queued as `GAP-ARCHITECTURE-RECONCILIATION` (P0) in
-`research/canonical/canonical-research.json`. All corpora beyond the
-original brief expand scope and were not requested by the operating
-prompt — queued because supplied, not because completing them blocks the
-original brief's remaining 3 sources (Volcengine, Baidu, Agent Skills).
-A2A is the one exception: it was pulled forward and resolved live this
-session specifically because it closed a real brief gap, not deferred
-with the rest.
+**Resolved in Phase 1B, no longer queued**: `GAP-ARCHITECTURE-RECONCILIATION`
+(P0) — the formal ADR-writing pass over the accumulated ADR-CANDIDATEs is
+done (`ADR-0009`–`ADR-0016`; see `research/reconciliation/DECISION-
+CONSOLIDATION.md`). The delete-test's own first-pass count of "25 candidate
+boundaries" (`research/canonical/ARCHITECTURE-DECISIONS.md`) was itself
+corrected to the actual **27** during Phase 1B — see
+`research/reconciliation/BOUNDARY-RECONCILIATION.md`'s frontmatter
+correction note. `GAP-E5-ZERO` (P0) is **partially** addressed, not closed
+— `E5-DURABLE-RESTART` executed clean, 9 more named benchmarks remain
+`NOT_RUN`; still requires further runnable implementation surfaces, not
+desk research, to close further.
 
-**Also queued**: `research/canonical/` itself names `GAP-E5-ZERO` (P0) —
-zero E5 reproductions across all 6 corpora combined — as the highest-impact
-gap in the entire consolidated graph; it requires a runnable, pinned
-LabLaunchPad implementation, not further desk research, to close.
+**Still lower priority, unchanged**: independent re-verification (live
+WebFetch/WebSearch) of the imported supplementary corpora (batch 1, batch
+2, batch 3, wave1 — 14 frameworks + 5 topics total, all currently
+`DOCUMENTED_NOT_REPRODUCED`).
 
 **P02 — System Specification.**
-Entry condition: Workstream B's research is judged sufficient to derive the
-LabLaunchPad target architecture and spec/benchmark deltas the operating
-prompt calls for, and those deltas are reconciled into this repository's
-governing documents.
+Entry condition met for spec-preparation work: Phase 1B's ADR set exists
+and is reconciled against `docs/architecture/PACKAGE-MAP.md`. See
+`docs/agent/NOW.md`'s Phase 1B section and `SPEC_GATE: PARTIAL` in
+`.context/research/reconciliation/phase-gate.json` for the precise scope
+of what's unblocked (spec/contract preparation) versus what remains gated
+(full confidence pending further E5 execution).
 
-**Phase 2 has NOT started.**
+**Phase 2 spec-preparation may begin. Phase 2 implementation has NOT started.**
 
 ## Operational tracking (from ADR-0008)
 

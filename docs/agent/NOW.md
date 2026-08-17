@@ -5,6 +5,7 @@ here, stop and reconcile before continuing.
 
 ## Phase
 
+**Phase 1B — Architecture Reconciliation & ADR Freeze** (complete). Was:
 **P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 3
 
 ## Objective
@@ -231,6 +232,52 @@ surfacing 3 evidenced-but-unplanned `ADD_CANDIDATE` boundaries
 future ADR, **not** added to the package map by this consolidation itself.
 Status recorded honestly as `PARTIAL`: E5 reproduction remains 0/14 across
 every corpus combined.
+
+## Phase 1B — Architecture Reconciliation & ADR Freeze (complete)
+
+The audit delivered earlier this session found a specific, verifiable
+state: research accumulation was no longer the bottleneck — 44 recorded
+decisions and 27 delete-tested architecture boundaries existed, and zero
+had been converted into a binding ADR since Phase 0's original 8. The user
+requested this exact next phase: freeze further broad research, convert
+the backlog into a minimal binding ADR set, triage every open action item,
+close only decision-relevant research gaps, run a first real E5, decide
+the dormant `post-commit-ops` bundle, and gate Phase 2 behind all of it.
+
+**Result**: 8 binding ADRs (`ADR-0009`–`ADR-0016`), consolidating 22 of the
+44 decisions directly or as duplicate corroboration — not one ADR per
+decision. All 27 boundaries dispositioned (14 `KEEP`, 4 `ADAPT`, 1
+`EXTERNALIZE`, 3 promoted from `ADD_CANDIDATE` to bound contract additions
+on existing packages — zero new top-level packages created, all failed
+the creation rule's dependency-cut test — 4 `DEFER` with named revisit
+triggers, 1 `N/A`). All 12 `ACTION_REQUIRED` items resolved, 0 remaining.
+Agent Skills researched live (closing the original brief's last fully-
+`UNKNOWN` gap besides Volcengine/Baidu, deliberately not researched this
+phase per the operating prompt's own budget rule — no pending ADR needed
+them). `post-commit-ops` resolved to `DEFER` (not adopted, not rejected) —
+see `research/reconciliation/POST-COMMIT-OPS-DECISION.md`. First real E5
+executed (`E5-DURABLE-RESTART`): 6/6 genuine mid-transaction kills rolled
+back cleanly, 4/4 post-commit controls committed cleanly, zero corruption
+across 11 trials — converts `GAP-E5-ZERO` from 0/14+ to a genuine but
+partial 1/14+, not closed. A 7th validator (`research-integrity`) was
+added and wired into CI, closing a real gap it found immediately: 4 broken
+ID references inside `research/canonical/canonical-research.json` itself
+(`versions[].ecosystem` using plain names instead of `ECO-`-prefixed IDs)
+— caught and fixed the same session the check was built. CI was also
+found to be silently missing the `okf-conformance` validator entirely
+since Workstream A added it; fixed alongside.
+
+**Phase gate** (`.context/research/reconciliation/phase-gate.json`):
+`ADR_GATE` PASS · `BOUNDARY_GATE` PASS · `ACTION_GATE` PASS · `E5_GATE`
+PARTIAL (first E5 done, satisfies the literal Phase 2 entry condition;
+`GAP-E5-ZERO` itself is not closed — 9 more named benchmarks remain
+`NOT_RUN`) · `CONTEXT_GATE` PASS · `SPEC_GATE` PARTIAL (spec-preparation
+work may begin; full architectural confidence stays gated on further E5
+execution as implementation surfaces come online). Full detail:
+`research/reconciliation/` (`CURRENT-STATE-RECONCILIATION.md`,
+`DECISION-CONSOLIDATION.md`, `BOUNDARY-RECONCILIATION.md`,
+`ACTION-REQUIRED-TRIAGE.md`, `RESEARCH-REOPEN-GATES.md`,
+`ARCHITECTURE-FREEZE-CANDIDATE.md`, `POST-COMMIT-OPS-DECISION.md`).
 
 ## Explicitly deferred (installment 4+)
 

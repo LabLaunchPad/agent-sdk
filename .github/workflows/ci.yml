@@ -56,23 +56,38 @@ jobs:
       - name: Test
         run: pnpm test
 
-      # The five mandatory validators run as separate steps so a red CI names
+      # The seven mandatory validators run as separate steps so a red CI names
       # the failing check without anyone reading the log.
-      - name: 'Validator 1/5 — schema-contract'
+      - name: 'Validator 1/7 — schema-contract'
         run: node scripts/repo-tools/dist/cli.js validate schema-contract
 
-      - name: 'Validator 2/5 — package-boundary'
+      - name: 'Validator 2/7 — package-boundary'
         run: node scripts/repo-tools/dist/cli.js validate package-boundary
 
-      - name: 'Validator 3/5 — context-staleness'
+      - name: 'Validator 3/7 — context-staleness'
         # Mandatory, never advisory. `context refresh` must NOT run here:
         # auto-refresh would rubber-stamp drift instead of reporting it.
         run: node scripts/repo-tools/dist/cli.js validate context-staleness
 
-      - name: 'Validator 4/5 — package-exports (publication smoke test)'
+      - name: 'Validator 4/7 — okf-conformance'
+        # Added in Workstream A but never wired into this file until Phase 1B
+        # found the gap: every OKF concept under .context/research/specs/ADR
+        # was unenforced in CI, only checked locally via `pnpm validate`.
+        run: node scripts/repo-tools/dist/cli.js validate okf-conformance
+
+      - name: 'Validator 5/7 — package-exports (publication smoke test)'
         # Packs the tarball, installs it into a clean consumer, imports by public
         # package name and executes an export.
         run: node scripts/repo-tools/dist/cli.js validate package-exports
 
-      - name: 'Validator 5/5 — repository-policy'
+      - name: 'Validator 6/7 — repository-policy'
         run: node scripts/repo-tools/dist/cli.js validate repository-policy
+
+      - name: 'Validator 7/7 — research-integrity'
+        # Added in Phase 1B: ID cross-references in research/canonical/
+        # canonical-research.json and relative markdown links across the OKF
+        # scopes actually resolve. okf-conformance-validator is explicitly
+        # required by the OKF v0.2 spec to tolerate broken links, so this is a
+        # separate check under its own rule namespace, not a stricter
+        # okf-conformance.
+        run: node scripts/repo-tools/dist/cli.js validate research-integrity

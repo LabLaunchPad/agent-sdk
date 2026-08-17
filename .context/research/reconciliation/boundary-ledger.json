@@ -1,0 +1,98 @@
+{
+  "note": "Full narrative in research/reconciliation/BOUNDARY-RECONCILIATION.md. Corrects the '25 boundaries' figure used in research/canonical/ (actual architecture[] array length is 27).",
+  "total_boundaries": 27,
+  "dispositions": {
+    "KEEP": 14,
+    "ADAPT": 4,
+    "EXTERNALIZE": 1,
+    "PROMOTED_FROM_ADD_CANDIDATE": 3,
+    "DEFER": 4,
+    "N/A": 1
+  },
+  "keep": [
+    "AgentKernel",
+    "CapabilityEngine",
+    "PolicyEngine",
+    "ContextEngine",
+    "Runtime",
+    "StateEngine",
+    "MemoryEngine",
+    "WorkflowEngine",
+    "ProtocolAdapters",
+    "MCPAdapter",
+    "A2AAdapter",
+    "ModelRegistry",
+    "EvaluationEngine",
+    "ObservabilityEngine"
+  ],
+  "adapt": [
+    {
+      "boundary": "DurabilityEngine",
+      "folded_into": "@lablaunchpad/state CheckpointStore",
+      "adr": "ADR-0010"
+    },
+    {
+      "boundary": "ModelCapabilityRegistry",
+      "folded_into": "adapters/models Model Gateway",
+      "adr": "ADR-0014"
+    },
+    {
+      "boundary": "RoutingEngine",
+      "folded_into": "adapters/models Model Gateway",
+      "adr": "ADR-0014"
+    },
+    {
+      "boundary": "HumanControlLayer",
+      "folded_into": "@lablaunchpad/workflow contract",
+      "adr": "ADR-0015"
+    }
+  ],
+  "externalize": [
+    {
+      "boundary": "SecurityEngine",
+      "folded_into": "@lablaunchpad/policy + capabilities",
+      "adr": "ADR-0013"
+    }
+  ],
+  "promoted_from_add_candidate": [
+    {
+      "boundary": "WorkspaceEngine",
+      "bound_as": "@lablaunchpad/capabilities contract (not new package)",
+      "adr": "ADR-0012"
+    },
+    {
+      "boundary": "SandboxEngine",
+      "bound_as": "adapters/tools/sandbox contract (not new package)",
+      "adr": "ADR-0012"
+    },
+    {
+      "boundary": "SideEffectEngine",
+      "bound_as": "@lablaunchpad/task + state contract (not new package)",
+      "adr": "ADR-0011"
+    }
+  ],
+  "defer": [
+    {
+      "boundary": "KnowledgeEngine",
+      "trigger": "Phase 7 memory design reaching a concrete Knowledge/Memory boundary question"
+    },
+    {
+      "boundary": "EventModel",
+      "trigger": "Phase 4/20 design finding neither state nor observability can absorb it"
+    },
+    {
+      "boundary": "ReplayEngine",
+      "trigger": "A concrete replay use case arising in Phase 4/21"
+    },
+    {
+      "boundary": "InstructionSkillEngine",
+      "trigger": "A concrete LabLaunchPad skill-consuming use case, or Agent Skills' allowed-tools field reaching non-experimental status",
+      "gap_closed_this_phase": true,
+      "gap_closure_ref": "research/protocols/agent-skills.md"
+    }
+  ],
+  "not_applicable": ["RepositoryAgentContract"],
+  "package_map_updated": true,
+  "package_map_new_packages_created": 0,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

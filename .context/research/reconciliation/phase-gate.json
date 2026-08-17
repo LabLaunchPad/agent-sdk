@@ -1,0 +1,48 @@
+{
+  "phase": "Phase 1B — Architecture Reconciliation & ADR Freeze",
+  "gates": {
+    "ADR_GATE": {
+      "status": "PASS",
+      "reason": "8 binding ADRs written (ADR-0009 through ADR-0016), each using the repository's existing template (Context/Decision/Adversarial review/Alternatives/Consequences/Revisit trigger/Evidence). Minimal complete set, not one-per-decision.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "BOUNDARY_GATE": {
+      "status": "PASS",
+      "reason": "All 27 delete-tested boundaries dispositioned: 14 KEEP, 4 ADAPT, 1 EXTERNALIZE, 3 promoted from ADD_CANDIDATE to bound contract additions, 4 DEFER (each with a named revisit trigger), 1 N/A. Zero left undispositioned.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "ACTION_GATE": {
+      "status": "PASS",
+      "reason": "All 12 ACTION_REQUIRED/ACTION_REQUIRED_AT_PHASE_18 entries triaged and resolved - 0 remaining in .context/research/decisions.json.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "E5_GATE": {
+      "status": "PARTIAL",
+      "reason": "First real E5 (E5-DURABLE-RESTART) executed and clean - 6/6 genuine mid-transaction kills rolled back cleanly, 4/4 post-commit controls committed cleanly, zero corruption. Satisfies docs/agent/NEXT.md's literal 'first high-leverage E5 completed' entry condition. Does NOT close GAP-E5-ZERO: only 1 of 10+ named benchmarks across all corpora has been run, single-run only (no repetition), and the harness's own stated limitations (no WAL mode, no concurrent-reader test, kill-signal-only) mean this is real but partial evidence.",
+      "impact": "Every architecture decision this phase made still rests primarily on E3/E4 documentation evidence, not E5 reproduction - consistent with every corpus's own honest self-assessment throughout this project.",
+      "blocker": "None blocking Phase 2 entry specifically (the literal 'first E5' criterion is met) - but a real evidence gap remains for architecture confidence beyond that literal bar.",
+      "next_action": "Run BEN-TOOL-INJECTION and BEN-SANDBOX-BOUNDARY (or their successors) once Phase 8/9 implementation exists to test against - both explicitly deferred this phase for exactly that reason, not forgotten."
+    },
+    "CONTEXT_GATE": {
+      "status": "PASS",
+      "reason": "Minimum viable deterministic verification harness added (research-integrity-validator, 7th validator): ID cross-reference integrity in research/canonical/canonical-research.json and relative markdown link resolution across all OKF-scoped directories. Running clean against the real repository (36 links, 248 ID references checked, 0 findings) after catching and fixing 4 real broken references this phase introduced (versions[].ecosystem using plain names instead of ECO- prefixed IDs).",
+      "impact": null,
+      "blocker": null,
+      "next_action": "Distinct, unresolved by this gate: the OKF 'verified' trust-tier percentage remains 0% (ADR-0008) - a human-review-cadence question, not a missing-mechanism question. See docs/agent/NEXT.md's Operational tracking section, unchanged by this phase."
+    },
+    "SPEC_GATE": {
+      "status": "PARTIAL",
+      "reason": "ADR_GATE, BOUNDARY_GATE, ACTION_GATE, and CONTEXT_GATE all PASS. E5_GATE is PARTIAL. Phase 2 spec-preparation work (specs, contracts, invariants - not implementation) may reasonably begin using the 8 ADRs as its base, per docs/agent/NEXT.md's literal entry condition, but full architectural confidence remains gated on further E5 execution as implementation surfaces become available.",
+      "impact": "Phase 2 is not fully unconditionally unblocked - it is unblocked for spec/contract preparation, gated for anything depending on E5-level confidence beyond the durability claim this phase tested.",
+      "blocker": "E5_GATE's PARTIAL status.",
+      "next_action": "Begin Phase 2 spec-preparation work referencing ADR-0009 through ADR-0016 directly. Continue closing E5_GATE opportunistically as Phase 8/9/12/16/17/19 implementation surfaces come online."
+    }
+  },
+  "generated_at": "2026-08-17T00:00:00Z"
+}

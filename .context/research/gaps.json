@@ -1,8 +1,9 @@
 {
-  "gap": "3 of 17 sources named in the ORIGINAL research brief remain fully UNKNOWN (down from 4 - A2A closed this session); 14 ADDITIONAL frameworks (beyond the 17-source brief, across two imported batches) plus 2 new cross-cutting topics have been imported from prior external research passes and are mostly not yet independently re-verified",
+  "gap": "2 of 17 sources named in the ORIGINAL research brief remain fully UNKNOWN (down from 4 - A2A closed in the prior installment, Agent Skills closed in Phase 1B); both remaining are Volcengine AgentKit and Baidu AppBuilder SDK, deliberately not researched in Phase 1B per its own research-budget rule since no pending ADR or boundary decision depends on them yet - see research/reconciliation/RESEARCH-REOPEN-GATES.md",
   "remaining_primary": ["volcengine-agentkit", "baidu-appbuilder-sdk"],
-  "remaining_protocols": ["agent-skills"],
+  "remaining_protocols": [],
   "researched_this_installment": ["a2a-1.0.1"],
+  "agent_skills_closure_note": "Agent Skills was the last of the original brief's 4 fully-UNKNOWN sources. Closed in Phase 1B via live WebSearch/WebFetch (research/protocols/agent-skills.md), specifically because it was decision-relevant to the InstructionSkillEngine boundary's DEFER disposition - a bounded, decision-relevant research pass, not a broad research wave. Finding: the spec's own permission model (allowed-tools) is Experimental with inconsistent cross-implementation support, and no concrete LabLaunchPad use case exists yet - InstructionSkillEngine's disposition stays DEFER, now for a concrete evidenced reason rather than absence of research. See research/reconciliation/BOUNDARY-RECONCILIATION.md.",
   "a2a_closure_note": "A2A was flagged by a user-supplied 'current wave' corpus as a lead (a thin, unverified okf.md extract); this session independently re-verified it via live WebSearch/WebFetch (research/protocols/a2a-1.0.1.md) rather than trusting the import as-is - the only imported framework/protocol treated this way so far, because it was the one import that actually closed an original-brief gap",
   "researched_previously": ["langgraph", "mastra", "mcp-2026-07-28"],
   "imported_supplementary_corpus_batch_1": {

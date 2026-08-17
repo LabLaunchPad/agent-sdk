@@ -1,0 +1,104 @@
+{
+  "adrs": [
+    {
+      "id": "ADR-0009",
+      "title": "Protocol / Application / Agent State Distinction",
+      "file": "ADR/0009-protocol-application-agent-state-distinction.md",
+      "status": "stable",
+      "consolidates": [
+        "protocol-application-agent-state-distinction",
+        "current-wave-cw-002-mcp-stateless-adapter",
+        "wave1-adr-001-mcp-baseline"
+      ]
+    },
+    {
+      "id": "ADR-0010",
+      "title": "Durability & Checkpoint Boundary",
+      "file": "ADR/0010-durability-checkpoint-boundary.md",
+      "status": "stable",
+      "amends": "specs/persistence/STORE-INTERFACES.md",
+      "consolidates": [
+        "reject-checkpointer-solves-persistence",
+        "adopt-checkpointer-pluggable-backend",
+        "adopt-libsql-local-storage-precedent",
+        "wave1-adr-003-durability-boundary"
+      ]
+    },
+    {
+      "id": "ADR-0011",
+      "title": "UNKNOWN_OUTCOME as a First-Class Side-Effect State",
+      "file": "ADR/0011-unknown-outcome-side-effect-state.md",
+      "status": "stable",
+      "amends": "specs/persistence/STORE-INTERFACES.md",
+      "consolidates": [
+        "adr-candidate-006-durable-side-effect-reconciliation",
+        "post-commit-ops-unknown-outcome-convergence",
+        "current-wave-cw-007-unknown-outcome-mutation-state"
+      ]
+    },
+    {
+      "id": "ADR-0012",
+      "title": "Workspace & Sandbox as Explicit Architecture Boundaries",
+      "file": "ADR/0012-workspace-sandbox-boundaries.md",
+      "status": "stable",
+      "consolidates": [
+        "adopt-workspace-composable-tool-boundary",
+        "adopt-runtime-and-sandbox-as-explicit-contracts",
+        "current-wave-cw-004-workspace-sandbox-contracts"
+      ]
+    },
+    {
+      "id": "ADR-0013",
+      "title": "Security Enforcement at the Policy/Capability Boundary",
+      "file": "ADR/0013-security-at-policy-capability-boundary.md",
+      "status": "stable",
+      "consolidates": [
+        "reject-llm-only-security-judgement",
+        "adr-candidate-003-capability-based-tool-security",
+        "current-wave-cw-005-source-to-sink-security",
+        "adopt-tool-boundary-guardrails"
+      ]
+    },
+    {
+      "id": "ADR-0014",
+      "title": "Model Gateway Capability & Semantic-Portability Contract",
+      "file": "ADR/0014-model-gateway-capability-portability-contract.md",
+      "status": "stable",
+      "consolidates": [
+        "adopt-local-model-gateway-pattern",
+        "current-wave-cw-006-model-capability-matrix",
+        "wave1-adr-002-semantic-portability",
+        "adr-candidate-004-offline-local-first-contract"
+      ]
+    },
+    {
+      "id": "ADR-0015",
+      "title": "Human-in-the-Loop as a Workflow Contract",
+      "file": "ADR/0015-human-in-the-loop-workflow-contract.md",
+      "status": "stable",
+      "consolidates": []
+    },
+    {
+      "id": "ADR-0016",
+      "title": "Runtime-Assumption Corrections",
+      "file": "ADR/0016-runtime-assumption-corrections.md",
+      "status": "stable",
+      "consolidates": [
+        "reject-uniform-runtime-swap-assumption",
+        "reject-local-always-cheaper"
+      ]
+    }
+  ],
+  "prior_adrs": [
+    "ADR-0001",
+    "ADR-0002",
+    "ADR-0003",
+    "ADR-0004",
+    "ADR-0005",
+    "ADR-0006",
+    "ADR-0007",
+    "ADR-0008"
+  ],
+  "total_adr_count": 16,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

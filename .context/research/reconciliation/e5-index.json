@@ -1,0 +1,22 @@
+{
+  "experiments": [
+    {
+      "experiment_id": "E5-DURABLE-RESTART",
+      "status": "EXECUTED",
+      "commit": "37223b3a9df3d302f657d1ee44530949f84faba0",
+      "harness": "benchmarks/durable-restart/",
+      "result_doc": "research/benchmarks/E5-RESULT.md",
+      "trials": 11,
+      "genuine_mid_transaction_trials": 6,
+      "genuine_post_commit_control_trials": 4,
+      "corrupted_or_unreadable_outcomes": 0,
+      "supports_adr": "ADR-0010",
+      "closes_gap_e5_zero": false,
+      "note": "First real E5 across all corpora combined (was 0/14+). Single run, stated limitations in research/benchmarks/E5-RESULT.md - does not close GAP-E5-ZERO, converts it from wholly unaddressed to partially addressed."
+    }
+  ],
+  "total_named_benchmarks_across_all_corpora": 10,
+  "executed_this_phase": 1,
+  "still_not_run": 9,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

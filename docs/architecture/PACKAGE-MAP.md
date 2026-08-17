@@ -37,6 +37,21 @@ created only when its boundary is proven.
 Adapters live under `adapters/` (models, runtimes, protocols, tools) and are all
 layer 4.
 
+### Contract additions bound by ADR (Phase 1B)
+
+Three candidate boundaries surfaced by research (`WorkspaceEngine`,
+`SandboxEngine`, `SideEffectEngine`) were resolved as contract additions to
+existing planned packages, not new packages — each failed the creation
+rule below on its own. `@lablaunchpad/capabilities` carries the Workspace
+contract (policy-gated filesystem/command/search/skills, per-tool approval
+— [ADR-0012](../../ADR/0012-workspace-sandbox-boundaries.md));
+`adapters/tools/sandbox` carries the elaborated Sandbox contract (isolation
+mechanism, same ADR); `@lablaunchpad/task`/`@lablaunchpad/state` carry the
+`UNKNOWN_OUTCOME` side-effect contract
+([ADR-0011](../../ADR/0011-unknown-outcome-side-effect-state.md)). See
+`research/reconciliation/BOUNDARY-RECONCILIATION.md` for the full
+disposition of every candidate boundary considered.
+
 ## Creation rule
 
 Do not create a package because it appears in this table. Create it when one of

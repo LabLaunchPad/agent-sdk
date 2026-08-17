@@ -1,0 +1,24 @@
+{
+  "sources": [{ "source_id": "SRC-A" }],
+  "evidence": [{ "evidence_id": "EVD-A-001", "source_id": "SRC-A" }],
+  "ecosystems": [{ "ecosystem_id": "ECO-A", "source_ids": ["SRC-A"] }],
+  "claims": [
+    {
+      "id": "CLM-A-001",
+      "source_ids": ["SRC-A"],
+      "evidence_ids": ["EVD-A-001"],
+      "ecosystem": "ECO-A"
+    }
+  ],
+  "versions": [{ "source_ids": ["SRC-A"], "ecosystem": "ECO-A" }],
+  "benchmarks": [{ "benchmark_id": "BEN-A", "source_ids": ["SRC-A"] }],
+  "security": [{ "evidence_ids": ["EVD-A-001"] }],
+  "contradictions": [{ "evidence_a": ["EVD-A-001"], "evidence_b": [] }],
+  "traceability": {
+    "decision_to_claim": { "DEC-A": ["CLM-A-001"] },
+    "claim_to_evidence": { "CLM-A-001": ["EVD-A-001"] },
+    "evidence_to_source": { "EVD-A-001": ["SRC-A"] },
+    "claim_to_benchmark": { "CLM-A-001": ["BEN-A"] },
+    "gap_to_evidence": { "GAP-A": ["EVD-A-001"] }
+  }
+}

@@ -4,6 +4,7 @@ import { contextStalenessValidator } from '../src/validators/context-staleness.j
 import { okfConformanceValidator } from '../src/validators/okf-conformance.js';
 import { packageBoundaryValidator } from '../src/validators/package-boundary.js';
 import { repositoryPolicyValidator } from '../src/validators/repository-policy.js';
+import { researchIntegrityValidator } from '../src/validators/research-integrity.js';
 import { schemaContractValidator } from '../src/validators/schema-contract.js';
 
 const FIXTURES = path.resolve(import.meta.dirname, '../../../tests/fixtures');
@@ -107,5 +108,18 @@ describe('okf-conformance-validator — leniency (must NOT reject)', () => {
 
     expect(result.findings).toEqual([]);
     expect(result.status).toBe('PASS');
+  });
+});
+
+describe('research-integrity-validator — positive', () => {
+  it('accepts a resolvable link and a fully cross-referenced canonical graph', async () => {
+    const result = await researchIntegrityValidator({
+      rootDir: fixture('research-integrity', 'valid'),
+    });
+
+    expect(result.findings).toEqual([]);
+    expect(result.status).toBe('PASS');
+    expect(result.stats?.linksChecked).toBe(1);
+    expect(result.stats?.idsChecked).toBe(15);
   });
 });

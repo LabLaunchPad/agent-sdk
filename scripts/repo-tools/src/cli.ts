@@ -17,6 +17,7 @@ import { okfConformanceValidator } from './validators/okf-conformance.js';
 import { packageBoundaryValidator } from './validators/package-boundary.js';
 import { packageExportsValidator } from './validators/package-exports.js';
 import { repositoryPolicyValidator } from './validators/repository-policy.js';
+import { researchIntegrityValidator } from './validators/research-integrity.js';
 import { schemaContractValidator } from './validators/schema-contract.js';
 
 const VALIDATORS = {
@@ -26,6 +27,7 @@ const VALIDATORS = {
   'okf-conformance': okfConformanceValidator,
   'package-exports': packageExportsValidator,
   'repository-policy': repositoryPolicyValidator,
+  'research-integrity': researchIntegrityValidator,
 } as const satisfies Record<
   ValidatorName,
   (options: { rootDir: string }) => Promise<ValidatorResult>

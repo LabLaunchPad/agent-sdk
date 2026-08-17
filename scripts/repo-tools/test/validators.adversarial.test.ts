@@ -6,6 +6,7 @@ import { okfConformanceValidator } from '../src/validators/okf-conformance.js';
 import { packageBoundaryValidator } from '../src/validators/package-boundary.js';
 import { packageExportsValidator } from '../src/validators/package-exports.js';
 import { repositoryPolicyValidator } from '../src/validators/repository-policy.js';
+import { researchIntegrityValidator } from '../src/validators/research-integrity.js';
 import { schemaContractValidator } from '../src/validators/schema-contract.js';
 
 /**
@@ -255,6 +256,26 @@ describe('schema-contract-validator — negative fixtures', () => {
 
     expect(result.status).toBe('FAIL');
     expect(rules(result)).toContain('schema/invalid-version');
+  });
+});
+
+describe('research-integrity-validator — negative fixtures', () => {
+  it('rejects a markdown link that does not resolve to a file on disk', async () => {
+    const result = await researchIntegrityValidator({
+      rootDir: fixture('research-integrity', 'broken-link'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('research-integrity/broken-link');
+  });
+
+  it('rejects a canonical-graph ID reference that does not resolve', async () => {
+    const result = await researchIntegrityValidator({
+      rootDir: fixture('research-integrity', 'broken-reference'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('research-integrity/broken-reference');
   });
 });
 

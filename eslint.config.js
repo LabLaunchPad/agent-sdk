@@ -11,6 +11,10 @@ export default defineConfig([
     'tests/fixtures/**',
     'tmp/**',
     '.tmp/**',
+    // Throwaway E5 harnesses (research/benchmarks/*), never part of any
+    // @lablaunchpad/* package or tsconfig project — see ADR-0016's
+    // durable-restart evidence and research/benchmarks/E5-DURABLE-RESTART.md.
+    'benchmarks/**',
   ]),
 
   js.configs.recommended,

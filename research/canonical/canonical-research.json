@@ -72,7 +72,7 @@
   "versions": [
     {
       "version_id": "VER-MCP-001",
-      "ecosystem": "MCP",
+      "ecosystem": "ECO-MCP",
       "version": "2026-07-28",
       "status": "CURRENT",
       "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
@@ -81,7 +81,7 @@
     },
     {
       "version_id": "VER-A2A-001",
-      "ecosystem": "A2A",
+      "ecosystem": "ECO-A2A",
       "version": "1.0.1 (batch3) / v0.2.5 (session live-fetch, stale archived path) / 0.3.0 (wave1, claimed 'official latest')",
       "status": "CONTRADICTED_THEN_RESOLVED",
       "source_ids": ["SRC-BATCH3", "SRC-SESSION", "SRC-WAVE1"],
@@ -90,7 +90,7 @@
     },
     {
       "version_id": "VER-OAI-001",
-      "ecosystem": "OpenAI Agents SDK",
+      "ecosystem": "ECO-OAI",
       "version": "VERSION_UNPINNED",
       "status": "VERSION_UNPINNED",
       "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
@@ -99,7 +99,7 @@
     },
     {
       "version_id": "VER-MAF-001",
-      "ecosystem": "Microsoft Agent Framework",
+      "ecosystem": "ECO-MAF",
       "version": "Python 1.6.0 / .NET 1.10.0 (batch3 observation); VERSION_UNPINNED (wave1)",
       "status": "PARTIALLY_PINNED",
       "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
@@ -1210,9 +1210,9 @@
     {
       "benchmark_id": "BEN-DURABLE-RESTART",
       "name": "Durable restart (kill/resume at checkpoint boundary)",
-      "status": "NOT_RUN",
+      "status": "EXECUTED_PARTIAL",
       "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
-      "note": "named E5-A (wave1) / BM-DURABLE-001 (batch3) - same concept, different ID scheme across corpora, not yet unified into one LabLaunchPad benchmark ID"
+      "note": "named E5-A (wave1) / BM-DURABLE-001 (batch3) - executed in Phase 1B as E5-DURABLE-RESTART (research/benchmarks/E5-RESULT.md): 6/6 genuine mid-transaction kills rolled back cleanly, 4/4 post-commit controls committed cleanly, zero corruption across 11 trials. Single run, stated limitations (no WAL-mode test, no repetition, no concurrent-reader test) - EXECUTED_PARTIAL, not fully closed."
     },
     {
       "benchmark_id": "BEN-MULTIAGENT-ECONOMICS",

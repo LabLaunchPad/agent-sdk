@@ -138,6 +138,27 @@ candidates (none auto-adopted); **both imported corpora's ADR-CANDIDATEs
 (12 total) remain unreconciled against the existing locked architecture**
 — now the standing follow-up item across both batches, not just one.
 
+## Post-commit operations bundle import (out of Workstream B scope, tracked separately)
+
+The user also supplied a third corpus, different in kind from the two
+research imports above: a **post-commit operations protocol** for this
+repository's own git/PR/CI/deploy lifecycle (not research about external
+agent frameworks). Stored at `docs/operations/post-commit-ops/` —
+outside `research/` and outside Workstream B's scope entirely. SHA-256
+verified against the user-provided hash and the bundle's own internal
+manifest before use. One systematic OKF non-conformance was fixed
+(`verified: documented`, a bare string, renamed to
+`x_verification_state`) since `docs/` isn't in `okf.json`'s validated
+scopes but consistency was still worth the trivial fix. **Recorded as
+CANDIDATE, not adopted** — not wired into `AGENTS.md` or CI; see
+`docs/operations/post-commit-ops/PROVENANCE.md` and
+`docs/agent/DECISIONS.md`'s 2026-08-17 entry. One genuine cross-corpus
+convergence worth flagging: this bundle's UNKNOWN_OUTCOME/RECONCILING
+states for merges and deployments independently converge with research
+batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect
+model) — two unrelated corpora landing on the same "never blindly retry
+an operation with an unknown side-effect outcome" rule.
+
 ## Explicitly deferred (installment 4+)
 
 Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills — all recorded

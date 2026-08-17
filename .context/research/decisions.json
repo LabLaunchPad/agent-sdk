@@ -171,6 +171,18 @@
       "status": "ACTION_REQUIRED",
       "source": "research/imported-corpus/SOURCE-RECEIPT-2.md, .context/research/next-wave/spec-delta.json",
       "note": "Batch 2's own spec-delta.json proposes 6 SPEC changes (State/Memory/Context/Knowledge/Evidence/Transcript separation; WorkspaceContract+SandboxContract; optional DurableWorkflow layer; EvaluationPort; Operation ID+UNKNOWN_OUTCOME side-effect state; OptimizationPort outside kernel) and gap-delta.json proposes 8 prioritized gaps (durable execution semantics, side-effect reconciliation, workspace security, multi-agent economics, context compression quality, offline evaluation, MCP trust, schema/version migration - all P0/P1/P2 tagged). None reconciled against the existing locked architecture or against batch 1's own 6 ADR-CANDIDATEs for overlap/redundancy yet - both imported corpora's architectural proposals need a single reconciliation pass before any of them move past CANDIDATE."
+    },
+    {
+      "id": "post-commit-ops-bundle-not-yet-adopted",
+      "status": "ACTION_REQUIRED",
+      "source": "docs/operations/post-commit-ops/PROVENANCE.md",
+      "note": "A third user-supplied corpus (distinct in kind from the two framework-research imports - a proposed operational protocol for this repository's OWN git/PR/CI/deploy lifecycle, not research about external frameworks) is stored at docs/operations/post-commit-ops/. It proposes a 25-state lifecycle state machine, merge/release gates, an AI code-review protocol, CI failure/verification runbooks, security gates, a no-bypass policy, an evidence-ledger contract, recovery/rollback protocols, and machine-readable agent-contract/lifecycle JSON. It is NOT wired into AGENTS.md (the canonical operating contract) or CI - adopting any part of it requires an explicit ADR, same as any other architectural/governance decision, per this repository's own anti-drift rule. docs/ is outside okf.json's validated scopes, so this bundle was not okf-conformance-checked by CI, but one systematic non-conformance (verified: documented, a bare string where OKF requires a mapping) was fixed anyway for consistency."
+    },
+    {
+      "id": "post-commit-ops-unknown-outcome-convergence",
+      "status": "CANDIDATE",
+      "source": "docs/operations/post-commit-ops/08-recovery/unknown-outcome-protocol.md",
+      "note": "The post-commit-ops bundle's UNKNOWN_OUTCOME/RECONCILING states (for merges, deployments, and any side effect with an ambiguous remote result) independently converge with research corpus batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect model, decisions.json id adr-candidate-006-durable-side-effect-reconciliation) - two separately-supplied corpora, one about external framework patterns and one about this repository's own git/CI/deploy operations, both landing on 'never blindly retry an operation whose side effect has an unknown outcome, reconcile actual state first' as a hard rule. Worth treating as reinforcing evidence when Phase 4/7 persistence work and any future CI/release automation are designed, not yet adopted as an ADR."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

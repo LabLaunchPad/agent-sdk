@@ -21,6 +21,16 @@ The named design goals are the load-bearing part of that sentence, and new code 
 - **policy-aware** — agent actions are expected to be subject to enforceable policy, so permission/policy checks belong on the execution path, not in caller-side conventions.
 - **verifiable** — agent runs should produce an auditable record of what happened.
 
+## Architecture
+
+See `docs/architecture/l0-l3-blueprint.md` for the approved product/platform/module blueprint and the deep-dive plans for the first two SDKs to be built: **Kernel** (execution/state/durability substrate) and **Tool Runtime + Security** (governed tool/MCP execution). Everything else in the platform's candidate module list is intentionally deferred until its dependency is stable and its standalone value is evidenced — do not add new top-level packages without checking that document first.
+
+Key decisions already made there (see the doc for full reasoning and confidence levels):
+- Language is decided **per component**, not globally. Orchestration/control-plane code in both SDKs is TypeScript/Node. The Tool Runtime's sandbox/isolation boundary is a **wrap-existing** decision (reuse OS/container-level isolation), not a build-a-custom-sandbox decision, and is still EXPERIMENTAL pending a small prototype (Tier 1 subprocess+OS-permissions vs. Tier 2 container/microVM).
+- Kernel durability ships as **interim checkpoint/restore** for the MVP (not full event-sourced replay) — see ADR-B for the upgrade path to V1.
+- The Graph/State/Context/Event-bus concerns live inside the Kernel SDK as internally namespaced modules, not as separate packages.
+- A hosted Control Plane is deferred (Horizon 3+); nothing before that should assume a required remote service, consistent with local-first.
+
 ## Conventions to establish
 
-Nothing in the repo fixes a language, package manager, or layout yet. Before starting a substantial change, confirm with the user which stack the SDK targets rather than inferring one — the first commit that adds tooling sets that choice for everything after it.
+Beyond the above, package manager, monorepo tooling, build system, linter, and test framework are still unfixed. Before adding those, confirm with the user rather than inferring — the first commit that adds tooling sets that choice for everything after it.

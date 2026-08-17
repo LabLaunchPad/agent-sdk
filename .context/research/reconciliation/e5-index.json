@@ -48,10 +48,23 @@
         "authorization_decision_changes_without_cause"
       ],
       "note": "Second real E5 (GAP-E5-ZERO now 2/14+). SIMULATED external service, not real - tests kernel-side UNKNOWN_OUTCOME/reconciliation logic (KERNEL-CONSTITUTION.md section 2), not real network/API failure modes. 7 of 15 named adversarial cases NOT_EXECUTED with stated reasons (need real Policy/Capability/Event-log implementation, Phase 8/9+). Corrected 4 real bugs/flakes found while running this harness - see E5-02-RESULT.md's Corrections section, added without deleting the original record."
+    },
+    {
+      "experiment_id": "E5-08-POLICY-CAPABILITY-BYPASS",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-08-policy-capability/",
+      "harness_type": "SIMULATED",
+      "result_doc": "research/benchmarks/E5-08-RESULT.md",
+      "executed_cases": 5,
+      "all_executed_pass": true,
+      "supports_adr": "ADR-0013",
+      "closes_gap_e5_zero": false,
+      "adv_cases_closed": ["ADV-12", "ADV-13", "ADV-14"],
+      "note": "Third real E5 (GAP-E5-ZERO now 3/14+). SIMULATED Capability/Policy enforcement layer, not real - proves the enforcement logic (stale-authorization re-check, capability-scope matching, policy-version freshness) from KERNEL-CONSTITUTION.md sections 4.1/4.2 (added this same pass), not that a real Phase 8/9 implementation will behave identically. Closes kernel-core.json's ADV-12/13/14 from NOT_EXECUTED to EXECUTED (SIMULATED). Stable across 5 consecutive re-runs, no flake."
     }
   ],
   "total_named_benchmarks_across_all_corpora": 10,
-  "executed_this_phase": 2,
-  "still_not_run": 8,
+  "executed_this_phase": 3,
+  "still_not_run": 7,
   "generated_at": "2026-08-17T00:00:00Z"
 }

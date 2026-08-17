@@ -361,6 +361,43 @@ model was deepened (native "Agent delegation" pattern, no built-in
 memory). Two new comparative audits added:
 `research/comparison/{TOKEN-CONTEXT-EFFICIENCY,UX-DX-AUDIT}.md`.
 
+## Phase 8/9 prep: Policy/Capability spec depth + SIMULATED E5-08 (2026-08-18)
+
+`docs/architecture/KERNEL-CONSTITUTION.md` section 4 (Capability/Policy)
+deepened — elaboration, not a new decision — with two new subsections:
+**4.1** the Capability lifecycle (`ISSUED → ACTIVE → EXPIRED | REVOKED`)
+and a precise stale-authorization rule (a capability checked at
+`AUTHORIZED` must be re-checked at `DISPATCHED`, never assumed valid from
+the earlier check); **4.2** the Policy evaluation model
+(`(Identity, Action, Object, Context) → ALLOW|DENY|CONDITIONAL`) and a
+precise policy-freshness rule (a `PolicyDecision` bound to a superseded
+policy version must be re-evaluated, never trusted stale). Both
+elaborations exist specifically to make `.context/scenarios/kernel-core.json`'s
+`ADV-12`/`ADV-13`/`ADV-14` — previously `NOT_EXECUTED`, "no real
+Capability/Policy enforcement boundary exists yet" — actually testable.
+
+`benchmarks/e5-08-policy-capability/` (throwaway, package-external,
+`node:sqlite`, exact precedent of `benchmarks/e5-02-unknown-outcome/`)
+built and executed for real: a SIMULATED Capability/Policy enforcement
+layer exercising `ADV-12` (stale-authorization), `ADV-13` (capability-
+escalation), `ADV-14` (policy-bypass), plus a positive control and a
+revocation case — **5/5 pass, stable across 5 consecutive re-runs, no
+flake** (unlike E5-02's first attempt). `kernel-core.json` updated:
+11/15 cases now `EXECUTED` (was 8/15). `GATE_C_HARNESS` moves from
+"8/15, sections 5/6 uncovered" to "11/15, sections 5/6 still uncovered" —
+narrowed, not closed. `E5-08`'s own named trigger in `E5-LADDER.md` was
+"Phase 8/9 PolicyEngine/CapabilityEngine exists" — a SIMULATED one
+doesn't fully satisfy that, recorded as `PASS_SIMULATED`, not a full
+close. `GAP-E5-ZERO` is now 3/14+. See
+`research/benchmarks/E5-08-RESULT.md`.
+
+Also: `research/methodology/FRAMEWORK-RESEARCH-DEPTH-CHECKLIST.md` — the
+40-dimension checklist deferred since installment 3, built as a reusable
+tool (7 categories, 5-tag precision scheme) with its own explicit
+statement that the full 8-framework backfill remains deferred as a
+`BROAD_RESEARCH`-locked item, not silently implied done by the
+checklist's existence.
+
 ## Explicitly deferred (installment 4+)
 
 Full per-framework 40-dimension depth

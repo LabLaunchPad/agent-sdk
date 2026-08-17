@@ -211,6 +211,60 @@ not this primitive — it is advisory. This is ADR-0013's core claim,
 restated here as a kernel-level rule rather than a security
 recommendation.
 
+### 4.1 Capability lifecycle and stale-authorization rule (added for Phase 8/9 prep — elaboration, not a new decision)
+
+A `Capability` is not a permanent fact once granted — it has a lifecycle:
+
+```
+ISSUED → ACTIVE → (EXPIRED | REVOKED)
+```
+
+- **Issuance**: a `Capability` is created by an issuing authority, scoped
+  to a specific `WHO + DO WHAT + TO WHICH OBJECT`, with an explicit
+  expiry (`UNTIL WHEN`) — an unbounded-lifetime capability is a defect,
+  not a convenience.
+- **Expiry**: time-based, checked at the moment of use, not at the moment
+  of issuance.
+- **Revocation**: an explicit, out-of-band event that must take effect
+  before the next enforcement check, independent of the capability's own
+  expiry clock.
+
+**The stale-authorization rule**: a `Capability` checked once at
+`AUTHORIZED` (§2) is not thereby valid for the rest of the `Operation`'s
+lifetime. The source-to-sink enforcement point (above) means the
+`Capability`'s validity is re-checked at `DISPATCHED`, not assumed from
+the earlier `AUTHORIZED` check. An `Operation` that sits `AUTHORIZED` for
+longer than the `Capability`'s remaining lifetime must fail at dispatch,
+not silently proceed on a now-expired grant. This is the precise failure
+mode `.context/scenarios/kernel-core.json`'s `ADV-12`
+(`stale-authorization`) tests.
+
+**Capability escalation, defined precisely**: an attempt to dispatch an
+`Operation` whose actual `DO WHAT + TO WHICH OBJECT` falls outside the
+scope the held `Capability` actually grants — even when the principal
+(`WHO`) holds _some_ valid, unexpired `Capability`. Holding _a_
+capability is not holding _the_ capability the specific action requires.
+This is what `ADV-13` (`capability-escalation`) tests.
+
+### 4.2 Policy evaluation model (added for Phase 8/9 prep)
+
+A `Policy` evaluation is a deterministic function: `(Identity, Action,
+Object, Context) → PolicyDecision`, where `PolicyDecision` is one of
+`ALLOW`, `DENY`, or `CONDITIONAL` (allowed only if a named additional
+condition is later satisfied — e.g. human approval), each carrying a
+`reason`. Two properties this evaluation must hold:
+
+- **Independence from Capability**: a `PolicyDecision` of `ALLOW` does
+  not imply a valid `Capability` exists, and vice versa — both must
+  independently evaluate to a passing state before dispatch.
+- **Freshness**: a `PolicyDecision` is bound to the `Policy` version in
+  effect at evaluation time (§2's `Operation.PolicyDecision` field
+  already records this). Dispatching against a `PolicyDecision` from a
+  superseded `Policy` version without re-evaluation is **policy bypass**
+  — the exact failure mode `ADV-14` (`policy-bypass`) tests. An
+  `Operation` with no `PolicyDecision` recorded at all is the simpler,
+  degenerate case of the same failure.
+
 ## 5. Evidence / verdict
 
 Elaborates: nothing existing directly — this formalizes the E0–E5

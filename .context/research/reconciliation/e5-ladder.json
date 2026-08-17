@@ -53,9 +53,11 @@
     {
       "id": "E5-08",
       "name": "Policy/Capability Bypass",
-      "status": "NOT_RUN",
+      "status": "PASS_SIMULATED",
       "feeds": "ADR-0013",
-      "trigger": "Phase 8/9 PolicyEngine/CapabilityEngine exists"
+      "trigger": "Phase 8/9 PolicyEngine/CapabilityEngine exists",
+      "result_doc": "research/benchmarks/E5-08-RESULT.md",
+      "note": "Named trigger was \"Phase 8/9 PolicyEngine/CapabilityEngine exists\" - a SIMULATED one does not fully satisfy that; PASS_SIMULATED not a full close, matching E5-02s framing."
     },
     {
       "id": "E5-09",

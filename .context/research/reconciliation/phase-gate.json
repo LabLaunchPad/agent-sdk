@@ -1,5 +1,5 @@
 {
-  "phase": "Phase 1B — Architecture Reconciliation & ADR Freeze",
+  "phase": "Phase 1B \u2014 Architecture Reconciliation & ADR Freeze",
   "lock_state": {
     "PHASE_2_SPEC_PREP": "UNLOCKED",
     "PHASE_2_IMPLEMENTATION": "LOCKED",
@@ -71,10 +71,10 @@
     },
     "GATE_C_HARNESS": {
       "status": "PARTIAL",
-      "reason": ".context/scenarios/kernel-core.json's 15-case adversarial matrix written, mapping every case to a constitution section, expected/actual result, and status. 8/15 EXECUTED (all SIMULATED, all pass), 7/15 NOT_EXECUTED with named triggers. All 7 CLI validators (schema-contract, package-boundary, context-staleness, package-exports, repository-policy, okf-conformance, research-integrity) confirmed to have positive fixture + negative fixture + CI wiring, verified by scripts/repo-tools/test/ci-coverage.unit.test.ts.",
-      "impact": "Sections 5 (Evidence/Verdict) and 6 (Agent/workflow boundary) of the constitution have no adversarial case whose specific purpose is to test them - a real, logged gap (see kernel-core.json's summary.sections_not_covered_note), not silently claimed as covered.",
+      "reason": ".context/scenarios/kernel-core.json's 15-case adversarial matrix: 11/15 EXECUTED (all SIMULATED, all pass) after this pass added ADV-12/13/14 (stale-authorization, capability-escalation, policy-bypass) via benchmarks/e5-08-policy-capability/ - was 8/15 at Phase 2's original close. 4/15 remain NOT_EXECUTED (ADV-09/10/11 need a real Guard/Event-log model per section 1; ADV-15 needs Phase 4's second schema version). All 7 CLI validators confirmed to have positive fixture + negative fixture + CI wiring, verified by scripts/repo-tools/test/ci-coverage.unit.test.ts.",
+      "impact": "Sections 5 (Evidence/Verdict) and 6 (Agent/workflow boundary) of the constitution still have no adversarial case whose specific purpose is to test them - unchanged from Phase 2's original close, still a real logged gap, not silently claimed as covered.",
       "blocker": null,
-      "next_action": "Add cases targeting sections 5/6 directly (e.g. 'a Verdict with no cited Evidence is malformed') when a real implementation exists to test them against meaningfully."
+      "next_action": "Close ADV-09/10/11 when a real state-machine Guard/Event-log model exists (Phase 4+); close ADV-15 when a second real schema version exists to migrate against (Phase 4). Add cases targeting sections 5/6 directly when a real implementation exists to test them against meaningfully."
     },
     "GATE_D_GOVERNANCE": {
       "status": "PASS",

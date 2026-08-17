@@ -25,17 +25,31 @@ COMPLETE_FOR_THE_7_SCOPED_MODULES`, `PHASE_2_IMPLEMENTATION: LOCKED`,
 `BROAD_RESEARCH: LOCKED`, `NEW_ADR_CREATION: TRIGGER_ONLY`. Spec-prep for
 the 7 `ACTIVE_THIS_PHASE` modules (M01 State, M02 Durability, M03 Side
 Effects, M04 Capability, M05 Policy, M15 Observability, M16 Contracts) is
-done to the depth `docs/architecture/KERNEL-CONSTITUTION.md` and E5-02
-required — the other 13 modules stay `GOVERNED`, not queued. Writing real
-`@lablaunchpad/*` kernel code is **not** unblocked by this phase; no
-runtime package was created. The concrete next E5-worthy gate is either
-`E5-04` (Duplicate Operation against a **real** capability, not
-SIMULATED) or `E5-08` (Policy/Capability Bypass) once a real Phase 8/9
-`PolicyEngine`/`CapabilityEngine` exists to test against — neither is
-triggered yet. `.context/scenarios/kernel-core.json`'s adversarial matrix
-also has a real, logged gap: no case targets constitution sections 5
-(Evidence/Verdict) or 6 (Agent/workflow boundary) specifically — worth
-closing with a real implementation to test against, not more spec work.
+done to the depth `docs/architecture/KERNEL-CONSTITUTION.md`, E5-02, and
+now E5-08 required — the other 13 modules stay `GOVERNED`, not queued.
+Writing real `@lablaunchpad/*` kernel code is **not** unblocked by this
+phase; no runtime package was created.
+
+**Resolved, no longer queued** (2026-08-18): `E5-08` (Policy/Capability
+Bypass) ran SIMULATED — `kernel-core.json`'s `ADV-12`/`ADV-13`/`ADV-14`
+are `EXECUTED`, 11/15 total (was 8/15). See `docs/agent/NOW.md`'s "Phase
+8/9 prep" section and `research/benchmarks/E5-08-RESULT.md`. This does
+**not** fully satisfy `E5-08`'s own named trigger ("Phase 8/9
+PolicyEngine/CapabilityEngine exists") — recorded `PASS_SIMULATED`, not
+closed. The concrete next E5-worthy gate is `E5-04` (Duplicate Operation)
+or re-running `E5-08` against a **real** (not SIMULATED) Phase 8/9
+`PolicyEngine`/`CapabilityEngine` once one exists — not triggered yet.
+`kernel-core.json`'s remaining gaps: `ADV-09`/`ADV-10`/`ADV-11` (illegal-
+transition/duplicate-event/reordered-event — need a real state-machine
+Guard/Event-log model, section 1, Phase 4+), `ADV-15` (schema-version-
+mismatch — needs Phase 4's second real schema version). Sections 5
+(Evidence/Verdict) and 6 (Agent/workflow boundary) still have no
+dedicated adversarial case at all — unchanged, still a real logged gap.
+
+The 40-dimension checklist is now built as a tool
+(`research/methodology/FRAMEWORK-RESEARCH-DEPTH-CHECKLIST.md`) — its full
+application across the existing framework set remains explicitly
+deferred as a `BROAD_RESEARCH`-locked item, not silently implied done.
 
 **Resolved, no longer queued** (2026-08-18): Volcengine AgentKit and Baidu
 AppBuilder SDK are now researched (`CLOUD_ONLY`, local-first/licensing/
@@ -45,11 +59,7 @@ audit files are also done. See `docs/agent/NOW.md`'s "Volcengine AgentKit
 / Baidu AppBuilder SDK closed" section and
 `research/imported-corpus/SOURCE-RECEIPT-5.md`.
 
-Still queued, lower priority: the full 40-dimension checklist (per-
-framework depth across state/memory/context/security/evaluation/DX/UX for
-all already-researched frameworks — explicitly scoped as a deferred,
-not-yet-started broad pass, see `docs/agent/DECISIONS.md`), comparative
-network-disabled testing.
+Still queued, lower priority: comparative network-disabled testing.
 
 **Resolved in Phase 1B, no longer queued**: `GAP-ARCHITECTURE-RECONCILIATION`
 (P0) — the formal ADR-writing pass over the accumulated ADR-CANDIDATEs is

@@ -64,6 +64,35 @@
     },
     "caveat": "given installment 3's finding that 2 of 7 directly-researched frameworks split their license by directory/tier, do not assume these five are uniformly licensed without a direct whole-tree check"
   },
+  "imported_supplementary_corpus_batch_2": {
+    "coverage": "9 additional frameworks beyond the original 17-source brief and beyond batch 1, license TYPE credibly sourced but status is IMPORTED CLAIM / DOCUMENTED_NOT_REPRODUCED, not FACT",
+    "licenses": {
+      "strands-agents": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "smolagents": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "ag2": {
+        "license": "SPLIT - Apache-2.0 for fork modifications, original AutoGen code retained under MIT",
+        "whole_tree_checked": false,
+        "note": "a third variant of license-split found this session: by code provenance (pre-fork vs post-fork), not by directory (LangGraph) or by tier (Mastra)"
+      },
+      "llama-index": {
+        "license": "MIT core; individual integrations may vary",
+        "whole_tree_checked": false
+      },
+      "llama-agents": { "license": "MIT", "whole_tree_checked": false },
+      "haystack": {
+        "license": "Apache-2.0",
+        "whole_tree_checked": false,
+        "note": "source corpus itself flags an unknown/unreviewed license-header file in the repository - flagged for review, not resolved"
+      },
+      "dspy": { "license": "MIT", "whole_tree_checked": false },
+      "autogen": {
+        "license": "SPLIT - MIT for code, CC-BY-4.0 for repository documentation",
+        "whole_tree_checked": false
+      },
+      "semantic-kernel": { "license": "MIT", "whole_tree_checked": false }
+    },
+    "caveat": "3 of 9 batch-2 frameworks (AG2, Haystack, AutoGen) already show licensing nuance beyond a single clean label - reinforces the standing rule to check the whole tree/offering before any reuse decision"
+  },
   "source": "research/licensing/MATRIX.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

@@ -106,6 +106,38 @@ the imported receipt's own 6 ADR-CANDIDATEs and 10 proposed benchmarks have
 **not** been reconciled against the existing locked architecture; that
 reconciliation is future work.
 
+## Supplementary corpus import, batch 2 (second scope expansion, not silent)
+
+The user supplied a **second** prior external research pass ("next wave")
+covering **9 more frameworks not named in the original 17-source brief**:
+Strands Agents, Hugging Face smolagents, AG2, LlamaIndex, Llama Agents +
+Workflows, Haystack, DSPy, Microsoft AutoGen, and Microsoft Semantic
+Kernel — 9 framework overviews, 11 comparison matrices, 6
+`ADR-CANDIDATE-*.md` files, a `LICENSE-REVIEW.md`, and 6 machine-facing
+delta JSON files (`source-index`, `gap-delta`, `benchmark-delta`,
+`dimension-coverage`, `spec-delta`, `next-wave`). Combined with batch 1,
+this is **14 imported frameworks total, beyond the 17-source brief** —
+recorded explicitly as a second, distinct scope expansion, not merged
+silently into batch 1's figures. Integrated into
+`research/frameworks/{name}/overview.md`, `research/comparison/NEXT-WAVE-*.md`
+(prefixed to avoid colliding with batch 1's filenames — `CAPABILITY-MATRIX.md`
+would otherwise have collided), `research/decisions/ADR-CANDIDATE-*.md`,
+`research/sources/LICENSE-REVIEW.md`, `research/imported-corpus/SOURCE-RECEIPT-2.md`,
+`.context/research/{name}.json` (9 files) and `.context/research/next-wave/*.json`
+(6 meta-delta files), plus updates to
+`.context/research/{gaps,decisions,local-first,licensing,capabilities}.json`.
+
+**Same provenance discipline as batch 1**: real, URL-cited E4 evidence,
+`DOCUMENTED_NOT_REPRODUCED` per the source corpus's own vocabulary, not
+independently re-fetched via WebFetch/WebSearch in this session. Two of
+the nine (AutoGen, Semantic Kernel) are explicitly migration-era research
+whose documented successor is Microsoft Agent Framework, already
+researched live in installment 1 — not double-counted as independent new
+framework coverage. Six more ADR-CANDIDATEs were recorded as decision
+candidates (none auto-adopted); **both imported corpora's ADR-CANDIDATEs
+(12 total) remain unreconciled against the existing locked architecture**
+— now the standing follow-up item across both batches, not just one.
+
 ## Explicitly deferred (installment 4+)
 
 Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills — all recorded

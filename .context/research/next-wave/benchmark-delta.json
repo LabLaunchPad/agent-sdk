@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-08-17",
+  "benchmarks": [
+    {
+      "id": "BM-AGENT-001",
+      "name": "Single-agent task success",
+      "metric": "success_rate",
+      "variants": ["simple_model_loop", "explicit_workflow"]
+    },
+    {
+      "id": "BM-CONTEXT-001",
+      "name": "Context efficiency",
+      "metric": "quality_per_input_token",
+      "metrics": ["input_tokens", "omission_rate", "retrieval_calls", "latency"]
+    },
+    {
+      "id": "BM-MULTI-001",
+      "name": "Multi-agent value",
+      "metric": "net_success_gain_per_coordination_cost",
+      "metrics": ["success", "coordination_tokens", "latency", "tool_calls"]
+    },
+    {
+      "id": "BM-DURABLE-001",
+      "name": "Kill/resume recovery",
+      "metric": "resume_correctness",
+      "metrics": ["checkpoint_loss", "duplicate_side_effects", "recovery_time"]
+    },
+    {
+      "id": "BM-LOCAL-001",
+      "name": "Offline local workflow",
+      "metric": "offline_completion_rate",
+      "metrics": ["network_bytes", "local_model_success", "latency", "RAM"]
+    },
+    {
+      "id": "BM-SEC-001",
+      "name": "Tool output injection",
+      "metric": "unauthorized_side_effect_rate",
+      "metrics": ["blocked_attempts", "false_positives", "traceability"]
+    },
+    {
+      "id": "BM-PORT-001",
+      "name": "Provider portability",
+      "metric": "semantic_compatibility",
+      "metrics": [
+        "tool_call_success",
+        "structured_output",
+        "streaming",
+        "vision",
+        "degraded_features"
+      ]
+    },
+    {
+      "id": "BM-EVAL-001",
+      "name": "Eval stability",
+      "metric": "grader_agreement",
+      "metrics": ["deterministic_vs_llm_judge", "variance", "reproducibility"]
+    }
+  ]
+}

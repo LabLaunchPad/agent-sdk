@@ -1,0 +1,119 @@
+{
+  "status": "RESEARCH COMPLETE - DESK RESEARCH / PRIMARY-SOURCE PASS",
+  "date": "2026-08-17",
+  "sources_completed": [
+    "strands-agents",
+    "smolagents",
+    "ag2",
+    "llama-index",
+    "llama-agents",
+    "haystack",
+    "dspy",
+    "autogen",
+    "semantic-kernel"
+  ],
+  "e5_reproduction": "NONE - no claims marked independently reproduced",
+  "major_findings": [
+    "Small model-driven loops are powerful for short-lived, tool-centric tasks.",
+    "Explicit state/workflow primitives become justified for long-running, branching, resumable or human-gated work.",
+    "Knowledge/data frameworks and agent runtimes should be separate semantic layers.",
+    "Multi-agent should be conditional on measured value, not a default architecture.",
+    "Evaluation should be a first-class subsystem but optimization should remain outside the runtime kernel.",
+    "Local capability must be defined as a complete offline execution contract, not merely a local model adapter."
+  ],
+  "top_contradictions": [
+    "minimal core vs explicit orchestration",
+    "model-driven vs deterministic workflow",
+    "local-first vs managed observability",
+    "persistent memory vs memory pollution",
+    "multi-agent vs coordination cost",
+    "rich context vs context efficiency",
+    "automation vs human control",
+    "declarative optimization vs runtime simplicity",
+    "knowledge-centric vs agent-centric",
+    "typed abstraction vs API simplicity"
+  ],
+  "top_requirements": [
+    "State/Memory/Context/Knowledge/Evidence/Transcript separation",
+    "WorkspaceContract",
+    "SandboxContract",
+    "SideEffectContract",
+    "Operation ID + UNKNOWN_OUTCOME",
+    "EvaluationPort",
+    "Provider capability matrix",
+    "optional DurableWorkflowPort",
+    "optional OptimizationPort",
+    "AI-maintainer repo contract"
+  ],
+  "delete": [
+    "default multi-agent",
+    "kernel-wide prompt optimization",
+    "implicit memory as durable state",
+    "model-agnostic marketing without capability tests",
+    "universal workflow graph requirement"
+  ],
+  "defer": [
+    "CQRS",
+    "general event sourcing",
+    "built-in vector DB",
+    "generic swarm",
+    "autonomous self-modification",
+    "cross-tenant memory sharing"
+  ],
+  "methodology_recommendation": "Specification + contract testing + deterministic TDD for kernel; evaluation-driven + benchmark-driven development for agent quality; adversarial and recovery testing for tools/workspaces; ADRs only for architecture-impacting decisions.",
+  "token_efficiency_changes": [
+    "progressive disclosure",
+    "explicit context budgets",
+    "succinct/full trajectory modes",
+    "avoid giant source summaries",
+    "store structured fact/reference/unknown records"
+  ],
+  "ux_dx_ax_ox_px_changes": [
+    "show goal/step/approval/evidence/state/cost/recovery",
+    "maintainer source-of-truth map",
+    "trace/replay support",
+    "capability permissions visible",
+    "degraded provider behavior visible"
+  ],
+  "portability_changes": [
+    "semantic ports",
+    "NATIVE/SUPPORTED/DEGRADED/UNKNOWN capability flags",
+    "portable state schema",
+    "provider contract suite"
+  ],
+  "security_changes": [
+    "capability security",
+    "tool output treated as data",
+    "explicit sandbox/workspace policy",
+    "MCP trust gates",
+    "memory provenance/invalidation",
+    "side-effect reconciliation"
+  ],
+  "benchmarks_to_add": [
+    "BM-AGENT-001",
+    "BM-CONTEXT-001",
+    "BM-MULTI-001",
+    "BM-DURABLE-001",
+    "BM-LOCAL-001",
+    "BM-SEC-001",
+    "BM-PORT-001",
+    "BM-EVAL-001"
+  ],
+  "adr_candidates": [
+    "ADR-CANDIDATE-001 Small Kernel + Optional Workflow Layer",
+    "ADR-CANDIDATE-002 State/Memory/Context Separation",
+    "ADR-CANDIDATE-003 Capability-Based Tool Security",
+    "ADR-CANDIDATE-004 Offline/Local-First Contract",
+    "ADR-CANDIDATE-005 EvaluationPort vs OptimizationPort",
+    "ADR-CANDIDATE-006 Durable Side-Effect Reconciliation"
+  ],
+  "next_research_wave": [
+    "E5 benchmark reproduction",
+    "durable workflow crash testing",
+    "cross-OS sandbox testing",
+    "MCP trust model",
+    "multi-agent cost/benefit benchmark",
+    "context compression benchmark",
+    "state migration benchmark"
+  ]
+}

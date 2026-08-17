@@ -1,0 +1,95 @@
+{
+  "date": "2026-08-17",
+  "sources": [
+    {
+      "id": "strands-agents",
+      "name": "Strands Agents",
+      "version": "v1.36.0 (latest surfaced release; 2026-04-17)",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/strands-agents/sdk-python",
+      "documentation": "https://strandsagents.com/docs/",
+      "evidence_count": 5,
+      "e5_reproduced": false
+    },
+    {
+      "id": "smolagents",
+      "name": "Hugging Face smolagents",
+      "version": "v1.26.0 (latest surfaced release; 2026-05-29)",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/huggingface/smolagents",
+      "documentation": "https://huggingface.co/docs/smolagents/",
+      "evidence_count": 5,
+      "e5_reproduced": false
+    },
+    {
+      "id": "ag2",
+      "name": "AG2 (formerly AutoGen)",
+      "version": "v0.13.2 (latest surfaced release; 2026-05-29)",
+      "license": "Apache-2.0 for fork modifications; original AutoGen code under MIT",
+      "repository": "https://github.com/ag2ai/ag2",
+      "documentation": "https://docs.ag2.ai/",
+      "evidence_count": 5,
+      "e5_reproduced": false
+    },
+    {
+      "id": "llama-index",
+      "name": "LlamaIndex",
+      "version": "v0.14.22 (latest surfaced release; 2026-05-14)",
+      "license": "MIT for core repository (individual integrations may vary)",
+      "repository": "https://github.com/run-llama/llama_index",
+      "documentation": "https://docs.llamaindex.ai/",
+      "evidence_count": 5,
+      "e5_reproduced": false
+    },
+    {
+      "id": "llama-agents",
+      "name": "Llama Agents + Workflows",
+      "version": "llama-agents v0.12.5 surfaced; workflows v2.22.2 surfaced",
+      "license": "MIT",
+      "repository": "https://github.com/run-llama/llama-agents",
+      "documentation": "https://developers.llamaindex.ai/",
+      "evidence_count": 3,
+      "e5_reproduced": false
+    },
+    {
+      "id": "haystack",
+      "name": "Haystack",
+      "version": "v2.29.0 (latest surfaced release; 2026-05-12)",
+      "license": "Apache-2.0; repository notes an unknown license-header file that should be reviewed",
+      "repository": "https://github.com/deepset-ai/haystack",
+      "documentation": "https://docs.haystack.deepset.ai/",
+      "evidence_count": 6,
+      "e5_reproduced": false
+    },
+    {
+      "id": "dspy",
+      "name": "DSPy",
+      "version": "v3.2.1 (latest surfaced release; 2026-05-05)",
+      "license": "MIT",
+      "repository": "https://github.com/stanfordnlp/dspy",
+      "documentation": "https://dspy.ai/",
+      "evidence_count": 4,
+      "e5_reproduced": false
+    },
+    {
+      "id": "autogen",
+      "name": "Microsoft AutoGen",
+      "version": "Python v0.7.5 surfaced (2025-09-30); migration-era research",
+      "license": "MIT for code; CC-BY-4.0 for repository documentation",
+      "repository": "https://github.com/microsoft/autogen",
+      "documentation": "https://microsoft.github.io/autogen/",
+      "evidence_count": 4,
+      "e5_reproduced": false
+    },
+    {
+      "id": "semantic-kernel",
+      "name": "Microsoft Semantic Kernel",
+      "version": "migration-era / successor is Microsoft Agent Framework 1.0",
+      "license": "MIT",
+      "repository": "https://github.com/microsoft/semantic-kernel",
+      "documentation": "https://learn.microsoft.com/en-us/semantic-kernel/",
+      "evidence_count": 4,
+      "e5_reproduced": false
+    }
+  ]
+}

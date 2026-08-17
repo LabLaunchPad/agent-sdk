@@ -110,3 +110,28 @@ yet have columns for — **Browser** (Browser Use's core capability),
 approval** (as an explicit state transition, not just a boolean), and
 **Structured output** — worth adding as new rows once these frameworks are
 independently re-verified rather than merged in as unverified columns now.
+
+## Supplementary corpus, batch 2: Strands Agents, smolagents, AG2, LlamaIndex, Llama Agents, Haystack, DSPy, AutoGen, Semantic Kernel
+
+A second imported comparison lives at
+`research/comparison/NEXT-WAVE-CAPABILITY-MATRIX.md`, covering 9 more
+frameworks across Core loop / Explicit workflow / Multi-agent / Durable
+session-state / Local model / Evaluation / MCP / Sandboxing. Same
+provenance caveat as batch 1 — not independently re-verified this session.
+Two points worth surfacing here:
+
+- **DSPy is architecturally different from every other framework
+  researched so far** — it is a programming/optimization framework over an
+  LM adapter (declarative program compilation, prompt/weight
+  optimization), not an agent runtime with tools/memory/workflow in the
+  usual sense. Its own comparison row is mostly "not core" for
+  agent-runtime capabilities specifically _because_ those aren't its job —
+  recorded as a genuine category difference, not a weak result. This
+  motivates the `OptimizationPort` decision candidate in
+  `.context/research/decisions.json` (kept separate from the runtime
+  kernel, per the imported corpus's own `spec-delta.json` SPEC-006).
+- **AutoGen and Semantic Kernel are migration-era research** — both
+  frameworks' documented successor is Microsoft Agent Framework, already
+  researched in installment 1. Their capability rows are historical
+  context for understanding _why_ Microsoft Agent Framework's design looks
+  the way it does, not two more independent capability data points.

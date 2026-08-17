@@ -1,0 +1,161 @@
+{
+  "date": "2026-08-17",
+  "dimensions": {
+    "1": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "2": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "3": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "4": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "5": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "6": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "7": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "8": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Tool schema/permissions reviewed where official sources exposed them; full per-provider trust/rollback matrix requires E5."
+    },
+    "9": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Workspace/sandbox evidence extracted; cross-OS isolation not reproduced."
+    },
+    "10": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "11": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "12": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "13": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "14": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "15": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "16": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "17": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "18": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "19": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Human UX examined at documentation/product-model level; no full visual usability study."
+    },
+    "20": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "DX compared qualitatively; no timed TTF metrics reproduced."
+    },
+    "21": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "AI-coding-agent repo guidance audited where exposed; not every source repository fully scanned."
+    },
+    "22": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Semantic portability extracted; no drop-in compatibility claimed."
+    },
+    "23": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Migration evidence strong for AutoGen/SK; detailed state-schema migrations need E5."
+    },
+    "24": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Cost model derived; no common-task benchmark run."
+    },
+    "25": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Documented failure/security signals extracted; no chaos test run."
+    },
+    "26": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Side-effect contract is a LabLaunchPad requirement derived from gaps; no surveyed source fully proves a universal implementation."
+    },
+    "27": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Composable-layer recommendation derived from source architectures; exact replace/mock test contracts require implementation."
+    },
+    "28": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Pattern extraction completed in decision corpus."
+    },
+    "29": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "30": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Methodology matrix completed."
+    },
+    "31": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Outcome-driven engineering contract proposed."
+    },
+    "32": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Forward engineering principles extracted from test/repo practices."
+    },
+    "33": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Backward engineering model formalized as required LabLaunchPad trace."
+    },
+    "34": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Machine artifacts created."
+    },
+    "35": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Major recommendations include decision rationale/tradeoffs/reversibility."
+    },
+    "36": {
+      "status": "COVERED",
+      "note": "Primary-source evidence reviewed for applicability."
+    },
+    "37": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Decision rule embodied in extraction."
+    },
+    "38": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Architecture freeze respected; ADR-CANDIDATE used."
+    },
+    "39": {
+      "status": "PARTIAL_OR_TARGETED",
+      "note": "Token-efficiency discipline applied to artifact design; raw repos not copied."
+    }
+  }
+}

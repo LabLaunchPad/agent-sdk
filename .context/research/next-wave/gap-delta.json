@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-08-17",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "priority": "P0",
+      "gap": "Durable execution semantics",
+      "question": "What exact state must be checkpointed for safe resume after process death?"
+    },
+    {
+      "id": "GAP-002",
+      "priority": "P0",
+      "gap": "Side-effect reconciliation",
+      "question": "How does operation identity survive provider timeout with unknown remote outcome?"
+    },
+    {
+      "id": "GAP-003",
+      "priority": "P0",
+      "gap": "Workspace security",
+      "question": "Which sandbox boundary is appropriate per OS and workload?"
+    },
+    {
+      "id": "GAP-004",
+      "priority": "P1",
+      "gap": "Multi-agent economics",
+      "question": "On product tasks, when does delegation beat one workflow?"
+    },
+    {
+      "id": "GAP-005",
+      "priority": "P1",
+      "gap": "Context compression quality",
+      "question": "How much token reduction is possible before unacceptable omission?"
+    },
+    {
+      "id": "GAP-006",
+      "priority": "P1",
+      "gap": "Offline evaluation",
+      "question": "Which eval suites remain meaningful with local models only?"
+    },
+    {
+      "id": "GAP-007",
+      "priority": "P2",
+      "gap": "MCP trust",
+      "question": "How should dynamic tool discovery be authenticated, reviewed and capability-scoped?"
+    },
+    {
+      "id": "GAP-008",
+      "priority": "P2",
+      "gap": "Schema/version migration",
+      "question": "How should persisted state migrate across SDK releases?"
+    }
+  ]
+}

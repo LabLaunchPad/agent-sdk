@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-08-17",
+  "changes": [
+    {
+      "id": "SPEC-001",
+      "decision": "ADOPT",
+      "change": "Separate State, Memory, Context, Knowledge, Evidence, Transcript",
+      "reason": "Cross-framework persistence/context patterns reveal they solve different failure modes",
+      "evidence": [
+        "strands-agents",
+        "smolagents",
+        "llama-index",
+        "haystack",
+        "microsoft-agent-framework"
+      ],
+      "acceptance": [
+        "each has independent interface and lifecycle",
+        "provenance is first-class"
+      ]
+    },
+    {
+      "id": "SPEC-002",
+      "decision": "ADOPT",
+      "change": "Add WorkspaceContract and SandboxContract",
+      "reason": "Local execution and MCP/subprocess/code-agent patterns expose explicit trust boundaries",
+      "evidence": ["smolagents", "haystack", "strands-agents"],
+      "acceptance": ["network/filesystem/process/secret policies testable"]
+    },
+    {
+      "id": "SPEC-003",
+      "decision": "ADAPT",
+      "change": "Optional DurableWorkflow layer",
+      "reason": "Long-running state/checkpoint/HITL benefits from explicit orchestration; not every task needs graphs",
+      "evidence": ["llama-agents", "haystack", "microsoft-agent-framework", "ag2"],
+      "acceptance": ["checkpoint/resume/retry/recovery", "simple tasks can bypass"]
+    },
+    {
+      "id": "SPEC-004",
+      "decision": "ADOPT",
+      "change": "EvaluationPort",
+      "reason": "Dedicated eval frameworks demonstrate output/trajectory/tool/state evaluation value",
+      "evidence": ["strands", "ag2", "dspy", "haystack"],
+      "acceptance": [
+        "offline deterministic evaluators",
+        "LLM judge adapter",
+        "trace evaluator"
+      ]
+    },
+    {
+      "id": "SPEC-005",
+      "decision": "ADOPT",
+      "change": "Operation ID and UNKNOWN_OUTCOME side-effect state",
+      "reason": "Production agents need reconciliation, not just success/failure",
+      "evidence": [],
+      "acceptance": [
+        "duplicate submission is detectable",
+        "unknown outcome is resumable/reconcilable"
+      ]
+    },
+    {
+      "id": "SPEC-006",
+      "decision": "ADAPT",
+      "change": "OptimizationPort outside kernel",
+      "reason": "DSPy optimization is valuable but couples evaluation/training if embedded in runtime",
+      "evidence": ["dspy"],
+      "acceptance": [
+        "optimization can change prompts/programs without changing runtime interfaces"
+      ]
+    }
+  ]
+}

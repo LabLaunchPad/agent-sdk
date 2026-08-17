@@ -22,13 +22,18 @@ token/context-efficiency and UX/DX audit files — all explicitly deferred
 from installment 3, not dropped.
 
 **Also queued, lower priority**: independent re-verification (live
-WebFetch/WebSearch) of the imported 5-framework supplementary corpus
-(OpenHands, Letta, Google ADK, Browser Use, CrewAI — see `docs/agent/NOW.md`
-"Supplementary corpus import"), and reconciliation of its 6 ADR-CANDIDATEs
-and 10 proposed benchmarks against the existing locked architecture. This
-corpus expands scope beyond the original 17-source brief and was not
-requested by the operating prompt — it is queued because it was supplied,
-not because completing it blocks the original brief's remaining 4 sources.
+WebFetch/WebSearch) of both imported supplementary corpora — batch 1
+(OpenHands, Letta, Google ADK, Browser Use, CrewAI) and batch 2 (Strands
+Agents, smolagents, AG2, LlamaIndex, Llama Agents, Haystack, DSPy,
+AutoGen, Semantic Kernel), 14 frameworks total — and reconciliation of
+their combined 12 ADR-CANDIDATEs (6 in `.context/research/decisions.json`
+from batch 1, 6 in `research/decisions/ADR-CANDIDATE-*.md` from batch 2)
+plus batch 2's `spec-delta.json` (6 proposed spec changes) and
+`gap-delta.json` (8 prioritized gaps) against the existing locked
+architecture. Both corpora expand scope beyond the original 17-source
+brief and were not requested by the operating prompt — queued because
+supplied, not because completing them blocks the original brief's
+remaining 4 sources (Volcengine, Baidu, A2A, Agent Skills).
 
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the

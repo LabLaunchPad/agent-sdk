@@ -1,0 +1,54 @@
+{
+  "source": "DSPy",
+  "version": "v3.2.1 (latest surfaced release; 2026-05-05)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "MIT",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Framework is programming-not-prompting: modular programs with optimization of prompts and weights.",
+      "url": "https://github.com/stanfordnlp/dspy"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Evaluation uses a devset and metric, with parallel evaluation support; optimizers compile programs against trainsets/metrics.",
+      "url": "https://github.com/stanfordnlp/dspy/blob/main/docs/docs/cheatsheet.md"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Research lineage includes compilation, prompt optimization, assertions and joint prompt/weight optimization.",
+      "url": "https://github.com/stanfordnlp/dspy"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "MIT license.",
+      "url": "https://github.com/stanfordnlp/dspy/blob/main/LICENSE"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "declarative signatures",
+    "modules",
+    "evaluation metrics",
+    "optimizers/compilers"
+  ],
+  "state": ["program/compiled artifact state", "not runtime agent session state"],
+  "context": ["signature/input fields", "retrieval/module composition"],
+  "memory": ["not core"],
+  "runtime": ["model adapter driven", "offline optimization loop around runtime"],
+  "security": ["not an agent sandbox framework"],
+  "ux": ["programming-not-prompting mental model"],
+  "dx": ["metrics and optimizer API"],
+  "portability": ["depends on model adapters"],
+  "efficiency": ["offline compile cost can trade for online prompt/weight efficiency"],
+  "patterns": ["evaluation-guided compilation", "optimizer as separate lifecycle"],
+  "contradictions": ["optimization power vs runtime complexity/coupling"],
+  "unknowns": [
+    "E5 improvement rates for LabLaunchPad workloads",
+    "optimizer cost under local models"
+  ],
+  "decisions": ["ADOPT OptimizationPort", "KEEP OUT of runtime kernel"]
+}

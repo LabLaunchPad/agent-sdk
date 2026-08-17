@@ -1,0 +1,81 @@
+{
+  "source": "LlamaIndex",
+  "version": "v0.14.22 (latest surfaced release; 2026-05-14)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "MIT for core repository (individual integrations may vary)",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "By default index data is in-memory; storage context can persist to disk and reload.",
+      "url": "https://github.com/run-llama/llama_index"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Project is broad document/data/agent framework with RAG, agents, multi-agent and storage integrations.",
+      "url": "https://github.com/run-llama/llama_index"
+    },
+    {
+      "evidence_level": "E3",
+      "claim": "Separate Llama Agents project is event-driven, async-first and step-based for execution control; includes deployable agent services and MCP server paths.",
+      "url": "https://github.com/run-llama/llama-agents"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Release train is fast and modular; latest surfaced core release is v0.14.22.",
+      "url": "https://github.com/run-llama/llama_index/releases"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Core repo license is MIT; integration licenses can differ and must be audited per dependency.",
+      "url": "https://github.com/run-llama/llama_index/blob/main/LICENSE"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "document/data ingestion",
+    "indexes",
+    "query engines",
+    "retrieval",
+    "agent integrations",
+    "storage context"
+  ],
+  "state": ["in-memory by default", "explicit disk persistence/reload"],
+  "context": ["retrieval/index context", "data connectors", "document context"],
+  "memory": [
+    "application-specific memory integrations",
+    "must be separated from index storage"
+  ],
+  "runtime": [
+    "Python",
+    "local and hosted model integrations",
+    "broad vector/database ecosystem"
+  ],
+  "security": ["integration-specific; deployment-dependent"],
+  "ux": ["knowledge-centric abstraction", "data-to-agent workflow"],
+  "dx": ["modular integrations", "large ecosystem"],
+  "portability": ["broad model/data/storage integrations"],
+  "efficiency": [
+    "retrieval can reduce prompt bulk",
+    "broad integrations increase dependency complexity"
+  ],
+  "patterns": [
+    "knowledge layer separated from model call",
+    "explicit storage persistence"
+  ],
+  "contradictions": [
+    "knowledge richness vs context/token cost",
+    "broad integration surface vs maintainability"
+  ],
+  "unknowns": [
+    "exact durable agent execution semantics versus data persistence",
+    "full local offline coverage"
+  ],
+  "decisions": [
+    "ADOPT KnowledgePort idea",
+    "ADAPT persistence separation",
+    "REJECT embedding knowledge storage into execution state"
+  ]
+}

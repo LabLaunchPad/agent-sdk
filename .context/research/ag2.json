@@ -1,0 +1,77 @@
+{
+  "source": "AG2 (formerly AutoGen)",
+  "version": "v0.13.2 (latest surfaced release; 2026-05-29)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "Apache-2.0 for fork modifications; original AutoGen code under MIT",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Core strength is multi-agent orchestration: two-agent, sequential, group chat, nested patterns; Swarm functionality was merged into group chat.",
+      "url": "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/orchestrations/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Ollama is directly supported and tool calling is supported without LiteLLM.",
+      "url": "https://docs.ag2.ai/latest/docs/user-guide/models/ollama/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "AutoGenBench lineage provides CLI benchmark execution with Docker isolation, logs/telemetry and multiple-run support.",
+      "url": "https://docs.ag2.ai/latest/docs/blog/2024/01/25/AutoGenBench/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Release feed shows beta agent evaluation support and security work.",
+      "url": "https://github.com/ag2ai/ag2/releases"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "License boundary is explicitly mixed: original AutoGen MIT code plus Apache-2.0 fork changes.",
+      "url": "https://github.com/ag2ai/ag2"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "agent conversation patterns",
+    "sequential chat",
+    "group chat",
+    "nested chat",
+    "swarm-merged group chat"
+  ],
+  "state": ["conversation/carryover state", "pattern-dependent persistence"],
+  "context": ["carryover summary between sequential chats", "group conversation context"],
+  "memory": ["conversation history", "summary carryover"],
+  "runtime": [
+    "Python runtime",
+    "Ollama local model client",
+    "Docker benchmark isolation"
+  ],
+  "security": [
+    "benchmark Docker isolation",
+    "tool-calling trust boundary requires host controls"
+  ],
+  "ux": ["multi-agent orchestration mental model", "group chat patterns"],
+  "dx": ["many orchestration patterns", "evaluation beta"],
+  "portability": ["Ollama direct", "broad provider/client ecosystem"],
+  "efficiency": [
+    "coordination adds token/context overhead",
+    "sequential carryover adds summarization cost"
+  ],
+  "patterns": ["conditional multi-agent orchestration", "benchmark CLI"],
+  "contradictions": [
+    "multi-agent expressiveness vs coordination cost",
+    "summary carryover vs information loss"
+  ],
+  "unknowns": [
+    "durable state contract across all orchestration patterns",
+    "E5 multi-agent value on LabLaunchPad tasks"
+  ],
+  "decisions": [
+    "ADAPT handoff/group patterns",
+    "ADOPT benchmark lineage",
+    "REJECT default multi-agent"
+  ]
+}

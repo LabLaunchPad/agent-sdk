@@ -73,6 +73,36 @@
     },
     "detail": "see research/comparison/CAPABILITY-MATRIX.md and research/comparison/SECURITY-MATRIX.md for the full imported comparison"
   },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "beyond the original 17-source brief and beyond batch 1; second 'next wave' user-supplied corpus, not independently re-verified via WebFetch/WebSearch in this session",
+    "patterns": {
+      "small_kernel_optional_workflow_layer": {
+        "sources": ["strands-agents", "smolagents", "haystack", "llama-agents"],
+        "note": "see decisions.json adr-candidate-001"
+      },
+      "optimization_port_outside_runtime_kernel": {
+        "sources": ["dspy"],
+        "note": "DSPy is architecturally a programming/optimization framework over an LM adapter, not an agent runtime - a category difference, not a weak capability result. See decisions.json adr-candidate-005."
+      },
+      "durable_side_effect_reconciliation_via_operation_id": {
+        "sources": [],
+        "note": "no cited evidence sources in the source corpus's own spec-delta.json - flagged as the weakest-evidenced of batch 2's 6 ADR-CANDIDATEs"
+      }
+    },
+    "migration_era_note": "autogen and semantic-kernel capability rows describe historical frameworks whose documented successor is microsoft-agent-framework (researched live in installment 1) - not independent capability data points",
+    "detail": "see research/comparison/NEXT-WAVE-CAPABILITY-MATRIX.md and research/decisions/ADR-CANDIDATE-*.md for the full imported comparison"
+  },
   "source": "research/built-in-capabilities/MATRIX.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

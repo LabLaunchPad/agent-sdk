@@ -27,11 +27,31 @@ sources:
     id: browser-use-license
   - resource: /research/frameworks/crewai/licensing.md
     id: crewai-license
+  - resource: /research/frameworks/strands-agents/overview.md
+    id: strands-agents-license
+  - resource: /research/frameworks/smolagents/overview.md
+    id: smolagents-license
+  - resource: /research/frameworks/ag2/overview.md
+    id: ag2-license
+  - resource: /research/frameworks/llama-index/overview.md
+    id: llama-index-license
+  - resource: /research/frameworks/llama-agents/overview.md
+    id: llama-agents-license
+  - resource: /research/frameworks/haystack/overview.md
+    id: haystack-license
+  - resource: /research/frameworks/dspy/overview.md
+    id: dspy-license
+  - resource: /research/frameworks/autogen/overview.md
+    id: autogen-license
+  - resource: /research/frameworks/semantic-kernel/overview.md
+    id: semantic-kernel-license
+  - resource: /research/sources/LICENSE-REVIEW.md
+    id: batch-2-license-review
 generated:
   by: process:claude-code-session
   at: 2026-08-17T00:00:00Z
 status: draft
-x_coverage: 7 of 17 sources from the original research brief researched live in this session, plus 5 additional frameworks from an imported supplementary corpus (see note below)
+x_coverage: 7 of 17 sources from the original research brief researched live in this session, plus 5+9=14 additional frameworks from two imported supplementary corpora (see notes below)
 ---
 
 # Licensing Matrix
@@ -53,20 +73,33 @@ x_coverage: 7 of 17 sources from the original research brief researched live in 
 | **Browser Use** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/browser-use/licensing.md` |
 | **CrewAI** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/crewai/licensing.md` |
 
+| **Strands Agents** (imported batch 2, not independently re-verified) | Apache-2.0 | UNKNOWN | Yes — NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/strands-agents/overview.md` |
+| **Hugging Face smolagents** (imported batch 2, not independently re-verified) | Apache-2.0 | UNKNOWN | Yes | Presumed permitted | Presumed permitted | Presumed yes | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/smolagents/overview.md` |
+| **AG2** (imported batch 2, not independently re-verified) | **Split** — Apache-2.0 for fork modifications; original AutoGen code retained under MIT | UNKNOWN | Yes (both licenses require it) | Presumed permitted | Presumed permitted | Presumed yes for Apache-2.0-covered code | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — a fork with a mixed license by provenance (not by directory like LangGraph/Mastra, but by which code predates the fork) — see `research/frameworks/ag2/overview.md` |
+| **LlamaIndex** (imported batch 2, not independently re-verified) | MIT for core repository; individual integrations may vary | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No — source corpus explicitly flags integration-level variance | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/llama-index/overview.md` |
+| **Llama Agents + Workflows** (imported batch 2, not independently re-verified) | MIT | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/llama-agents/overview.md` |
+| **Haystack** (imported batch 2, not independently re-verified) | Apache-2.0 — **source corpus flags an unknown/unreviewed license-header file in the repository** | UNKNOWN | Yes — NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes | **No — and the source corpus itself says this needs review** | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED, FLAGGED FOR REVIEW** — see `research/frameworks/haystack/overview.md` |
+| **DSPy** (imported batch 2, not independently re-verified) | MIT | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/dspy/overview.md` |
+| **Microsoft AutoGen** (imported batch 2, migration-era, not independently re-verified) | **Split** — MIT for code; CC-BY-4.0 for repository documentation | Microsoft | Yes (both licenses require it) | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — successor is Microsoft Agent Framework (already researched, installment 1); see `research/frameworks/autogen/overview.md` |
+| **Microsoft Semantic Kernel** (imported batch 2, migration-era, not independently re-verified) | MIT | Microsoft | Yes | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — same successor relationship as AutoGen; see `research/frameworks/semantic-kernel/overview.md` |
+
 ## Imported corpus caveat
 
-The five rows above (OpenHands, Letta, Google ADK, Browser Use, CrewAI) come
-from a research pass the user supplied, not from this session's own
-WebFetch/WebSearch calls. Their license _type_ is credibly sourced (each
-`licensing.md` cites the framework's own repository), but this repository's
-evidence discipline does not upgrade an unreproduced claim to `FACT` just
-because it looks credible — hence `IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED`
-rather than `FACT`, consistently with the imported corpus's own status
-vocabulary. None of the five had their copyright holder or whole-tree
-license status captured by the source corpus — recorded as `UNKNOWN`, not
-inferred. Given installment 3's finding that license splits are common
-(2 of 7 directly-researched frameworks), **do not assume these five are
-uniformly licensed** without a direct check.
+The rows above tagged "imported" come from two research passes the user
+supplied, not from this session's own WebFetch/WebSearch calls. Their
+license _type_ is credibly sourced (each cites the framework's own
+repository), but this repository's evidence discipline does not upgrade an
+unreproduced claim to `FACT` just because it looks credible — hence
+`IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED` rather than `FACT`,
+consistently with each corpus's own status vocabulary. None had their
+copyright holder or whole-tree license status captured by the source
+corpus — recorded as `UNKNOWN`, not inferred. Given installment 3's
+finding that license splits are common (2 of 7 directly-researched
+frameworks, plus AG2 and AutoGen now showing a _third_ variant — mixed
+license by code provenance rather than by directory or by tier), **do not
+assume any imported-corpus framework is uniformly licensed** without a
+direct check. Haystack is specifically flagged by its own source corpus as
+needing a license-header review before any reuse decision.
 
 ## Governing rule (from the research brief, restated)
 
@@ -113,10 +146,11 @@ repository ownership, not a fact directly readable from the license text —
 recorded as such rather than silently treated as equivalent to Youtu-Agent's
 complete, specific copyright statement.
 
-## Not yet researched
+## Not yet researched (from the original 17-source brief)
 
-Volcengine AgentKit, Baidu AppBuilder SDK, MCP, A2A, Agent Skills
-specification. Each requires its own LICENSE-file fetch (and, per the
-installment 3 finding above, a whole-tree check, not just the root file)
-before any claim is recorded here — do not extrapolate a license from a
-framework's general "open source" reputation.
+Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills specification.
+Each requires its own LICENSE-file fetch (and, per the installment 3
+finding above, a whole-tree check, not just the root file) before any
+claim is recorded here — do not extrapolate a license from a framework's
+general "open source" reputation. (MCP's protocol-level licensing was not
+in scope for `research/protocols/mcp-2026-07-28.md`.)

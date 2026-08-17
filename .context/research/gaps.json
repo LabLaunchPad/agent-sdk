@@ -1,13 +1,30 @@
 {
-  "gap": "9 of 17 sources named in the ORIGINAL research brief not yet researched live in this session; 5 ADDITIONAL frameworks (beyond the 17-source brief) have been imported from a prior external research pass and are not yet independently re-verified",
+  "gap": "4 of 17 sources named in the ORIGINAL research brief remain fully UNKNOWN; 14 ADDITIONAL frameworks (beyond the 17-source brief, across two imported batches) have been imported from prior external research passes and are not yet independently re-verified",
   "remaining_primary": ["volcengine-agentkit", "baidu-appbuilder-sdk"],
   "remaining_protocols": ["a2a", "agent-skills"],
   "researched_this_installment": ["langgraph", "mastra", "mcp-2026-07-28"],
-  "imported_supplementary_corpus": {
+  "imported_supplementary_corpus_batch_1": {
     "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
     "provenance": "user-supplied research pass, not part of the original 17-source brief; not independently re-verified via WebFetch/WebSearch in this session",
     "status": "DOCUMENTED_NOT_REPRODUCED per the corpus's own evidence-discipline vocabulary",
     "location": "research/frameworks/{openhands,letta,google-adk,browser-use,crewai}/*.md, research/comparison/*.md, research/imported-corpus/SOURCE-RECEIPT.md"
+  },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "second user-supplied research pass ('next wave'), not part of the original 17-source brief; not independently re-verified via WebFetch/WebSearch in this session",
+    "status": "DOCUMENTED_NOT_REPRODUCED per the corpus's own evidence-discipline vocabulary",
+    "note": "autogen and semantic-kernel are migration-era research - both frameworks' documented successor is microsoft-agent-framework, already researched live in installment 1",
+    "location": "research/frameworks/{strands-agents,smolagents,ag2,llama-index,llama-agents,haystack,dspy,autogen,semantic-kernel}/overview.md, research/comparison/NEXT-WAVE-*.md, research/decisions/ADR-CANDIDATE-*.md, research/sources/LICENSE-REVIEW.md, research/imported-corpus/SOURCE-RECEIPT-2.md, .context/research/next-wave/*.json"
   },
   "remaining_dimensions_even_for_researched_frameworks": [
     "state.md",
@@ -25,9 +42,10 @@
     "UX/DX audit file - not created",
     "PydanticAI deepening (installment 1 was shallow per user feedback)",
     "Kimi Agent SDK deepening (installment 1 left local-first as UNKNOWN)",
-    "independent re-verification (E3/E4 live WebFetch) of the 5 imported-corpus frameworks - currently DOCUMENTED_NOT_REPRODUCED only",
-    "E5 reproduction across identical tasks for all researched frameworks, per the imported corpus's own 'Next research installment' recommendation"
+    "independent re-verification (live WebFetch) of all 14 imported-corpus frameworks across both batches - currently DOCUMENTED_NOT_REPRODUCED only",
+    "E5 reproduction across identical tasks for all researched frameworks, per both imported corpora's own 'next wave'/'next research installment' recommendations",
+    "reconciliation of both imported corpora's ADR-CANDIDATEs (6 in research/decisions/, plus batch 1's 6 decisions.json entries) against the existing locked architecture - not yet performed"
   ],
-  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then A2A and Agent Skills (remaining protocol layer), then the deepening passes and the 40-dimension/comparative/token/UX audit files. Independent re-verification of the imported 5-framework corpus is a separate, lower-priority track since it is already real evidence, just not re-fetched by this session.",
+  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then A2A and Agent Skills (remaining protocol layer). Independent re-verification of the 14 imported-corpus frameworks and ADR-CANDIDATE reconciliation against the locked architecture are separate, lower-priority tracks since they are already real evidence, just not re-fetched or reconciled by this session.",
   "generated_at": "2026-08-17T00:00:00Z"
 }

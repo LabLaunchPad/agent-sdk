@@ -127,6 +127,50 @@
       "status": "ACTION_REQUIRED",
       "source": "research/imported-corpus/SOURCE-RECEIPT.md",
       "note": "The imported corpus proposes 6 ADR-CANDIDATEs (separate Runtime from Agent semantics; formalize State/Memory/Context/Knowledge/Evidence/Transcript; introduce ContextBroker; mandatory action-boundary policy for dangerous capabilities; opt-in multi-agent orchestration; semantic adapter policy for external frameworks) and 10 proposed benchmarks. None have been compared against the existing locked architecture (docs/architecture/PACKAGE-MAP.md, existing ADRs) or cross-checked against this session's own installment 1-3 findings yet - that reconciliation is future work, not performed as part of this import."
+    },
+    {
+      "id": "adr-candidate-001-small-kernel-optional-workflow",
+      "pattern": "small-kernel-plus-optional-workflow-layer",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-001.md",
+      "note": "Strands/smolagents minimal model-driven loops vs Haystack/Llama Agents/Microsoft-successor explicit workflows for durable control - argues for a small kernel with workflow as an optional, not mandatory, layer. Overlaps with and reinforces the LangGraph/Mastra installment 3 finding that workflow orchestration is core-vs-attached varies by framework family. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-002-state-memory-context-separation",
+      "pattern": "state-memory-context-knowledge-evidence-transcript-six-way-separation",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-002.md",
+      "note": "Directly reinforces batch 1's adopt-durable-state-distinct-from-memory candidate - now evidenced independently by strands-agents, smolagents, llama-index, haystack AND microsoft-agent-framework (5 sources total across both batches plus this session's own MAF research). Two independent imported corpora converging on the same six-way split is stronger evidence than either alone. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-003-capability-based-tool-security",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-003.md",
+      "note": "Reinforces batch 1's reject-llm-only-security-judgement finding from OpenHands - capability-scoped, deterministic tool security rather than relying on model judgement. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-004-offline-local-first-contract",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-004.md",
+      "note": "Proposes defining local-first as a capability contract (CloudAccount=optional, Network=denyable, ModelProvider=local/remote interchangeable, Storage=filesystem/sqlite/embedded selectable, Tools=explicit capability grants, Observability=local sink required, Evaluation=runnable offline) rather than a single LOCAL_NATIVE/CLOUD_ONLY label - see research/comparison/NEXT-WAVE-RUNTIME-LOCAL-FIRST.md. Worth reconciling against this repository's own local-first scorecard enum in a future installment, not silently adopted as the replacement here. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-005-evaluationport-vs-optimizationport",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-005.md",
+      "note": "DSPy's optimization capability (prompt/program compilation) is valuable but should live outside the runtime kernel as a separate OptimizationPort, distinct from an EvaluationPort - avoids coupling evaluation/training into the core runtime interfaces. See research/frameworks/dspy/overview.md. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-006-durable-side-effect-reconciliation",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-006.md",
+      "note": "Proposes an Operation ID + UNKNOWN_OUTCOME model for side effects that time out with unknown remote state - production agents need reconciliation, not just success/failure. No cited evidence sources in the source corpus's own spec-delta.json (SPEC-005), unlike the other 5 candidates - flagged as the weakest-evidenced of the 6, not silently treated as equally supported. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "batch-2-corpus-not-yet-reconciled-with-architecture",
+      "status": "ACTION_REQUIRED",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-2.md, .context/research/next-wave/spec-delta.json",
+      "note": "Batch 2's own spec-delta.json proposes 6 SPEC changes (State/Memory/Context/Knowledge/Evidence/Transcript separation; WorkspaceContract+SandboxContract; optional DurableWorkflow layer; EvaluationPort; Operation ID+UNKNOWN_OUTCOME side-effect state; OptimizationPort outside kernel) and gap-delta.json proposes 8 prioritized gaps (durable execution semantics, side-effect reconciliation, workspace security, multi-agent economics, context compression quality, offline evaluation, MCP trust, schema/version migration - all P0/P1/P2 tagged). None reconciled against the existing locked architecture or against batch 1's own 6 ADR-CANDIDATEs for overlap/redundancy yet - both imported corpora's architectural proposals need a single reconciliation pass before any of them move past CANDIDATE."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

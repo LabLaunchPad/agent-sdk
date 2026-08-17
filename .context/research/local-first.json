@@ -69,6 +69,32 @@
       "crewai": "LOCAL_CAPABLE - open-source framework and the managed AMP platform are explicitly different things"
     }
   },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "beyond the original 17-source brief; second user-supplied 'next wave' corpus, not independently re-verified via WebFetch/WebSearch in this session - see research/comparison/NEXT-WAVE-RUNTIME-LOCAL-FIRST.md",
+    "verdicts": {
+      "strands-agents": "LOCAL_CAPABLE - Ollama provider documented",
+      "smolagents": "LOCAL_CAPABLE - local/HF/provider model support, agent memory local by default",
+      "ag2": "LOCAL_CAPABLE - Ollama native client documented",
+      "llama-index": "LOCAL_CAPABLE - strong local data stack, explicit disk persistence",
+      "llama-agents": "HYBRID - depends on selected model/deployment",
+      "haystack": "LOCAL_NATIVE/LOCAL_CAPABLE - HF local, llama.cpp, and Ollama all documented; strongest local-model breadth of batch 2",
+      "dspy": "RUNTIME-AGNOSTIC - optimization framework over any LM adapter, not itself a local/cloud commitment",
+      "autogen": "LEGACY/HYBRID - migration-era, successor is microsoft-agent-framework",
+      "semantic-kernel": "LEGACY/HYBRID - migration-era, successor is microsoft-agent-framework, successor explicitly supports Ollama"
+    },
+    "proposed_local_first_capability_contract": "CloudAccount=optional, Network=denyable, ModelProvider=local/remote interchangeable, Storage=filesystem/sqlite/embedded selectable, Tools=explicit capability grants, Observability=local sink required, Evaluation=runnable offline - see ADR-CANDIDATE-004, not yet reconciled against this file's own LOCAL_NATIVE/LOCAL_WITH_ADAPTER/CLOUD_ONLY enum"
+  },
   "source": "research/local-first/SCORECARD.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

@@ -29,6 +29,31 @@ import { collectFiles, exists, readJson } from '../lib/workspace.js';
  * those generically would require per-file schema knowledge nobody has
  * asked for and risks false positives on files never meant to follow this
  * shape. See docs/agent/NEXT.md for that as a possible future extension.
+ *
+ * Also checks for duplicate IDs within the same array (`sources[]`,
+ * `evidence[]`, `ecosystems[]`, `claims[]`, `benchmarks[]`) — a distinct
+ * corruption class from a broken reference: two records silently sharing
+ * one ID makes every reference to it ambiguous, not just wrong.
+ *
+ * Four further corruption types named during Phase-2 adjudication are
+ * deliberately NOT implemented here, each for a specific reason rather
+ * than left silently undone:
+ * - missing evidence reference (a claim with zero evidence_ids) — some
+ *   claims in the real graph legitimately have none yet (e.g. an UNKNOWN
+ *   verdict pending research); a blanket "must have at least one" rule
+ *   would produce false positives against honest, already-recorded gaps.
+ * - wrong provenance — there is no schema field yet describing what
+ *   "correct" provenance looks like to check against; adding the check
+ *   before the schema exists would be speculative.
+ * - invalid status transition — the JSON ledgers this validator covers
+ *   don't model state transitions at all (claims/decisions have a status
+ *   value, not a transition history); this belongs to a future
+ *   state-machine-aware validator once `@lablaunchpad/state` exists, not
+ *   this content-integrity one.
+ * - stale source reference — would require `sources[]` entries to carry a
+ *   content hash of what they point at, which they don't yet; this is
+ *   `context-staleness-validator`'s pattern applied to a field that
+ *   doesn't exist here, a real but separate future extension.
  */
 
 interface OkfManifest {
@@ -46,8 +71,13 @@ export async function researchIntegrityValidator(
 
   const linksChecked = await checkMarkdownLinks(rootDir, findings);
   const idsChecked = await checkCanonicalReferences(rootDir, findings);
+  const duplicatesChecked = await checkDuplicateIds(rootDir, findings);
 
-  return result('research-integrity', findings, { linksChecked, idsChecked });
+  return result('research-integrity', findings, {
+    linksChecked,
+    idsChecked,
+    duplicatesChecked,
+  });
 }
 
 async function checkMarkdownLinks(rootDir: string, findings: Finding[]): Promise<number> {
@@ -264,6 +294,75 @@ async function checkCanonicalReferences(
       checkRef(ids, evidenceIds, 'evidence_id', `traceability.gap_to_evidence["${key}"]`);
     }
   }
+
+  return checked;
+}
+
+async function checkDuplicateIds(rootDir: string, findings: Finding[]): Promise<number> {
+  const canonicalPath = path.join(
+    rootDir,
+    'research',
+    'canonical',
+    'canonical-research.json',
+  );
+  if (!(await exists(canonicalPath))) return 0;
+
+  const relative = path.relative(rootDir, canonicalPath);
+  let graph: CanonicalGraph;
+  try {
+    graph = await readJson<CanonicalGraph>(canonicalPath);
+  } catch {
+    return 0; // already reported by checkCanonicalReferences
+  }
+
+  let checked = 0;
+  const checkArrayForDuplicates = (
+    ids: readonly (string | undefined)[],
+    arrayName: string,
+    kind: string,
+  ): void => {
+    const seen = new Map<string, number>();
+    for (const [index, id] of ids.entries()) {
+      if (id === undefined) continue;
+      checked += 1;
+      const firstIndex = seen.get(id);
+      if (firstIndex !== undefined) {
+        findings.push({
+          rule: 'research-integrity/duplicate-id',
+          message: `${relative}: ${arrayName}[${String(index)}] reuses ${kind} "${id}", already used by ${arrayName}[${String(firstIndex)}]. Every reference to this ID is now ambiguous.`,
+          path: relative,
+        });
+      } else {
+        seen.set(id, index);
+      }
+    }
+  };
+
+  checkArrayForDuplicates(
+    (graph.sources ?? []).map((s) => s.source_id),
+    'sources',
+    'source_id',
+  );
+  checkArrayForDuplicates(
+    (graph.evidence ?? []).map((e) => e.evidence_id),
+    'evidence',
+    'evidence_id',
+  );
+  checkArrayForDuplicates(
+    (graph.ecosystems ?? []).map((e) => e.ecosystem_id),
+    'ecosystems',
+    'ecosystem_id',
+  );
+  checkArrayForDuplicates(
+    (graph.claims ?? []).map((c) => c.id),
+    'claims',
+    'id',
+  );
+  checkArrayForDuplicates(
+    (graph.benchmarks ?? []).map((b) => b.benchmark_id),
+    'benchmarks',
+    'benchmark_id',
+  );
 
   return checked;
 }

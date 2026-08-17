@@ -1,87 +1,49 @@
 {
-  "id": "P1A-workstream-B-wave1-import-and-canonical-consolidation",
-  "phase": "P1A",
-  "title": "Workstream B: installments 1-3, 5 imported research/governance corpora, and cross-corpus canonical consolidation",
-  "status": "COMPLETE",
-  "governingPrompt": "local-first-agent-sdk-intelligence-legal-reverse-engineering",
+  "id": "P2-kernel-constitution-and-e5-02",
+  "phase": "P2",
+  "title": "Phase 2: Kernel Constitution (spec synthesis) + E5-02 UNKNOWN_OUTCOME/side-effect reconciliation harness",
+  "status": "IN_PROGRESS",
+  "governingPrompt": "LabLaunchPadClaudeCodeOneShotPhase2Kernelv1 one-shot spec, adopted per the plan at /root/.claude/plans/yes-the-right-next-starry-truffle.md",
   "scopeReconciliation": "docs/agent/NOW.md",
-  "researched": [
-    "openai-agents-sdk",
-    "microsoft-agent-framework",
-    "pydantic-ai",
-    "kimi-agent-sdk",
-    "qwen-agent",
-    "tencent-youtu-agent",
-    "langgraph",
-    "mastra",
-    "mcp",
-    "a2a"
-  ],
-  "notYetResearched": ["volcengine-agentkit", "baidu-appbuilder-sdk", "agent-skills"],
-  "importedSupplementaryCorpora": [
+  "scopedModules": ["M01", "M02", "M03", "M04", "M05", "M15", "M16"],
+  "steps": [
     {
-      "name": "batch1",
-      "frameworks": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
-      "receipt": "research/imported-corpus/SOURCE-RECEIPT.md"
+      "id": "step0",
+      "title": "Governance hygiene (E5 scope-qualification, E5 ladder, module registry, phase-gate lock_state, research-integrity hardening, CI control-coverage meta-test, learning promotion)",
+      "status": "COMPLETE"
     },
     {
-      "name": "batch2 (next-wave)",
-      "frameworks": [
-        "strands-agents",
-        "smolagents",
-        "ag2",
-        "llama-index",
-        "llama-agents",
-        "haystack",
-        "dspy",
-        "autogen",
-        "semantic-kernel"
-      ],
-      "receipt": "research/imported-corpus/SOURCE-RECEIPT-2.md"
+      "id": "step1",
+      "title": "Kernel Constitution (docs/architecture/KERNEL-CONSTITUTION.md + .context/specs/kernel.json)",
+      "status": "COMPLETE"
     },
     {
-      "name": "batch3 (current-wave)",
-      "contents": "A2A gap-closer (live-researched), 3 refresh checks, 2 new topics (sandbox-execution, security-2026)",
-      "receipt": "research/imported-corpus/SOURCE-RECEIPT-3.md"
+      "id": "step2",
+      "title": "Build + run E5-02 UNKNOWN_OUTCOME harness (benchmarks/e5-02-unknown-outcome/)",
+      "status": "PENDING"
     },
     {
-      "name": "post-commit-ops",
-      "contents": "post-commit git/PR/CI/deploy lifecycle governance protocol, CANDIDATE, not adopted",
-      "location": "docs/operations/post-commit-ops/"
+      "id": "step3",
+      "title": "Write .context/scenarios/kernel-core.json adversarial matrix",
+      "status": "PENDING"
     },
     {
-      "name": "wave1",
-      "contents": "3 new topics, 3 formal ADR proposals, 7 new benchmark categories, mostly reinforcing MCP/A2A/OpenAI/MSFT findings",
-      "receipt": "research/imported-corpus/SOURCE-RECEIPT-4.md"
+      "id": "step4",
+      "title": "Final receipt (.context/evidence/phase-2-kernel-receipt.json) + gates + NOW/NEXT update",
+      "status": "PENDING"
     }
   ],
-  "canonicalConsolidation": {
-    "location": "research/canonical/",
-    "status": "PARTIAL",
-    "relationshipToExistingState": "supplementary cross-reference/audit layer; does not supersede .context/research/{gaps,decisions}.json or the OKF markdown tree (ADR-0007 remains authoritative)",
-    "keyFindings": [
-      "A2A version drift found across 3 corpora and resolved via live WebSearch (research/protocols/a2a-1.0.1.md)",
-      "3 ADD_CANDIDATE architecture boundaries surfaced (WorkspaceEngine, SandboxEngine, SideEffectEngine) - not added to docs/architecture/PACKAGE-MAP.md, flagged for a future ADR"
-    ]
-  },
   "acceptance": [
-    "every claim backed by real primary-source evidence (WebSearch/WebFetch) or explicit imported-corpus provenance, not model-knowledge recall",
-    "evidence level recorded per claim",
-    "UNKNOWN used honestly for unresearched dimensions, never inferred",
-    "all new research/ and knowledge/ content OKF-conformant (validated)",
-    "no production Agent SDK behaviour implemented",
-    "no imported corpus's decisions silently adopted into architecture"
+    "zero new ADRs unless a genuine ambiguity in an existing ADR surfaces (amend, do not create)",
+    "no @lablaunchpad/* implementation code - E5-02 harness stays throwaway and package-external, matching benchmarks/durable-restart/",
+    "no broad M01-M20 research wave - only the 7 named modules, only to the depth the kernel spec actually requires",
+    "every claim in the final receipt labeled VERIFIED/SUPPORTED/INFERRED/UNKNOWN/NOT_EXECUTED, never silently upgraded",
+    "SIMULATED harness explicitly labeled as such everywhere it appears - never presented as a real side-effect test"
   ],
   "prohibited": [
-    "implementing newly discovered SDK functionality",
-    "fabricating coverage of unresearched sources",
-    "promoting an imported ADR-CANDIDATE to architecture without a formal ADR"
+    "implementing the kernel or any runtime surface",
+    "starting a new broad research pass on GOVERNED modules (M06-M14, M17-M20) without a named trigger firing",
+    "generalizing E5-DURABLE-RESTART's scope-qualified result beyond what research/benchmarks/E5-RESULT.md now states"
   ],
-  "openCommitments": [
-    "close remaining 3 original-brief gaps: Volcengine AgentKit, Baidu AppBuilder SDK, Agent Skills",
-    "GAP-ARCHITECTURE-RECONCILIATION (P0): formal ADR pass over 22 accumulated ADR-CANDIDATEs, using research/canonical/ARCHITECTURE-DECISIONS.md as the starting map",
-    "GAP-E5-ZERO (P0): 0/14 E5 reproductions across all corpora - requires a runnable pinned implementation, not further research",
-    "independent re-verification of all imported-corpus frameworks/topics (currently DOCUMENTED_NOT_REPRODUCED)"
-  ],
-  "priorTask": "P1A-workstream-A-okf-adoption (COMPLETE, docs/agent/RECEIPT-P1A-WORKSTREAM-A.md)"
+  "priorTask": "P1A-workstream-B-wave1-import-and-canonical-consolidation (COMPLETE) -> Phase 1B Architecture Reconciliation (COMPLETE, docs/agent/NOW.md, .context/research/reconciliation/phase-gate.json)"
 }

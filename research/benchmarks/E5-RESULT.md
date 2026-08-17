@@ -54,12 +54,60 @@ all 11 trials.
 
 None. Every trial matched its expected outcome.
 
+## Scope-qualified verdict (added on external adjudication — not a silent revision)
+
+A reviewer correctly flagged that the Conclusion below, as originally
+written, risked being read as a general durability claim. It is not one.
+Three distinct kinds of "durability" are at stake, and this experiment
+tested only the first:
+
+| Case                             | Description                                                                                                                | Tested by this E5?                                                                                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A. Internal state mutation**   | A local process mutates its own on-disk state with no external observer                                                    | Yes — this is exactly what the harness exercises                                                                                                         |
+| **B. Durable kernel operation**  | A kernel-level operation (checkpoint write, state transition) that other in-process logic depends on completing atomically | Adjacent — the harness's transaction _models_ this, but no actual kernel/task/state primitives exist yet to attach it to                                 |
+| **C. Real external side effect** | An operation whose effect is observed or performed by a system outside this process (a network call, a remote API)         | **No** — this harness never leaves the local filesystem; nothing here says anything about what happens when a response is lost across a network boundary |
+
+```
+status = PASS
+scope = tested scenario (case A/B-adjacent only)
+generalized_durability = NOT_YET_PROVEN
+external_side_effect_durability = NOT_YET_PROVEN
+```
+
+`external_side_effect_durability` is exactly what `E5-02` (this phase)
+exists to test — see `research/benchmarks/E5-02-RESULT.md`.
+
+### Precise definition of "corruption"
+
+The original write-up's "0 corrupted" headline was informal. A
+reproducible definition, so future E5s can be compared against this one
+on the same terms: **corruption** is any of —
+
+1. state violates its schema
+2. event order is invalid
+3. a committed operation is duplicated
+4. an impossible transition is observed
+5. evidence linkage is missing
+6. a checkpoint references state that does not exist
+7. an authorization decision changes without a recorded cause
+
+This harness's own verdict enum (`ROLLED_BACK_CLEANLY` / `COMMITTED_CLEANLY`
+/ `CORRUPTED_PARTIAL_STATE` / `DB_UNREADABLE_AFTER_KILL`) only ever
+measured **criteria 1 and 4** (schema validity via `PRAGMA integrity_check`;
+impossible transition via header/chunk-count mismatch). Criteria 2, 3, 5,
+6, and 7 were **not measured** — this harness has no event log, no
+operation identity, no evidence linkage, and no authorization concept at
+all. "Zero corruption" is true and honestly earned for what was actually
+checked; it is not evidence about the other five criteria.
+
 ## Conclusion
 
-This run **supports** ADR-0010's evidence basis: SQLite's default
-rollback-journal mode protected checkpoint state integrity across every
-tested kill point in this harness, on this environment. It does not
-**prove** the general claim — see Limitations.
+This run **supports** ADR-0010's evidence basis for case A/B: SQLite's
+default rollback-journal mode protected checkpoint state integrity across
+every tested kill point in this harness, on this environment, against 2
+of the 7 corruption criteria above. It does not **prove** the general
+claim, and says nothing about case C (real external side effects) — see
+Limitations and the Scope-qualified verdict above.
 
 ## Architecture impact (per the operating prompt's own E5-decision-feedback framework)
 

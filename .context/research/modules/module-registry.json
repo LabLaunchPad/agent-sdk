@@ -1,0 +1,168 @@
+{
+  "research_depth_model": "criticality * uncertainty * failure_impact * novelty (replaces flat 5x5x5)",
+  "modules": [
+    {
+      "module_id": "M01",
+      "name": "State Machine / Statechart Kernel",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 1,
+      "adr_targets": ["KERNEL-CONSTITUTION.md#1"],
+      "research_trigger": "Real state-machine implementation exposes a contradiction Constitution didn't anticipate"
+    },
+    {
+      "module_id": "M02",
+      "name": "Durable Execution",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 2,
+      "adr_targets": ["ADR-0010"],
+      "research_trigger": "E5-06/E5-07 firing against a real CheckpointStore"
+    },
+    {
+      "module_id": "M03",
+      "name": "Operation / Side-Effect Semantics",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 3,
+      "adr_targets": ["ADR-0011"],
+      "research_trigger": "E5-04/E5-08 firing against a real capability"
+    },
+    {
+      "module_id": "M04",
+      "name": "Capability / Authorization Kernel",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 4,
+      "adr_targets": ["ADR-0013"],
+      "research_trigger": "E5-08/E5-10 firing against a real PolicyEngine/CapabilityEngine (Phase 8/9)"
+    },
+    {
+      "module_id": "M05",
+      "name": "Policy Engine",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 5,
+      "adr_targets": ["ADR-0013"],
+      "research_trigger": "Same as M04"
+    },
+    {
+      "module_id": "M06",
+      "name": "Context Compiler",
+      "status": "GOVERNED",
+      "dependency_order": 9,
+      "adr_targets": [],
+      "research_trigger": "Phase 6 @lablaunchpad/context design"
+    },
+    {
+      "module_id": "M07",
+      "name": "Memory",
+      "status": "GOVERNED",
+      "dependency_order": 10,
+      "adr_targets": [],
+      "research_trigger": "Phase 7 @lablaunchpad/memory design"
+    },
+    {
+      "module_id": "M08",
+      "name": "Knowledge / Retrieval",
+      "status": "GOVERNED",
+      "dependency_order": 11,
+      "adr_targets": [],
+      "research_trigger": "A concrete retrieval requirement"
+    },
+    {
+      "module_id": "M09",
+      "name": "Agent Loop",
+      "status": "GOVERNED",
+      "dependency_order": 12,
+      "adr_targets": [],
+      "research_trigger": "Phase 10 @lablaunchpad/agent design"
+    },
+    {
+      "module_id": "M10",
+      "name": "Workflow / Graph Engine",
+      "status": "GOVERNED",
+      "dependency_order": 13,
+      "adr_targets": [],
+      "research_trigger": "Phase 12 @lablaunchpad/workflow design"
+    },
+    {
+      "module_id": "M11",
+      "name": "Tools / MCP",
+      "status": "GOVERNED",
+      "dependency_order": 14,
+      "adr_targets": ["ADR-0009"],
+      "research_trigger": "Phase 18 MCPAdapter design"
+    },
+    {
+      "module_id": "M12",
+      "name": "A2A / Remote Agent Protocol",
+      "status": "GOVERNED",
+      "dependency_order": 15,
+      "adr_targets": ["ADR-0009"],
+      "research_trigger": "Phase 18 A2AAdapter design"
+    },
+    {
+      "module_id": "M13",
+      "name": "Workspace / Sandbox",
+      "status": "GOVERNED",
+      "dependency_order": 7,
+      "adr_targets": ["ADR-0012"],
+      "research_trigger": "Phase 8/19 implementation"
+    },
+    {
+      "module_id": "M14",
+      "name": "HITL / Approval",
+      "status": "GOVERNED",
+      "dependency_order": 13,
+      "adr_targets": ["ADR-0015"],
+      "research_trigger": "Phase 12 workflow design"
+    },
+    {
+      "module_id": "M15",
+      "name": "Observability / Replay",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 8,
+      "adr_targets": [],
+      "research_trigger": "Phase 20 @lablaunchpad/observability design"
+    },
+    {
+      "module_id": "M16",
+      "name": "Contracts / Schemas",
+      "status": "ACTIVE_THIS_PHASE",
+      "dependency_order": 6,
+      "adr_targets": ["ADR-0001"],
+      "research_trigger": "Phase 3 domain-contract design finding the existing harness insufficient"
+    },
+    {
+      "module_id": "M17",
+      "name": "Concurrency / Queue / Scheduling",
+      "status": "GOVERNED",
+      "dependency_order": 8,
+      "adr_targets": [],
+      "research_trigger": "Phase 4 concurrency model design"
+    },
+    {
+      "module_id": "M18",
+      "name": "Model Gateway / Provider Abstraction",
+      "status": "GOVERNED",
+      "dependency_order": 16,
+      "adr_targets": ["ADR-0014"],
+      "research_trigger": "Phase 16 Model Gateway design"
+    },
+    {
+      "module_id": "M19",
+      "name": "Evaluation / Red Team",
+      "status": "GOVERNED",
+      "dependency_order": 17,
+      "adr_targets": [],
+      "research_trigger": "Phase 21 @lablaunchpad/evaluation design"
+    },
+    {
+      "module_id": "M20",
+      "name": "Packaging / Monorepo / Runtime Portability",
+      "status": "GOVERNED",
+      "dependency_order": 18,
+      "adr_targets": [],
+      "research_trigger": "Phase 17 runtime-portability work, workerd smoke test"
+    }
+  ],
+  "active_this_phase_count": 7,
+  "governed_count": 13,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

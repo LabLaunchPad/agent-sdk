@@ -121,5 +121,6 @@ describe('research-integrity-validator — positive', () => {
     expect(result.status).toBe('PASS');
     expect(result.stats?.linksChecked).toBe(1);
     expect(result.stats?.idsChecked).toBe(15);
+    expect(result.stats?.duplicatesChecked).toBe(5);
   });
 });

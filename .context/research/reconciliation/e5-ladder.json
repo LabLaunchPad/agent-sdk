@@ -1,0 +1,105 @@
+{
+  "rungs": [
+    {
+      "id": "E5-01",
+      "name": "Durable Restart",
+      "status": "PASS_SCOPE_LIMITED",
+      "feeds": "ADR-0010",
+      "trigger": "ALREADY_FIRED"
+    },
+    {
+      "id": "E5-02",
+      "name": "UNKNOWN_OUTCOME reconciliation",
+      "status": "PASS_SIMULATED",
+      "feeds": "ADR-0011",
+      "trigger": "ALREADY_FIRED",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "E5-03",
+      "name": "Replay Determinism",
+      "status": "NOT_RUN",
+      "feeds": "KERNEL-CONSTITUTION.md",
+      "trigger": "Real state-machine implementation exists"
+    },
+    {
+      "id": "E5-04",
+      "name": "Duplicate Operation",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0011",
+      "trigger": "Real capability exists (partially exercised by E5-02 simulator)"
+    },
+    {
+      "id": "E5-05",
+      "name": "Concurrent Runs",
+      "status": "NOT_RUN",
+      "feeds": "@lablaunchpad/state",
+      "trigger": "Phase 4 StateStore exists"
+    },
+    {
+      "id": "E5-06",
+      "name": "Checkpoint Corruption",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0010",
+      "trigger": "Phase 4 CheckpointStore exists"
+    },
+    {
+      "id": "E5-07",
+      "name": "Schema Migration",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0010",
+      "trigger": "Phase 4, second real schema version exists"
+    },
+    {
+      "id": "E5-08",
+      "name": "Policy/Capability Bypass",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0013",
+      "trigger": "Phase 8/9 PolicyEngine/CapabilityEngine exists"
+    },
+    {
+      "id": "E5-09",
+      "name": "Sandbox Boundary",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0012",
+      "trigger": "Phase 19 SandboxProvider exists"
+    },
+    {
+      "id": "E5-10",
+      "name": "Tool Output Injection",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0013",
+      "trigger": "Real capability/policy implementation exists"
+    },
+    {
+      "id": "E5-11",
+      "name": "MCP Failure",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0009",
+      "trigger": "Phase 18 MCPAdapter exists"
+    },
+    {
+      "id": "E5-12",
+      "name": "A2A Failure",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0009",
+      "trigger": "Phase 18 A2AAdapter exists"
+    },
+    {
+      "id": "E5-13",
+      "name": "Model Provider Failure",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0014",
+      "trigger": "Phase 16 Model Gateway exists"
+    },
+    {
+      "id": "E5-14",
+      "name": "Cross-runtime Recovery",
+      "status": "NOT_RUN",
+      "feeds": "ADR-0016",
+      "trigger": "Phase 17, second RuntimeAdapter exists"
+    }
+  ],
+  "registry_not_queue": true,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

@@ -1,0 +1,153 @@
+{
+  "experiment_id": "E5-02-UNKNOWN-OUTCOME",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "harness_type": "SIMULATED",
+  "harness_type_note": "The external side-effect service (service.mjs) is SIMULATED - a local child process with its own SQLite durable log, not a real remote system. No real capability/policy implementation exists yet (Phase 8/9 unstarted), so authorization is recorded but not enforced.",
+  "executed_cases": 9,
+  "not_executed_cases": 7,
+  "all_executed_pass": true,
+  "results": [
+    {
+      "case": "primary-12-step-unknown-outcome-reconciliation",
+      "executed": "EXECUTED",
+      "steps": {
+        "1_create": true,
+        "2_authorize": true,
+        "3_dispatch_checkpoint": true,
+        "4_side_effect_happened": true,
+        "5_ack_lost": true,
+        "6_process_killed": false,
+        "7_8_restart_recover": true,
+        "9_classify_unknown_outcome": true,
+        "10_reconcile_query_service_log": true,
+        "11_reach_terminal_state": "ACKED",
+        "12_no_blind_duplicate_dispatch": true
+      },
+      "finalOperationState": "ACKED",
+      "finalOperationOutcome": "ACKED",
+      "serviceDispatchAttempts": 1,
+      "pass": true
+    },
+    {
+      "case": "duplicate-operation",
+      "executed": "EXECUTED",
+      "before": {
+        "dispatchAttempts": 1,
+        "committedAt": 1786970801425
+      },
+      "after": {
+        "dispatchAttempts": 2,
+        "committedAt": 1786970801425
+      },
+      "deduped": true,
+      "pass": true
+    },
+    {
+      "case": "timeout-after-real-side-effect",
+      "executed": "EXECUTED",
+      "note": "Kernel-side timeout, distinct mechanism from response-lost-after-real-side-effect: the service process is never killed, only the kernel stops waiting for it.",
+      "kernelStoppedWaitingWhileServiceStillRunning": true,
+      "finalOperationState": "ACKED",
+      "pass": true
+    },
+    {
+      "case": "response-lost-after-real-side-effect",
+      "executed": "EXECUTED",
+      "sideEffectCommitted": true,
+      "responseObserved": false,
+      "finalOperationState": "ACKED",
+      "pass": true
+    },
+    {
+      "case": "kill-before-checkpoint",
+      "executed": "EXECUTED",
+      "stateOnRestart": "AUTHORIZED",
+      "serviceHasRecordOfEffect": false,
+      "note": "No DISPATCHED checkpoint was ever written, so restart correctly finds AUTHORIZED, not UNKNOWN_OUTCOME - safe to dispatch fresh.",
+      "pass": true
+    },
+    {
+      "case": "kill-after-checkpoint",
+      "executed": "EXECUTED",
+      "finalOperationState": "REJECTED",
+      "serviceEvidenceFound": false,
+      "limitation": "REJECTED here is trustworthy only because this SIMULATED service honors a log-before-respond invariant. A real external system with no equivalently reliable status check must degrade this same no-evidence case to MANUAL_REVIEW instead, per KERNEL-CONSTITUTION.md section 2 - not assumed safe by default.",
+      "pass": true
+    },
+    {
+      "case": "checkpoint-corruption",
+      "executed": "EXECUTED",
+      "integrityCheckResult": null,
+      "threwOnOpen": true,
+      "corruptionDetected": true,
+      "note": "Detection only - this harness does not implement a repair/quarantine path. A real CheckpointStore must route a detected corruption to MANUAL_REVIEW, never proceed as if the state were trustworthy.",
+      "pass": true
+    },
+    {
+      "case": "replay-determinism",
+      "executed": "EXECUTED",
+      "replayA": {
+        "state": "ACKED",
+        "outcome": "ACKED"
+      },
+      "replayB": {
+        "state": "ACKED",
+        "outcome": "ACKED"
+      },
+      "identical": true,
+      "pass": true
+    },
+    {
+      "case": "concurrent-state-mutation",
+      "executed": "EXECUTED",
+      "workerA": {
+        "pid": 19707,
+        "won": true,
+        "resultingState": "ACKED"
+      },
+      "workerB": {
+        "pid": 19714,
+        "won": false,
+        "resultingState": "ACKED"
+      },
+      "exactlyOneWon": true,
+      "noDuplicateDispatchTriggered": true,
+      "note": "Workers reconcile only (read the already-committed service log); neither ever calls the service, so this case isolates the concurrency guard from dispatch behaviour, which is already covered by the duplicate-operation case.",
+      "pass": true
+    }
+  ],
+  "not_executed": [
+    {
+      "case": "illegal-transition",
+      "reason": "This harness's transition() guard rejects any fromStates mismatch, but there is no real Guard/Context model (KERNEL-CONSTITUTION.md section 1) to test an actually adversarial illegal-transition attempt against - only the one legal path was exercised."
+    },
+    {
+      "case": "duplicate-event",
+      "reason": "No Event identity/log exists in this harness (section 1 Event carries its own identity) - only Operation-level idempotency was exercised, which is a different mechanism."
+    },
+    {
+      "case": "reordered-event",
+      "reason": "Same reason as duplicate-event: no persisted Event log to reorder."
+    },
+    {
+      "case": "stale-authorization",
+      "reason": "Capability/PolicyDecision fields are recorded but never expire or get re-evaluated in this harness - needs a real Capability grant with an expiry (ADR-0013)."
+    },
+    {
+      "case": "capability-escalation",
+      "reason": "No real Capability enforcement boundary exists yet (Phase 8/9 unstarted) - the \"capability\" field here is a label, not an enforced grant."
+    },
+    {
+      "case": "policy-bypass",
+      "reason": "Same reason as capability-escalation - PolicyDecision is recorded, not enforced by a real PolicyEngine."
+    },
+    {
+      "case": "schema-version-mismatch",
+      "reason": "This harness runs a single schema version throughout - no second version exists to test migration/mismatch against (ADR-0010's schema migration invariant, Phase 4)."
+    }
+  ]
+}

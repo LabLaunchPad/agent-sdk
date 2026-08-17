@@ -1,0 +1,98 @@
+{
+  "receipt_id": "RECEIPT-PHASE-2-KERNEL-001",
+  "phase": "Phase 2 - Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)",
+  "claim_labels_used": ["VERIFIED", "SUPPORTED", "INFERRED", "UNKNOWN", "NOT_EXECUTED"],
+  "STATE": {
+    "claim": "Phase 2 spec-preparation is complete for the 7 named modules (M01, M02, M03, M04, M05, M15, M16); Phase 2 implementation has not begun.",
+    "label": "VERIFIED",
+    "detail": "docs/architecture/KERNEL-CONSTITUTION.md + .context/specs/kernel.json exist and cover all 6 required sections. No @lablaunchpad/* package was created or modified this phase - git status confirms no changes under packages/. .context/state/{project,active-task,checkpoint}.json and .context/specs/active.json updated to reflect P2 IN_PROGRESS, resolving a real contradiction flagged by a user-supplied review (previously read P1A/P00 inconsistently across the four files)."
+  },
+  "FILES_CHANGED": {
+    "claim": "27 files changed/added this phase (14 modified, 13 new paths, several of which are directories containing multiple files).",
+    "label": "VERIFIED",
+    "detail": {
+      "modified": [
+        ".context/research/reconciliation/e5-index.json",
+        ".context/research/reconciliation/phase-gate.json",
+        ".context/specs/active.json",
+        ".context/state/active-task.json",
+        ".context/state/checkpoint.json",
+        ".context/state/project.json",
+        "docs/agent/DECISIONS.md",
+        "docs/agent/LEARNINGS.md",
+        "docs/agent/NEXT.md",
+        "docs/agent/NOW.md",
+        "research/benchmarks/E5-RESULT.md",
+        "scripts/repo-tools/src/validators/research-integrity.ts",
+        "scripts/repo-tools/test/validators.adversarial.test.ts",
+        "scripts/repo-tools/test/validators.unit.test.ts"
+      ],
+      "new": [
+        ".context/benchmarks/e5-02-unknown-outcome.json",
+        ".context/evidence/phase-2-kernel-receipt.json",
+        ".context/research/modules/module-registry.json",
+        ".context/research/reconciliation/e5-ladder.json",
+        ".context/scenarios/kernel-core.json",
+        ".context/specs/kernel.json",
+        "benchmarks/e5-02-unknown-outcome/ (store.mjs, service.mjs, reconcile-worker.mjs, run-e5-02.mjs, runs/.gitignore, runs/summary.json)",
+        "docs/architecture/KERNEL-CONSTITUTION.md",
+        "research/benchmarks/E5-02-RESULT.md",
+        "research/benchmarks/E5-LADDER.md",
+        "research/modules/MODULE-MAP.md",
+        "scripts/repo-tools/test/ci-coverage.unit.test.ts",
+        "tests/fixtures/research-integrity/duplicate-id/ (okf.json, research/canonical/canonical-research.json)"
+      ]
+    }
+  },
+  "DECISIONS": {
+    "claim": "Zero new ADRs created this phase. All decisions recorded either as ADR-elaborating synthesis (the constitution itself) or as docs/agent/DECISIONS.md smaller-calls entries.",
+    "label": "VERIFIED",
+    "detail": "ADR/ directory unchanged (still ADR-0001 through ADR-0016). 9 new smaller-calls rows added to docs/agent/DECISIONS.md this session (governance hygiene items from Step 0, the state-contradiction repair, and the TS7/Socratic review). NEW_ADR_CREATION lock_state stayed TRIGGER_ONLY throughout - no trigger fired."
+  },
+  "EVIDENCE": {
+    "claim": "This phase produced 2 real, executed E5 experiments (E5-DURABLE-RESTART, scope-corrected this phase; E5-02-UNKNOWN-OUTCOME, new this phase) plus a 15-case adversarial scenario matrix.",
+    "label": "VERIFIED",
+    "detail": "research/benchmarks/E5-02-RESULT.md and .context/benchmarks/e5-02-unknown-outcome.json record real, captured output from benchmarks/e5-02-unknown-outcome/run-e5-02.mjs, run multiple times (5 consecutive clean runs after fixing one real flake found during development). .context/scenarios/kernel-core.json maps 15 named adversarial cases (8 EXECUTED/SIMULATED, 7 NOT_EXECUTED with stated reasons) to constitution sections 1-4; sections 5-6 have no dedicated adversarial case, logged as a real gap, not claimed as covered."
+  },
+  "TESTS": {
+    "claim": "The full pnpm verify pipeline (build, typecheck, lint, format:check, test including the new ci-coverage.unit.test.ts, validate 7/7, smoke) has not yet been re-run since this phase's file changes.",
+    "label": "NOT_EXECUTED",
+    "detail": "benchmarks/e5-02-unknown-outcome/ sits under the benchmarks/** glob already excluded from ESLint/TypeScript project scope (Phase 1B), matching benchmarks/durable-restart/'s precedent, so it should not affect lint/typecheck. pnpm verify is the next action after this receipt, before commit."
+  },
+  "E5_STATUS": {
+    "claim": "GAP-E5-ZERO is now 2/14+ (was 1/14+ entering this phase). E5-DURABLE-RESTART and E5-02-UNKNOWN-OUTCOME are both real, executed, scope-qualified results; 8 more named benchmarks in research/benchmarks/E5-LADDER.md remain NOT_RUN, each gated on a stated implementation-surface trigger.",
+    "label": "SUPPORTED",
+    "detail": "SUPPORTED rather than VERIFIED because the E5-02 harness is SIMULATED throughout (no real external system) - its result supports the kernel-side reconciliation design, it does not verify behavior against a real side-effect system. See research/benchmarks/E5-02-RESULT.md's Limitations section for the full scope qualification."
+  },
+  "OPEN_GAPS": {
+    "claim": "7 of 15 named adversarial cases remain NOT_EXECUTED (illegal-transition, duplicate-event, reordered-event, stale-authorization, capability-escalation, policy-bypass, schema-version-mismatch) - each requires a real Guard/Event-log/Capability/Policy implementation this phase deliberately does not build. Sections 5 (Evidence/Verdict) and 6 (Agent/workflow boundary) of the constitution have no dedicated adversarial case at all.",
+    "label": "UNKNOWN",
+    "detail": "UNKNOWN in the sense that these cases' actual behavior against the real state machine/policy/capability implementation is genuinely not known yet, not INFERRED from anything already tested - the SIMULATED harness's guard logic is too simple to stand in for the real thing here."
+  },
+  "RESEARCH_TRIGGERS": {
+    "claim": "No named research trigger fired this phase. BROAD_RESEARCH stays LOCKED. The M01-M20 module registry (research/modules/MODULE-MAP.md) is unchanged in status - still 7 ACTIVE_THIS_PHASE, 13 GOVERNED.",
+    "label": "VERIFIED",
+    "detail": "The two additional user-supplied documents reviewed this phase (TS7 graph-first methodology, Socratic planning coverage) were folded in without triggering any GOVERNED module's research condition - see docs/agent/DECISIONS.md's corresponding entry for the explicit reasoning."
+  },
+  "NEXT_GATE": {
+    "claim": "The smallest unblocked next step is running pnpm verify, then committing and pushing this phase's work, then re-subscribing to PR activity - not starting kernel implementation.",
+    "label": "VERIFIED",
+    "detail": "PHASE_2_IMPLEMENTATION stays LOCKED per .context/research/reconciliation/phase-gate.json's phase_2_gates.lock_state_after_this_phase. The next E5-worthy gate is either E5-04 (Duplicate Operation against a real capability) or E5-08 (Policy/Capability Bypass), both gated on Phase 8/9 PolicyEngine/CapabilityEngine existing - not yet triggered."
+  },
+  "CLAIMS_NOT_PROVEN": {
+    "claim": "This phase does not prove: (1) the kernel design works against a real external system's actual failure modes, (2) illegal-transition/duplicate-event/reordered-event/stale-authorization/capability-escalation/policy-bypass/schema-version-mismatch behavior, (3) the constitution's Evidence/Verdict (section 5) and Agent/workflow boundary (section 6) rules under adversarial conditions, (4) concurrency behavior beyond 2 workers racing on reconciliation only (not dispatch), (5) any corruption criterion besides schema violation (criterion 1 of 7).",
+    "label": "NOT_EXECUTED",
+    "detail": "Each of these is logged with its specific trigger condition in .context/scenarios/kernel-core.json and research/benchmarks/E5-02-RESULT.md's Limitations section - not silently omitted from this receipt."
+  },
+  "acceptance_gates_summary": {
+    "GATE_A_SPEC": "PASS",
+    "GATE_B_E5_02": "PASS_SIMULATED",
+    "GATE_C_HARNESS": "PARTIAL",
+    "GATE_D_GOVERNANCE": "PASS",
+    "ref": ".context/research/reconciliation/phase-gate.json#phase_2_gates"
+  },
+  "generated": {
+    "by": "process:claude-code-session",
+    "at": "2026-08-17"
+  }
+}

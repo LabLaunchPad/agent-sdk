@@ -2,20 +2,22 @@
   "repository": "LabLaunchPad/agent-sdk",
   "namespace": "@lablaunchpad",
   "phase": {
-    "id": "P1A",
-    "name": "OKF v0.2 Adoption + Gap Audit",
-    "workstream": "B",
-    "workstreamName": "Gap Audit / Local-First Research",
+    "id": "P2",
+    "name": "Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)",
+    "workstream": null,
+    "workstreamName": null,
     "status": "IN_PROGRESS",
     "stopAfter": true,
     "previousPhase": {
-      "id": "P00",
+      "id": "P1B",
+      "name": "Architecture Reconciliation & ADR Freeze",
       "status": "PASS",
-      "receipt": "docs/agent/RECEIPT-P00.md"
+      "receipt": ".context/research/reconciliation/phase-gate.json",
+      "note": "SPEC_GATE and E5_GATE recorded PARTIAL, not PASS - Phase 2 spec-preparation work is UNLOCKED, Phase 2 implementation stays LOCKED. See .context/research/reconciliation/phase-gate.json lock_state."
     },
     "previousWorkstream": {
-      "id": "A",
-      "name": "OKF Adoption",
+      "id": "P1A-B",
+      "name": "OKF v0.2 Adoption + Gap Audit / Research",
       "status": "PASS",
       "receipt": "docs/agent/RECEIPT-P1A-WORKSTREAM-A.md"
     }

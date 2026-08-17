@@ -1,9 +1,9 @@
 {
   "checkpointVersion": 1,
-  "phase": "P00",
+  "phase": "P2",
   "recordedAt": null,
-  "lastCompletedMilestone": null,
-  "resumeHint": "Phase 0 has no durable execution state. Checkpointing becomes meaningful in Phase 4 (Durable State); this file establishes the location and shape only.",
+  "lastCompletedMilestone": "docs/architecture/KERNEL-CONSTITUTION.md + .context/specs/kernel.json written (Phase 2, Step 1)",
+  "resumeHint": "The kernel's own Checkpoint primitive (docs/architecture/KERNEL-CONSTITUTION.md #3 Durability) is specified but has no runtime implementation yet - this file still records repository/session progress, not kernel-level durable execution state. That distinction becomes load-bearing in Phase 4/7 when a real CheckpointStore exists.",
   "environmentFingerprint": {
     "node": "24.19.0",
     "pnpm": "10.33.0"

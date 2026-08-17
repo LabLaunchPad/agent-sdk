@@ -5,8 +5,61 @@ here, stop and reconcile before continuing.
 
 ## Phase
 
-**Phase 1B — Architecture Reconciliation & ADR Freeze** (complete). Was:
-**P1A — OKF v0.2 Adoption + Gap Audit**, Workstream B (research), installment 3
+**Phase 2 — Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)** (spec-prep
+complete, implementation LOCKED). Was: **Phase 1B — Architecture
+Reconciliation & ADR Freeze** (complete). Before that: **P1A — OKF v0.2
+Adoption + Gap Audit**, Workstream B (research), installment 3
+
+## Phase 2 — Kernel Constitution + E5-02 (complete for its scoped gates)
+
+**Objective**: convert the 8 ADRs bound in Phase 1B into one coherent,
+testable kernel-primitive specification, then execute the single
+highest-leverage E5 that spec depends on (`UNKNOWN_OUTCOME`/side-effect
+reconciliation) via a SIMULATED harness, since no real capability/side-
+effect implementation exists yet.
+
+**Result**: `docs/architecture/KERNEL-CONSTITUTION.md` (6 sections: state
+machine algebra, operation/side-effect state machine, durability,
+capability/policy, evidence/verdict, agent/workflow boundary) synthesizes
+ADR-0006 and ADR-0009 through ADR-0016 with **zero new ADRs required** —
+mirrored machine-readable at `.context/specs/kernel.json`.
+`benchmarks/e5-02-unknown-outcome/` executed the 12-step minimum
+UNKNOWN_OUTCOME scenario plus 8 of 15 named adversarial cases for real
+(not fabricated) — **9/9 executed cases pass**, after fixing 4 real bugs/
+flakes found while running the harness (a missing-table edge case, a
+stale-sentinel-file false positive, an undetected corruption technique
+corrected to a reliably-detected one, and a genuine timing flake in the
+"response lost" case, fixed the same way `E5-DURABLE-RESTART` fixed its
+own timing problem — by widening the window, not by hiding the flake).
+7/15 adversarial cases logged `NOT_EXECUTED` with named reasons (all
+require a real Guard/Event-log/Capability/Policy implementation this
+phase deliberately does not build). `.context/scenarios/kernel-core.json`
+maps all 15 cases to constitution sections — sections 5 (Evidence/Verdict)
+and 6 (Agent/workflow boundary) have no dedicated adversarial case, a real
+logged gap, not silently claimed as covered.
+
+Also resolved this phase, folded in without expanding scope: a real
+`.context/state/*.json` phase-contradiction (four files disagreeing about
+whether the repo was on P1A or P00), flagged by a user-supplied Socratic-
+planning-coverage review; a second user-supplied TS7-graph-first
+methodology document was reviewed and found not to require action (the
+`TYPESCRIPT_7_REVISIT` gate in ADR-0003 stays unmet — no stable
+programmatic API yet). Neither triggered new research or new ADRs — see
+`docs/agent/DECISIONS.md`'s corresponding entries.
+
+**Gates** (`.context/research/reconciliation/phase-gate.json`'s
+`phase_2_gates`): `GATE_A_SPEC` PASS · `GATE_B_E5_02` PASS_SIMULATED ·
+`GATE_C_HARNESS` PARTIAL (the sections 5/6 coverage gap above) ·
+`GATE_D_GOVERNANCE` PASS. Structured 10-field receipt:
+`.context/evidence/phase-2-kernel-receipt.json`.
+
+**`lock_state_after_this_phase`**: `PHASE_2_SPEC_PREP:
+COMPLETE_FOR_THE_7_SCOPED_MODULES`, `PHASE_2_IMPLEMENTATION: LOCKED`,
+`BROAD_RESEARCH: LOCKED`, `NEW_ADR_CREATION: TRIGGER_ONLY`. No
+`@lablaunchpad/*` runtime package was created or should be inferred as
+started from this phase's work.
+
+## Phase 1B (complete, for context)
 
 ## Objective
 
@@ -273,7 +326,14 @@ PARTIAL (first E5 done, satisfies the literal Phase 2 entry condition;
 `GAP-E5-ZERO` itself is not closed — 9 more named benchmarks remain
 `NOT_RUN`) · `CONTEXT_GATE` PASS · `SPEC_GATE` PARTIAL (spec-preparation
 work may begin; full architectural confidence stays gated on further E5
-execution as implementation surfaces come online). Full detail:
+execution as implementation surfaces come online).
+
+**Sharpened on external review** (the PASS/PARTIAL language above risked
+being read as "Phase 2 may begin" = "start coding the kernel" — it does
+not): `lock_state` in the same `phase-gate.json` now states this
+precisely — `PHASE_2_SPEC_PREP: UNLOCKED`, `PHASE_2_IMPLEMENTATION:
+LOCKED`, `BROAD_RESEARCH: LOCKED`, `NEW_ADR_CREATION: TRIGGER_ONLY`. Full
+detail:
 `research/reconciliation/` (`CURRENT-STATE-RECONCILIATION.md`,
 `DECISION-CONSOLIDATION.md`, `BOUNDARY-RECONCILIATION.md`,
 `ACTION-REQUIRED-TRIAGE.md`, `RESEARCH-REOPEN-GATES.md`,

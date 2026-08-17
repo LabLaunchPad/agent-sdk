@@ -1,0 +1,309 @@
+{
+  "spec_id": "SPEC-KERNEL-001",
+  "title": "Kernel Constitution — machine-readable mirror",
+  "type": "architecture-spec",
+  "status": "draft",
+  "source_of_truth_rank": "CANONICAL",
+  "canonical_source": "docs/architecture/KERNEL-CONSTITUTION.md",
+  "note": "This file mirrors docs/architecture/KERNEL-CONSTITUTION.md. On any disagreement, the markdown document is authoritative (SOURCE-OF-TRUTH.md: docs/architecture ranks with ADR-elaborating documents; this JSON is a compiled projection of it, not an independent record). Synthesis, not new decision — zero new ADRs required to produce either file.",
+  "elaborates_adrs": [
+    "ADR-0006",
+    "ADR-0009",
+    "ADR-0010",
+    "ADR-0011",
+    "ADR-0012",
+    "ADR-0013",
+    "ADR-0015",
+    "ADR-0016"
+  ],
+  "phase_gate": {
+    "ref": ".context/research/reconciliation/phase-gate.json",
+    "lock_state_honored": [
+      "PHASE_2_SPEC_PREP: UNLOCKED",
+      "PHASE_2_IMPLEMENTATION: LOCKED",
+      "NEW_ADR_CREATION: TRIGGER_ONLY"
+    ]
+  },
+  "kernel_primitives": {
+    "count": 10,
+    "fixed_until": "a proven dependency-cut requires an 11th (docs/architecture/PACKAGE-MAP.md package-creation rule, applied identically to primitives)",
+    "list": [
+      "Identity",
+      "Task",
+      "Run",
+      "State",
+      "Operation",
+      "Capability",
+      "Policy",
+      "Checkpoint",
+      "Evidence",
+      "Verdict"
+    ],
+    "everything_else_is": "adapter or higher layer, never kernel — see non_goals"
+  },
+  "sections": {
+    "1_state_machine_algebra": {
+      "elaborates": null,
+      "note": "No prior ADR defines the transition algebra itself; ADR-0009/0010/0011 assume a state machine exists.",
+      "elements": [
+        {
+          "name": "State",
+          "definition": "An immutable snapshot of everything a Run needs to resume. Never partial — either fully resumable or not a State (in-flight work that hasn't reached one yet)."
+        },
+        {
+          "name": "Event",
+          "definition": "An input that may cause a transition. Carries its own identity so duplicate/replayed events are detectable."
+        },
+        {
+          "name": "Context",
+          "definition": "Data available to a Guard/Action at transition time, distinct from State. May include ambient information (current time, external system status) not itself persisted as part of State."
+        },
+        {
+          "name": "Guard",
+          "definition": "A pure, deterministic predicate over (State, Event, Context) deciding whether a transition is legal. Never has side effects."
+        },
+        {
+          "name": "Transition",
+          "definition": "(State, Event) -> State, mediated by zero or more Guards, producing zero or more Action/Effect records."
+        },
+        {
+          "name": "Action/Effect",
+          "definition": "What a transition causes — may be purely internal (another kernel state change) or may dispatch an Operation (see section 2)."
+        },
+        {
+          "name": "Error",
+          "definition": "A transition a Guard rejects is not a kernel failure — a defined, expected outcome ('illegal transition'), mapped in the adversarial matrix."
+        },
+        {
+          "name": "Cancellation",
+          "definition": "An explicit Event type; a cancelled Run reaches a defined terminal State, never simply stops emitting Events."
+        },
+        {
+          "name": "Completion",
+          "definition": "A terminal State from which no further Event causes a Transition (checked, not assumed)."
+        },
+        {
+          "name": "Replay",
+          "definition": "Re-deriving State from a persisted Event log must produce byte-identical State to what was actually persisted, or the determinism invariant is violated."
+        }
+      ],
+      "determinism_invariant": "same state + same event + same deterministic input => same transition result",
+      "illegal_by_construction_rule": "A Transition function that reads any non-deterministic source (wall-clock time, random state, network I/O) directly is a defect, not a style violation. Non-determinism enters only through Context, which is itself part of the recorded input to a Transition, never invisible to it.",
+      "covers": [
+        "illegal transitions",
+        "duplicates",
+        "ordering",
+        "replay",
+        "migration",
+        "concurrency"
+      ],
+      "adversarial_matrix_ref": ".context/scenarios/kernel-core.json",
+      "e5_evidence_ref": "research/benchmarks/E5-02-RESULT.md"
+    },
+    "2_operation_side_effect_state_machine": {
+      "elaborates": "ADR-0011",
+      "note": "The exact state enum ADR-0011 established the need for but did not itself enumerate.",
+      "states": [
+        "NOT_STARTED",
+        "AUTHORIZED",
+        "DISPATCHED",
+        "ACKED",
+        "REJECTED",
+        "UNKNOWN_OUTCOME",
+        "RECONCILING",
+        "MANUAL_REVIEW"
+      ],
+      "transitions": [
+        { "from": "NOT_STARTED", "to": "AUTHORIZED" },
+        { "from": "AUTHORIZED", "to": "DISPATCHED" },
+        { "from": "DISPATCHED", "to": "ACKED" },
+        { "from": "DISPATCHED", "to": "REJECTED" },
+        { "from": "DISPATCHED", "to": "UNKNOWN_OUTCOME" },
+        { "from": "UNKNOWN_OUTCOME", "to": "RECONCILING" },
+        { "from": "RECONCILING", "to": "ACKED" },
+        { "from": "RECONCILING", "to": "REJECTED" },
+        { "from": "RECONCILING", "to": "MANUAL_REVIEW" }
+      ],
+      "operation_fields": [
+        { "name": "OperationID", "purpose": "stable identity across retries" },
+        { "name": "AttemptID", "purpose": "distinct per dispatch attempt" },
+        {
+          "name": "IdempotencyKey",
+          "purpose": "what the external system uses to detect a duplicate, where it supports one"
+        },
+        {
+          "name": "InputHash",
+          "purpose": "detects a caller reusing an OperationID with different input — must be rejected, not silently accepted"
+        },
+        { "name": "Capability", "purpose": "what authorized this" },
+        {
+          "name": "PolicyDecision",
+          "purpose": "the recorded outcome of policy evaluation (section 4)"
+        },
+        { "name": "Evidence", "purpose": "section 5" },
+        { "name": "Outcome", "purpose": "terminal result" }
+      ],
+      "core_rule": "A timeout is never automatically converted into a failure for a non-idempotent external effect. DISPATCHED transitions to UNKNOWN_OUTCOME, not REJECTED, when the caller cannot confirm what happened. REJECTED means positive evidence the effect did not occur; UNKNOWN_OUTCOME means the kernel does not know. Collapsing the two is the failure mode this primitive exists to prevent.",
+      "cross_corpus_evidence_ref": "research/canonical/canonical-research.json#CTR-UNKNOWN-OUTCOME-CONVERGENCE",
+      "reconciling_rule": "RECONCILING must query the external system's own record of what it did (an idempotent status check, where supported) before ever re-dispatching. A capability with no such status check degrades RECONCILING's only exit to MANUAL_REVIEW — a legitimate, expected outcome, not a defect.",
+      "evidence_this_phase": {
+        "ref": "research/benchmarks/E5-02-RESULT.md",
+        "harness_type": "SIMULATED",
+        "reason": "no real capability/side-effect implementation exists yet (Phase 8/9 unstarted)"
+      }
+    },
+    "3_durability": {
+      "elaborates": [
+        "ADR-0010",
+        "specs/persistence/STORE-INTERFACES.md#SPEC-PERSIST-001"
+      ],
+      "checkpoint_boundary": "A Checkpoint is a (State, sequence number, schema version) tuple, written atomically — partial checkpoint writes must never be observable by a subsequent reader.",
+      "checkpoint_boundary_evidence_ref": "research/benchmarks/E5-RESULT.md",
+      "persistence_ordering": "Checkpoints for a single Run are totally ordered by sequence number. Cross-Run ordering is not guaranteed unless a Run explicitly depends on another's Checkpoint (open question, STORE-INTERFACES.md section 19).",
+      "recovery": "On restart, the kernel loads the highest-sequence Checkpoint for a Run and resumes from there — never from partially-written state (verified this phase, scope-qualified, by E5-DURABLE-RESTART).",
+      "replay": "Recovering State from Checkpoint + subsequent Event log entries must satisfy the section-1 determinism invariant exactly.",
+      "duplicate_suppression": "Resuming a Run must not re-execute an Operation already DISPATCHED before the crash — this is where section 2's UNKNOWN_OUTCOME/RECONCILING states and section 3's checkpoint/recovery model meet directly; recovery alone cannot resolve this, reconciliation must.",
+      "crash_semantics": {
+        "rule": "A crash at any point must leave the persisted state in exactly one of two observable conditions: the pre-crash Checkpoint (if the in-flight write never completed) or the post-write Checkpoint (if it did) — never anything in between.",
+        "this_is_the_corruption_definition": true
+      },
+      "corruption_criteria": [
+        {
+          "id": 1,
+          "criterion": "schema violation (structural)",
+          "measured_this_phase": true
+        },
+        { "id": 2, "criterion": "invalid event order", "measured_this_phase": false },
+        {
+          "id": 3,
+          "criterion": "duplicate committed operation",
+          "measured_this_phase": false
+        },
+        { "id": 4, "criterion": "impossible transition", "measured_this_phase": true },
+        {
+          "id": 5,
+          "criterion": "missing evidence linkage",
+          "measured_this_phase": false
+        },
+        {
+          "id": 6,
+          "criterion": "checkpoint referencing nonexistent state",
+          "measured_this_phase": false
+        },
+        {
+          "id": 7,
+          "criterion": "authorization decision changing without cause",
+          "measured_this_phase": false
+        }
+      ],
+      "corruption_criteria_ref": "research/benchmarks/E5-RESULT.md#precise-definition-of-corruption",
+      "schema_migration": "A Checkpoint written by version N must remain readable by version N+1 (STORE-INTERFACES.md invariant 4), tested against real persisted checkpoints, never synthetic fixtures built to match the new shape.",
+      "concurrency": {
+        "minimum": "StateStore writes for a single Run require optimistic concurrency at minimum",
+        "sufficiency_under_multi_agent_write_contention": "UNKNOWN",
+        "ref": "specs/persistence/STORE-INTERFACES.md#section-19, ADR-0010 revisit trigger"
+      }
+    },
+    "4_capability_policy": {
+      "elaborates": "ADR-0013",
+      "formula": "WHO + CAN + DO WHAT + TO WHICH OBJECT + UNDER WHICH CONDITIONS + UNTIL WHEN + BECAUSE OF WHICH GRANT (WHY)",
+      "capability": {
+        "answers": "is this principal (Identity) permitted this action on this object at all",
+        "shape": "a grant, with an expiry, traceable to its issuing authority"
+      },
+      "policy": {
+        "answers": "is this action permitted right now, given environment/risk/cost/data-sensitivity/network conditions",
+        "evaluation": "independent of capability, deterministic, enforceable without a model in the loop"
+      },
+      "separation_rule": "Capability and Policy are kept separate and both independently enforceable, never merged into one check and never delegated to model judgement.",
+      "enforcement_point": "source-to-sink, at the point an Operation actually dispatches (section 2) — never at the point a model produces or receives text. A check that only runs against model output is advisory, not this primitive."
+    },
+    "5_evidence_verdict": {
+      "elaborates": null,
+      "note": "Formalizes the E0-E5 evidence-hierarchy discipline used informally throughout this repository's research as an explicit kernel primitive for the first time.",
+      "evidence_fields": [
+        "identity (own stable ID)",
+        "provenance (what produced it — a Transition, an Operation dispatch, a reconciliation query)",
+        "timestamp/version",
+        "source",
+        "transition linkage (which State change it is evidence for)",
+        "authorization linkage (which PolicyDecision/Capability grant it is evidence for, where applicable)",
+        "confidence/status (E0-E5 scale)"
+      ],
+      "verdict_lifecycle": {
+        "labels": ["VERIFIED", "SUPPORTED", "INFERRED", "UNKNOWN", "NOT_EXECUTED"],
+        "note": "Same five labels this phase's own final receipt uses, deliberately — a Verdict at kernel level and a claim label at documentation level are the same concept applied at different scales, not two different vocabularies.",
+        "malformed_if": "a Verdict with no cited Evidence records"
+      }
+    },
+    "6_agent_workflow_boundary": {
+      "elaborates": [
+        "ADR-0012",
+        "ADR-0015",
+        "docs/architecture/PACKAGE-MAP.md",
+        "docs/architecture/DEPENDENCY-DIRECTION.md"
+      ],
+      "layers": [
+        {
+          "layer": "Kernel",
+          "owns": "The 10 primitives; canonical semantics; truth",
+          "does_not_own": "Execution mechanics, model calls, tool implementations"
+        },
+        {
+          "layer": "AgentLoop",
+          "owns": "observe -> interpret -> propose -> validate -> authorize -> execute -> observe result -> update state -> continue/stop",
+          "does_not_own": "Planning as an inseparable primitive — a loop may be planning-free"
+        },
+        {
+          "layer": "Workflow/Graph",
+          "owns": "Multi-step orchestration with explicit control flow; may host an AgentLoop as one of its steps",
+          "does_not_own": "Being required for an AgentLoop to function — a loop never needs to 'become' a workflow"
+        },
+        {
+          "layer": "HITL",
+          "owns": "A Workflow pause point, checkpointed exactly like any other durable pause (ADR-0015)",
+          "does_not_own": "A separate control-flow mechanism"
+        },
+        {
+          "layer": "Runtime/Adapters",
+          "owns": "Model calls, tool execution, MCP/A2A protocol translation, sandbox isolation",
+          "does_not_own": "Kernel semantics — an adapter translates, it never redefines what Operation/Capability/Evidence mean"
+        }
+      ],
+      "committed_flow": [
+        "MODEL PROPOSES",
+        "KERNEL VALIDATES",
+        "POLICY AUTHORIZES",
+        "RUNTIME EXECUTES",
+        "EVIDENCE RECORDS",
+        "STATE TRANSITIONS",
+        "CHECKPOINT/REPLAY"
+      ],
+      "invariants": [
+        "The model never authorizes its own proposals.",
+        "The kernel never executes directly — it validates and hands off to Runtime.",
+        "Runtime never decides policy — it executes what Policy already authorized."
+      ]
+    }
+  },
+  "non_goals": {
+    "explicitly_not_kernel": [
+      "planning strategy",
+      "memory management",
+      "knowledge/retrieval",
+      "specific tool implementations",
+      "MCP/A2A wire protocols",
+      "specific model providers",
+      "sandbox isolation mechanisms"
+    ],
+    "note": "Each has a real, planned home (PACKAGE-MAP.md, BOUNDARY-RECONCILIATION.md); none may leak kernel-shaped assumptions into its own design (same rule already applied to MCP in ADR-0009)."
+  },
+  "testability": {
+    "rule": "Every element in sections 1-6 must correspond to at least one case in .context/scenarios/kernel-core.json's adversarial matrix, marked EXECUTED, SIMULATED, or NOT_EXECUTED with a stated reason. A primitive with no corresponding test case is not yet a tested part of this constitution, regardless of how precisely it is described in prose.",
+    "adversarial_matrix_ref": ".context/scenarios/kernel-core.json"
+  },
+  "generated": {
+    "by": "process:claude-code-session",
+    "at": "2026-08-17"
+  }
+}

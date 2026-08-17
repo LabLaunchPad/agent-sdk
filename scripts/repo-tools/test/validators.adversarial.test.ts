@@ -277,6 +277,15 @@ describe('research-integrity-validator — negative fixtures', () => {
     expect(result.status).toBe('FAIL');
     expect(rules(result)).toContain('research-integrity/broken-reference');
   });
+
+  it('rejects a canonical-graph ID reused by two different records', async () => {
+    const result = await researchIntegrityValidator({
+      rootDir: fixture('research-integrity', 'duplicate-id'),
+    });
+
+    expect(result.status).toBe('FAIL');
+    expect(rules(result)).toContain('research-integrity/duplicate-id');
+  });
 });
 
 describe('package-exports-validator — negative fixtures', () => {

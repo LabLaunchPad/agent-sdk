@@ -18,7 +18,9 @@ and `stale_after`, never stored — see [`context-staleness-validator`](../scrip
 
 **P00 — Foundation + Working Toolchain Only** (complete, CI green; see
 [`docs/agent/RECEIPT-P00.md`](../docs/agent/RECEIPT-P00.md)) →
-**P1A — OKF Adoption + Gap Audit** (in progress, Workstream A)
+**P1A — OKF Adoption + Gap Audit** — Workstream A complete (see
+[`docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`](../docs/agent/RECEIPT-P1A-WORKSTREAM-A.md)),
+Workstream B (gap audit) in progress.
 
 Phase 0 proves the engineering environment. Phase 1A adopts a vendor-neutral
 knowledge format and audits the plan against the current ecosystem. Only
@@ -26,9 +28,16 @@ Phase 2+ implements Agent SDK behaviour.
 
 ## Current objective
 
-Workstream A: migrate agent-facing knowledge (`.context/`, `research/`,
-`specs/`, `ADR/`) to OKF v0.2 with a full no-regression gate. Workstream B
-(gap audit) begins only once Workstream A's gate passes.
+Workstream B: evidence-gated research across the current agent-ecosystem.
+9 of 17 original-brief sources live-researched (OpenAI Agents SDK, Microsoft
+Agent Framework, PydanticAI, Kimi Agent SDK, Qwen-Agent, Tencent Youtu-Agent,
+LangGraph, Mastra, MCP, A2A); 3 remain `UNKNOWN` (Volcengine AgentKit, Baidu
+AppBuilder SDK, Agent Skills). 5 supplementary research/governance corpora
+integrated beyond the brief (14 more frameworks, 5 topics, 1 governance
+bundle — see `.context/research/decisions.json`), plus a supplementary
+cross-corpus consolidation graph at `research/canonical/` (status
+`PARTIAL`). See [`docs/agent/NOW.md`](../docs/agent/NOW.md) for the full
+scope-reconciliation record.
 
 ## Canonical documents
 
@@ -108,8 +117,12 @@ None. Verify with `pnpm context:check`.
 
 ## Next action
 
-Complete Workstream A's no-regression gate, emit its sub-receipt, then begin
-Workstream B (gap audit). Do not begin Phase 2.
+Close the 3 remaining original-brief gaps (Volcengine AgentKit, Baidu
+AppBuilder SDK, Agent Skills) via live research, same discipline as A2A's
+closure. In parallel, `GAP-ARCHITECTURE-RECONCILIATION` (P0) — a formal ADR
+pass over the 22 accumulated ADR-CANDIDATEs, starting from
+`research/canonical/ARCHITECTURE-DECISIONS.md` — is queued but not yet
+performed. Do not begin Phase 2.
 
 ## Rules
 

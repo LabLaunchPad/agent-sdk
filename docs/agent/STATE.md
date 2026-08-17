@@ -8,15 +8,15 @@ and this file is the human summary — reconcile both before proceeding.
 
 ## Repository
 
-| Field                      | Value                                                 |
-| -------------------------- | ----------------------------------------------------- |
-| Repository                 | `LabLaunchPad/agent-sdk`                              |
-| npm namespace              | `@lablaunchpad/*`                                     |
-| Current phase              | P1A — OKF v0.2 Adoption + Gap Audit (Workstream A)    |
-| Phase status               | IN PROGRESS                                           |
-| Canonical language         | TypeScript                                            |
-| Canonical wire format      | JSON Schema                                           |
-| Canonical knowledge format | OKF v0.2 (`.context/`, `research/`, `specs/`, `ADR/`) |
+| Field                      | Value                                                                                                                                                                                                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Repository                 | `LabLaunchPad/agent-sdk`                                                                                                                                                                                                                                                 |
+| npm namespace              | `@lablaunchpad/*`                                                                                                                                                                                                                                                        |
+| Current phase              | P1A — OKF v0.2 Adoption + Gap Audit (Workstream B)                                                                                                                                                                                                                       |
+| Phase status               | IN PROGRESS — Workstream A complete; Workstream B installments 1-3 (9 of 17 brief sources live-researched) + 5 imported research/governance corpora (batch1, batch2, batch3/current-wave, post-commit-ops, wave1) + canonical multi-corpus consolidation, all integrated |
+| Canonical language         | TypeScript                                                                                                                                                                                                                                                               |
+| Canonical wire format      | JSON Schema                                                                                                                                                                                                                                                              |
+| Canonical knowledge format | OKF v0.2 (`.context/`, `research/`, `specs/`, `ADR/`)                                                                                                                                                                                                                    |
 
 ## Toolchain baseline
 
@@ -43,8 +43,17 @@ and this file is the human summary — reconcile both before proceeding.
 ## Open commitments
 
 - Phase 0 exit criteria all passed (CI green) — see [`RECEIPT-P00.md`](RECEIPT-P00.md).
-- Workstream A's no-regression gate must pass before Workstream B (gap audit)
-  may begin — see [`NOW.md`](NOW.md).
+- Workstream A's no-regression gate passed — see [`RECEIPT-P1A-WORKSTREAM-A.md`](RECEIPT-P1A-WORKSTREAM-A.md).
+- Workstream B (gap audit): 9 of 17 original-brief sources live-researched;
+  3 remain fully `UNKNOWN` (Volcengine AgentKit, Baidu AppBuilder SDK, Agent
+  Skills). 5 supplementary research/governance corpora imported beyond the
+  brief (14 more frameworks + 5 topics + 1 governance bundle), none of their
+  ADR-CANDIDATEs reconciled into architecture yet. See [`NOW.md`](NOW.md) /
+  [`NEXT.md`](NEXT.md) and `.context/research/gaps.json`.
+- `research/canonical/` — a supplementary cross-corpus consolidation graph
+  exists (status `PARTIAL`); does not supersede `.context/research/*.json`
+  or the OKF markdown tree. `GAP-ARCHITECTURE-RECONCILIATION` and
+  `GAP-E5-ZERO` are its two P0 follow-ups.
 - `TYPESCRIPT_7_REVISIT` gate is open — see ADR-0003.
 - OKF v0.3 revisit gate is open — see ADR-0007.
 - `.context/` verification backlog (all entries currently `unverified`) — see

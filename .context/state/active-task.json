@@ -1,7 +1,7 @@
 {
-  "id": "P1A-workstream-B-local-first-research-installment-1",
+  "id": "P1A-workstream-B-wave1-import-and-canonical-consolidation",
   "phase": "P1A",
-  "title": "Local-first + built-in-capability + licensing research, installment 1 of N",
+  "title": "Workstream B: installments 1-3, 5 imported research/governance corpora, and cross-corpus canonical consolidation",
   "status": "COMPLETE",
   "governingPrompt": "local-first-agent-sdk-intelligence-legal-reverse-engineering",
   "scopeReconciliation": "docs/agent/NOW.md",
@@ -9,32 +9,79 @@
     "openai-agents-sdk",
     "microsoft-agent-framework",
     "pydantic-ai",
-    "kimi-agent-sdk"
-  ],
-  "notYetResearched": [
-    "langgraph",
-    "mastra",
+    "kimi-agent-sdk",
     "qwen-agent",
     "tencent-youtu-agent",
-    "volcengine-agentkit",
-    "baidu-appbuilder-sdk",
+    "langgraph",
+    "mastra",
     "mcp",
-    "a2a",
-    "agent-skills"
+    "a2a"
   ],
+  "notYetResearched": ["volcengine-agentkit", "baidu-appbuilder-sdk", "agent-skills"],
+  "importedSupplementaryCorpora": [
+    {
+      "name": "batch1",
+      "frameworks": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+      "receipt": "research/imported-corpus/SOURCE-RECEIPT.md"
+    },
+    {
+      "name": "batch2 (next-wave)",
+      "frameworks": [
+        "strands-agents",
+        "smolagents",
+        "ag2",
+        "llama-index",
+        "llama-agents",
+        "haystack",
+        "dspy",
+        "autogen",
+        "semantic-kernel"
+      ],
+      "receipt": "research/imported-corpus/SOURCE-RECEIPT-2.md"
+    },
+    {
+      "name": "batch3 (current-wave)",
+      "contents": "A2A gap-closer (live-researched), 3 refresh checks, 2 new topics (sandbox-execution, security-2026)",
+      "receipt": "research/imported-corpus/SOURCE-RECEIPT-3.md"
+    },
+    {
+      "name": "post-commit-ops",
+      "contents": "post-commit git/PR/CI/deploy lifecycle governance protocol, CANDIDATE, not adopted",
+      "location": "docs/operations/post-commit-ops/"
+    },
+    {
+      "name": "wave1",
+      "contents": "3 new topics, 3 formal ADR proposals, 7 new benchmark categories, mostly reinforcing MCP/A2A/OpenAI/MSFT findings",
+      "receipt": "research/imported-corpus/SOURCE-RECEIPT-4.md"
+    }
+  ],
+  "canonicalConsolidation": {
+    "location": "research/canonical/",
+    "status": "PARTIAL",
+    "relationshipToExistingState": "supplementary cross-reference/audit layer; does not supersede .context/research/{gaps,decisions}.json or the OKF markdown tree (ADR-0007 remains authoritative)",
+    "keyFindings": [
+      "A2A version drift found across 3 corpora and resolved via live WebSearch (research/protocols/a2a-1.0.1.md)",
+      "3 ADD_CANDIDATE architecture boundaries surfaced (WorkspaceEngine, SandboxEngine, SideEffectEngine) - not added to docs/architecture/PACKAGE-MAP.md, flagged for a future ADR"
+    ]
+  },
   "acceptance": [
-    "every claim backed by real primary-source evidence (WebSearch/WebFetch), not model-knowledge recall",
+    "every claim backed by real primary-source evidence (WebSearch/WebFetch) or explicit imported-corpus provenance, not model-knowledge recall",
     "evidence level recorded per claim",
     "UNKNOWN used honestly for unresearched dimensions, never inferred",
     "all new research/ and knowledge/ content OKF-conformant (validated)",
-    "no production Agent SDK behaviour implemented"
+    "no production Agent SDK behaviour implemented",
+    "no imported corpus's decisions silently adopted into architecture"
   ],
   "prohibited": [
     "implementing newly discovered SDK functionality",
-    "fabricating coverage of unresearched sources"
+    "fabricating coverage of unresearched sources",
+    "promoting an imported ADR-CANDIDATE to architecture without a formal ADR"
   ],
   "openCommitments": [
-    "installment 2: research remaining ~13 sources, prioritized per docs/agent/NEXT.md"
+    "close remaining 3 original-brief gaps: Volcengine AgentKit, Baidu AppBuilder SDK, Agent Skills",
+    "GAP-ARCHITECTURE-RECONCILIATION (P0): formal ADR pass over 22 accumulated ADR-CANDIDATEs, using research/canonical/ARCHITECTURE-DECISIONS.md as the starting map",
+    "GAP-E5-ZERO (P0): 0/14 E5 reproductions across all corpora - requires a runnable pinned implementation, not further research",
+    "independent re-verification of all imported-corpus frameworks/topics (currently DOCUMENTED_NOT_REPRODUCED)"
   ],
   "priorTask": "P1A-workstream-A-okf-adoption (COMPLETE, docs/agent/RECEIPT-P1A-WORKSTREAM-A.md)"
 }

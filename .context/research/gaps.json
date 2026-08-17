@@ -52,6 +52,30 @@
     },
     "location": "research/imported-corpus/SOURCE-RECEIPT-3.md"
   },
+  "imported_corpus_batch_4_wave1": {
+    "research_run_id": "llp-rsch-2026-08-17-wave1",
+    "corpus_version": "0.1-wave1",
+    "validation": "self-checksummed, 54/54 files verified against the corpus's own CHECKSUMS.sha256",
+    "mostly_reinforcement": "primarily another independent MCP/A2A/OpenAI Agents SDK pass, corroborating rather than contradicting this session's own findings (MCP version agreement across all 3 sources that researched it; A2A opaque-trust-model corroboration)",
+    "new_content": {
+      "topics": [
+        "durability-exactly-once",
+        "e5-evidence-levels",
+        "capability-aware-routing"
+      ],
+      "adr_proposals": "research/decisions/WAVE1-ADR-{001-MCP-BASELINE,002-SEMANTIC-PORTABILITY,003-DURABILITY-BOUNDARY}.md - formally numbered, but recorded at CANDIDATE status in decisions.json same as every other import, despite the source's own confident naming",
+      "benchmark_categories": "7 new categories under research/benchmarks/WAVE1-*.md, all NOT_RUN, 0/14 E5 executed, no fabricated results"
+    },
+    "version_drift_flagged_and_resolved": "wave1's own drift-report.json flagged A2A version drift as HIGH impact; a follow-up live WebSearch during the canonical consolidation confirmed the drift was real but that wave1's own '0.3.0 official latest' claim was itself the stale data point - see research/protocols/a2a-1.0.1.md",
+    "status": "IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED",
+    "location": "research/imported-corpus/SOURCE-RECEIPT-4.md"
+  },
+  "canonical_consolidation": {
+    "location": "research/canonical/",
+    "status": "PARTIAL",
+    "note": "A supplementary cross-corpus knowledge graph consolidating all 6 research/governance corpora (this session's own live research + batch1 + batch2 + batch3/current-wave + post-commit-ops + wave1). Does NOT replace this file or decisions.json - see .context/research/decisions.json's canonical-research-graph-is-supplementary-not-authoritative entry. Its own gaps[] array names GAP-E5-ZERO and GAP-ARCHITECTURE-RECONCILIATION as P0, both consistent with this file's own remaining-work list below.",
+    "delete_test_result": "25 candidate architecture boundaries evaluated against docs/architecture/PACKAGE-MAP.md; 3 evidenced-but-unplanned ADD_CANDIDATE boundaries surfaced (WorkspaceEngine, SandboxEngine, SideEffectEngine) - flagged for a future ADR, not added to the package map by the consolidation itself. See research/canonical/ARCHITECTURE-DECISIONS.md."
+  },
   "remaining_dimensions_even_for_researched_frameworks": [
     "state.md",
     "memory.md",
@@ -70,9 +94,10 @@
     "Kimi Agent SDK deepening (installment 1 left local-first as UNKNOWN)",
     "independent re-verification (live WebFetch) of all 14 imported-corpus frameworks across both batches, plus the 3 refresh-check appendices and 2 new topics from batch 3 - currently DOCUMENTED_NOT_REPRODUCED only",
     "E5 reproduction across identical tasks for all researched frameworks, per all three imported corpora's own recommendations",
-    "reconciliation of all three imported corpora's ADR-CANDIDATEs (6 batch-1 decisions.json entries + 6 batch-2 files + 7 batch-3 file, plus the post-commit-ops governance bundle) against the existing locked architecture - not yet performed",
-    "Microsoft Agent Framework local-shell-support lead from the current-wave refresh check - not independently confirmed"
+    "formal ADR-writing pass reconciling all 22 accumulated ADR-CANDIDATEs (6 batch-1 + 6 batch-2 + 7 batch-3 + 3 wave1 decisions.json entries, plus the post-commit-ops governance bundle) against the existing locked architecture - a first-pass delete_test now exists at research/canonical/ARCHITECTURE-DECISIONS.md, but no formal ADR has been written from it yet",
+    "Microsoft Agent Framework local-shell-support lead from the current-wave refresh check - not independently confirmed",
+    "E5 reproduction for any of the 10+ benchmark plans accumulated across corpora (GAP-E5-ZERO, P0 in research/canonical/canonical-research.json) - requires a runnable pinned LabLaunchPad implementation, not further desk research"
   ],
-  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then Agent Skills (the last remaining original-brief protocol). Independent re-verification of the 14+ imported-corpus frameworks/topics and ADR-CANDIDATE reconciliation against the locked architecture are separate, lower-priority tracks since they are already real evidence, just not re-fetched or reconciled by this session.",
+  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then Agent Skills (the last remaining original-brief protocol). The formal ADR-writing pass over research/canonical/ARCHITECTURE-DECISIONS.md's 3 ADD_CANDIDATE boundaries (WorkspaceEngine, SandboxEngine, SideEffectEngine) is the highest-priority architecture-track item, since it is the one item blocking Phase 2 spec work rather than expanding research breadth. Independent re-verification of the 14+ imported-corpus frameworks/topics remains a separate, lower-priority track since it is already real evidence, just not re-fetched by this session.",
   "generated_at": "2026-08-17T00:00:00Z"
 }

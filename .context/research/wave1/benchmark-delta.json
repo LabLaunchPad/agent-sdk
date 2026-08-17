@@ -1,0 +1,27 @@
+[
+  {
+    "benchmark": "E5-A",
+    "status": "NOT_RUN",
+    "reason": "No runnable target"
+  },
+  {
+    "benchmark": "E5-F",
+    "status": "NOT_RUN",
+    "reason": "No matched model/provider environment"
+  },
+  {
+    "benchmark": "E5-J",
+    "status": "NOT_RUN",
+    "reason": "No LabLaunchPad MCP implementation available"
+  },
+  {
+    "benchmark": "E5-I",
+    "status": "NOT_RUN",
+    "reason": "No LabLaunchPad A2A implementation and independent peer fixture available"
+  },
+  {
+    "benchmark": "E5-N",
+    "status": "NOT_RUN",
+    "reason": "No side-effect system fixture available"
+  }
+]

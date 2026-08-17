@@ -23,23 +23,34 @@ token/context-efficiency and UX/DX audit files — all explicitly deferred
 from installment 3, not dropped.
 
 **Also queued, lower priority**: independent re-verification (live
-WebFetch/WebSearch) of three imported supplementary corpora — batch 1
+WebFetch/WebSearch) of four imported supplementary corpora — batch 1
 (OpenHands, Letta, Google ADK, Browser Use, CrewAI), batch 2 (Strands
 Agents, smolagents, AG2, LlamaIndex, Llama Agents, Haystack, DSPy,
-AutoGen, Semantic Kernel), and batch 3 / "current wave" (2 new topics —
-sandbox-execution, security-2026 — plus 3 refresh-check appendices), 14
-frameworks + 2 topics total — and reconciliation of their combined 19
-ADR-CANDIDATEs (6 in `.context/research/decisions.json` from batch 1, 6
-in `research/decisions/ADR-CANDIDATE-*.md` from batch 2, 7 more from
-batch 3) plus each batch's own `spec-delta.json`/`gap-delta.json` against
-the existing locked architecture — and now also against the separately-
-imported post-commit-ops governance bundle. All three research corpora
-expand scope beyond the original 17-source brief and were not requested
-by the operating prompt — queued because supplied, not because completing
-them blocks the original brief's remaining 3 sources (Volcengine, Baidu,
-Agent Skills). A2A is the one exception: it was pulled forward and
-resolved live this session specifically because it closed a real brief
-gap, not deferred with the rest.
+AutoGen, Semantic Kernel), batch 3 / "current wave" (2 new topics —
+sandbox-execution, security-2026 — plus 3 refresh-check appendices), and
+wave1 (3 new topics — durability-exactly-once, e5-evidence-levels,
+capability-aware-routing), 14 frameworks + 5 topics total — and
+reconciliation of their combined 22 ADR-CANDIDATEs (6 batch 1, 6 batch 2,
+7 batch 3, 3 wave1) plus each batch's own `spec-delta.json`/`gap-delta.json`
+against the existing locked architecture — and now also against the
+separately-imported post-commit-ops governance bundle. A **first pass** at
+this reconciliation now exists: `research/canonical/ARCHITECTURE-DECISIONS.md`
+applies a `delete_test` to 25 candidate boundaries and surfaces 3
+evidenced-but-unplanned `ADD_CANDIDATE` boundaries (`WorkspaceEngine`,
+`SandboxEngine`, `SideEffectEngine`) — this is NOT a formal ADR-writing
+pass, still queued as `GAP-ARCHITECTURE-RECONCILIATION` (P0) in
+`research/canonical/canonical-research.json`. All corpora beyond the
+original brief expand scope and were not requested by the operating
+prompt — queued because supplied, not because completing them blocks the
+original brief's remaining 3 sources (Volcengine, Baidu, Agent Skills).
+A2A is the one exception: it was pulled forward and resolved live this
+session specifically because it closed a real brief gap, not deferred
+with the rest.
+
+**Also queued**: `research/canonical/` itself names `GAP-E5-ZERO` (P0) —
+zero E5 reproductions across all 6 corpora combined — as the highest-impact
+gap in the entire consolidated graph; it requires a runnable, pinned
+LabLaunchPad implementation, not further desk research, to close.
 
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the

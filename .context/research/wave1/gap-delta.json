@@ -1,0 +1,92 @@
+[
+  {
+    "gap_id": "GAP-001",
+    "taxonomy": "G1_CORPUS",
+    "title": "Existing LabLaunchPad corpus audit",
+    "status": "BLOCKED",
+    "priority": "P0",
+    "reason": "Repository and prior research corpus were not supplied/mounted.",
+    "closure_required": "Provide repo snapshot containing research/ and .context/."
+  },
+  {
+    "gap_id": "GAP-002",
+    "taxonomy": "G2_VERSIONING",
+    "title": "Anchor exact SDK commits/releases for all current ecosystems",
+    "status": "PARTIAL",
+    "priority": "P0",
+    "reason": "Web sources confirm current protocol/docs but not all exact package commits.",
+    "closure_required": "Resolve package/repo versions and lockfiles from reproducible snapshots."
+  },
+  {
+    "gap_id": "GAP-003",
+    "taxonomy": "G11_PROTOCOL",
+    "title": "MCP 2026-07-28 LabLaunchPad interoperability",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "Spec delta established; wire execution not run.",
+    "closure_required": "Run conformance suite against independent MCP client/server implementations."
+  },
+  {
+    "gap_id": "GAP-004",
+    "taxonomy": "G11_PROTOCOL",
+    "title": "A2A 0.3.0 LabLaunchPad interoperability",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "Current spec established; independent interoperability not executed.",
+    "closure_required": "Run discovery/auth/task/stream/artifact/long-running/failure tests."
+  },
+  {
+    "gap_id": "GAP-005",
+    "taxonomy": "G20_SECURITY",
+    "title": "Sandbox adversarial boundary",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "Docs establish isolation-oriented APIs, not security guarantees.",
+    "closure_required": "Run adversarial fixtures for filesystem, process, socket, secrets, symlink, package, network escape."
+  },
+  {
+    "gap_id": "GAP-006",
+    "taxonomy": "G22_LOCAL_FIRST",
+    "title": "End-to-end offline local-first classification",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "No offline execution performed.",
+    "closure_required": "Disable network and verify model, storage, tools, observability, evaluation, and secrets all remain local."
+  },
+  {
+    "gap_id": "GAP-007",
+    "taxonomy": "G15_MODEL_PORTABILITY",
+    "title": "Matched-task semantic portability",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "Router/provider capabilities do not prove semantic equivalence.",
+    "closure_required": "Run identical tool/schema/error/streaming tasks across selected providers/models."
+  },
+  {
+    "gap_id": "GAP-008",
+    "taxonomy": "G21_SIDE_EFFECTS",
+    "title": "UNKNOWN_OUTCOME reconciliation",
+    "status": "OPEN",
+    "priority": "P0",
+    "reason": "No fault-injection test executed.",
+    "closure_required": "Simulate commit-then-response-loss and verify reconciliation/deduplication."
+  },
+  {
+    "gap_id": "GAP-009",
+    "taxonomy": "G18_EVALUATION",
+    "title": "Evaluation contamination controls",
+    "status": "OPEN",
+    "priority": "P1",
+    "reason": "No benchmark datasets were executed or contamination-audited in this wave.",
+    "closure_required": "Pin datasets, assess contamination, add fresh/held-out/adversarial splits."
+  },
+  {
+    "gap_id": "GAP-010",
+    "taxonomy": "G29_LICENSE_TERMS",
+    "title": "Complete license and commercial terms ledger",
+    "status": "PARTIAL",
+    "priority": "P1",
+    "reason": "Current wave focused on architecture evidence, not full terms review.",
+    "closure_required": "Review repo licenses, SDK licenses, dependencies, hosted service terms, model/data-use restrictions."
+  }
+]

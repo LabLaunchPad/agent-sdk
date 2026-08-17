@@ -1,0 +1,22 @@
+{
+  "research_run_id": "llp-rsch-2026-08-17-wave1",
+  "research_start": "2026-08-17T04:28:42.332446+00:00",
+  "research_end": "2026-08-17T04:28:42.332446+00:00",
+  "cutoff_datetime": "2026-08-17T04:28:42.332446+00:00",
+  "execution_mode": "ONLINE",
+  "agent_identity": "GPT-5.6 Luna",
+  "host_environment": "OpenAI hosted execution environment",
+  "operating_system": "Linux",
+  "architecture": "x86_64",
+  "runtime_versions": ["Python 3.x"],
+  "package_versions": [],
+  "lockfile_hashes": [],
+  "repository_snapshot": "BLOCKED: LabLaunchPad repository/corpus was not supplied or mounted in this run.",
+  "research_corpus_snapshot": "BLOCKED",
+  "benchmark_snapshot": "INITIAL_WEB_EVIDENCE_ONLY",
+  "source_snapshot": "CURRENT_WEB_RESEARCH_2026-08-17",
+  "network_policy": "Web research available; direct external repository execution not available.",
+  "credentials_policy": "No credentials used.",
+  "previous_run_id": "",
+  "notes": "This is a first executable research wave. It closes current-wave evidence gaps that can be established from authoritative public sources and creates the corpus/validation scaffolding. Existing-corpus audit and E5 execution against LabLaunchPad remain blocked without the repository and runnable benchmark environment."
+}

@@ -237,6 +237,36 @@
       "status": "ACTION_REQUIRED",
       "source": "research/imported-corpus/SOURCE-RECEIPT-3.md, .context/research/current-wave/spec-delta.json",
       "note": "Same standing item as batch 1 and batch 2: current-wave's 7 ADR-CANDIDATEs, spec-delta.json, and gap-delta.json have not been reconciled against the existing locked architecture, against each other, or against the post-commit-ops bundle. Three research corpora plus one governance corpus now have unreconciled architectural proposals - this reconciliation is a real, growing backlog item, not decreasing with each import."
+    },
+    {
+      "id": "wave1-adr-001-mcp-baseline",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1' (research_run_id llp-rsch-2026-08-17-wave1): research/decisions/WAVE1-ADR-001-MCP-BASELINE.md",
+      "note": "ADOPT a version-aware MCP adapter with no protocol session state in the kernel - consistent with this session's own MCP 2026-07-28 audit finding that the revision itself removed protocol-level sessions from the core. Despite the source's confident 'ADR-001'/'ADOPT' naming, this carries the SAME CANDIDATE status as every other imported decision - the source's own numbering convention does not confer this repository's actual architectural authority."
+    },
+    {
+      "id": "wave1-adr-002-semantic-portability",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1': research/decisions/WAVE1-ADR-002-SEMANTIC-PORTABILITY.md",
+      "note": "ADOPT: never equate adapter/API compatibility with semantic portability; publish TESTED_SEMANTIC_PORTABILITY only per actually-tested task class, not assumed globally. No E5 reproduction exists yet to test this against - recorded as evidence-backed guidance, not a verified property of any current implementation."
+    },
+    {
+      "id": "wave1-adr-003-durability-boundary",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1': research/decisions/WAVE1-ADR-003-DURABILITY-BOUNDARY.md",
+      "note": "ADOPT: keep durability as a replaceable boundary with explicit per-backend guarantees; do not create a universal exactly-once abstraction without scoped semantics. Matches ADR-0006's own deferred persistence-interface stance and the canonical consolidation's ADAPT verdict for DurabilityEngine (fold into @lablaunchpad/state's CheckpointStore) - see research/canonical/ARCHITECTURE-DECISIONS.md."
+    },
+    {
+      "id": "wave1-corpus-not-yet-reconciled-with-architecture",
+      "status": "ACTION_REQUIRED",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-4.md, .context/research/wave1/gap-delta.json",
+      "note": "Same standing item as batches 1-3: wave1's 3 formally-named ADRs and 14 benchmark plans have not been independently reconciled against the existing locked architecture beyond the first-pass delete_test in research/canonical/ARCHITECTURE-DECISIONS.md. Four research corpora plus one governance corpus now have unreconciled architectural proposals."
+    },
+    {
+      "id": "canonical-research-graph-is-supplementary-not-authoritative",
+      "status": "RECORDED",
+      "source": "research/canonical/ (canonical-research.json, research-index.xml, CONSOLIDATION-REPORT.md, ARCHITECTURE-DECISIONS.md, index.md)",
+      "note": "A cross-corpus consolidation graph was built at the user's request, covering all 6 research/governance corpora integrated so far (this session's own live research + batch1 + batch2 + batch3/current-wave + post-commit-ops + wave1). It is explicitly a SUPPLEMENTARY cross-reference/audit layer, not a replacement for this file or gaps.json or the OKF-frontmatter research/ markdown tree, which remain the authoritative, CI-validated record per ADR-0007. Built this way rather than replacing the existing system because the new LabLaunchPad.ResearchCanonical schema is a different, non-OKF-conformant shape, and silently swapping the knowledge system's architecture was judged an undiscussed change this repository's own rules guard against. Its main net-new contribution: cross-corpus contradiction/version-drift detection (see CTR-A2A-VERSION, resolved) and a first delete_test pass over 25 candidate architecture boundaries, surfacing 3 evidenced-but-unplanned ADD_CANDIDATE boundaries (WorkspaceEngine, SandboxEngine, SideEffectEngine) not previously named as a set in gaps.json."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

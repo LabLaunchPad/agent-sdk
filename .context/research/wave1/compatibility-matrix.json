@@ -1,0 +1,39 @@
+[
+  {
+    "domain": "MCP",
+    "baseline": "2026-07-28",
+    "spec_support": "VERIFIED",
+    "message_conformance": "UNKNOWN",
+    "transport_conformance": "UNKNOWN",
+    "error_conformance": "UNKNOWN",
+    "lifecycle_conformance": "UNKNOWN",
+    "security_conformance": "UNKNOWN",
+    "interoperability": "NOT_RUN"
+  },
+  {
+    "domain": "A2A",
+    "baseline": "0.3.0",
+    "spec_support": "VERIFIED",
+    "message_conformance": "UNKNOWN",
+    "transport_conformance": "DOCUMENTED",
+    "error_conformance": "UNKNOWN",
+    "lifecycle_conformance": "UNKNOWN",
+    "security_conformance": "UNKNOWN",
+    "interoperability": "NOT_RUN"
+  },
+  {
+    "domain": "OpenAI Agents SDK",
+    "baseline": "UNPINNED",
+    "spec_support": "N/A",
+    "runtime_features": "DOCUMENTED",
+    "sandbox": "DOCUMENTED",
+    "interoperability": "NOT_RUN"
+  },
+  {
+    "domain": "Microsoft Agent Framework",
+    "baseline": "UNPINNED",
+    "workflow": "DOCUMENTED",
+    "checkpointing": "DOCUMENTED",
+    "interoperability": "NOT_RUN"
+  }
+]

@@ -189,6 +189,49 @@ batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect
 model) — two unrelated corpora landing on the same "never blindly retry
 an operation with an unknown side-effect outcome" rule.
 
+## "Wave1" import — fifth research corpus, mostly reinforcement + new benchmark categories (not silent)
+
+A fifth corpus (`research_run_id: llp-rsch-2026-08-17-wave1`, self-checksummed,
+54/54 files verified). Mostly another independent MCP/A2A/OpenAI Agents SDK
+pass — reinforcing, not contradicting, this session's own findings (MCP
+version agreement across all 3 sources that researched it; A2A's opaque
+trust model corroborated) — plus genuinely new content: 3 formally-numbered
+`WAVE1-ADR-*.md` decision proposals (MCP baseline, semantic portability,
+durability boundary), 3 new cross-cutting topics
+(`research/topics/{durability-exactly-once,e5-evidence-levels,capability-aware-routing}.md`),
+and 7 new benchmark-plan categories extending `research/benchmarks/` (all
+explicitly `NOT_RUN`, 0/14 E5 executed, no fabricated results). Its own
+`drift-report.json` flagged A2A version drift as HIGH impact — this
+session's follow-up live WebSearch confirmed the drift was real but that
+wave1's own "0.3.0 official latest" claim was itself the stale data point
+(see `research/protocols/a2a-1.0.1.md`'s "Version drift" section and
+`research/canonical/CONSOLIDATION-REPORT.md` Section C). Despite the
+source's confident "ADR-001"/"ADOPT" naming, all 3 proposals are recorded
+in `.context/research/decisions.json` at `CANDIDATE` status, same as every
+other imported decision — naming confidence in a source does not confer
+this repository's actual architectural authority.
+
+## Canonical multi-corpus consolidation (`research/canonical/`)
+
+At the user's explicit request, all 6 research/governance corpora
+integrated so far (this session's own live research + batches 1-3 +
+post-commit-ops + wave1) were consolidated into one deduplicated,
+evidence-graded knowledge graph per a user-supplied
+`LabLaunchPad.ResearchCanonical` schema — see `research/canonical/index.md`
+for the entry point. **Explicitly supplementary, not authoritative**: it
+does not replace `.context/research/{gaps,decisions}.json` or the OKF
+markdown tree (ADR-0007 remains in force); recorded as such in
+`.context/research/decisions.json`'s
+`canonical-research-graph-is-supplementary-not-authoritative` entry. Its
+main net-new contribution is cross-corpus contradiction/version-drift
+detection (the A2A resolution above) and a first `delete_test` pass over
+25 candidate architecture boundaries against `docs/architecture/PACKAGE-MAP.md`,
+surfacing 3 evidenced-but-unplanned `ADD_CANDIDATE` boundaries
+(`WorkspaceEngine`, `SandboxEngine`, `SideEffectEngine`) — flagged for a
+future ADR, **not** added to the package map by this consolidation itself.
+Status recorded honestly as `PARTIAL`: E5 reproduction remains 0/14 across
+every corpus combined.
+
 ## Explicitly deferred (installment 4+)
 
 Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills — all recorded

@@ -1,0 +1,38 @@
+{
+  "MCP": [
+    {
+      "from": "2025-11-25-era assumptions",
+      "to": "2026-07-28",
+      "delta": "protocol core becomes stateless; initialize/initialized and Mcp-Session-Id retired",
+      "impact": "HIGH",
+      "status": "VERIFIED",
+      "source": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    },
+    {
+      "from": "prior assumptions",
+      "to": "2026-07-28",
+      "delta": "header-based routing via Mcp-Method/Mcp-Name and optional server/discover",
+      "impact": "HIGH",
+      "status": "VERIFIED",
+      "source": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    },
+    {
+      "from": "prior assumptions",
+      "to": "2026-07-28",
+      "delta": "extensions framework formalized; Tasks is an extension; auth hardening and CIMD direction",
+      "impact": "HIGH",
+      "status": "VERIFIED",
+      "source": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    }
+  ],
+  "A2A": [
+    {
+      "from": "0.2.6",
+      "to": "0.3.0",
+      "delta": "Current official version advanced to 0.3.0",
+      "impact": "HIGH",
+      "status": "VERIFIED",
+      "source": "https://a2a-protocol.org/v0.3.0/specification/"
+    }
+  ]
+}

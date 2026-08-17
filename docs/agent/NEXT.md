@@ -37,14 +37,19 @@ also has a real, logged gap: no case targets constitution sections 5
 (Evidence/Verdict) or 6 (Agent/workflow boundary) specifically — worth
 closing with a real implementation to test against, not more spec work.
 
-Deferred, lower priority, still queued: Volcengine AgentKit and Baidu
-AppBuilder SDK (`.context/research/gaps.json` — deliberately not
-researched in Phase 1B since no pending ADR needs them; see
-`research/reconciliation/RESEARCH-REOPEN-GATES.md` for the actual reopen
-conditions). Also queued: PydanticAI/Kimi Agent SDK deepening passes, the
-full 40-dimension checklist, comparative network-disabled testing, and the
-token/context-efficiency and UX/DX audit files — all explicitly deferred
-from installment 3, not dropped.
+**Resolved, no longer queued** (2026-08-18): Volcengine AgentKit and Baidu
+AppBuilder SDK are now researched (`CLOUD_ONLY`, local-first/licensing/
+model-coupling depth) — the original 17-source brief is 17/17. PydanticAI/
+Kimi Agent SDK deepening passes and the token/context-efficiency and UX/DX
+audit files are also done. See `docs/agent/NOW.md`'s "Volcengine AgentKit
+/ Baidu AppBuilder SDK closed" section and
+`research/imported-corpus/SOURCE-RECEIPT-5.md`.
+
+Still queued, lower priority: the full 40-dimension checklist (per-
+framework depth across state/memory/context/security/evaluation/DX/UX for
+all already-researched frameworks — explicitly scoped as a deferred,
+not-yet-started broad pass, see `docs/agent/DECISIONS.md`), comparative
+network-disabled testing.
 
 **Resolved in Phase 1B, no longer queued**: `GAP-ARCHITECTURE-RECONCILIATION`
 (P0) — the formal ADR-writing pass over the accumulated ADR-CANDIDATEs is

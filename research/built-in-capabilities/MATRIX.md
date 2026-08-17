@@ -17,7 +17,7 @@ generated:
   by: process:claude-code-session
   at: 2026-08-17T00:00:00Z
 status: draft
-x_coverage: 5 of 17 sources have at least one populated column; Qwen-Agent, Youtu-Agent and Kimi were not researched against this specific dimension set. A separate 5-framework supplementary comparison (OpenHands, Letta, Google ADK, Browser Use, CrewAI) is summarized below rather than added as columns, to keep this table readable — see /research/comparison/CAPABILITY-MATRIX.md
+x_coverage: 5 of 17 sources have at least one populated column; Qwen-Agent, Youtu-Agent, Kimi, Volcengine AgentKit and Baidu AppBuilder SDK were not researched against this specific dimension set (Volcengine/Baidu's 2026-08-18 research pass covered local-first/licensing/model-coupling only, not this capability matrix's tools/memory/checkpointing columns — see their overview.md files). A separate 5-framework supplementary comparison (OpenHands, Letta, Google ADK, Browser Use, CrewAI) is summarized below rather than added as columns, to keep this table readable — see /research/comparison/CAPABILITY-MATRIX.md
 ---
 
 # Built-In Capability Matrix

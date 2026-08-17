@@ -70,8 +70,43 @@ it cleanly.
 | Assuming backend-swap is semantically uniform                                           | **REJECT the assumption** | Directly falsified by Temporal-vs-DBOS/Prefect runtime-swap behaviour difference — our own `RuntimeAdapter` conformance tests (Phase 17) must test swap behaviour explicitly, not just steady-state execution, per this evidence |
 | Waiting for a "first-class RuntimeCapability interface" pattern before building our own | **ADAPT**                 | PydanticAI's own open issue confirms this is unsolved even in a mature ecosystem — we should design our `RuntimeAdapter` contract deliberately in Phase 17 rather than assuming a reference implementation exists to copy        |
 
+## Deepening pass [2026-08-18, E3]
+
+> Closes part of the "Open questions" gap below. Independently verified
+> via direct WebFetch of PydanticAI's own official docs, after a
+> user-supplied external research pass on this framework was found to
+> have unverifiable citations and could not be trusted as-is — see
+> `research/imported-corpus/SOURCE-RECEIPT-5.md`.
+
+**Multi-agent / delegation support**: native, called **"Agent
+delegation"** in PydanticAI's own terminology — one agent calls another
+agent's `.run()` method from within a tool function defined on the
+parent agent, passing `usage=ctx.usage` to accumulate token counts
+across both agents. Confirmed by directly fetching
+`https://pydantic.dev/docs/ai/guides/multi-agent-applications/`, which
+states: _"'Agent delegation' refers to the scenario where an agent
+delegates work to another agent, then takes back control when the
+delegate agent finishes."_ [E3]
+
+**State/memory model**: no built-in memory or state abstraction.
+PydanticAI's own docs state agents "are stateless and designed to be
+global" — state management is entirely the calling application's
+responsibility. The framework provides mechanisms for _sharing context_
+(the `deps` parameter for dependencies, `message_history` for
+conversation history, `usage` for token tracking) but not a _managed_
+state layer. [E3, same source]
+
+**Local-first classification** (from this deepening pass):
+
+| Capability             | Classification | Evidence                                                                              |
+| ---------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| State persistence      | `LOCAL_NATIVE` | [E3] Caller controls storage entirely — no built-in cloud dependency, confirmed above |
+| Multi-agent delegation | `LOCAL_NATIVE` | [E3] In-process tool-call mechanism, no external orchestration service required       |
+
 ## Open questions
 
 - Local-first / offline model support — not yet researched for this
-  framework specifically.
-- Full capability catalog (tools, memory) — not yet researched.
+  framework specifically (model execution itself, distinct from state/
+  multi-agent, above).
+- Full capability catalog (tools beyond delegation, evaluation/testing
+  story, DX signals) — not yet researched.

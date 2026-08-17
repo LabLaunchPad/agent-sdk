@@ -339,10 +339,31 @@ detail:
 `ACTION-REQUIRED-TRIAGE.md`, `RESEARCH-REOPEN-GATES.md`,
 `ARCHITECTURE-FREEZE-CANDIDATE.md`, `POST-COMMIT-OPS-DECISION.md`).
 
+## Volcengine AgentKit / Baidu AppBuilder SDK closed (2026-08-18)
+
+The original 17-source brief is now **17/17 researched or explicitly
+resolved**. Volcengine AgentKit and Baidu AppBuilder SDK were the last
+two — closed via independent WebFetch/WebSearch verification (local-
+first/licensing/model-coupling dimensions only), **after** a user-
+commissioned external research pass on both frameworks was found to have
+disqualifying evidentiary defects (unverifiable bare-bracketed citations
+with no bibliography, fabricated checksum placeholders, no zip actually
+produced) and was not imported as-is — see
+`research/imported-corpus/SOURCE-RECEIPT-5.md` for the full defect
+record and `research/frameworks/{volcengine-agentkit,baidu-appbuilder-sdk}/overview.md`
+for what this session actually verified and adopted. Both classified
+`CLOUD_ONLY`. One external claim was corrected (Baidu AppBuilder is not
+ERNIE-exclusive), one was checked and rejected (Volcengine's "99% token
+savings" claim did not corroborate). The Kimi Agent SDK local-first
+`UNKNOWN` from installment 1 was also resolved this pass (`CLOUD_ONLY`,
+confirmed via Moonshot's own docs), and PydanticAI's multi-agent/state
+model was deepened (native "Agent delegation" pattern, no built-in
+memory). Two new comparative audits added:
+`research/comparison/{TOKEN-CONTEXT-EFFICIENCY,UX-DX-AUDIT}.md`.
+
 ## Explicitly deferred (installment 4+)
 
-Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills — all recorded
-`UNKNOWN`, never silently assumed. Full per-framework 40-dimension depth
+Full per-framework 40-dimension depth
 (state, memory, context, security, evaluation, DX, UX, plus the
 DOCUMENTED/OBSERVED-IN-SOURCE/OBSERVED-IN-TESTS/REPRODUCED-BY-US/UNKNOWN
 precision scheme) for all 8 already-researched frameworks — installments

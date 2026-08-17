@@ -61,12 +61,28 @@ bindings later — not parallel implementations).
 | One runtime, many thin language bindings sharing config/tools/skills/MCP/sessions | **ADOPT** (pattern only) | Directly validates ADR-0001's binding strategy — independent evidence that a real, shipping multi-language agent SDK chose the same shape we already committed to                          |
 | CLI-as-execution-engine, SDK as a client of it                                    | **ADAPT**                | LabLaunchPad's canonical runtime is a library (`@lablaunchpad/agent-sdk`), not necessarily a CLI process — the _shared-runtime_ idea transfers, the specific CLI-process mechanism may not |
 
+## Deepening pass [2026-08-18, E3] — closes the local-first UNKNOWN below
+
+> Independently verified via direct WebFetch of Moonshot's own platform
+> docs, after a user-supplied external research pass on this framework
+> was found to have unverifiable citations and could not be trusted as-is
+> — see `research/imported-corpus/SOURCE-RECEIPT-5.md`.
+
+**Local-first classification: `CLOUD_ONLY`** (resolved, was `UNKNOWN`).
+Directly fetched `https://platform.kimi.com/docs`: the documented API
+usage requires "你需要从 Kimi 开放平台中创建一个 API Key" ("you need to
+create an API Key from the Kimi open platform"), and the docs state
+compatibility "兼容 OpenAI API 格式" (compatible with the OpenAI API
+format) — a wire-format compatibility statement, not evidence of
+self-hosted model support. No documented path to a self-hosted or
+open-weight Kimi model endpoint was found anywhere in the fetched
+documentation. [E3]
+
+This is the answer, not a restatement of the gap: the prior installment
+correctly identified this as unknown; this pass closes it with a
+`CLOUD_ONLY` classification rather than leaving it open again.
+
 ## Open questions
 
-- **Local-first / offline capability**: genuinely UNKNOWN from this pass.
-  The README emphasizes "keep the CLI as the execution engine" but does not
-  state whether the CLI can run against a fully local model with no
-  Moonshot AI account — needs a direct read of the Kimi CLI's own model
-  configuration docs, not yet done.
 - Full built-in capability inventory — not yet researched.
 - Security/sandbox boundary for local tool execution — not yet researched.

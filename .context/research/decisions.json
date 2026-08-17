@@ -87,6 +87,46 @@
       "id": "correct-mastra-licensing-two-tier-to-three-tier",
       "status": "CORRECTION_RECORDED",
       "note": "First draft recorded a simple core/ee two-way license split for Mastra; deeper research found a third, distinguishable platform tier (Studio/observability/Memory Gateway, commercially metered). Corrected in research/licensing/MATRIX.md and .context/research/licensing.json, not silently overwritten."
+    },
+    {
+      "id": "adopt-runtime-and-sandbox-as-explicit-contracts",
+      "pattern": "workspace-sandbox-as-explicit-contract",
+      "status": "CANDIDATE",
+      "source": "imported corpus: OpenHands, Browser Use, Letta",
+      "note": "OpenHands makes workspace/runtime boundaries explicit as a named contract; converges with Mastra's Workspace (installment 3) and Youtu-Agent's Environment (installment 2) - now a 3-way independent convergence on 'workspace/environment as an explicit, swappable contract'. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adopt-durable-state-distinct-from-memory",
+      "pattern": "durable-agent-state-distinct-from-memory-context-knowledge",
+      "status": "CANDIDATE",
+      "source": "imported corpus: Letta, Google ADK, CrewAI",
+      "note": "Letta provides evidence for treating State/Memory/Context/Knowledge/Evidence/Transcript as six distinct concepts rather than collapsing them. Directly relevant to Phase 4/7 persistence work and complements the checkpointing-vs-persistence-lifecycle contradiction from LangGraph. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adopt-context-broker-progressive-disclosure",
+      "pattern": "context-broker-with-progressive-disclosure-and-token-budgets",
+      "status": "CANDIDATE",
+      "source": "imported corpus: Google ADK, Letta, OpenHands, Browser Use",
+      "note": "Multiple frameworks independently implement filtering/summarization/lazy-loading/token-tracking as an explicit context-management subsystem - relevant to Phase 6 (Context Compiler). Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "reject-llm-only-security-judgement",
+      "contradiction": "imported corpus CONTRADICTION-MATRIX.md #7 (LLM security judgement vs deterministic enforcement)",
+      "status": "ACTION_REQUIRED",
+      "source": "imported corpus: OpenHands",
+      "note": "OpenHands' own docs state its LLM-based security analyzer is explicitly not a complete prompt-injection solution, and execute_tool() bypasses conversation analyzers/confirmation entirely - capability enforcement must live below the agent loop, not rely on model judgement. Directly actionable for this repository's own Policy Gate design. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "defer-default-multiagent-hierarchy",
+      "status": "DEFERRED",
+      "source": "imported corpus RESEARCH-RECEIPT.md 'Requirements to defer'",
+      "note": "Imported corpus's contradiction #3 (multi-agent coordination vs measurable coordination overhead) supports keeping single-agent as the default and multi-agent orchestration opt-in, not a default hierarchy. Consistent with this repository's own minimal-core bias; not yet cross-checked against the existing locked architecture per the corpus's own caveat that candidate deletions/changes need that comparison first."
+    },
+    {
+      "id": "imported-corpus-not-yet-reconciled-with-architecture",
+      "status": "ACTION_REQUIRED",
+      "source": "research/imported-corpus/SOURCE-RECEIPT.md",
+      "note": "The imported corpus proposes 6 ADR-CANDIDATEs (separate Runtime from Agent semantics; formalize State/Memory/Context/Knowledge/Evidence/Transcript; introduce ContextBroker; mandatory action-boundary policy for dangerous capabilities; opt-in multi-agent orchestration; semantic adapter policy for external frameworks) and 10 proposed benchmarks. None have been compared against the existing locked architecture (docs/architecture/PACKAGE-MAP.md, existing ADRs) or cross-checked against this session's own installment 1-3 findings yet - that reconciliation is future work, not performed as part of this import."
     }
   ],
   "generated_at": "2026-08-17T00:00:00Z"

@@ -1,0 +1,82 @@
+{
+  "purpose": "Delta of five additional ecosystems against the prior LabLaunchPad corpus",
+  "coverage": [
+    "OpenAI Agents SDK",
+    "Microsoft Agent Framework",
+    "LangGraph",
+    "PydanticAI",
+    "Mastra",
+    "Qwen-Agent",
+    "Tencent Youtu-Agent",
+    "Volcengine AgentKit",
+    "Baidu AppBuilder",
+    "Kimi Agent SDK",
+    "MCP",
+    "A2A",
+    "Agent Skills",
+    "OpenHands",
+    "Letta",
+    "Google ADK",
+    "Browser Use",
+    "CrewAI"
+  ],
+  "new_high_value_patterns": [
+    {
+      "id": "PAT-RUNTIME-001",
+      "pattern": "Workspace/Sandbox as explicit contracts",
+      "sources": ["OpenHands", "Browser Use", "Letta"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-MEMORY-001",
+      "pattern": "Durable agent state separate from memory/context",
+      "sources": ["Letta", "ADK", "CrewAI"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-CONTEXT-001",
+      "pattern": "Context broker with progressive disclosure and compression",
+      "sources": ["ADK", "Letta", "OpenHands", "Browser Use"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-EVAL-001",
+      "pattern": "Tool trajectory evaluation separate from response quality",
+      "sources": ["ADK"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-MINIMAL-001",
+      "pattern": "Thin environment-native core loop",
+      "sources": ["Browser Use"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-SECURITY-001",
+      "pattern": "Deterministic action-boundary policy + sandbox, not LLM-only security",
+      "sources": ["OpenHands"],
+      "decision": "ADOPT"
+    },
+    {
+      "id": "PAT-WORKFLOW-001",
+      "pattern": "Autonomy vs deterministic workflow as separate modes",
+      "sources": ["ADK", "CrewAI"],
+      "decision": "ADAPT"
+    },
+    {
+      "id": "PAT-ROLE-001",
+      "pattern": "Role/task metadata for human mental model, not mandatory orchestration",
+      "sources": ["CrewAI", "Browser Use"],
+      "decision": "INVESTIGATE"
+    }
+  ],
+  "new_research_gaps": [
+    "Cross-framework reproduction on identical tasks and providers",
+    "exact dependency-license inventories and documentation copyright terms",
+    "quantified coordination break-even for multi-agent vs single-agent execution",
+    "memory poisoning/staleness benchmarks across persistent-agent frameworks",
+    "runtime escape testing across local, Docker, cloud browser and managed runtimes",
+    "exact context token accounting across current framework releases"
+  ],
+  "architecture_status": "No rewrite performed; conflicting evidence becomes ADR-CANDIDATE."
+}

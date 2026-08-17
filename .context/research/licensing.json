@@ -53,6 +53,17 @@
   },
   "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",
   "installment_3_rule": "Check the whole tree, not just the root LICENSE file - confirmed necessary by two independent frameworks (LangGraph, Mastra) both splitting license by directory/package.",
+  "imported_supplementary_corpus": {
+    "coverage": "5 additional frameworks beyond the original 17-source brief, license TYPE credibly sourced but status is IMPORTED CLAIM / DOCUMENTED_NOT_REPRODUCED, not FACT - see research/licensing/MATRIX.md's imported-corpus rows",
+    "licenses": {
+      "openhands": { "license": "MIT", "whole_tree_checked": false },
+      "letta": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "google-adk": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "browser-use": { "license": "MIT", "whole_tree_checked": false },
+      "crewai": { "license": "MIT", "whole_tree_checked": false }
+    },
+    "caveat": "given installment 3's finding that 2 of 7 directly-researched frameworks split their license by directory/tier, do not assume these five are uniformly licensed without a direct whole-tree check"
+  },
   "source": "research/licensing/MATRIX.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

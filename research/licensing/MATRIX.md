@@ -17,11 +17,21 @@ sources:
     id: langgraph-license
   - resource: https://github.com/mastra-ai/mastra/blob/main/LICENSE.md
     id: mastra-license
+  - resource: /research/frameworks/openhands/licensing.md
+    id: openhands-license
+  - resource: /research/frameworks/letta/licensing.md
+    id: letta-license
+  - resource: /research/frameworks/google-adk/licensing.md
+    id: google-adk-license
+  - resource: /research/frameworks/browser-use/licensing.md
+    id: browser-use-license
+  - resource: /research/frameworks/crewai/licensing.md
+    id: crewai-license
 generated:
   by: process:claude-code-session
   at: 2026-08-17T00:00:00Z
 status: draft
-x_coverage: 7 of 17 sources
+x_coverage: 7 of 17 sources from the original research brief researched live in this session, plus 5 additional frameworks from an imported supplementary corpus (see note below)
 ---
 
 # Licensing Matrix
@@ -36,6 +46,27 @@ x_coverage: 7 of 17 sources
 | Tencent Youtu-Agent       | MIT                                                                                                                                                                                                                                                                   | Tencent, 2025                                                                                                          | Yes                                                          | Permitted                                                    | Permitted                                                                                                                        | No                                                                                           | No                                                                                                                   | **FACT** — LICENSE file directly fetched and quoted: "Tencent is pleased to support the open source community by making Youtu-agent available. Copyright (C) 2025 Tencent."  |
 | **LangGraph**             | **Split** — core (`langgraph`, `langchain-core`, model integrations) is MIT                                                                                                                                                                                           | LangChain, Inc., 2024                                                                                                  | Yes for MIT-covered code                                     | Permitted for core; restricted for `langgraph-api`           | Permitted for core; **restricted for `langgraph-api`** (Elastic License 2.0 limits offering as a competing hosted service)       | No (MIT core is patent-silent; Elastic 2.0 terms differ, not independently re-verified here) | **Yes — this pass specifically checked beyond the root LICENSE and found the split**                                 | **FACT** — both the core LICENSE and the `langgraph-api`/Elastic split are independently sourced. See `research/contradictions/license-split-by-directory.md`.               |
 | **Mastra**                | **Three-tier, not a simple split** — (1) core framework: Apache-2.0; (2) platform (Studio/observability/Memory Gateway): self-hostable or hosted, commercially metered, not a code license per se; (3) Enterprise Edition: separate Mastra Enterprise Edition License | Kepler Software (Mastra maintainers)                                                                                   | Yes for Apache-2.0-covered code                              | Permitted for core; restricted for platform/Enterprise tiers | Permitted for core; **restricted/metered for platform tier; restricted for Enterprise tier** (source-available, not open source) | **Yes — express patent grant for Apache-2.0-covered code**                                   | **Yes — this pass specifically checked beyond the root LICENSE and found three distinguishable tiers, not just two** | **FACT** — Mastra's own licensing docs page and pricing page directly state the platform/Enterprise separation. See `research/contradictions/license-split-by-directory.md`. |
+
+| **OpenHands Software Agent SDK** (imported, not independently re-verified) | MIT | UNKNOWN — inspect repository-level notices before redistribution, not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/openhands/licensing.md` |
+| **Letta** (imported, not independently re-verified) | Apache-2.0 | UNKNOWN — not captured by the source corpus | Yes — plus NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes (if Apache-2.0) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/letta/licensing.md` |
+| **Google Agent Development Kit (ADK)** (imported, not independently re-verified) | Apache-2.0 (Python/Go) | UNKNOWN — not captured by the source corpus | Yes — plus NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes (if Apache-2.0) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/google-adk/licensing.md` |
+| **Browser Use** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/browser-use/licensing.md` |
+| **CrewAI** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/crewai/licensing.md` |
+
+## Imported corpus caveat
+
+The five rows above (OpenHands, Letta, Google ADK, Browser Use, CrewAI) come
+from a research pass the user supplied, not from this session's own
+WebFetch/WebSearch calls. Their license _type_ is credibly sourced (each
+`licensing.md` cites the framework's own repository), but this repository's
+evidence discipline does not upgrade an unreproduced claim to `FACT` just
+because it looks credible — hence `IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED`
+rather than `FACT`, consistently with the imported corpus's own status
+vocabulary. None of the five had their copyright holder or whole-tree
+license status captured by the source corpus — recorded as `UNKNOWN`, not
+inferred. Given installment 3's finding that license splits are common
+(2 of 7 directly-researched frameworks), **do not assume these five are
+uniformly licensed** without a direct check.
 
 ## Governing rule (from the research brief, restated)
 

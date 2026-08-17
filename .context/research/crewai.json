@@ -1,0 +1,81 @@
+{
+  "framework": "CrewAI",
+  "snapshot": "2026 current docs/release snapshot",
+  "repo": "https://github.com/crewAIInc/crewAI",
+  "docs": "https://docs.crewai.com/",
+  "license": "MIT",
+  "evidence_level_policy": {
+    "E0": "prior/model knowledge",
+    "E1": "community signal",
+    "E2": "repo/source evidence",
+    "E3": "official documentation",
+    "E4": "official docs + implementation/tests",
+    "E5": "LabLaunchPad reproduction/benchmark"
+  },
+  "target_user": "business automation developers",
+  "application_type": "multi-agent workflows",
+  "execution": ["local", "managed AMP"],
+  "short_vs_long": "short to long workflow",
+  "core": ["Agent", "Task", "Crew", "Flow", "Memory", "Knowledge", "Guardrail"],
+  "status": "DOCUMENTED_NOT_REPRODUCED",
+  "claim_ledger": [
+    {
+      "claim": "Agents concept: roles, tools, collaboration",
+      "source": "https://docs.crewai.com/concepts/agents",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Tasks: dependency/context and async execution",
+      "source": "https://docs.crewai.com/concepts/tasks",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Crews: sequential/hierarchical execution",
+      "source": "https://docs.crewai.com/concepts/crews",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Flows: structured stateful orchestration",
+      "source": "https://docs.crewai.com/concepts/flows",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Memory subsystem",
+      "source": "https://docs.crewai.com/concepts/memory",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Current docs overview: guardrails, HITL, observability, deployment",
+      "source": "https://docs.crewai.com/",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "MIT license and current release info",
+      "source": "https://github.com/crewAIInc/crewAI",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    }
+  ],
+  "lablaunchpad_decisions": {
+    "ADOPT": "clear Task contract, typed workflow state, structured output, progressive autonomy/control split.",
+    "ADAPT": "role-oriented Agent metadata as optional persona/competency descriptors rather than mandatory hierarchy.",
+    "REJECT": "manager-agent hierarchy as default for ordinary tasks.",
+    "DEFER": "enterprise control-plane cloning.",
+    "INVESTIGATE": "exact break-even point where multi-agent collaboration improves verified outcome per total cost."
+  },
+  "reproduction_required": true,
+  "code_reuse": false
+}

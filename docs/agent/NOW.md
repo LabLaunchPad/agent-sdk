@@ -79,6 +79,33 @@ candidate for Phase 18, not an ADR yet (`research/protocols/mcp-2026-07-28.md`).
 vulnerability — a concrete argument for applying this repository's own
 Policy Gate to state/checkpoint query paths, not only tool invocation.
 
+## Supplementary corpus import (explicit scope expansion, not silent)
+
+The user supplied a prior, external research pass covering **5 frameworks
+not named in the original 17-source brief**: OpenHands Software Agent SDK,
+Letta, Google Agent Development Kit (ADK), Browser Use, and CrewAI —
+85 per-dimension files, 13 cross-framework comparison matrices, and 6
+machine-facing JSON summaries. This is a genuine scope expansion beyond the
+17-source list, recorded here explicitly rather than folded silently into
+the "8 of 17" figure above. Integrated into `research/frameworks/{name}/`,
+`research/comparison/`, `research/imported-corpus/SOURCE-RECEIPT.md`, and
+`.context/research/{gaps,decisions,local-first,licensing,capabilities}.json`
+plus the 5 new per-framework `.context/research/{name}.json` files.
+
+**Provenance discipline applied**: this corpus is real, URL-cited E3/E4
+evidence, but it was **not independently re-fetched or re-verified via
+WebSearch/WebFetch in this session**. Every imported file carries an
+explicit `x_provenance` frontmatter field saying so, and every reference to
+it in the master matrices is tagged `IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED`
+rather than `FACT` or `VERIFIED` — the same evidence-level discipline
+applied throughout installments 1-3, extended to a case where the _research_
+itself (not just a framework's own claims) was not performed by this
+session. Six new decision candidates were recorded from it in
+`.context/research/decisions.json`, none auto-adopted into architecture —
+the imported receipt's own 6 ADR-CANDIDATEs and 10 proposed benchmarks have
+**not** been reconciled against the existing locked architecture; that
+reconciliation is future work.
+
 ## Explicitly deferred (installment 4+)
 
 Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills — all recorded

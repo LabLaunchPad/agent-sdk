@@ -21,6 +21,15 @@ Also queued: PydanticAI/Kimi Agent SDK deepening passes, the full
 token/context-efficiency and UX/DX audit files — all explicitly deferred
 from installment 3, not dropped.
 
+**Also queued, lower priority**: independent re-verification (live
+WebFetch/WebSearch) of the imported 5-framework supplementary corpus
+(OpenHands, Letta, Google ADK, Browser Use, CrewAI — see `docs/agent/NOW.md`
+"Supplementary corpus import"), and reconciliation of its 6 ADR-CANDIDATEs
+and 10 proposed benchmarks against the existing locked architecture. This
+corpus expands scope beyond the original 17-source brief and was not
+requested by the operating prompt — it is queued because it was supplied,
+not because completing it blocks the original brief's remaining 4 sources.
+
 **P02 — System Specification.**
 Entry condition: Workstream B's research is judged sufficient to derive the
 LabLaunchPad target architecture and spec/benchmark deltas the operating

@@ -58,6 +58,17 @@
     }
   },
   "installment_3_observation": "local-first is not one axis; LangGraph and Mastra are each strong on checkpointing/storage-plus-tools and unresolved on model execution - per-capability columns are load-bearing, not the single verdict. LangGraph's more precise finding is persistence LIFECYCLE risk (retention, schema migration), not a local-vs-cloud backend gap.",
+  "imported_supplementary_corpus": {
+    "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+    "provenance": "beyond the original 17-source brief; user-supplied, not independently re-verified via WebFetch/WebSearch in this session - see individual .context/research/{name}.json files and research/imported-corpus/SOURCE-RECEIPT.md",
+    "verdicts": {
+      "openhands": "LOCAL_CAPABLE - local/ephemeral Agent Server workspace, Cloud also available; local mount can expose writable host files (named caveat)",
+      "letta": "LOCAL_CAPABLE - self-hostable via Docker/PostgreSQL, or managed cloud; needs Postgres, not zero-infra",
+      "google-adk": "LOCAL_CAPABLE, platform-adjacent - local/container execution exists but platform services (Agent Runtime/Cloud Run/GKE) materially expand the surface",
+      "browser-use": "LOCAL_NATIVE for the core loop - deliberately minimal thin task+environment abstraction, OSS local browser is the default",
+      "crewai": "LOCAL_CAPABLE - open-source framework and the managed AMP platform are explicitly different things"
+    }
+  },
   "source": "research/local-first/SCORECARD.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

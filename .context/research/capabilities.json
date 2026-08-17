@@ -52,6 +52,27 @@
       "note": "checkpoint retention/archival and state-schema migration are open, unsolved problems in LangGraph independent of which backend (local or cloud) is used - see research/contradictions/checkpointing-vs-persistence-lifecycle.md"
     }
   },
+  "imported_supplementary_corpus": {
+    "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+    "provenance": "beyond the original 17-source brief; user-supplied, not independently re-verified via WebFetch/WebSearch in this session",
+    "patterns": {
+      "workspace_sandbox_as_explicit_contract": {
+        "sources": ["openhands", "browser-use", "letta"],
+        "note": "3rd independent convergence with Mastra's Workspace and Youtu-Agent's Environment on 'environment/workspace as an explicit, swappable contract'"
+      },
+      "durable_agent_state_distinct_from_memory_context_knowledge": {
+        "sources": ["letta", "google-adk", "crewai"]
+      },
+      "context_broker_progressive_disclosure": {
+        "sources": ["google-adk", "letta", "openhands", "browser-use"]
+      },
+      "action_boundary_deterministic_policy_not_llm_only": {
+        "sources": ["openhands"],
+        "note": "OpenHands' own docs: LLM security analyzer is explicitly not a complete solution; execute_tool() bypasses conversation analyzers/confirmation - see decisions.json reject-llm-only-security-judgement"
+      }
+    },
+    "detail": "see research/comparison/CAPABILITY-MATRIX.md and research/comparison/SECURITY-MATRIX.md for the full imported comparison"
+  },
   "source": "research/built-in-capabilities/MATRIX.md",
   "generated_at": "2026-08-17T00:00:00Z"
 }

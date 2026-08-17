@@ -17,7 +17,7 @@ generated:
   by: process:claude-code-session
   at: 2026-08-17T00:00:00Z
 status: draft
-x_coverage: 5 of 17 sources have at least one populated column; Qwen-Agent, Youtu-Agent and Kimi were not researched against this specific dimension set
+x_coverage: 5 of 17 sources have at least one populated column; Qwen-Agent, Youtu-Agent and Kimi were not researched against this specific dimension set. A separate 5-framework supplementary comparison (OpenHands, Letta, Google ADK, Browser Use, CrewAI) is summarized below rather than added as columns, to keep this table readable — see /research/comparison/CAPABILITY-MATRIX.md
 ---
 
 # Built-In Capability Matrix
@@ -86,3 +86,27 @@ independently configurable with per-tool approval gating) is the closest
 match across all 8 frameworks researched to this repository's own planned
 `adapters/tools/{filesystem,sandbox}` boundary combined with a policy layer
 in one coherent abstraction. See `research/frameworks/mastra/overview.md`.
+
+## Supplementary corpus: OpenHands, Letta, Google ADK, Browser Use, CrewAI
+
+An imported research pass (see `research/local-first/SCORECARD.md`'s
+"Supplementary corpus" section for the full provenance note) covers 5
+additional frameworks beyond this table's 5 columns, using a differently
+shaped capability matrix. Rather than force those into 5 more columns here
+(the table is already wide), the full comparison lives at
+`research/comparison/CAPABILITY-MATRIX.md` and
+`research/comparison/SECURITY-MATRIX.md`. Key points that map onto this
+table's existing rows:
+
+- **Shell/filesystem**: NATIVE for OpenHands (built-in); tool-dependent for
+  Letta, Google ADK, CrewAI; not core for Browser Use.
+- **MCP support**: confirmed present for OpenHands, Letta (out-of-process),
+  Google ADK; possible/cloud-integration for Browser Use; via integrations
+  for CrewAI.
+
+The imported corpus also names capability dimensions this table does not
+yet have columns for — **Browser** (Browser Use's core capability),
+**Skills** (all five, in varying maturity), **Subagents**, **Human
+approval** (as an explicit state transition, not just a boolean), and
+**Structured output** — worth adding as new rows once these frameworks are
+independently re-verified rather than merged in as unverified columns now.

@@ -13,3 +13,7 @@ tmp/
 .tmp/
 .DS_Store
 *.log
+
+# Run-time evidence fixtures: created inside the worktree so `git cat-file`
+# can resolve real revisions, removed by the test that creates them.
+tests/fixtures/evidence/.runtime-*/

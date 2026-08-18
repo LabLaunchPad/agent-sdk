@@ -1,9 +1,19 @@
+import { execFileSync } from 'node:child_process';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'vitest';
 import { evidenceProvenanceValidator } from '../src/validators/evidence-provenance.js';
 
 const FIXTURES = path.resolve(import.meta.dirname, '../../../tests/fixtures/evidence');
+const REPO_ROOT = path.resolve(import.meta.dirname, '../../..');
 const fixture = (name: string): string => path.join(FIXTURES, name);
+
+const temporary: string[] = [];
+afterAll(async () => {
+  await Promise.all(
+    temporary.splice(0).map((dir) => rm(dir, { recursive: true, force: true })),
+  );
+});
 
 /**
  * M4 adversarial matrix (E1-E20). Fixtures live inside this repository's
@@ -110,9 +120,44 @@ describe('evidence-provenance-validator — provenance identity (M4)', () => {
 });
 
 describe('evidence-provenance-validator — freshness is a property of the claim (M4 §10)', () => {
+  /**
+   * These two cases must build their fixture at run time. A CURRENT_HEAD
+   * receipt names whatever HEAD is *now*, so a fixture with a baked-in sha
+   * silently rots the moment anyone commits - which is exactly the drift
+   * class this repository's controls exist to eliminate, and it was caught
+   * here by committing.
+   */
+  const write = async (scope: string, sha: string): Promise<string> => {
+    // Inside the worktree on purpose: the validator resolves a recorded
+    // revision with `git cat-file` relative to the root it is given, and a
+    // directory under /tmp is not in any repository, so every sha would come
+    // back unresolvable and the test would prove nothing about freshness.
+    const dir = await mkdtemp(path.join(FIXTURES, '.runtime-'));
+    temporary.push(dir);
+    await mkdir(path.join(dir, '.context', 'evidence'), { recursive: true });
+    await writeFile(
+      path.join(dir, '.context', 'evidence', 'r.json'),
+      JSON.stringify({
+        receipt_id: 'R',
+        provenance: {
+          claim_scope: scope,
+          producer: { kind: 'CI', id: 'x' },
+          repository: { sha },
+          toolchain: { node: '24.19.0' },
+          recorded_at: '2026-08-18',
+        },
+      }),
+      'utf8',
+    );
+    return dir;
+  };
+
+  const git = (args: string): string =>
+    execFileSync('git', args.split(' '), { cwd: REPO_ROOT, encoding: 'utf8' }).trim();
+
   it('E5: BLOCKS a CURRENT_HEAD claim made at an older revision', async () => {
     const result = await evidenceProvenanceValidator({
-      rootDir: fixture('stale-current-head'),
+      rootDir: await write('CURRENT_HEAD', git('rev-parse HEAD~1')),
     });
 
     expect(result.status).toBe('FAIL');
@@ -121,7 +166,7 @@ describe('evidence-provenance-validator — freshness is a property of the claim
 
   it('ACCEPTS a CURRENT_HEAD claim made at HEAD', async () => {
     const result = await evidenceProvenanceValidator({
-      rootDir: fixture('fresh-current-head'),
+      rootDir: await write('CURRENT_HEAD', git('rev-parse HEAD')),
     });
 
     expect(result.status).toBe('PASS');
@@ -131,7 +176,9 @@ describe('evidence-provenance-validator — freshness is a property of the claim
     // The counter-rule that stops this becoming a universal timestamp check: a
     // phase receipt records what happened at a revision, and stays true after
     // later commits. Forcing every receipt to HEAD would destroy that.
-    const result = await evidenceProvenanceValidator({ rootDir: fixture('valid') });
+    const result = await evidenceProvenanceValidator({
+      rootDir: await write('HISTORICAL', git('rev-parse HEAD~1')),
+    });
 
     expect(result.status).toBe('PASS');
   });

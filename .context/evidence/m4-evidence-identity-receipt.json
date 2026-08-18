@@ -1,0 +1,57 @@
+{
+  "receipt_id": "RECEIPT-M4-EVIDENCE-IDENTITY-001",
+  "milestone": "M4 — evidence identity / execution provenance",
+  "provenance": {
+    "claim_scope": "HISTORICAL",
+    "claim_scope_note": "HISTORICAL rather than CURRENT_HEAD for a structural reason worth recording: a CURRENT_HEAD receipt cannot describe the commit that contains it, because the revision id does not exist until the commit is made and amending to insert it changes the id again. `pnpm verify` was therefore run against commit 0fee63d1ad47e6629788538ba14403c6eae93fc8 with a verified-clean worktree, and this receipt committed afterwards recording that run. The claim is about that revision and remains true after later commits.",
+    "producer": {
+      "kind": "LOCAL",
+      "id": "process:claude-code-session"
+    },
+    "repository": {
+      "sha": "0fee63d1ad47e6629788538ba14403c6eae93fc8",
+      "ref": "claude/agent-sdk-execution-context-h1lzv2",
+      "remote": "https://github.com/LabLaunchPad/agent-sdk"
+    },
+    "toolchain": {
+      "node": "24.19.0",
+      "pnpm": "10.33.0",
+      "typescript": "6.0.3"
+    },
+    "environment": {
+      "os": "linux-x64"
+    },
+    "invocation": {
+      "command": "pnpm verify",
+      "cwd": "<repository root>",
+      "worktree_clean_at_run": true
+    },
+    "recorded_at": "2026-08-18T20:29:41Z",
+    "started_at": "2026-08-18T20:28:44Z",
+    "completed_at": "2026-08-18T20:29:41Z"
+  },
+  "RESULT": {
+    "claim": "`pnpm verify` exited 0 at 0fee63d1ad47e6629788538ba14403c6eae93fc8. Tests: 106 passed, 1 skipped. Validators: 9/9 passed.",
+    "label": "VERIFIED"
+  },
+  "SCOPE": {
+    "claim": "LOCAL evidence only. A local run does not establish that CI is green for this revision - they are different executions in different environments. H07 (CI evidence bound to a revision) remains open.",
+    "label": "VERIFIED"
+  },
+  "CONTROLS_ADDED": {
+    "claim": "evidence-provenance validator (9th, CI-enforced); bidirectional projection closure with explicit reasoned exclusions.",
+    "label": "VERIFIED"
+  },
+  "SKIPPED_TEST": {
+    "claim": "The 1 skipped test is the Ajv-differential fallback guard, which fails loudly as VERIFY-BLOCKED if Ajv is absent rather than silently passing. It is inactive because Ajv 8.20.0 was present and the differential ran.",
+    "label": "VERIFIED"
+  },
+  "NOT_PROVEN": {
+    "claim": "No executable gate consumes any receipt, including this one. Provenance is now checkable by a validator, but no decision is automatically refused on bad evidence - the consumer of phase-gate.json remains an agent reading JSON. Adversarial case E12 is CONFIRMED TRUE and deliberately out of M4 scope.",
+    "label": "UNKNOWN"
+  },
+  "generated": {
+    "by": "process:claude-code-session",
+    "at": "2026-08-18T20:29:41Z"
+  }
+}

@@ -16,28 +16,30 @@ and `stale_after`, never stored — see [`context-staleness-validator`](../scrip
 
 ## Current phase
 
-**P00 — Foundation + Working Toolchain Only** (complete, CI green; see
-[`docs/agent/RECEIPT-P00.md`](../docs/agent/RECEIPT-P00.md)) →
-**P1A — OKF Adoption + Gap Audit** — Workstream A complete (see
-[`docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`](../docs/agent/RECEIPT-P1A-WORKSTREAM-A.md)),
-Workstream B (gap audit) in progress.
+**P2 — Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)**, spec-preparation
+complete for its 7 scoped modules. Preceded by **P1B — Architecture
+Reconciliation & ADR Freeze** (complete), **P1A — OKF Adoption + Gap
+Audit** (complete, see
+[`docs/agent/RECEIPT-P1A-WORKSTREAM-A.md`](../docs/agent/RECEIPT-P1A-WORKSTREAM-A.md))
+and **P00 — Foundation** (complete, see
+[`docs/agent/RECEIPT-P00.md`](../docs/agent/RECEIPT-P00.md)).
 
-Phase 0 proves the engineering environment. Phase 1A adopts a vendor-neutral
-knowledge format and audits the plan against the current ecosystem. Only
-Phase 2+ implements Agent SDK behaviour.
+Machine-readable equivalent: [`state/project.json`](state/project.json).
+Gate detail: `.context/research/reconciliation/phase-gate.json`
+(`phase_2_gates`). **Phase 2 implementation remains LOCKED** — spec-prep
+being complete does not unblock writing `@lablaunchpad/*` kernel code.
 
 ## Current objective
 
-Workstream B: evidence-gated research across the current agent-ecosystem.
-9 of 17 original-brief sources live-researched (OpenAI Agents SDK, Microsoft
-Agent Framework, PydanticAI, Kimi Agent SDK, Qwen-Agent, Tencent Youtu-Agent,
-LangGraph, Mastra, MCP, A2A); 3 remain `UNKNOWN` (Volcengine AgentKit, Baidu
-AppBuilder SDK, Agent Skills). 5 supplementary research/governance corpora
-integrated beyond the brief (14 more frameworks, 5 topics, 1 governance
-bundle — see `.context/research/decisions.json`), plus a supplementary
-cross-corpus consolidation graph at `research/canonical/` (status
-`PARTIAL`). See [`docs/agent/NOW.md`](../docs/agent/NOW.md) for the full
-scope-reconciliation record.
+Phase 2 spec-preparation is complete for M01/M02/M03/M04/M05/M15/M16. The
+original 17-source research brief is closed (17/17 live-researched). 5
+supplementary research/governance corpora integrated beyond the brief (14
+more frameworks, 5 topics, 1 governance bundle — see
+`.context/research/decisions.json`), plus a supplementary cross-corpus
+consolidation graph at `research/canonical/` (status `PARTIAL`). See
+[`docs/agent/NOW.md`](../docs/agent/NOW.md) for the full
+scope-reconciliation record and [`docs/agent/NEXT.md`](../docs/agent/NEXT.md)
+for the current gate.
 
 ## Canonical documents
 
@@ -78,7 +80,13 @@ starting state, not a defect — see [ADR-0008](../ADR/0008-cache-trust-tiers.md
 ADR-0001 TypeScript canonical · ADR-0002 nodenext, no bundler ·
 ADR-0003 TypeScript pinned 6.0.3 · ADR-0004 `@lablaunchpad/*` namespace ·
 ADR-0005 `.context` is compiled cache · ADR-0006 persistence interfaces
-deferred · ADR-0007 OKF v0.2 adoption · ADR-0008 cache trust tiers.
+deferred · ADR-0007 OKF v0.2 adoption · ADR-0008 cache trust tiers ·
+ADR-0009 protocol/application/agent-state distinction · ADR-0010 durability
+checkpoint boundary · ADR-0011 unknown-outcome side-effect state ·
+ADR-0012 workspace sandbox boundaries · ADR-0013 security at the
+policy/capability boundary · ADR-0014 model-gateway capability portability ·
+ADR-0015 human-in-the-loop workflow contract · ADR-0016 runtime assumption
+corrections. Authoritative list: [`ADR/`](../ADR/).
 
 ## Active risks
 
@@ -98,7 +106,12 @@ None recorded. See [`docs/agent/FAILURES.md`](../docs/agent/FAILURES.md).
 
 ## Current benchmark baseline
 
-None recorded. There is no behaviour to measure until Phase 3.
+No SDK-behaviour baseline — there is no runtime to measure until Phase 3.
+Three E5 harnesses have nonetheless been executed against throwaway,
+package-external code: `benchmarks/durable-restart/` (real kills),
+`benchmarks/e5-02-unknown-outcome/` (SIMULATED) and
+`benchmarks/e5-08-policy-capability/` (SIMULATED). Results:
+[`research/benchmarks/E5-LADDER.md`](../research/benchmarks/E5-LADDER.md).
 
 ## Relevant packages
 
@@ -115,14 +128,13 @@ See [`log.md`](log.md).
 
 None. Verify with `pnpm context:check`.
 
-## Next action
-
-Close the 3 remaining original-brief gaps (Volcengine AgentKit, Baidu
-AppBuilder SDK, Agent Skills) via live research, same discipline as A2A's
-closure. In parallel, `GAP-ARCHITECTURE-RECONCILIATION` (P0) — a formal ADR
-pass over the 22 accumulated ADR-CANDIDATEs, starting from
-`research/canonical/ARCHITECTURE-DECISIONS.md` — is queued but not yet
-performed. Do not begin Phase 2.
+See [`docs/agent/NEXT.md`](../docs/agent/NEXT.md) — the authoritative queue.
+In short: Phase 2 implementation stays **LOCKED**, `BROAD_RESEARCH` stays
+**LOCKED**, `NEW_ADR_CREATION` is **TRIGGER_ONLY**. The next E5-worthy gate
+is `E5-04` (Duplicate Operation) or re-running `E5-08` against a real —
+not SIMULATED — Phase 8/9 `PolicyEngine`/`CapabilityEngine`, neither
+triggered yet. `GAP-ARCHITECTURE-RECONCILIATION` was resolved in Phase 1B
+(`ADR-0009`–`ADR-0016`); the 17-source brief is closed 17/17.
 
 ## Rules
 

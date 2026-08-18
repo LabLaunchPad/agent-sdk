@@ -2,6 +2,12 @@
 export const EXIT_OK = 0;
 export const EXIT_VALIDATION_FAILED = 1;
 export const EXIT_USAGE_ERROR = 2;
+/**
+ * The checks did not run because the environment could not be trusted to
+ * produce evidence. Distinct from EXIT_VALIDATION_FAILED: nothing was found
+ * wrong with the repository, the run simply proves nothing about it.
+ */
+export const EXIT_VERIFY_BLOCKED = 3;
 
 export type ValidatorName =
   | 'schema-contract'

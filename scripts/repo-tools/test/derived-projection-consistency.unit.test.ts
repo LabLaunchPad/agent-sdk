@@ -1,9 +1,11 @@
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { derivedProjectionConsistencyValidator } from '../src/validators/derived-projection-consistency.js';
 import { parseGeneratedRegions, renderWithFacts } from '../src/lib/generated-regions.js';
 
 const FIXTURES = path.resolve(import.meta.dirname, '../../../tests/fixtures/facts');
+const ROOT = path.resolve(import.meta.dirname, '../../..');
 const fixture = (...segments: string[]): string => path.join(FIXTURES, ...segments);
 
 /**
@@ -73,12 +75,12 @@ describe('derived-projection-consistency-validator — mutation tests (Part E)',
     expect(result.stats?.regionsChecked).toBe(1);
   });
 
-  it('is a no-op on a file with no GENERATED regions', async () => {
+  it('is a no-op on a projection that declares no facts', async () => {
     const result = await derivedProjectionConsistencyValidator({
       rootDir: fixture('no-regions'),
     });
     expect(result.status).toBe('PASS');
-    expect(result.stats?.filesWithRegions).toBe(0);
+    expect(result.stats?.regionsChecked).toBe(0);
   });
 });
 
@@ -121,6 +123,89 @@ describe('derived-projection-consistency-validator — adversarial: corrupted ma
     });
     expect(result.status).toBe('FAIL');
     expect(result.findings[0]?.rule).toBe('derived-projection-consistency/unknown-fact');
+  });
+});
+
+/**
+ * Registry semantics (§12). The first implementation scanned every `.md` file,
+ * which meant documentation explaining the marker convention was parsed as a
+ * control artifact - and the "fix" applied at the time was to reword the
+ * documentation until the tool passed. These cases pin the corrected model:
+ * the registry decides what is a control artifact, in both directions.
+ */
+describe('derived-projection-consistency-validator — projection registry (§12)', () => {
+  it('BLOCKS when projections.json is absent (no registry = nothing checked)', async () => {
+    const result = await derivedProjectionConsistencyValidator({
+      rootDir: fixture('registry-missing'),
+    });
+    expect(result.status).toBe('FAIL');
+    expect(result.findings[0]?.rule).toBe(
+      'derived-projection-consistency/registry-missing',
+    );
+  });
+
+  it('BLOCKS a declared fact whose region was deleted from the file', async () => {
+    const result = await derivedProjectionConsistencyValidator({
+      rootDir: fixture('missing-region'),
+    });
+    expect(result.status).toBe('FAIL');
+    expect(result.findings[0]?.rule).toBe(
+      'derived-projection-consistency/missing-region',
+    );
+    expect(result.findings[0]?.message).toContain('validator_count');
+  });
+
+  it('BLOCKS a region whose fact is not declared for that projection', async () => {
+    const result = await derivedProjectionConsistencyValidator({
+      rootDir: fixture('undeclared-region'),
+    });
+    expect(result.status).toBe('FAIL');
+    expect(
+      result.findings.some(
+        (f) => f.rule === 'derived-projection-consistency/undeclared-region',
+      ),
+    ).toBe(true);
+  });
+
+  it('pins registry membership so a projection cannot be silenced by de-registering it', async () => {
+    // Adversarial pass found this: the registry closes the scan-based defect
+    // but becomes an unprotected surface itself - deleting an entry from
+    // projections.json silences that projection and no validator notices,
+    // because the validator can only check what the registry declares. This
+    // meta-guard is the same shape as ci-coverage.unit.test.ts's "a validator
+    // not in the execution path is equivalent to no validator".
+    const registry = JSON.parse(
+      await readFile(path.join(ROOT, 'projections.json'), 'utf8'),
+    ) as { projections: { id: string; file: string; facts: string[] }[] };
+
+    const byFile = new Map(registry.projections.map((p) => [p.file, p]));
+
+    // The three agent-facing surfaces that actually drifted in the incident
+    // this whole control exists to prevent. Removing any is a deliberate
+    // decision that must break CI and be argued for, not a silent edit.
+    for (const [file, requiredFacts] of [
+      ['.context/index.md', ['phase_id', 'validator_count']],
+      ['README.md', ['phase_id', 'validator_count']],
+      ['docs/agent/STATE.md', ['phase_id', 'validator_count']],
+    ] as const) {
+      const entry = byFile.get(file);
+      expect(entry, `projections.json must register ${file}`).toBeDefined();
+      for (const factId of requiredFacts) {
+        expect(entry?.facts, `${file} must declare fact ${factId}`).toContain(factId);
+      }
+    }
+  });
+
+  it('IGNORES marker syntax in an unregistered file, even with a wrong value', async () => {
+    // EXPLAINER.md contains a region claiming 999 validators. It is not
+    // registered, so it is prose about the convention - not a claim about the
+    // repository. Documentation must be able to describe the mechanism without
+    // being bent to satisfy it.
+    const result = await derivedProjectionConsistencyValidator({
+      rootDir: fixture('unregistered-file-with-marker'),
+    });
+    expect(result.status).toBe('PASS');
+    expect(result.stats?.regionsChecked).toBe(1);
   });
 });
 

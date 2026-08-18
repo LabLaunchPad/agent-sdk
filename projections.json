@@ -1,0 +1,26 @@
+{
+  "$comment": "Projection registry for derived-projection-consistency-validator. A generated region is a control artifact ONLY if its file is registered here and the fact id is declared for that file. Marker syntax appearing anywhere else (e.g. documentation explaining the convention) is ordinary prose and is not interpreted. Registering a fact for a file also makes its region MANDATORY: deleting the region fails the gate, so a projection cannot be silently de-registered by editing the document.",
+  "projections": [
+    {
+      "id": "context-index",
+      "file": ".context/index.md",
+      "facts": [
+        "phase_id",
+        "research_brief_status",
+        "adr_list",
+        "benchmark_run_count",
+        "validator_count"
+      ]
+    },
+    {
+      "id": "readme",
+      "file": "README.md",
+      "facts": ["phase_id", "validator_count"]
+    },
+    {
+      "id": "agent-state",
+      "file": "docs/agent/STATE.md",
+      "facts": ["phase_id", "research_brief_status", "validator_count"]
+    }
+  ]
+}

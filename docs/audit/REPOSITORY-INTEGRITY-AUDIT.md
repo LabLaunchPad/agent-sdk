@@ -470,7 +470,7 @@ class was mechanized rather than the instances patched again. See
 **Architecture (Option E, per §J):** a `CanonicalFact` registry
 (`scripts/repo-tools/src/lib/facts.ts`) defines seven facts, each with a
 single authoritative source and a `compute()` function - no fact is entered
-by hand. The `GENERATED:START fact=<id>` / `GENERATED:END` HTML-comment pair
+by hand. A `<!-- GENERATED:START fact=<id> -->…<!-- GENERATED:END -->` pair
 marks the exact span of a projection that must equal a fact's computed
 value; everything outside a marked span stays hand-authored prose
 (`scripts/repo-tools/src/lib/generated-regions.ts`). `pnpm facts:write`

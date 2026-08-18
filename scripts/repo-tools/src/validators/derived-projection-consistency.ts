@@ -8,66 +8,121 @@ import {
 } from '../lib/types.js';
 import { getFact } from '../lib/facts.js';
 import { parseGeneratedRegions } from '../lib/generated-regions.js';
-import { collectFiles } from '../lib/workspace.js';
+import { exists, readJson } from '../lib/workspace.js';
 
 /**
- * Closes the exact gap the audit's mutation experiment demonstrated:
- * `pnpm validate` passed 7/7 while `.context/index.md` and `README.md`
- * stated a validator count that did not match
- * `scripts/repo-tools/src/validators/*.ts`, and separately while
+ * Closes the gap the audit's mutation experiment demonstrated: `pnpm validate`
+ * passed 7/7 while `.context/index.md` and `README.md` stated a validator count
+ * that did not match `scripts/repo-tools/src/validators/*.ts`, and while
  * `.context/index.md` / `docs/agent/STATE.md` disagreed with each other and
- * with `.context/state/project.json` about the current phase.
+ * with `.context/state/project.json` about the current phase. See
+ * docs/audit/REPOSITORY-INTEGRITY-AUDIT.md findings A1-A3.
  *
- * This validator does not know what "correct" prose looks like - it knows
- * how to recompute a `CanonicalFact` (see lib/facts.ts) and compare it,
- * byte-for-byte after trimming, against every `GENERATED:START fact=<id>`
- * region that claims to represent it. A malformed region (unterminated,
- * unmatched END, nested START, or referencing an unregistered fact id)
- * fails just as loudly as a value mismatch: a corrupted or hand-edited
- * marker must not silently stop being checked.
+ * Registry-driven, not scan-driven. A generated region is a control artifact
+ * only when `projections.json` registers its file AND declares its fact id for
+ * that file. The first implementation scanned every `.md` file instead, which
+ * had a real defect: documentation explaining the marker convention was parsed
+ * as a control artifact, and the "fix" applied at the time was to reword the
+ * documentation so the tool would pass - bending the document to satisfy the
+ * checker, which is the same failure class this validator exists to prevent.
+ * A registry gives every region deterministic identity and lets prose discuss
+ * the convention freely.
  *
- * `tests/` is excluded from the scan on purpose - validator/generator unit
- * tests intentionally construct malformed and mismatched regions as
- * fixtures, and those are not real repository claims.
+ * Registration is bidirectional, so neither side can drift alone:
+ *   - a declared fact with no region in the file      -> missing-region
+ *   - a region whose fact is not declared for that file -> undeclared-region
+ *   - a region whose content != the canonical value   -> mismatch
+ *   - a malformed/corrupted marker                    -> malformed-*
  */
+
+interface ProjectionEntry {
+  readonly id: string;
+  readonly file: string;
+  readonly facts: readonly string[];
+}
+
+interface ProjectionRegistry {
+  readonly projections: readonly ProjectionEntry[];
+}
+
 export async function derivedProjectionConsistencyValidator(
   options: ValidatorOptions,
 ): Promise<ValidatorResult> {
   const { rootDir } = options;
   const findings: Finding[] = [];
 
-  const files = (await collectFiles(rootDir, ['.md'])).filter(
-    (file) => !path.relative(rootDir, file).startsWith(`tests${path.sep}`),
-  );
+  const registryPath = path.join(rootDir, 'projections.json');
+  if (!(await exists(registryPath))) {
+    return result('derived-projection-consistency', [
+      {
+        rule: 'derived-projection-consistency/registry-missing',
+        message:
+          'projections.json does not exist. Without it no projection is checked, so its absence must fail rather than silently pass.',
+        path: 'projections.json',
+      },
+    ]);
+  }
+
+  let registry: ProjectionRegistry;
+  try {
+    registry = await readJson<ProjectionRegistry>(registryPath);
+  } catch (error) {
+    return result('derived-projection-consistency', [
+      {
+        rule: 'derived-projection-consistency/registry-unreadable',
+        message: `projections.json could not be parsed: ${String(error)}`,
+        path: 'projections.json',
+      },
+    ]);
+  }
 
   let regionsChecked = 0;
-  let filesWithRegions = 0;
 
-  for (const file of files) {
-    const relative = path.relative(rootDir, file);
-    const text = await readFile(file, 'utf8');
+  for (const entry of registry.projections) {
+    const absolute = path.join(rootDir, entry.file);
+
+    if (!(await exists(absolute))) {
+      findings.push({
+        rule: 'derived-projection-consistency/projection-file-missing',
+        message: `projections.json registers "${entry.id}" at ${entry.file}, but no such file exists.`,
+        path: entry.file,
+      });
+      continue;
+    }
+
+    const text = await readFile(absolute, 'utf8');
     const { regions, errors } = parseGeneratedRegions(text);
 
     for (const error of errors) {
       findings.push({
         rule: `derived-projection-consistency/malformed-${error.kind}`,
-        message: malformedMessage(error, relative),
-        path: relative,
+        message: malformedMessage(error, entry.file),
+        path: entry.file,
       });
     }
 
-    if (regions.length === 0) continue;
-    filesWithRegions += 1;
+    const declared = new Set(entry.facts);
+    const seen = new Set<string>();
 
     for (const region of regions) {
       regionsChecked += 1;
-      const fact = getFact(region.factId);
+      seen.add(region.factId);
 
+      if (!declared.has(region.factId)) {
+        findings.push({
+          rule: 'derived-projection-consistency/undeclared-region',
+          message: `${entry.file}: contains a generated region for fact "${region.factId}", which projections.json does not declare for projection "${entry.id}". Declare it or remove the region — an unregistered region is not checked against anything.`,
+          path: entry.file,
+        });
+        continue;
+      }
+
+      const fact = getFact(region.factId);
       if (!fact) {
         findings.push({
           rule: 'derived-projection-consistency/unknown-fact',
-          message: `${relative}: region references fact "${region.factId}", which is not registered in lib/facts.ts. A marked region must name a real canonical fact.`,
-          path: relative,
+          message: `${entry.file}: region references fact "${region.factId}", which is not registered in lib/facts.ts.`,
+          path: entry.file,
         });
         continue;
       }
@@ -78,8 +133,8 @@ export async function derivedProjectionConsistencyValidator(
       } catch (error) {
         findings.push({
           rule: 'derived-projection-consistency/authority-unreadable',
-          message: `${relative}: could not compute fact "${fact.id}" from its authority (${fact.authority}): ${String(error)}`,
-          path: relative,
+          message: `${entry.file}: could not compute fact "${fact.id}" from its authority (${fact.authority}): ${String(error)}`,
+          path: entry.file,
         });
         continue;
       }
@@ -92,18 +147,27 @@ export async function derivedProjectionConsistencyValidator(
             `DERIVED_PROJECTION_MISMATCH ` +
             `fact: ${fact.id} ` +
             `canonical: ${canonical} ` +
-            `projection: ${relative} ` +
+            `projection: ${entry.file} ` +
             `observed: ${observed} ` +
             `authority: ${fact.authority}`,
-          path: relative,
+          path: entry.file,
+        });
+      }
+    }
+
+    for (const factId of entry.facts) {
+      if (!seen.has(factId)) {
+        findings.push({
+          rule: 'derived-projection-consistency/missing-region',
+          message: `${entry.file}: projections.json declares fact "${factId}" for projection "${entry.id}", but the file contains no generated region for it. Deleting a region must not silently stop it being checked.`,
+          path: entry.file,
         });
       }
     }
   }
 
   return result('derived-projection-consistency', findings, {
-    filesScanned: files.length,
-    filesWithRegions,
+    projections: registry.projections.length,
     regionsChecked,
   });
 }

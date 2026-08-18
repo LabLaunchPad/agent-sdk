@@ -21,6 +21,7 @@
     "CODEX.md",
     "boundaries.json",
     "repo-policy.json",
+    "projections.json",
     "okf.json",
     ".nvmrc",
     "pnpm-workspace.yaml",

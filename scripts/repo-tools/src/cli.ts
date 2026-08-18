@@ -5,6 +5,7 @@ import {
   EXIT_OK,
   EXIT_USAGE_ERROR,
   EXIT_VALIDATION_FAILED,
+  EXIT_VERIFY_BLOCKED,
   VALIDATOR_NAMES,
   type ValidatorName,
   type ValidatorResult,
@@ -21,6 +22,7 @@ import { repositoryPolicyValidator } from './validators/repository-policy.js';
 import { researchIntegrityValidator } from './validators/research-integrity.js';
 import { schemaContractValidator } from './validators/schema-contract.js';
 import { writeFacts } from './lib/facts-writer.js';
+import { checkNodeBaseline } from './lib/toolchain.js';
 
 const VALIDATORS = {
   'schema-contract': schemaContractValidator,
@@ -52,6 +54,12 @@ Exit codes:
   0  all checks passed
   1  at least one check failed
   2  usage error
+  3  VERIFY_BLOCKED — checks did not run; the environment cannot produce evidence
+
+Validation commands refuse to run on a Node version other than \`.nvmrc\`'s
+baseline, because a green run on the wrong version is not evidence. Pass
+\`--allow-toolchain-mismatch\` to proceed anyway; the run is then explicitly
+not evidence.
 
 \`context refresh\` rewrites cache hashes and must never run in CI: auto-refresh
 would rubber-stamp drift instead of reporting it.
@@ -65,19 +73,23 @@ drift into agreement instead of reporting it via
 async function main(argv: readonly string[]): Promise<number> {
   const rootDir = process.env.REPO_ROOT ?? path.resolve(import.meta.dirname, '../../..');
   const json = argv.includes('--json');
+  const allowMismatch = argv.includes('--allow-toolchain-mismatch');
   const positional = argv.filter((argument) => !argument.startsWith('--'));
   const [command, ...rest] = positional;
 
   switch (command) {
     case 'validate':
+      if (!(await enforceToolchain(rootDir, allowMismatch))) return EXIT_VERIFY_BLOCKED;
       return runValidators(rootDir, selectValidators(rest), json);
 
     case 'smoke':
+      if (!(await enforceToolchain(rootDir, allowMismatch))) return EXIT_VERIFY_BLOCKED;
       return runValidators(rootDir, ['package-exports'], json);
 
     case 'context': {
       const subcommand = rest[0];
       if (subcommand === 'check') {
+        if (!(await enforceToolchain(rootDir, allowMismatch))) return EXIT_VERIFY_BLOCKED;
         return runValidators(rootDir, ['context-staleness'], json);
       }
       if (subcommand === 'refresh') {
@@ -128,6 +140,42 @@ function selectValidators(requested: readonly string[]): ValidatorName[] {
     selected.push(name as ValidatorName);
   }
   return selected;
+}
+
+/**
+ * Gate every validation run on the declared Node baseline before it can
+ * produce a trustworthy verdict. Returns true when the run may proceed.
+ *
+ * A mismatch yields VERIFY_BLOCKED, not FAIL and not PASS: the checks did not
+ * run, so their outcome is unknown rather than good or bad. `--allow-toolchain-mismatch`
+ * exists for deliberate local exploration and still refuses to call the run
+ * evidence.
+ */
+async function enforceToolchain(
+  rootDir: string,
+  allowMismatch: boolean,
+): Promise<boolean> {
+  const check = await checkNodeBaseline(rootDir);
+  if (check.ok) return true;
+
+  console.error(
+    `VERIFY_BLOCKED  toolchain  expected Node ${check.expected} (.nvmrc), running ${check.actual}`,
+  );
+  console.error(
+    "        .context/state/runtime.json: 'A green run on a Node version other than the baseline is not evidence.'",
+  );
+
+  if (!allowMismatch) {
+    console.error(
+      '        Use the baseline Node, or pass --allow-toolchain-mismatch for a run that is explicitly NOT evidence.',
+    );
+    return false;
+  }
+
+  console.error(
+    '        --allow-toolchain-mismatch set: continuing, but this run is NOT evidence.',
+  );
+  return true;
 }
 
 async function runValidators(

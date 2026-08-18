@@ -22,7 +22,7 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
-`pnpm verify` runs build, typecheck, lint, format check, tests, all five
+`pnpm verify` runs build, typecheck, lint, format check, tests, all seven
 repository validators and the publication smoke test.
 
 ## Working here
@@ -43,7 +43,7 @@ repository. New here? [`docs/agent/BOOTSTRAP.md`](docs/agent/BOOTSTRAP.md).
 | `ADR/`                | Architecture decisions — canonical               |
 | `tests/`              | Cross-package tests and validator fixtures       |
 | `benchmarks/`         | Benchmark suites and recorded baselines          |
-| `scripts/repo-tools/` | The five repository validators                   |
+| `scripts/repo-tools/` | The seven repository validators                  |
 | `.context/`           | Compiled AI working cache — **never** canonical  |
 | `docs/`               | Agent operating state and repository conventions |
 

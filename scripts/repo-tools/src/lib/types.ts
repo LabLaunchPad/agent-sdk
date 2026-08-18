@@ -10,7 +10,8 @@ export type ValidatorName =
   | 'okf-conformance'
   | 'package-exports'
   | 'repository-policy'
-  | 'research-integrity';
+  | 'research-integrity'
+  | 'derived-projection-consistency';
 
 export const VALIDATOR_NAMES: readonly ValidatorName[] = [
   'schema-contract',
@@ -20,6 +21,7 @@ export const VALIDATOR_NAMES: readonly ValidatorName[] = [
   'package-exports',
   'repository-policy',
   'research-integrity',
+  'derived-projection-consistency',
 ];
 
 export interface Finding {

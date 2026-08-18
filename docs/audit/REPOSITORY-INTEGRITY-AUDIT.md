@@ -458,3 +458,56 @@ defect. Without §J, the expected outcome is another `9eef033` in two phases.
 | Completeness        | **PARTIAL** — `README.md` still says "Phase 0 — foundation only"; `NOW.md` remains a P1A-era snapshot (may be by design) |
 | Regression coverage | **NONE** — no test prevents recurrence; A1's experiment shows CI cannot detect it                                        |
 | Recurrence risk     | **HIGH (unchanged)** — no mechanism added; A7 is the precedent                                                           |
+
+---
+
+## Addendum — Recurrence-class mechanization (2026-08-18)
+
+The FIX-VERDICT above is superseded. Following this audit, the recurrence
+class was mechanized rather than the instances patched again. See
+`docs/agent/FAILURES.md` (F001-F005) for the failure records.
+
+**Architecture (Option E, per §J):** a `CanonicalFact` registry
+(`scripts/repo-tools/src/lib/facts.ts`) defines seven facts, each with a
+single authoritative source and a `compute()` function - no fact is entered
+by hand. The `GENERATED:START fact=<id>` / `GENERATED:END` HTML-comment pair
+marks the exact span of a projection that must equal a fact's computed
+value; everything outside a marked span stays hand-authored prose
+(`scripts/repo-tools/src/lib/generated-regions.ts`). `pnpm facts:write`
+(local-only, mirroring `context refresh`'s CI exclusion) regenerates marked
+spans; validator #8, `derived-projection-consistency`, checks them,
+fail-closed, CI-blocking.
+
+**Proof, not assertion:** reverting `.context/index.md` and `README.md` to
+their pre-fix (false) content and running the full suite now produces
+`0/1 validators passed` on `derived-projection-consistency` with a precise
+`DERIVED_PROJECTION_MISMATCH` finding - the exact experiment that proved
+A1 now proves the opposite. Five mutation tests (Tests A-E, one per
+demonstrated-drift fact) and four adversarial marker-corruption tests make
+this permanent (`derived-projection-consistency.unit.test.ts`).
+
+**Schema safety (§G/H):** `schema-contract.ts` now declares
+`SUPPORTED_SCHEMA_KEYWORDS` explicitly and asserts every schema stays
+within it - recursively, including nested `items`/`properties` - before
+compiling a validator; an unrecognised keyword raises
+`schema/unsupported-construct` rather than being silently accepted. A
+12-keyword regression corpus (every construct the differential test in
+finding A4 found ignored, plus one nested case) asserts fail-closed
+behaviour, and a live differential test against Ajv 8.20.0 asserts
+agreement on every sample for the supported subset
+(`schema-safety.unit.test.ts`).
+
+**Verified on-baseline** (Node 24.19.0, pnpm 10.33.0, tsc 6.0.3): full
+`pnpm verify` green - 8/8 validators, 80/80 tests (1 differential test
+skip-guarded as `VERIFY-BLOCKED` rather than silently passed if Ajv is
+ever unavailable).
+
+**Deliberately not implemented this pass:** count-style claims embedded in
+non-`.md` files (e.g. the `.github/workflows/ci.yml` step-count comment)
+are outside `derived-projection-consistency`'s `.md`-only scan scope, so
+they can still drift undetected; `docs/agent/NOW.md`/`NEXT.md` were left
+fully hand-authored (narrative, not atomic facts); the Node-baseline
+`evidenceRule` is enforced by `pnpm`'s `engines` field, not by the CLI
+itself - invoking `dist/cli.js` directly with `node` on any version
+bypasses it (pre-existing, all eight validators, not scoped to this
+milestone).

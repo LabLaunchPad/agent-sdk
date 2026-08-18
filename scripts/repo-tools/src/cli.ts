@@ -13,12 +13,14 @@ import {
   contextStalenessValidator,
   refreshContext,
 } from './validators/context-staleness.js';
+import { derivedProjectionConsistencyValidator } from './validators/derived-projection-consistency.js';
 import { okfConformanceValidator } from './validators/okf-conformance.js';
 import { packageBoundaryValidator } from './validators/package-boundary.js';
 import { packageExportsValidator } from './validators/package-exports.js';
 import { repositoryPolicyValidator } from './validators/repository-policy.js';
 import { researchIntegrityValidator } from './validators/research-integrity.js';
 import { schemaContractValidator } from './validators/schema-contract.js';
+import { writeFacts } from './lib/facts-writer.js';
 
 const VALIDATORS = {
   'schema-contract': schemaContractValidator,
@@ -28,6 +30,7 @@ const VALIDATORS = {
   'package-exports': packageExportsValidator,
   'repository-policy': repositoryPolicyValidator,
   'research-integrity': researchIntegrityValidator,
+  'derived-projection-consistency': derivedProjectionConsistencyValidator,
 } as const satisfies Record<
   ValidatorName,
   (options: { rootDir: string }) => Promise<ValidatorResult>
@@ -40,6 +43,7 @@ Usage:
   repo-tools smoke [--json]
   repo-tools context check [--json]
   repo-tools context refresh
+  repo-tools facts write
 
 Validators:
 ${VALIDATOR_NAMES.map((name) => `  ${name}`).join('\n')}
@@ -51,6 +55,11 @@ Exit codes:
 
 \`context refresh\` rewrites cache hashes and must never run in CI: auto-refresh
 would rubber-stamp drift instead of reporting it.
+
+\`facts write\` regenerates every GENERATED:START/END region from its canonical
+fact and must never run in CI, for the same reason: it would rubber-stamp
+drift into agreement instead of reporting it via
+\`validate derived-projection-consistency\`.
 `;
 
 async function main(argv: readonly string[]): Promise<number> {
@@ -81,6 +90,24 @@ async function main(argv: readonly string[]): Promise<number> {
         return outcome.unresolved.length > 0 ? EXIT_VALIDATION_FAILED : EXIT_OK;
       }
       console.error(`Unknown context subcommand: ${String(subcommand)}\n\n${USAGE}`);
+      return EXIT_USAGE_ERROR;
+    }
+
+    case 'facts': {
+      const subcommand = rest[0];
+      if (subcommand === 'write') {
+        const outcome = await writeFacts(rootDir);
+        for (const file of outcome.updated) console.log(`updated    ${file}`);
+        for (const file of outcome.unchanged) console.log(`unchanged  ${file}`);
+        for (const failure of outcome.failed) {
+          console.error(`failed     ${failure.file}: ${failure.error}`);
+        }
+        console.log(
+          `\n${String(outcome.updated.length)} updated, ${String(outcome.unchanged.length)} unchanged, ${String(outcome.failed.length)} failed`,
+        );
+        return outcome.failed.length > 0 ? EXIT_VALIDATION_FAILED : EXIT_OK;
+      }
+      console.error(`Unknown facts subcommand: ${String(subcommand)}\n\n${USAGE}`);
       return EXIT_USAGE_ERROR;
     }
 

@@ -16,7 +16,7 @@ and `stale_after`, never stored — see [`context-staleness-validator`](../scrip
 
 ## Current phase
 
-**P2 — Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)**, spec-preparation
+**<!-- GENERATED:START fact=phase_id -->P2<!-- GENERATED:END --> — Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)**, spec-preparation
 complete for its 7 scoped modules. Preceded by **P1B — Architecture
 Reconciliation & ADR Freeze** (complete), **P1A — OKF Adoption + Gap
 Audit** (complete, see
@@ -32,7 +32,7 @@ being complete does not unblock writing `@lablaunchpad/*` kernel code.
 ## Current objective
 
 Phase 2 spec-preparation is complete for M01/M02/M03/M04/M05/M15/M16. The
-original 17-source research brief is closed (17/17 live-researched). 5
+original 17-source research brief is closed (<!-- GENERATED:START fact=research_brief_status -->17/17<!-- GENERATED:END --> live-researched). 5
 supplementary research/governance corpora integrated beyond the brief (14
 more frameworks, 5 topics, 1 governance bundle — see
 `.context/research/decisions.json`), plus a supplementary cross-corpus
@@ -77,16 +77,9 @@ starting state, not a defect — see [ADR-0008](../ADR/0008-cache-trust-tiers.md
 
 ## Active decisions
 
-ADR-0001 TypeScript canonical · ADR-0002 nodenext, no bundler ·
-ADR-0003 TypeScript pinned 6.0.3 · ADR-0004 `@lablaunchpad/*` namespace ·
-ADR-0005 `.context` is compiled cache · ADR-0006 persistence interfaces
-deferred · ADR-0007 OKF v0.2 adoption · ADR-0008 cache trust tiers ·
-ADR-0009 protocol/application/agent-state distinction · ADR-0010 durability
-checkpoint boundary · ADR-0011 unknown-outcome side-effect state ·
-ADR-0012 workspace sandbox boundaries · ADR-0013 security at the
-policy/capability boundary · ADR-0014 model-gateway capability portability ·
-ADR-0015 human-in-the-loop workflow contract · ADR-0016 runtime assumption
-corrections. Authoritative list: [`ADR/`](../ADR/).
+<!-- GENERATED:START fact=adr_list -->ADR-0001 TypeScript Canonical Language · ADR-0002 Nodenext Module Resolution · ADR-0003 TypeScript Version Pin · ADR-0004 LabLaunchPad npm Namespace · ADR-0005 Context Is a Compiled Cache · ADR-0006 Persistence Interfaces Deferred · ADR-0007 Adopt OKF v0.2 for Agent-Facing Knowledge · ADR-0008 Cache Trust Tiers via Verified · ADR-0009 Protocol / Application / Agent State Distinction · ADR-0010 Durability & Checkpoint Boundary · ADR-0011 UNKNOWN_OUTCOME as a First-Class Side-Effect State · ADR-0012 Workspace & Sandbox as Explicit Architecture Boundaries · ADR-0013 Security Enforcement at the Policy/Capability Boundary · ADR-0014 Model Gateway Capability & Semantic-Portability Contract · ADR-0015 Human-in-the-Loop as a Workflow Contract · ADR-0016 Runtime-Assumption Corrections<!-- GENERATED:END -->.
+
+Authoritative list: [`ADR/`](../ADR/).
 
 ## Active risks
 
@@ -107,7 +100,8 @@ None recorded. See [`docs/agent/FAILURES.md`](../docs/agent/FAILURES.md).
 ## Current benchmark baseline
 
 No SDK-behaviour baseline — there is no runtime to measure until Phase 3.
-Three E5 harnesses have nonetheless been executed against throwaway,
+<!-- GENERATED:START fact=benchmark_run_count -->3<!-- GENERATED:END --> E5 harnesses have nonetheless been executed against throwaway,
+
 package-external code: `benchmarks/durable-restart/` (real kills),
 `benchmarks/e5-02-unknown-outcome/` (SIMULATED) and
 `benchmarks/e5-08-policy-capability/` (SIMULATED). Results:
@@ -115,10 +109,10 @@ package-external code: `benchmarks/durable-restart/` (real kills),
 
 ## Relevant packages
 
-| Package                    | Layer     | Role                              |
-| -------------------------- | --------- | --------------------------------- |
-| `@lablaunchpad/contracts`  | contracts | Placeholder — schema harness only |
-| `@lablaunchpad/repo-tools` | tooling   | The seven validators              |
+| Package                    | Layer     | Role                                                                                |
+| -------------------------- | --------- | ----------------------------------------------------------------------------------- |
+| `@lablaunchpad/contracts`  | contracts | Placeholder — schema harness only                                                   |
+| `@lablaunchpad/repo-tools` | tooling   | The <!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> validators |
 
 ## Recent changes
 
@@ -128,13 +122,16 @@ See [`log.md`](log.md).
 
 None. Verify with `pnpm context:check`.
 
+## Next action
+
 See [`docs/agent/NEXT.md`](../docs/agent/NEXT.md) — the authoritative queue.
 In short: Phase 2 implementation stays **LOCKED**, `BROAD_RESEARCH` stays
 **LOCKED**, `NEW_ADR_CREATION` is **TRIGGER_ONLY**. The next E5-worthy gate
 is `E5-04` (Duplicate Operation) or re-running `E5-08` against a real —
 not SIMULATED — Phase 8/9 `PolicyEngine`/`CapabilityEngine`, neither
 triggered yet. `GAP-ARCHITECTURE-RECONCILIATION` was resolved in Phase 1B
-(`ADR-0009`–`ADR-0016`); the 17-source brief is closed 17/17.
+(`ADR-0009`–`ADR-0016`); the 17-source brief is closed
+<!-- GENERATED:START fact=research_brief_status -->17/17<!-- GENERATED:END -->.
 
 ## Rules
 

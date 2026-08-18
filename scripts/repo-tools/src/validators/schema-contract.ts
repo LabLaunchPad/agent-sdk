@@ -101,10 +101,25 @@ export async function schemaContractValidator(
         continue;
       }
 
+      let jsonSchemaValidator: Validator;
+      try {
+        jsonSchemaValidator = compile(value.jsonSchema);
+      } catch (error) {
+        if (error instanceof UnsupportedSchemaKeywordError) {
+          findings.push({
+            rule: 'schema/unsupported-construct',
+            message: `${relative}#${exportName} ("${value.name}"): ${error.message}`,
+            path: relative,
+          });
+          continue;
+        }
+        throw error;
+      }
+
       for (const sample of declaredSamples) {
         samplesChecked += 1;
         const schemaAccepts = value.schema.safeParse(sample).success;
-        const projectionAccepts = acceptsUnderProjection(value.jsonSchema, sample);
+        const projectionAccepts = jsonSchemaValidator(sample);
 
         if (schemaAccepts !== projectionAccepts) {
           findings.push({
@@ -154,25 +169,112 @@ function isContractLike(value: unknown): value is ContractLike {
 }
 
 /**
- * Ajv is loaded lazily and per-call from the validated package's own dependency
- * tree so this tool needs no schema dependency of its own.
+ * The draft-07 keywords this evaluator actually implements. Deliberately a
+ * subset, not an attempt at parity with a reference implementation (Ajv is
+ * used only in differential tests, never at runtime - see
+ * differential.unit.test.ts and docs/audit/REPOSITORY-INTEGRITY-AUDIT.md
+ * finding A4/A5 for why runtime parity was rejected as scope creep, and the
+ * `schemasafe` posture this adopts instead).
  */
-function acceptsUnderProjection(
-  jsonSchema: Record<string, unknown>,
-  sample: unknown,
-): boolean {
-  const validate = compile(jsonSchema);
-  return validate(sample);
+const SUPPORTED_SCHEMA_KEYWORDS: ReadonlySet<string> = new Set([
+  'type',
+  'const',
+  'enum',
+  'minimum',
+  'maximum',
+  'minLength',
+  'maxLength',
+  'pattern',
+  'items',
+  'properties',
+  'required',
+  'additionalProperties',
+]);
+
+/**
+ * Keywords that annotate a schema without constraining accepted values.
+ * Safe to ignore: a validator that skips `description` cannot become more
+ * permissive than the schema it describes, which is the property
+ * SUPPORTED_SCHEMA_KEYWORDS exists to protect.
+ */
+const ANNOTATION_KEYWORDS: ReadonlySet<string> = new Set([
+  '$schema',
+  '$id',
+  '$comment',
+  'title',
+  'description',
+  'default',
+  'examples',
+  'readOnly',
+  'writeOnly',
+]);
+
+export class UnsupportedSchemaKeywordError extends Error {
+  readonly keyword: string;
+  readonly atPath: string;
+
+  constructor(keyword: string, atPath: string) {
+    super(
+      `Unsupported JSON Schema keyword "${keyword}" at ${atPath || '#'}. ` +
+        'schema-contract-validator implements a deliberately narrow draft-07 ' +
+        'subset (see SUPPORTED_SCHEMA_KEYWORDS) and fails closed on a construct ' +
+        'it cannot evaluate rather than silently accepting whatever the ' +
+        'construct would have rejected.',
+    );
+    this.name = 'UnsupportedSchemaKeywordError';
+    this.keyword = keyword;
+    this.atPath = atPath;
+  }
+}
+
+/**
+ * Walks `schema` and throws `UnsupportedSchemaKeywordError` at the first
+ * keyword outside `SUPPORTED_SCHEMA_KEYWORDS`/`ANNOTATION_KEYWORDS`, at any
+ * nesting depth reachable through `items` or `properties`.
+ *
+ * This is the fail-closed half of the contract: before this existed, an
+ * unrecognised keyword (`oneOf`, `$ref`, `multipleOf`, ...) was silently
+ * ignored by `evaluate()`, which made the projection strictly more
+ * permissive than the schema it was derived from on every sample that
+ * keyword would have rejected - the exact defect this validator exists to
+ * catch, now present inside the validator itself. See
+ * docs/audit/REPOSITORY-INTEGRITY-AUDIT.md finding A4 for the differential
+ * evidence (20 of 21 draft-07 constructs silently ignored) that this
+ * function closes.
+ */
+function assertSupportedSchema(schema: unknown, atPath: string): void {
+  if (typeof schema === 'boolean') return; // `true`/`false` schemas are valid draft-07.
+  if (!isPlainObject(schema)) return;
+
+  for (const key of Object.keys(schema)) {
+    if (SUPPORTED_SCHEMA_KEYWORDS.has(key) || ANNOTATION_KEYWORDS.has(key)) continue;
+    throw new UnsupportedSchemaKeywordError(key, atPath);
+  }
+
+  if (isSchema(schema.items)) {
+    assertSupportedSchema(schema.items, `${atPath}/items`);
+  }
+  if (isPlainObject(schema.properties)) {
+    for (const [key, propertySchema] of Object.entries(schema.properties)) {
+      assertSupportedSchema(propertySchema, `${atPath}/properties/${key}`);
+    }
+  }
 }
 
 type Validator = (value: unknown) => boolean;
 
 const compiled = new WeakMap<Record<string, unknown>, Validator>();
 
+/**
+ * Compiles `jsonSchema` into a `Validator`, first asserting it uses only
+ * `SUPPORTED_SCHEMA_KEYWORDS`. Throws `UnsupportedSchemaKeywordError` rather
+ * than compiling a validator that would silently under-enforce.
+ */
 function compile(jsonSchema: Record<string, unknown>): Validator {
   const cached = compiled.get(jsonSchema);
   if (cached) return cached;
 
+  assertSupportedSchema(jsonSchema, '#');
   const validator = buildValidator(jsonSchema);
   compiled.set(jsonSchema, validator);
   return validator;
@@ -187,6 +289,10 @@ function compile(jsonSchema: Record<string, unknown>): Validator {
  * something other than the library that produced it. A projection validated by
  * its own generator can agree with itself while disagreeing with every other
  * consumer.
+ *
+ * Only ever called on schemas that already passed `assertSupportedSchema` -
+ * every keyword this function reads is therefore known-supported at every
+ * nesting depth, not just the top level.
  */
 function buildValidator(schema: Record<string, unknown>): Validator {
   return (value: unknown): boolean => evaluate(schema, value);

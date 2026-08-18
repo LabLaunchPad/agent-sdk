@@ -1,5 +1,5 @@
 {
-  "gap": "2 of 17 sources named in the ORIGINAL research brief remain fully UNKNOWN (down from 4 - A2A closed in the prior installment, Agent Skills closed in Phase 1B); both remaining are Volcengine AgentKit and Baidu AppBuilder SDK, deliberately not researched in Phase 1B per its own research-budget rule since no pending ADR or boundary decision depends on them yet - see research/reconciliation/RESEARCH-REOPEN-GATES.md",
+  "gap": "RESOLVED 2026-08-18: the original 17-source research brief is now closed 17/17 - see volcengine_baidu_closure_note below. remaining_primary/remaining_protocols are both empty, which is this field's actual authority (derived-projection-consistency-validator reads those arrays, not this prose field).",
   "remaining_primary": [],
   "remaining_protocols": [],
   "researched_this_installment": ["a2a-1.0.1"],

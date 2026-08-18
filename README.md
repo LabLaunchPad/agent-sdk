@@ -3,9 +3,12 @@
 Next-generation, local-first AI Agent SDK for efficient, stateful, long-running,
 policy-aware and verifiable agents and workflows.
 
-> **Status: Phase 0 — foundation only.** This repository currently contains the
-> engineering substrate and its enforcement machinery. **No Agent SDK behaviour
-> is implemented yet**, and none should be added ahead of its gate.
+> **Status: <!-- GENERATED:START fact=phase_id -->P2<!-- GENERATED:END -->
+> — spec-preparation complete, implementation LOCKED.** This repository
+> currently contains the engineering substrate, its enforcement machinery, and
+> Phase 2's kernel specification. **No Agent SDK runtime behaviour is
+> implemented yet**, and none should be added ahead of its gate. See
+> [`.context/index.md`](.context/index.md) for the current phase detail.
 
 ## What this is
 
@@ -22,8 +25,10 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
-`pnpm verify` runs build, typecheck, lint, format check, tests, all seven
-repository validators and the publication smoke test.
+`pnpm verify` runs build, typecheck, lint, format check, tests, all
+<!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> repository
+
+validators and the publication smoke test.
 
 ## Working here
 
@@ -36,16 +41,16 @@ repository. New here? [`docs/agent/BOOTSTRAP.md`](docs/agent/BOOTSTRAP.md).
 
 ## Layout
 
-| Path                  | Contents                                         |
-| --------------------- | ------------------------------------------------ |
-| `packages/`           | Published `@lablaunchpad/*` packages             |
-| `specs/`              | Behaviour specifications — canonical             |
-| `ADR/`                | Architecture decisions — canonical               |
-| `tests/`              | Cross-package tests and validator fixtures       |
-| `benchmarks/`         | Benchmark suites and recorded baselines          |
-| `scripts/repo-tools/` | The seven repository validators                  |
-| `.context/`           | Compiled AI working cache — **never** canonical  |
-| `docs/`               | Agent operating state and repository conventions |
+| Path                  | Contents                                                                                       |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `packages/`           | Published `@lablaunchpad/*` packages                                                           |
+| `specs/`              | Behaviour specifications — canonical                                                           |
+| `ADR/`                | Architecture decisions — canonical                                                             |
+| `tests/`              | Cross-package tests and validator fixtures                                                     |
+| `benchmarks/`         | Benchmark suites and recorded baselines                                                        |
+| `scripts/repo-tools/` | The <!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> repository validators |
+| `.context/`           | Compiled AI working cache — **never** canonical                                                |
+| `docs/`               | Agent operating state and repository conventions                                               |
 
 ## Toolchain
 

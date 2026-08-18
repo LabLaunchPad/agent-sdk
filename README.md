@@ -26,7 +26,7 @@ pnpm verify
 ```
 
 `pnpm verify` runs build, typecheck, lint, format check, tests, all
-<!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> repository
+<!-- GENERATED:START fact=validator_count -->9<!-- GENERATED:END --> repository
 
 validators and the publication smoke test.
 
@@ -48,7 +48,7 @@ repository. New here? [`docs/agent/BOOTSTRAP.md`](docs/agent/BOOTSTRAP.md).
 | `ADR/`                | Architecture decisions — canonical                                                             |
 | `tests/`              | Cross-package tests and validator fixtures                                                     |
 | `benchmarks/`         | Benchmark suites and recorded baselines                                                        |
-| `scripts/repo-tools/` | The <!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> repository validators |
+| `scripts/repo-tools/` | The <!-- GENERATED:START fact=validator_count -->9<!-- GENERATED:END --> repository validators |
 | `.context/`           | Compiled AI working cache — **never** canonical                                                |
 | `docs/`               | Agent operating state and repository conventions                                               |
 

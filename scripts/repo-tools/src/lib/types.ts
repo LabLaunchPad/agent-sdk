@@ -17,7 +17,8 @@ export type ValidatorName =
   | 'package-exports'
   | 'repository-policy'
   | 'research-integrity'
-  | 'derived-projection-consistency';
+  | 'derived-projection-consistency'
+  | 'evidence-provenance';
 
 export const VALIDATOR_NAMES: readonly ValidatorName[] = [
   'schema-contract',
@@ -28,6 +29,7 @@ export const VALIDATOR_NAMES: readonly ValidatorName[] = [
   'repository-policy',
   'research-integrity',
   'derived-projection-consistency',
+  'evidence-provenance',
 ];
 
 export interface Finding {

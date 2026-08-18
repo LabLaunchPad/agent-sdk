@@ -38,7 +38,7 @@ and this file is the human summary — reconcile both before proceeding.
 | Package                    | Purpose                                                                                                  |
 | -------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `@lablaunchpad/contracts`  | Placeholder. Schema harness only, no agent contracts.                                                    |
-| `@lablaunchpad/repo-tools` | Private. The <!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> repository validators. |
+| `@lablaunchpad/repo-tools` | Private. The <!-- GENERATED:START fact=validator_count -->9<!-- GENERATED:END --> repository validators. |
 
 ## Open commitments
 

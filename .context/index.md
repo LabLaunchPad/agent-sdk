@@ -112,7 +112,7 @@ package-external code: `benchmarks/durable-restart/` (real kills),
 | Package                    | Layer     | Role                                                                                |
 | -------------------------- | --------- | ----------------------------------------------------------------------------------- |
 | `@lablaunchpad/contracts`  | contracts | Placeholder — schema harness only                                                   |
-| `@lablaunchpad/repo-tools` | tooling   | The <!-- GENERATED:START fact=validator_count -->8<!-- GENERATED:END --> validators |
+| `@lablaunchpad/repo-tools` | tooling   | The <!-- GENERATED:START fact=validator_count -->9<!-- GENERATED:END --> validators |
 
 ## Recent changes
 

@@ -196,16 +196,28 @@ describe('derived-projection-consistency-validator — projection registry (§12
     }
   });
 
-  it('IGNORES marker syntax in an unregistered file, even with a wrong value', async () => {
-    // EXPLAINER.md contains a region claiming 999 validators. It is not
-    // registered, so it is prose about the convention - not a claim about the
-    // repository. Documentation must be able to describe the mechanism without
-    // being bent to satisfy it.
+  it('SHADOW: BLOCKS a marker-bearing file that is neither registered nor excluded', async () => {
+    // Reverse-direction closure (reality -> registry). Without it, adding a
+    // projection and simply not registering it leaves it unchecked forever
+    // while the gate still reports PASS - the same self-exemption shape as
+    // F008, one step removed.
     const result = await derivedProjectionConsistencyValidator({
-      rootDir: fixture('unregistered-file-with-marker'),
+      rootDir: fixture('unregistered-projection'),
+    });
+    expect(result.status).toBe('FAIL');
+    expect(result.findings[0]?.rule).toBe(
+      'derived-projection-consistency/unregistered-projection',
+    );
+    expect(result.findings[0]?.message).toContain('SHADOW.md');
+  });
+
+  it('ACCEPTS a marker-bearing file that is explicitly excluded with a reason', async () => {
+    const result = await derivedProjectionConsistencyValidator({
+      rootDir: fixture('excluded-projection'),
     });
     expect(result.status).toBe('PASS');
-    expect(result.stats?.regionsChecked).toBe(1);
+    expect(result.stats?.markerFilesDiscovered).toBe(2);
+    expect(result.stats?.exclusions).toBe(1);
   });
 });
 

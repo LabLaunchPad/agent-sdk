@@ -1,5 +1,26 @@
 {
   "receipt_id": "RECEIPT-PHASE-2-KERNEL-001",
+  "provenance": {
+    "claim_scope": "HISTORICAL",
+    "claim_scope_note": "This receipt records what Phase 2 did at the revision below. That remains true regardless of later commits, so it is not invalidated by a newer HEAD - see the M4 freshness rule in docs/audit/REPOSITORY-INTEGRITY-AUDIT.md.",
+    "producer": {
+      "kind": "AGENT_SESSION",
+      "id": "process:claude-code-session"
+    },
+    "repository": {
+      "sha": "4d6d13c4a3926a2330619e3b78b14b579479354b",
+      "ref": "claude/agent-sdk-execution-context-h1lzv2"
+    },
+    "toolchain": {
+      "node": "UNKNOWN",
+      "pnpm": "UNKNOWN",
+      "typescript": "UNKNOWN"
+    },
+    "toolchain_note": "Recovered provenance. This receipt's own TESTS field records that `pnpm verify` had NOT_EXECUTED when it was written, so no toolchain was ever captured for it. UNKNOWN is the truthful value; it is not inferred from the current environment.",
+    "recorded_at": "2026-08-17",
+    "recorded_at_precision": "DATE_ONLY",
+    "provenance_added": "Backfilled in M4 (evidence identity). The sha is the commit that introduced this file, recovered via git log --diff-filter=A, not invented."
+  },
   "phase": "Phase 2 - Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)",
   "claim_labels_used": ["VERIFIED", "SUPPORTED", "INFERRED", "UNKNOWN", "NOT_EXECUTED"],
   "STATE": {

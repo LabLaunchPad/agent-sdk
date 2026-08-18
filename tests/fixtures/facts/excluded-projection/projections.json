@@ -1,0 +1,2 @@
+{ "projections": [ { "id": "p", "file": "projection.md", "facts": ["validator_count"] } ],
+  "exclusions": [ { "file": "EXPLAINER.md", "reason": "documentation quoting the convention" } ] }

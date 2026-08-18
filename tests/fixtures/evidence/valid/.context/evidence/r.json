@@ -1,0 +1,1 @@
+{"receipt_id":"R1","provenance":{"claim_scope":"HISTORICAL","producer":{"kind":"CI","id":"run-1"},"repository":{"sha":"770a4076caf47ee3015eba62a54dd939827caf32","ref":"main"},"toolchain":{"node":"24.19.0"},"recorded_at":"2026-08-18"}}

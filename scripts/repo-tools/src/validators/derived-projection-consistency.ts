@@ -8,7 +8,7 @@ import {
 } from '../lib/types.js';
 import { getFact } from '../lib/facts.js';
 import { parseGeneratedRegions } from '../lib/generated-regions.js';
-import { exists, readJson } from '../lib/workspace.js';
+import { collectFiles, exists, readJson } from '../lib/workspace.js';
 
 /**
  * Closes the gap the audit's mutation experiment demonstrated: `pnpm validate`
@@ -41,8 +41,14 @@ interface ProjectionEntry {
   readonly facts: readonly string[];
 }
 
+interface ProjectionExclusion {
+  readonly file: string;
+  readonly reason: string;
+}
+
 interface ProjectionRegistry {
   readonly projections: readonly ProjectionEntry[];
+  readonly exclusions?: readonly ProjectionExclusion[];
 }
 
 export async function derivedProjectionConsistencyValidator(
@@ -166,10 +172,79 @@ export async function derivedProjectionConsistencyValidator(
     }
   }
 
+  const discovered = await closeCoverage(rootDir, registry, findings);
+
   return result('derived-projection-consistency', findings, {
     projections: registry.projections.length,
     regionsChecked,
+    markerFilesDiscovered: discovered,
+    exclusions: registry.exclusions?.length ?? 0,
   });
+}
+
+/**
+ * Reverse-direction integrity: reality -> registry.
+ *
+ * Checking only registry -> reality leaves a SHADOW gap - a file can carry
+ * generated regions, be absent from the registry, and therefore never be
+ * compared to anything while the gate still reports PASS. That is the same
+ * self-exemption shape as F008 (deleting a registry entry silenced its
+ * projection), one step removed, so it is closed the same way rather than
+ * left for a later adversarial pass to find.
+ *
+ * Every marker-bearing file must be registered or explicitly excluded with a
+ * stated reason. `tests/` is out of scope: its fixtures deliberately contain
+ * malformed and mismatched regions as test inputs, and are not claims about
+ * this repository.
+ */
+async function closeCoverage(
+  rootDir: string,
+  registry: ProjectionRegistry,
+  findings: Finding[],
+): Promise<number> {
+  const registered = new Set(registry.projections.map((entry) => entry.file));
+  const excluded = new Map(
+    (registry.exclusions ?? []).map((entry) => [entry.file, entry.reason]),
+  );
+
+  for (const [file, reason] of excluded) {
+    if (registered.has(file)) {
+      findings.push({
+        rule: 'derived-projection-consistency/exclusion-conflict',
+        message: `projections.json both registers and excludes ${file}. One file cannot be simultaneously protected and exempt.`,
+        path: 'projections.json',
+      });
+    }
+    if (reason.trim() === '') {
+      findings.push({
+        rule: 'derived-projection-consistency/exclusion-unjustified',
+        message: `projections.json excludes ${file} with an empty reason. An exemption without a stated reason is an unaudited hole.`,
+        path: 'projections.json',
+      });
+    }
+  }
+
+  const candidates = (await collectFiles(rootDir, ['.md'])).filter(
+    (file) => !path.relative(rootDir, file).startsWith(`tests${path.sep}`),
+  );
+
+  let discovered = 0;
+  for (const absolute of candidates) {
+    const relative = path.relative(rootDir, absolute).split(path.sep).join('/');
+    const text = await readFile(absolute, 'utf8');
+    if (!text.includes('GENERATED:START')) continue;
+    discovered += 1;
+
+    if (!registered.has(relative) && !excluded.has(relative)) {
+      findings.push({
+        rule: 'derived-projection-consistency/unregistered-projection',
+        message: `${relative} contains generated region markers but is neither registered in projections.json nor listed under exclusions. An unregistered projection is never checked against its canonical facts, so it must not exist silently.`,
+        path: relative,
+      });
+    }
+  }
+
+  return discovered;
 }
 
 function malformedMessage(

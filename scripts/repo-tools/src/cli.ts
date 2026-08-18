@@ -15,6 +15,7 @@ import {
   refreshContext,
 } from './validators/context-staleness.js';
 import { derivedProjectionConsistencyValidator } from './validators/derived-projection-consistency.js';
+import { evidenceProvenanceValidator } from './validators/evidence-provenance.js';
 import { okfConformanceValidator } from './validators/okf-conformance.js';
 import { packageBoundaryValidator } from './validators/package-boundary.js';
 import { packageExportsValidator } from './validators/package-exports.js';
@@ -33,6 +34,7 @@ const VALIDATORS = {
   'repository-policy': repositoryPolicyValidator,
   'research-integrity': researchIntegrityValidator,
   'derived-projection-consistency': derivedProjectionConsistencyValidator,
+  'evidence-provenance': evidenceProvenanceValidator,
 } as const satisfies Record<
   ValidatorName,
   (options: { rootDir: string }) => Promise<ValidatorResult>

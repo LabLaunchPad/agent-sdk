@@ -56,34 +56,34 @@ jobs:
       - name: Test
         run: pnpm test
 
-      # The eight mandatory validators run as separate steps so a red CI names
+      # The nine mandatory validators run as separate steps so a red CI names
       # the failing check without anyone reading the log.
-      - name: 'Validator 1/8 — schema-contract'
+      - name: 'Validator 1/9 — schema-contract'
         run: node scripts/repo-tools/dist/cli.js validate schema-contract
 
-      - name: 'Validator 2/8 — package-boundary'
+      - name: 'Validator 2/9 — package-boundary'
         run: node scripts/repo-tools/dist/cli.js validate package-boundary
 
-      - name: 'Validator 3/8 — context-staleness'
+      - name: 'Validator 3/9 — context-staleness'
         # Mandatory, never advisory. `context refresh` must NOT run here:
         # auto-refresh would rubber-stamp drift instead of reporting it.
         run: node scripts/repo-tools/dist/cli.js validate context-staleness
 
-      - name: 'Validator 4/8 — okf-conformance'
+      - name: 'Validator 4/9 — okf-conformance'
         # Added in Workstream A but never wired into this file until Phase 1B
         # found the gap: every OKF concept under .context/research/specs/ADR
         # was unenforced in CI, only checked locally via `pnpm validate`.
         run: node scripts/repo-tools/dist/cli.js validate okf-conformance
 
-      - name: 'Validator 5/8 — package-exports (publication smoke test)'
+      - name: 'Validator 5/9 — package-exports (publication smoke test)'
         # Packs the tarball, installs it into a clean consumer, imports by public
         # package name and executes an export.
         run: node scripts/repo-tools/dist/cli.js validate package-exports
 
-      - name: 'Validator 6/8 — repository-policy'
+      - name: 'Validator 6/9 — repository-policy'
         run: node scripts/repo-tools/dist/cli.js validate repository-policy
 
-      - name: 'Validator 7/8 — research-integrity'
+      - name: 'Validator 7/9 — research-integrity'
         # Added in Phase 1B: ID cross-references in research/canonical/
         # canonical-research.json and relative markdown links across the OKF
         # scopes actually resolve. okf-conformance-validator is explicitly
@@ -92,7 +92,7 @@ jobs:
         # okf-conformance.
         run: node scripts/repo-tools/dist/cli.js validate research-integrity
 
-      - name: 'Validator 8/8 — derived-projection-consistency'
+      - name: 'Validator 8/9 — derived-projection-consistency'
         # Added after the repository integrity audit (docs/audit/
         # REPOSITORY-INTEGRITY-AUDIT.md) proved, by mutation, that the prior
         # seven validators could pass while .context/index.md, README.md and
@@ -103,3 +103,10 @@ jobs:
         # (scripts/repo-tools/src/lib/facts.ts); never auto-fixes, for the
         # same reason context-staleness and facts write never run in CI.
         run: node scripts/repo-tools/dist/cli.js validate derived-projection-consistency
+
+      - name: 'Validator 9/9 — evidence-provenance'
+        # M4: decision-critical receipts under .context/evidence/ must state
+        # which revision, environment and producer their claims came from, and
+        # any revision they name must resolve in this repository. UNKNOWN is a
+        # valid recorded value; an omitted field is not.
+        run: node scripts/repo-tools/dist/cli.js validate evidence-provenance

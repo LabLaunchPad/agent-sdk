@@ -1,0 +1,14 @@
+{
+  "phase": "P2",
+  "governingSpecs": [
+    "docs/architecture/KERNEL-CONSTITUTION.md",
+    ".context/specs/kernel.json",
+    "specs/persistence/STORE-INTERFACES.md"
+  ],
+  "note": "Phase 2 spec-preparation is UNLOCKED, implementation stays LOCKED (.context/research/reconciliation/phase-gate.json lock_state). KERNEL-CONSTITUTION.md is synthesis of ADR-0006/0009-0016, not a new decision - ties the 10 kernel primitives (Identity, Task, Run, State, Operation, Capability, Policy, Checkpoint, Evidence, Verdict) into one testable spec across 6 sections. specs/persistence/ still holds the Phase-4/7 constraint stubs this document elaborates.",
+  "templates": [
+    "specs/TEMPLATE-BEHAVIOUR-SPEC.md",
+    "ADR/TEMPLATE.md",
+    "docs/agent/TEMPLATE-PHASE-RECEIPT.md"
+  ]
+}

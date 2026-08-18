@@ -1,0 +1,84 @@
+{
+  "source": "Hugging Face smolagents",
+  "version": "v1.26.0 (latest surfaced release; 2026-05-29)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "Apache-2.0",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Core loop is intentionally small; CodeAgent and ToolCallingAgent are the two primary paradigms.",
+      "url": "https://github.com/huggingface/smolagents/blob/main/docs/source/en/index.md"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Memory records task/steps/planning and supports reset/replay; it is step history rather than a demonstrated durable state store.",
+      "url": "https://huggingface.co/docs/smolagents/en/reference/agents"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "CodeAgent executes Python locally by default and can use sandboxed execution; local execution is explicitly characterized as potentially unsafe and imports are constrained by defaults.",
+      "url": "https://huggingface.co/docs/smolagents/en/guided_tour"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Tool abstraction requires metadata for name/description/input/output so models can use functions.",
+      "url": "https://huggingface.co/docs/smolagents/tutorials/tools"
+    },
+    {
+      "evidence_level": "E3",
+      "claim": "API is explicitly described as experimental and subject to change.",
+      "url": "https://huggingface.co/docs/smolagents/en/reference/agents"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "small core",
+    "MultiStepAgent",
+    "CodeAgent",
+    "ToolCallingAgent",
+    "managed agents"
+  ],
+  "state": ["AgentMemory step list", "planning/action/task steps", "replay/reset"],
+  "context": ["prompt templates", "tool metadata", "step history variants"],
+  "memory": [
+    "per-run step memory",
+    "no demonstrated durable workflow memory in cited docs"
+  ],
+  "runtime": [
+    "local Python execution",
+    "sandbox integrations such as Docker/E2B/Modal/Blaxel",
+    "model adapters"
+  ],
+  "security": [
+    "local code execution potentially unsafe",
+    "authorized import controls",
+    "sandbox option"
+  ],
+  "ux": ["very low boilerplate", "code-as-action mental model"],
+  "dx": ["minimal API", "experimental API warning"],
+  "portability": [
+    "HF/local and API model abstractions",
+    "OpenAI/Anthropic/LiteLLM and others"
+  ],
+  "efficiency": [
+    "small framework footprint",
+    "code actions can combine tools with loops/conditionals"
+  ],
+  "patterns": ["small core plus model intelligence", "code-as-action tool composition"],
+  "contradictions": [
+    "expressiveness vs sandbox/security cost",
+    "small core vs durable workflow needs"
+  ],
+  "unknowns": [
+    "durability semantics beyond in-memory memory",
+    "hard resource limits across sandbox backends"
+  ],
+  "decisions": [
+    "ADOPT minimal core principle",
+    "ADAPT sandbox contract",
+    "REJECT implicit security assumptions"
+  ]
+}

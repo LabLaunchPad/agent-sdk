@@ -1,0 +1,108 @@
+{
+  "coverage": "7 of 17 sources (installment 3 added langgraph, mastra capability findings)",
+  "confirmed_patterns": {
+    "tool_boundary_guardrails_distinct_from_agent_guardrails": {
+      "source": "openai-agents-sdk",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "tool-boundary-guardrails"
+    },
+    "agent_harness_workflow_three_layers": {
+      "source": "microsoft-agent-framework",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "agent-harness-workflow-layering"
+    },
+    "thin_sdk_over_shared_runtime": {
+      "source": "kimi-agent-sdk",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "thin-sdk-shared-runtime"
+    },
+    "durable_execution_as_attachable_capability": {
+      "source": "pydantic-ai",
+      "evidence_level": "E3",
+      "caveat": "not a uniform interface across backends - see research/contradictions/runtime-abstraction-uniform.md"
+    },
+    "local_model_gateway_with_hosted_fallback": {
+      "source": "qwen-agent",
+      "evidence_level": "E3",
+      "lablaunchpad_pattern_id": "local-model-gateway-with-hosted-fallback"
+    },
+    "environment_and_contextmanager_as_first_class_abstractions": {
+      "source": "tencent-youtu-agent",
+      "evidence_level": "E3",
+      "note": "confirms LabLaunchPad's own planned adapters/tools boundary and Phase 6 Context Compiler; not yet promoted to a knowledge/patterns/ file"
+    },
+    "checkpointer_as_pluggable_backend_interface": {
+      "source": "langgraph",
+      "evidence_level": "E3",
+      "note": "memory/SQLite/Postgres/Mongo behind one Checkpointer interface, in-memory/SQLite genuinely first-class (corrected from an initial framing that implied Postgres/Redis were required) - relevant to ADR-0006's deferred persistence-interface constraint; not yet promoted to a knowledge/patterns/ file"
+    },
+    "workflow_orchestration_and_checkpointing_as_core_not_attached": {
+      "source": "langgraph, mastra",
+      "evidence_level": "E3",
+      "note": "both graph-based frameworks treat these as first-party, contrasted with PydanticAI/Microsoft Agent Framework treating durable execution/checkpointing as attached capabilities"
+    },
+    "workspace_as_composable_filesystem_command_search_skills_with_per_tool_approval": {
+      "source": "mastra",
+      "evidence_level": "E3",
+      "note": "strongest match found across all 8 frameworks researched to LabLaunchPad's planned adapters/tools boundary combined with a policy layer in one abstraction; not yet promoted to a knowledge/patterns/ file"
+    },
+    "persistence_lifecycle_distinct_from_storage_backend_choice": {
+      "source": "langgraph",
+      "evidence_level": "E3",
+      "note": "checkpoint retention/archival and state-schema migration are open, unsolved problems in LangGraph independent of which backend (local or cloud) is used - see research/contradictions/checkpointing-vs-persistence-lifecycle.md"
+    }
+  },
+  "imported_supplementary_corpus": {
+    "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+    "provenance": "beyond the original 17-source brief; user-supplied, not independently re-verified via WebFetch/WebSearch in this session",
+    "patterns": {
+      "workspace_sandbox_as_explicit_contract": {
+        "sources": ["openhands", "browser-use", "letta"],
+        "note": "3rd independent convergence with Mastra's Workspace and Youtu-Agent's Environment on 'environment/workspace as an explicit, swappable contract'"
+      },
+      "durable_agent_state_distinct_from_memory_context_knowledge": {
+        "sources": ["letta", "google-adk", "crewai"]
+      },
+      "context_broker_progressive_disclosure": {
+        "sources": ["google-adk", "letta", "openhands", "browser-use"]
+      },
+      "action_boundary_deterministic_policy_not_llm_only": {
+        "sources": ["openhands"],
+        "note": "OpenHands' own docs: LLM security analyzer is explicitly not a complete solution; execute_tool() bypasses conversation analyzers/confirmation - see decisions.json reject-llm-only-security-judgement"
+      }
+    },
+    "detail": "see research/comparison/CAPABILITY-MATRIX.md and research/comparison/SECURITY-MATRIX.md for the full imported comparison"
+  },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "beyond the original 17-source brief and beyond batch 1; second 'next wave' user-supplied corpus, not independently re-verified via WebFetch/WebSearch in this session",
+    "patterns": {
+      "small_kernel_optional_workflow_layer": {
+        "sources": ["strands-agents", "smolagents", "haystack", "llama-agents"],
+        "note": "see decisions.json adr-candidate-001"
+      },
+      "optimization_port_outside_runtime_kernel": {
+        "sources": ["dspy"],
+        "note": "DSPy is architecturally a programming/optimization framework over an LM adapter, not an agent runtime - a category difference, not a weak capability result. See decisions.json adr-candidate-005."
+      },
+      "durable_side_effect_reconciliation_via_operation_id": {
+        "sources": [],
+        "note": "no cited evidence sources in the source corpus's own spec-delta.json - flagged as the weakest-evidenced of batch 2's 6 ADR-CANDIDATEs"
+      }
+    },
+    "migration_era_note": "autogen and semantic-kernel capability rows describe historical frameworks whose documented successor is microsoft-agent-framework (researched live in installment 1) - not independent capability data points",
+    "detail": "see research/comparison/NEXT-WAVE-CAPABILITY-MATRIX.md and research/decisions/ADR-CANDIDATE-*.md for the full imported comparison"
+  },
+  "source": "research/built-in-capabilities/MATRIX.md",
+  "generated_at": "2026-08-17T00:00:00Z"
+}

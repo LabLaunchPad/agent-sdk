@@ -1,0 +1,162 @@
+---
+type: Licensing Matrix
+title: Licensing Matrix
+description: License, attribution and reuse-restriction status for researched frameworks
+sources:
+  - resource: https://github.com/openai/openai-agents-python/blob/main/LICENSE
+    id: oai-license
+  - resource: https://github.com/pydantic/pydantic-ai/blob/main/LICENSE
+    id: pai-license
+  - resource: https://github.com/MoonshotAI/kimi-agent-sdk
+    id: kimi-license
+  - resource: https://github.com/QwenLM/Qwen-Agent/blob/main/LICENSE
+    id: qwen-license
+  - resource: https://github.com/TencentCloudADP/youtu-agent/blob/main/LICENSE
+    id: youtu-license
+  - resource: https://github.com/langchain-ai/langgraph/blob/main/LICENSE
+    id: langgraph-license
+  - resource: https://github.com/mastra-ai/mastra/blob/main/LICENSE.md
+    id: mastra-license
+  - resource: https://github.com/volcengine/agentkit-sdk-python/blob/main/LICENSE
+    id: volcengine-license
+  - resource: https://github.com/baidubce/app-builder
+    id: baidu-license
+  - resource: /research/frameworks/openhands/licensing.md
+    id: openhands-license
+  - resource: /research/frameworks/letta/licensing.md
+    id: letta-license
+  - resource: /research/frameworks/google-adk/licensing.md
+    id: google-adk-license
+  - resource: /research/frameworks/browser-use/licensing.md
+    id: browser-use-license
+  - resource: /research/frameworks/crewai/licensing.md
+    id: crewai-license
+  - resource: /research/frameworks/strands-agents/overview.md
+    id: strands-agents-license
+  - resource: /research/frameworks/smolagents/overview.md
+    id: smolagents-license
+  - resource: /research/frameworks/ag2/overview.md
+    id: ag2-license
+  - resource: /research/frameworks/llama-index/overview.md
+    id: llama-index-license
+  - resource: /research/frameworks/llama-agents/overview.md
+    id: llama-agents-license
+  - resource: /research/frameworks/haystack/overview.md
+    id: haystack-license
+  - resource: /research/frameworks/dspy/overview.md
+    id: dspy-license
+  - resource: /research/frameworks/autogen/overview.md
+    id: autogen-license
+  - resource: /research/frameworks/semantic-kernel/overview.md
+    id: semantic-kernel-license
+  - resource: /research/sources/LICENSE-REVIEW.md
+    id: batch-2-license-review
+generated:
+  by: process:claude-code-session
+  at: 2026-08-17T00:00:00Z
+status: draft
+x_coverage: 7 of 17 sources from the original research brief researched live in this session, plus 5+9=14 additional frameworks from two imported supplementary corpora (see notes below)
+---
+
+# Licensing Matrix
+
+| Framework                   | License                                                                                                                                                                                                                                                               | Copyright holder                                                                                                       | Attribution required                                         | Redistribution                                               | Commercial use                                                                                                                   | Patent grant                                                                                 | Whole tree checked?                                                                                                  | Status                                                                                                                                                                                                                                         |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAI Agents SDK           | MIT                                                                                                                                                                                                                                                                   | OpenAI, 2025                                                                                                           | Yes — copyright + license notice in copies                   | Permitted                                                    | Permitted                                                                                                                        | No (MIT is silent on patents)                                                                | No — root LICENSE only, per installment 1-2 methodology                                                              | **FACT** — LICENSE file directly cited                                                                                                                                                                                                         |
+| Microsoft Agent Framework   | MIT (asserted; not directly confirmed for the primary `microsoft/agent-framework` LICENSE file in this pass)                                                                                                                                                          | Microsoft                                                                                                              | Presumed yes if MIT                                          | Presumed permitted                                           | Presumed permitted                                                                                                               | No (if MIT)                                                                                  | No                                                                                                                   | **INFERENCE, not FACT** — confirmed for the _Samples_ repo, not the primary repo. `LICENSE_UNKNOWN` until directly re-verified.                                                                                                                |
+| PydanticAI                  | MIT                                                                                                                                                                                                                                                                   | Pydantic Services Inc., 2024–present                                                                                   | Yes                                                          | Permitted                                                    | Permitted                                                                                                                        | No                                                                                           | No                                                                                                                   | **FACT** — LICENSE file directly cited                                                                                                                                                                                                         |
+| Kimi Agent SDK              | Apache-2.0                                                                                                                                                                                                                                                            | Moonshot AI (implied by repo ownership; not independently confirmed by copyright line)                                 | Yes — plus NOTICE-file obligation Apache-2.0 adds beyond MIT | Permitted                                                    | Permitted                                                                                                                        | **Yes — express patent grant**                                                               | No                                                                                                                   | **FACT** for license identity (badge + LICENSE reference); copyright holder is INFERENCE                                                                                                                                                       |
+| Qwen-Agent                  | Apache-2.0                                                                                                                                                                                                                                                            | **Unfilled in the LICENSE file itself** — template placeholder `Copyright [yyyy] [name of copyright owner]` left as-is | Yes — same Apache-2.0 obligations                            | Permitted                                                    | Permitted                                                                                                                        | **Yes — express patent grant**                                                               | No                                                                                                                   | **FACT** for license type (LICENSE file directly fetched and quoted); copyright holder is a genuine gap in the source, not an inference we chose not to make                                                                                   |
+| Tencent Youtu-Agent         | MIT                                                                                                                                                                                                                                                                   | Tencent, 2025                                                                                                          | Yes                                                          | Permitted                                                    | Permitted                                                                                                                        | No                                                                                           | No                                                                                                                   | **FACT** — LICENSE file directly fetched and quoted: "Tencent is pleased to support the open source community by making Youtu-agent available. Copyright (C) 2025 Tencent."                                                                    |
+| **LangGraph**               | **Split** — core (`langgraph`, `langchain-core`, model integrations) is MIT                                                                                                                                                                                           | LangChain, Inc., 2024                                                                                                  | Yes for MIT-covered code                                     | Permitted for core; restricted for `langgraph-api`           | Permitted for core; **restricted for `langgraph-api`** (Elastic License 2.0 limits offering as a competing hosted service)       | No (MIT core is patent-silent; Elastic 2.0 terms differ, not independently re-verified here) | **Yes — this pass specifically checked beyond the root LICENSE and found the split**                                 | **FACT** — both the core LICENSE and the `langgraph-api`/Elastic split are independently sourced. See `research/contradictions/license-split-by-directory.md`.                                                                                 |
+| **Mastra**                  | **Three-tier, not a simple split** — (1) core framework: Apache-2.0; (2) platform (Studio/observability/Memory Gateway): self-hostable or hosted, commercially metered, not a code license per se; (3) Enterprise Edition: separate Mastra Enterprise Edition License | Kepler Software (Mastra maintainers)                                                                                   | Yes for Apache-2.0-covered code                              | Permitted for core; restricted for platform/Enterprise tiers | Permitted for core; **restricted/metered for platform tier; restricted for Enterprise tier** (source-available, not open source) | **Yes — express patent grant for Apache-2.0-covered code**                                   | **Yes — this pass specifically checked beyond the root LICENSE and found three distinguishable tiers, not just two** | **FACT** — Mastra's own licensing docs page and pricing page directly state the platform/Enterprise separation. See `research/contradictions/license-split-by-directory.md`.                                                                   |
+| Volcengine AgentKit / VeADK | Apache-2.0 (both `agentkit-sdk-python` and `veadk-python`)                                                                                                                                                                                                            | Volcengine (ByteDance) — implied by repo ownership, not independently confirmed by copyright line                      | Yes — plus NOTICE-file obligation                            | Permitted                                                    | Permitted                                                                                                                        | **Yes — express patent grant**                                                               | No — root LICENSE only                                                                                               | **FACT** for license identity — both repos directly fetched, license badge + explicit README statement confirmed on each. Platform terms of service (for the managed AgentKit Runtime, distinct from the SDK's own code license) not reviewed. |
+| Baidu AppBuilder SDK        | Apache-2.0                                                                                                                                                                                                                                                            | Baidu — implied by repo ownership, not independently confirmed by copyright line                                       | Yes — plus NOTICE-file obligation                            | Permitted                                                    | Permitted                                                                                                                        | **Yes — express patent grant**                                                               | No — root LICENSE only                                                                                               | **FACT** — directly fetched, license badge (`license-Apache%202-blue.svg`) and README footer statement confirmed. Qianfan platform terms of service (distinct from the SDK's own code license) not reviewed.                                   |
+
+| **OpenHands Software Agent SDK** (imported, not independently re-verified) | MIT | UNKNOWN — inspect repository-level notices before redistribution, not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/openhands/licensing.md` |
+| **Letta** (imported, not independently re-verified) | Apache-2.0 | UNKNOWN — not captured by the source corpus | Yes — plus NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes (if Apache-2.0) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/letta/licensing.md` |
+| **Google Agent Development Kit (ADK)** (imported, not independently re-verified) | Apache-2.0 (Python/Go) | UNKNOWN — not captured by the source corpus | Yes — plus NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes (if Apache-2.0) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/google-adk/licensing.md` |
+| **Browser Use** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/browser-use/licensing.md` |
+| **CrewAI** (imported, not independently re-verified) | MIT | UNKNOWN — not captured by the source corpus | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/crewai/licensing.md` |
+
+| **Strands Agents** (imported batch 2, not independently re-verified) | Apache-2.0 | UNKNOWN | Yes — NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/strands-agents/overview.md` |
+| **Hugging Face smolagents** (imported batch 2, not independently re-verified) | Apache-2.0 | UNKNOWN | Yes | Presumed permitted | Presumed permitted | Presumed yes | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/smolagents/overview.md` |
+| **AG2** (imported batch 2, not independently re-verified) | **Split** — Apache-2.0 for fork modifications; original AutoGen code retained under MIT | UNKNOWN | Yes (both licenses require it) | Presumed permitted | Presumed permitted | Presumed yes for Apache-2.0-covered code | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — a fork with a mixed license by provenance (not by directory like LangGraph/Mastra, but by which code predates the fork) — see `research/frameworks/ag2/overview.md` |
+| **LlamaIndex** (imported batch 2, not independently re-verified) | MIT for core repository; individual integrations may vary | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No — source corpus explicitly flags integration-level variance | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/llama-index/overview.md` |
+| **Llama Agents + Workflows** (imported batch 2, not independently re-verified) | MIT | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/llama-agents/overview.md` |
+| **Haystack** (imported batch 2, not independently re-verified) | Apache-2.0 — **source corpus flags an unknown/unreviewed license-header file in the repository** | UNKNOWN | Yes — NOTICE-file obligation if Apache-2.0 | Presumed permitted | Presumed permitted | Presumed yes | **No — and the source corpus itself says this needs review** | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED, FLAGGED FOR REVIEW** — see `research/frameworks/haystack/overview.md` |
+| **DSPy** (imported batch 2, not independently re-verified) | MIT | UNKNOWN | Presumed yes if MIT | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — see `research/frameworks/dspy/overview.md` |
+| **Microsoft AutoGen** (imported batch 2, migration-era, not independently re-verified) | **Split** — MIT for code; CC-BY-4.0 for repository documentation | Microsoft | Yes (both licenses require it) | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — successor is Microsoft Agent Framework (already researched, installment 1); see `research/frameworks/autogen/overview.md` |
+| **Microsoft Semantic Kernel** (imported batch 2, migration-era, not independently re-verified) | MIT | Microsoft | Yes | Presumed permitted | Presumed permitted | No (if MIT) | No | **IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED** — same successor relationship as AutoGen; see `research/frameworks/semantic-kernel/overview.md` |
+
+## Imported corpus caveat
+
+The rows above tagged "imported" come from two research passes the user
+supplied, not from this session's own WebFetch/WebSearch calls. Their
+license _type_ is credibly sourced (each cites the framework's own
+repository), but this repository's evidence discipline does not upgrade an
+unreproduced claim to `FACT` just because it looks credible — hence
+`IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED` rather than `FACT`,
+consistently with each corpus's own status vocabulary. None had their
+copyright holder or whole-tree license status captured by the source
+corpus — recorded as `UNKNOWN`, not inferred. Given installment 3's
+finding that license splits are common (2 of 7 directly-researched
+frameworks, plus AG2 and AutoGen now showing a _third_ variant — mixed
+license by code provenance rather than by directory or by tier), **do not
+assume any imported-corpus framework is uniformly licensed** without a
+direct check. Haystack is specifically flagged by its own source corpus as
+needing a license-header review before any reuse decision.
+
+## Governing rule (from the research brief, restated)
+
+Never assume "open source" = "no obligations," and never assume "public
+docs" = "free source-code reuse." All licenses recorded above are genuinely
+permissive at the core-license level and would allow direct source reuse of
+that core if LabLaunchPad ever wanted it — but this repository's own policy
+(ADR-driven, pattern-only extraction by default) means source reuse is
+**not currently authorized** regardless of what the upstream license would
+permit. License permission and LabLaunchPad's own reuse policy are two
+different gates; both licenses being permissive does not change the second
+gate.
+
+## Installment 3 finding: license splits are common, not rare
+
+LangGraph and Mastra — 2 of the 7 frameworks with a licensing row so far —
+both split their license/commercial terms rather than applying one license
+uniformly. Neither split was found by checking the root LICENSE file alone;
+both required reading further (a secondary blog post for LangGraph, the
+framework's own licensing and pricing docs pages for Mastra). This promotes
+"check the whole tree/offering, not just the root LICENSE" from a one-off
+observation to a standing due-diligence rule for this repository — see
+`research/contradictions/license-split-by-directory.md`. The five
+frameworks researched in installments 1-2 have **not** been retroactively
+re-checked against this rule; their `Whole tree checked?` column is
+honestly marked "No," not silently assumed clean.
+
+**Correction to this file's own first draft**: Mastra's row initially
+recorded a simple two-way split (core Apache-2.0 vs. `ee/` Enterprise
+License). Deeper research found a **third** tier: the platform layer
+(Mastra Studio, observability, Memory Gateway) is a separately-metered
+commercial product, self-hostable or hosted, distinct from both the
+Apache-2.0 framework code and the Enterprise Edition License. Corrected in
+the table above, not silently overwritten.
+
+## Noteworthy: Qwen-Agent's incomplete LICENSE file
+
+Apache-2.0's template requires the copyright line to be filled in with the
+actual holder and year; Qwen-Agent's repository ships the file with the
+placeholder still present. This does not change the license _type_ (still
+verifiably Apache-2.0 from the file's body text), but it means "copyright
+holder: Alibaba/QwenLM" is this research's own reasonable inference from
+repository ownership, not a fact directly readable from the license text —
+recorded as such rather than silently treated as equivalent to Youtu-Agent's
+complete, specific copyright statement.
+
+## Not yet researched (from the original 17-source brief)
+
+Volcengine AgentKit, Baidu AppBuilder SDK, A2A, Agent Skills specification.
+Each requires its own LICENSE-file fetch (and, per the installment 3
+finding above, a whole-tree check, not just the root file) before any
+claim is recorded here — do not extrapolate a license from a framework's
+general "open source" reputation. (MCP's protocol-level licensing was not
+in scope for `research/protocols/mcp-2026-07-28.md`.)

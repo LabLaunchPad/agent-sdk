@@ -1,0 +1,22 @@
+{
+  "research_run_id": "llp-rsch-2026-08-17-wave1",
+  "status": "PARTIAL",
+  "blocked_checks": [
+    "prior corpus duplication",
+    "prior stale claims",
+    "prior contradiction inventory"
+  ],
+  "verified_current_drift": [
+    {
+      "domain": "MCP",
+      "finding": "2026-07-28 stateless protocol core supersedes older session-based protocol assumptions",
+      "impact": "HIGH"
+    },
+    {
+      "domain": "A2A",
+      "finding": "Official latest is 0.3.0 rather than 0.2.x",
+      "impact": "HIGH"
+    }
+  ],
+  "unresolved": "Prior LabLaunchPad corpus was unavailable."
+}

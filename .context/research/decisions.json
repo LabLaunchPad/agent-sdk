@@ -1,0 +1,297 @@
+{
+  "decisions": [
+    {
+      "id": "adopt-tool-boundary-guardrails",
+      "pattern": "tool-boundary-guardrails",
+      "status": "CANDIDATE",
+      "note": "confirms existing AGENTS.md Policy Gate requirement rather than introducing a new one"
+    },
+    {
+      "id": "confirm-agent-harness-workflow-layering",
+      "pattern": "agent-harness-workflow-layering",
+      "status": "CANDIDATE",
+      "note": "no architectural change; independent E3 confirmation of existing PACKAGE-MAP.md layering"
+    },
+    {
+      "id": "confirm-thin-sdk-strategy",
+      "pattern": "thin-sdk-shared-runtime",
+      "status": "CANDIDATE",
+      "note": "confirms ADR-0001 binding strategy; no action until ADR-0001's revisit trigger fires"
+    },
+    {
+      "id": "reject-uniform-runtime-swap-assumption",
+      "contradiction": "runtime-abstraction-uniform",
+      "status": "BOUND",
+      "adr": "ADR-0016",
+      "note": "Phase 17 RuntimeAdapter conformance suite must test mid-execution backend swap explicitly. Bound to ADR-0016 (Phase 1B) - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 1."
+    },
+    {
+      "id": "reject-local-always-cheaper",
+      "contradiction": "local-execution-cheaper",
+      "status": "BOUND",
+      "adr": "ADR-0016",
+      "note": "Phase 19 SandboxProvider spec must define isolation guarantee independent of local-vs-hosted preference. Bound to ADR-0016 (Phase 1B) - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 2."
+    },
+    {
+      "id": "adopt-local-model-gateway-pattern",
+      "pattern": "local-model-gateway-with-hosted-fallback",
+      "status": "CANDIDATE",
+      "note": "informs Phase 16 Model Gateway spec - document at least one concrete local deployment target, not only an abstract interface"
+    },
+    {
+      "id": "correct-youtu-agent-local-first-assumption",
+      "contradiction": "priority-list-not-infallible",
+      "status": "CORRECTION_RECORDED",
+      "note": "operating-prompt framing is E0 until independently verified, exactly like any other external claim - applies symmetrically to future research installments"
+    },
+    {
+      "id": "adopt-checkpointer-pluggable-backend",
+      "pattern": "checkpointer-as-pluggable-backend-interface",
+      "status": "CANDIDATE",
+      "note": "LangGraph evidence for ADR-0006's deferred persistence-interface constraint (Phase 4/7); also motivates validating caller-supplied filters on state/checkpoint query paths per the disclosed LangGraph checkpointer CVEs"
+    },
+    {
+      "id": "adopt-libsql-local-storage-precedent",
+      "pattern": "embedded-sqlite-compatible-local-storage",
+      "status": "CANDIDATE",
+      "note": "Mastra's LibSQL file-DB path is a concrete, zero-infra local storage example to cite alongside Qwen-Agent's local model path when Phase 4/7 persistence work starts"
+    },
+    {
+      "id": "protocol-application-agent-state-distinction",
+      "source": "research/protocols/mcp-2026-07-28.md",
+      "status": "BOUND",
+      "adr": "ADR-0009",
+      "note": "PROTOCOL STATE (MCP's own, deliberately minimized) != APPLICATION STATE (server-minted/task handles) != AGENT STATE (LabLaunchPad's own Task/State/Checkpoint model). Bound to ADR-0009 (Phase 1B), ahead of the original Phase 18 target since the decision itself doesn't require implementation to make - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 3."
+    },
+    {
+      "id": "reject-root-license-file-sufficiency",
+      "contradiction": "license-split-by-directory",
+      "status": "RECORDED",
+      "note": "Any future dependency-review process must check the whole tree/offering, not just the root LICENSE file, before extracting even pattern-only knowledge - confirmed by LangGraph (langgraph-api Elastic 2.0) and Mastra (three tiers: framework/platform/enterprise) independently. Reclassified from ACTION_REQUIRED to RECORDED in Phase 1B: a research-methodology rule that self-enforces at its point of future use, not an SDK architecture decision awaiting a choice - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 4."
+    },
+    {
+      "id": "reject-checkpointer-solves-persistence",
+      "contradiction": "checkpointing-vs-persistence-lifecycle",
+      "status": "BOUND",
+      "adr": "ADR-0010",
+      "note": "Phase 4/7 CheckpointStore spec must treat retention/archival and schema-versioning/migration as first-class parts of the contract, not implementation details deferred to whichever backend is chosen - LangGraph's own open issues (#536 schema migration, #1138 unbounded growth) are direct evidence this is unsolved even in a mature, genuinely local-capable checkpointer. Bound to ADR-0010 (Phase 1B) - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 5."
+    },
+    {
+      "id": "adopt-workspace-composable-tool-boundary",
+      "pattern": "workspace-as-composable-filesystem-command-search-skills-with-per-tool-approval",
+      "status": "CANDIDATE",
+      "note": "Mastra's Workspace is the strongest match found to LabLaunchPad's planned adapters/tools boundary combined with a policy layer - worth citing directly when Phase 8 (Capability Registry) and the tool-boundary Policy Gate design are formalized"
+    },
+    {
+      "id": "correct-langgraph-local-first-classification",
+      "status": "CORRECTION_RECORDED",
+      "note": "First draft of the LangGraph local-first verdict (HYBRID, citing a Postgres/Redis production requirement) overstated the SDK's own dependency; corrected to LOCAL_CAPABLE after re-reading the Checkpointer interface directly, per user feedback. Applies the same evidence-discipline rule used for the Youtu-Agent correction: re-check a finding against primary sources before treating it as settled, regardless of source (a user's steer is not exempt from this either - the correction itself was verified against LangGraph's own docs, not accepted on assertion alone)"
+    },
+    {
+      "id": "correct-mastra-licensing-two-tier-to-three-tier",
+      "status": "CORRECTION_RECORDED",
+      "note": "First draft recorded a simple core/ee two-way license split for Mastra; deeper research found a third, distinguishable platform tier (Studio/observability/Memory Gateway, commercially metered). Corrected in research/licensing/MATRIX.md and .context/research/licensing.json, not silently overwritten."
+    },
+    {
+      "id": "adopt-runtime-and-sandbox-as-explicit-contracts",
+      "pattern": "workspace-sandbox-as-explicit-contract",
+      "status": "CANDIDATE",
+      "source": "imported corpus: OpenHands, Browser Use, Letta",
+      "note": "OpenHands makes workspace/runtime boundaries explicit as a named contract; converges with Mastra's Workspace (installment 3) and Youtu-Agent's Environment (installment 2) - now a 3-way independent convergence on 'workspace/environment as an explicit, swappable contract'. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adopt-durable-state-distinct-from-memory",
+      "pattern": "durable-agent-state-distinct-from-memory-context-knowledge",
+      "status": "CANDIDATE",
+      "source": "imported corpus: Letta, Google ADK, CrewAI",
+      "note": "Letta provides evidence for treating State/Memory/Context/Knowledge/Evidence/Transcript as six distinct concepts rather than collapsing them. Directly relevant to Phase 4/7 persistence work and complements the checkpointing-vs-persistence-lifecycle contradiction from LangGraph. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adopt-context-broker-progressive-disclosure",
+      "pattern": "context-broker-with-progressive-disclosure-and-token-budgets",
+      "status": "CANDIDATE",
+      "source": "imported corpus: Google ADK, Letta, OpenHands, Browser Use",
+      "note": "Multiple frameworks independently implement filtering/summarization/lazy-loading/token-tracking as an explicit context-management subsystem - relevant to Phase 6 (Context Compiler). Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "reject-llm-only-security-judgement",
+      "contradiction": "imported corpus CONTRADICTION-MATRIX.md #7 (LLM security judgement vs deterministic enforcement)",
+      "status": "BOUND",
+      "adr": "ADR-0013",
+      "source": "imported corpus: OpenHands",
+      "note": "OpenHands' own docs state its LLM-based security analyzer is explicitly not a complete prompt-injection solution, and execute_tool() bypasses conversation analyzers/confirmation entirely - capability enforcement must live below the agent loop, not rely on model judgement. Directly actionable for this repository's own Policy Gate design. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session. Bound to ADR-0013 (Phase 1B) - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 6."
+    },
+    {
+      "id": "defer-default-multiagent-hierarchy",
+      "status": "DEFERRED",
+      "source": "imported corpus RESEARCH-RECEIPT.md 'Requirements to defer'",
+      "note": "Imported corpus's contradiction #3 (multi-agent coordination vs measurable coordination overhead) supports keeping single-agent as the default and multi-agent orchestration opt-in, not a default hierarchy. Consistent with this repository's own minimal-core bias; not yet cross-checked against the existing locked architecture per the corpus's own caveat that candidate deletions/changes need that comparison first."
+    },
+    {
+      "id": "imported-corpus-not-yet-reconciled-with-architecture",
+      "status": "BOUND",
+      "source": "research/imported-corpus/SOURCE-RECEIPT.md",
+      "note": "The imported corpus proposes 6 ADR-CANDIDATEs (separate Runtime from Agent semantics; formalize State/Memory/Context/Knowledge/Evidence/Transcript; introduce ContextBroker; mandatory action-boundary policy for dangerous capabilities; opt-in multi-agent orchestration; semantic adapter policy for external frameworks) and 10 proposed benchmarks. Reconciled in Phase 1B - see research/reconciliation/DECISION-CONSOLIDATION.md and BOUNDARY-RECONCILIATION.md for the actual dispositions."
+    },
+    {
+      "id": "adr-candidate-001-small-kernel-optional-workflow",
+      "pattern": "small-kernel-plus-optional-workflow-layer",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-001.md",
+      "note": "Strands/smolagents minimal model-driven loops vs Haystack/Llama Agents/Microsoft-successor explicit workflows for durable control - argues for a small kernel with workflow as an optional, not mandatory, layer. Overlaps with and reinforces the LangGraph/Mastra installment 3 finding that workflow orchestration is core-vs-attached varies by framework family. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-002-state-memory-context-separation",
+      "pattern": "state-memory-context-knowledge-evidence-transcript-six-way-separation",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-002.md",
+      "note": "Directly reinforces batch 1's adopt-durable-state-distinct-from-memory candidate - now evidenced independently by strands-agents, smolagents, llama-index, haystack AND microsoft-agent-framework (5 sources total across both batches plus this session's own MAF research). Two independent imported corpora converging on the same six-way split is stronger evidence than either alone. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-003-capability-based-tool-security",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-003.md",
+      "note": "Reinforces batch 1's reject-llm-only-security-judgement finding from OpenHands - capability-scoped, deterministic tool security rather than relying on model judgement. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-004-offline-local-first-contract",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-004.md",
+      "note": "Proposes defining local-first as a capability contract (CloudAccount=optional, Network=denyable, ModelProvider=local/remote interchangeable, Storage=filesystem/sqlite/embedded selectable, Tools=explicit capability grants, Observability=local sink required, Evaluation=runnable offline) rather than a single LOCAL_NATIVE/CLOUD_ONLY label - see research/comparison/NEXT-WAVE-RUNTIME-LOCAL-FIRST.md. Worth reconciling against this repository's own local-first scorecard enum in a future installment, not silently adopted as the replacement here. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-005-evaluationport-vs-optimizationport",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-005.md",
+      "note": "DSPy's optimization capability (prompt/program compilation) is valuable but should live outside the runtime kernel as a separate OptimizationPort, distinct from an EvaluationPort - avoids coupling evaluation/training into the core runtime interfaces. See research/frameworks/dspy/overview.md. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "adr-candidate-006-durable-side-effect-reconciliation",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 2: research/decisions/ADR-CANDIDATE-006.md",
+      "note": "Proposes an Operation ID + UNKNOWN_OUTCOME model for side effects that time out with unknown remote state - production agents need reconciliation, not just success/failure. No cited evidence sources in the source corpus's own spec-delta.json (SPEC-005), unlike the other 5 candidates - flagged as the weakest-evidenced of the 6, not silently treated as equally supported. Imported claim, DOCUMENTED_NOT_REPRODUCED - not independently re-verified this session."
+    },
+    {
+      "id": "batch-2-corpus-not-yet-reconciled-with-architecture",
+      "status": "BOUND",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-2.md, .context/research/next-wave/spec-delta.json",
+      "note": "Batch 2's own spec-delta.json proposes 6 SPEC changes (State/Memory/Context/Knowledge/Evidence/Transcript separation; WorkspaceContract+SandboxContract; optional DurableWorkflow layer; EvaluationPort; Operation ID+UNKNOWN_OUTCOME side-effect state; OptimizationPort outside kernel) and gap-delta.json proposes 8 prioritized gaps (durable execution semantics, side-effect reconciliation, workspace security, multi-agent economics, context compression quality, offline evaluation, MCP trust, schema/version migration - all P0/P1/P2 tagged). None reconciled against the existing locked architecture or against batch 1's own 6 ADR-CANDIDATEs for overlap/redundancy yet - both imported corpora's architectural proposals need a single reconciliation pass before any of them move past CANDIDATE. Reconciled in Phase 1B - see research/reconciliation/DECISION-CONSOLIDATION.md."
+    },
+    {
+      "id": "post-commit-ops-bundle-not-yet-adopted",
+      "status": "DEFERRED",
+      "source": "docs/operations/post-commit-ops/PROVENANCE.md",
+      "note": "A third user-supplied corpus (distinct in kind from the two framework-research imports - a proposed operational protocol for this repository's OWN git/PR/CI/deploy lifecycle, not research about external frameworks) is stored at docs/operations/post-commit-ops/. It proposes a 25-state lifecycle state machine, merge/release gates, an AI code-review protocol, CI failure/verification runbooks, security gates, a no-bypass policy, an evidence-ledger contract, recovery/rollback protocols, and machine-readable agent-contract/lifecycle JSON. Phase 1B's decision analysis (research/reconciliation/POST-COMMIT-OPS-DECISION.md) resolved this to DEFER, not ADOPT/ADAPT: the harness this session already operates under duplicates the bundle's own 05-ci-cd/ protocols, no deployment pipeline exists yet to justify the deploy-related states, and the one genuinely non-duplicated value (RECONCILING semantics for ambiguous merge/deploy outcomes) has no current trigger. Not rejected - revisit trigger recorded in that document. docs/ is outside okf.json's validated scopes, so this bundle was not okf-conformance-checked by CI, but one systematic non-conformance (verified: documented, a bare string where OKF requires a mapping) was fixed anyway for consistency."
+    },
+    {
+      "id": "post-commit-ops-unknown-outcome-convergence",
+      "status": "CANDIDATE",
+      "source": "docs/operations/post-commit-ops/08-recovery/unknown-outcome-protocol.md",
+      "note": "The post-commit-ops bundle's UNKNOWN_OUTCOME/RECONCILING states (for merges, deployments, and any side effect with an ambiguous remote result) independently converge with research corpus batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect model, decisions.json id adr-candidate-006-durable-side-effect-reconciliation) - two separately-supplied corpora, one about external framework patterns and one about this repository's own git/CI/deploy operations, both landing on 'never blindly retry an operation whose side effect has an unknown outcome, reconcile actual state first' as a hard rule. Worth treating as reinforcing evidence when Phase 4/7 persistence work and any future CI/release automation are designed, not yet adopted as an ADR."
+    },
+    {
+      "id": "adopt-a2a-opaque-remote-agent-boundary",
+      "status": "CANDIDATE",
+      "source": "research/protocols/a2a-1.0.1.md (independently live-researched this session, not merely imported)",
+      "note": "A2A closes an original-brief gap. Its core design decision - remote agents are opaque black-boxes, internal state/memory/tools never exposed across the boundary - is directly actionable: treat A2A as an external-agent adapter at the edge of LabLaunchPad's architecture, never assume a remote peer's internals are inspectable or trustworthy. Same dependency-direction discipline already applied to MCP."
+    },
+    {
+      "id": "current-wave-cw-001-durable-workflow-subsystem",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-001",
+      "note": "INVESTIGATE->ADOPT: Microsoft Agent Framework's first-class graph workflows + checkpointing vs OpenAI's separated agent-loop/sessions/sandbox split, cited as evidence for a first-class durable workflow subsystem. Overlaps substantially with batch-2's own adr-candidate-001-small-kernel-optional-workflow and this session's own LangGraph/Mastra installment-3 finding (workflow orchestration core-vs-attached varies by framework family) - a third independent convergence on the same theme. Numbering disambiguation: this is 'CW-ADR-001', distinct from batch-2's ADR-CANDIDATE-001.md. Imported claim, DOCUMENTED_NOT_REPRODUCED."
+    },
+    {
+      "id": "current-wave-cw-002-mcp-stateless-adapter",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-002",
+      "note": "ADOPT: reinforces this session's own protocol-application-agent-state-distinction decision (from the live MCP 2026-07-28 audit) with independent confirmation from a separate corpus pass the same day. No new information, good corroboration."
+    },
+    {
+      "id": "current-wave-cw-003-a2a-trust-boundary",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-003",
+      "note": "ADOPT adapter, reject shared-state coupling - same conclusion this session reached independently via live A2A research, see adopt-a2a-opaque-remote-agent-boundary above. Corroborating, not new."
+    },
+    {
+      "id": "current-wave-cw-004-workspace-sandbox-contracts",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-004",
+      "note": "ADOPT: reinforces adopt-runtime-and-sandbox-as-explicit-contracts (batch 1) - now a 4th independent convergence (OpenHands/Browser Use/Letta, Mastra's Workspace, Youtu-Agent's Environment, and this current-wave corpus's own sandbox-execution topic research at research/topics/sandbox-execution.md) on 'workspace/sandbox as an explicit, named contract.' Strong enough evidence density to seriously consider promoting past CANDIDATE when Phase 19 (SandboxProvider) design starts, though still not an ADR yet."
+    },
+    {
+      "id": "current-wave-cw-005-source-to-sink-security",
+      "status": "BOUND",
+      "adr": "ADR-0013",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-005; research/topics/security-2026.md",
+      "note": "ADOPT: source-to-sink capability containment over prompt-injection text classification. This is now the THIRD independent source reaching the same conclusion as reject-llm-only-security-judgement (OpenHands's own docs; this security-2026 topic's OpenAI citation; and MCP's own 2026-07-28 spec security section per the refresh-check appended to research/protocols/mcp-2026-07-28.md). Bound to ADR-0013 (Phase 1B, same ADR as reject-llm-only-security-judgement - duplicate finding, single binding) - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md item 10."
+    },
+    {
+      "id": "current-wave-cw-006-model-capability-matrix",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-006",
+      "note": "ADOPT: a model/provider capability matrix as a release artifact, not just an abstract interface - directly relevant to Phase 16 Model Gateway spec, consistent with the existing adopt-local-model-gateway-pattern decision's own note to document concrete deployment targets, not only abstractions."
+    },
+    {
+      "id": "current-wave-cw-007-unknown-outcome-mutation-state",
+      "status": "CANDIDATE",
+      "source": "imported corpus batch 3 (current wave): research/decisions/ADR-CANDIDATE-001-to-007.md, CW-ADR-007",
+      "note": "ADOPT: UNKNOWN_OUTCOME as a first-class mutation state for side effects - the SAME conclusion as batch-2's adr-candidate-006-durable-side-effect-reconciliation and the post-commit-ops bundle's post-commit-ops-unknown-outcome-convergence. This is now the THIRD independent corpus landing on this exact requirement (framework research batch 2, this repository's own operations-protocol import, and now this framework research batch 3) - the single most corroborated candidate across all imports so far."
+    },
+    {
+      "id": "current-wave-corpus-not-yet-reconciled-with-architecture",
+      "status": "BOUND",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-3.md, .context/research/current-wave/spec-delta.json",
+      "note": "Same standing item as batch 1 and batch 2: current-wave's 7 ADR-CANDIDATEs, spec-delta.json, and gap-delta.json have not been reconciled against the existing locked architecture, against each other, or against the post-commit-ops bundle. Three research corpora plus one governance corpus now have unreconciled architectural proposals - this reconciliation is a real, growing backlog item, not decreasing with each import."
+    },
+    {
+      "id": "wave1-adr-001-mcp-baseline",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1' (research_run_id llp-rsch-2026-08-17-wave1): research/decisions/WAVE1-ADR-001-MCP-BASELINE.md",
+      "note": "ADOPT a version-aware MCP adapter with no protocol session state in the kernel - consistent with this session's own MCP 2026-07-28 audit finding that the revision itself removed protocol-level sessions from the core. Despite the source's confident 'ADR-001'/'ADOPT' naming, this carries the SAME CANDIDATE status as every other imported decision - the source's own numbering convention does not confer this repository's actual architectural authority."
+    },
+    {
+      "id": "wave1-adr-002-semantic-portability",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1': research/decisions/WAVE1-ADR-002-SEMANTIC-PORTABILITY.md",
+      "note": "ADOPT: never equate adapter/API compatibility with semantic portability; publish TESTED_SEMANTIC_PORTABILITY only per actually-tested task class, not assumed globally. No E5 reproduction exists yet to test this against - recorded as evidence-backed guidance, not a verified property of any current implementation."
+    },
+    {
+      "id": "wave1-adr-003-durability-boundary",
+      "status": "CANDIDATE",
+      "source": "imported corpus 'wave1': research/decisions/WAVE1-ADR-003-DURABILITY-BOUNDARY.md",
+      "note": "ADOPT: keep durability as a replaceable boundary with explicit per-backend guarantees; do not create a universal exactly-once abstraction without scoped semantics. Matches ADR-0006's own deferred persistence-interface stance and the canonical consolidation's ADAPT verdict for DurabilityEngine (fold into @lablaunchpad/state's CheckpointStore) - see research/canonical/ARCHITECTURE-DECISIONS.md."
+    },
+    {
+      "id": "wave1-corpus-not-yet-reconciled-with-architecture",
+      "status": "BOUND",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-4.md, .context/research/wave1/gap-delta.json",
+      "note": "Same standing item as batches 1-3: wave1's 3 formally-named ADRs and 14 benchmark plans have not been independently reconciled against the existing locked architecture beyond the first-pass delete_test in research/canonical/ARCHITECTURE-DECISIONS.md. Four research corpora plus one governance corpus now have unreconciled architectural proposals."
+    },
+    {
+      "id": "phase-1b-architecture-reconciliation-adr-freeze",
+      "status": "RECORDED",
+      "source": "research/reconciliation/, ADR-0009 through ADR-0016",
+      "note": "Phase 1B converted this file's 44 accumulated decisions and the canonical graph's 27 delete-tested architecture boundaries into 8 binding ADRs (ADR-0009 Protocol/Application/Agent state; ADR-0010 Durability & Checkpoint boundary; ADR-0011 UNKNOWN_OUTCOME as a first-class side-effect state; ADR-0012 Workspace & Sandbox boundaries; ADR-0013 Security at the Policy/Capability boundary; ADR-0014 Model Gateway capability & semantic-portability contract; ADR-0015 Human-in-the-loop as a workflow contract; ADR-0016 Runtime-assumption corrections). Every CANDIDATE decision that reinforces one of these 8 ADRs is now bound to it (not individually re-marked in every entry below - see research/reconciliation/DECISION-CONSOLIDATION.md for the full per-ID mapping, Groups A-H). All 12 prior ACTION_REQUIRED/ACTION_REQUIRED_AT_PHASE_18 entries were individually triaged and resolved - see research/reconciliation/ACTION-REQUIRED-TRIAGE.md. Agent Skills researched live, closing the last of the original 17-source brief's fully-UNKNOWN sources beyond Volcengine/Baidu (research/protocols/agent-skills.md) - InstructionSkillEngine stays DEFER for a concrete evidenced reason (the spec's own Experimental permission model), not absence of research. post-commit-ops-bundle-not-yet-adopted resolved to DEFERRED (not adopted, not rejected) via research/reconciliation/POST-COMMIT-OPS-DECISION.md. Zero decisions were deleted; every original entry's disposition is either updated in place or referenced from research/reconciliation/DECISION-CONSOLIDATION.md."
+    },
+    {
+      "id": "canonical-research-graph-is-supplementary-not-authoritative",
+      "status": "RECORDED",
+      "source": "research/canonical/ (canonical-research.json, research-index.xml, CONSOLIDATION-REPORT.md, ARCHITECTURE-DECISIONS.md, index.md)",
+      "note": "A cross-corpus consolidation graph was built at the user's request, covering all 6 research/governance corpora integrated so far (this session's own live research + batch1 + batch2 + batch3/current-wave + post-commit-ops + wave1). It is explicitly a SUPPLEMENTARY cross-reference/audit layer, not a replacement for this file or gaps.json or the OKF-frontmatter research/ markdown tree, which remain the authoritative, CI-validated record per ADR-0007. Built this way rather than replacing the existing system because the new LabLaunchPad.ResearchCanonical schema is a different, non-OKF-conformant shape, and silently swapping the knowledge system's architecture was judged an undiscussed change this repository's own rules guard against. Its main net-new contribution: cross-corpus contradiction/version-drift detection (see CTR-A2A-VERSION, resolved) and a first delete_test pass over 25 candidate architecture boundaries, surfacing 3 evidenced-but-unplanned ADD_CANDIDATE boundaries (WorkspaceEngine, SandboxEngine, SideEffectEngine) not previously named as a set in gaps.json."
+    },
+    {
+      "id": "knowledge-os-package-evaluated-not-adopted",
+      "status": "RECORDED",
+      "source": "research/reconciliation/KNOWLEDGE-OS-RECONCILIATION.md",
+      "note": "A user-supplied 94-file 'Decision Operating System / Knowledge OS' package (87e35b47-decision_operating_system_knowledge_os_complete.zip, the canonical consolidation of two smaller subsumed bundles) was evaluated across 3 angles (governance vs AGENTS.md, architecture vs KERNEL-CONSTITUTION.md, decision-method/business-scope vs ADR/TEMPLATE.md+DECISIONS.md) via 3 parallel Explore agents. Verdict: substantially duplicate of existing bound decisions, expressed more generically and without enforcement - NOT adopted as governance, architecture, or decision system. Explicitly rejected: its .ai/ parallel-instruction-file directory structure (conflicts with repository-policy-validator's anti-duplication enforcement), its 8-primitive 'core semantics' (term collisions with kernel Capability/Evidence, no UNKNOWN_OUTCOME equivalent), its decision-method (same structure as ADR/TEMPLATE.md, different words), its business-scope content (restates AGENTS.md's existing boundary). Adopted as small, non-competing additions: a claim-classification vocabulary (AGENTS.md Evidence principle addendum), an execution-mode taxonomy + replay-envelope concept (research/topics/execution-modes.md, non-binding), an optional completeness checklist (docs/agent/COMPLETENESS-CHECKLIST.md, not part of pnpm validate)."
+    },
+    {
+      "id": "external-research-corpus-6-defective-independently-verified",
+      "status": "RECORDED",
+      "source": "research/imported-corpus/SOURCE-RECEIPT-5.md",
+      "note": "A user-commissioned external research pass (Volcengine AgentKit, Baidu AppBuilder SDK, PydanticAI/Kimi deepening, token-efficiency + UX/DX audits) was returned with disqualifying evidentiary defects: every citation was a bare bracketed number with no bibliography anywhere in the output, MANIFEST.json/CHECKSUMS.txt contained literal 'simulated_hash_N' placeholders instead of real SHA-256 hashes, and no actual zip was produced (a build script with '...' placeholder content for 6 of 8 files was provided instead). NOT imported verbatim. Instead, per the A2A-in-Phase-1B precedent (treat an unverifiable import as a lead, not a final record), this session independently re-verified the load-bearing claims via direct WebFetch of the actual GitHub repos (volcengine/agentkit-sdk-python, volcengine/veadk-python, baidubce/app-builder) plus targeted WebSearch/WebFetch for PydanticAI and Kimi claims. Confirmed: Apache-2.0 licensing for both new frameworks, CLOUD_ONLY classification for both (mandatory API key/token), PydanticAI's 'Agent delegation' pattern and stateless-agent design, Kimi's hard Moonshot-API-key requirement with no self-hosted path. Corrected one external claim (Baidu AppBuilder is NOT ERNIE-exclusive - independently found it supports DeepSeek-V3.1 via an OpenAI-SDK-compatible API). Rejected one external claim outright (Volcengine 'up to 99% token savings' - independent WebSearch found no corroborating source anywhere). Closes the original 17-source brief entirely (17/17)."
+    }
+  ],
+  "generated_at": "2026-08-17T00:00:00Z"
+}

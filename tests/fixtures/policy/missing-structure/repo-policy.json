@@ -1,0 +1,9 @@
+{
+  "namespace": "@fixture",
+  "requiredDirectories": ["docs", "specs"],
+  "requiredFiles": ["AGENTS.md", "boundaries.json"],
+  "directoryReadmes": ["docs"],
+  "canonicalDocument": "AGENTS.md",
+  "adapterDocuments": [],
+  "adapterRules": { "maxLines": 40, "mustReferenceCanonical": true, "forbidSharedHeadings": true, "maxSharedNgram": 8 }
+}

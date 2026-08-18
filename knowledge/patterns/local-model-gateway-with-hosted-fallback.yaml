@@ -1,0 +1,55 @@
+pattern:
+  id: local-model-gateway-with-hosted-fallback
+  name: First-party local model deployment path alongside a hosted default
+  problem: >
+    Many agent SDKs offer local tools (shell, filesystem) around a model
+    that itself must be reached through a hosted API, which means the SDK
+    is "local-capable" for tooling but still has a hard dependency on a
+    cloud account for the one component that matters most. A genuinely
+    local-first SDK needs the model layer itself, not just the surrounding
+    tools, to have a real local path.
+  observed_solution: >
+    Qwen-Agent documents two first-party model deployment paths at equal
+    footing: Alibaba Cloud's DashScope (hosted) or a self-hosted deployment
+    of open-weight Qwen models via vLLM (GPU-optimized, high-throughput) or
+    Ollama (CPU+GPU, local development). This is not a community-maintained
+    workaround; it is documented as a first-class deployment option by the
+    framework's own maintainers.
+  source:
+    framework: Qwen-Agent
+    resource: https://github.com/QwenLM/Qwen-Agent
+    evidence_level: E3
+  strengths:
+    - A caller can genuinely run the full stack — model included — with no
+      external account, which none of the other 5 frameworks researched so
+      far (OpenAI, Microsoft, PydanticAI, Kimi, Youtu-Agent) demonstrably
+      offer at the model layer specifically.
+    - Two concrete, named deployment targets (vLLM, Ollama) rather than an
+      abstract "bring your own model" promise — lowers the activation
+      energy for a developer to actually try the local path.
+  weaknesses:
+    - Self-hosting a capable open-weight model has real hardware
+      requirements (GPU for vLLM, meaningful CPU/GPU for Ollama) that a
+      hosted API does not — "local" trades a cloud dependency for a
+      hardware dependency, not for zero cost.
+    - Model capability parity between the hosted and self-hosted paths is
+      not addressed by the evidence gathered here — UNKNOWN whether feature
+      parity (tool-calling reliability, context length, etc.) holds across
+      both paths.
+  applicability: >
+    Directly informs LabLaunchPad's Phase 16 (Model Gateway) design: the
+    "local model" tier in the Capability Economy Gate's cost ladder
+    (deterministic function -> local tool -> compiled workflow -> local
+    model -> cheap remote model -> frontier model -> multi-agent -> human)
+    needs at least one first-party, documented local deployment target, not
+    merely an interface a third party could theoretically implement.
+  lablaunchpad_adaptation: >
+    When Phase 16 is reached, document at least one concrete self-hosted
+    model deployment path (e.g. Ollama) as a first-class example in the
+    Model Gateway spec, not only an abstract ModelProvider interface —
+    mirroring what made this pattern concrete and actionable rather than
+    aspirational in Qwen-Agent's own documentation.
+  benchmark: >
+    Not applicable until Phase 16. Recorded now so the decision (document a
+    concrete local target, not just an interface) is pre-made.
+  status: CANDIDATE

@@ -1,0 +1,110 @@
+{
+  "framework": "OpenHands Software Agent SDK",
+  "snapshot": "2026 current main/docs snapshot",
+  "repo": "https://github.com/OpenHands/software-agent-sdk",
+  "docs": "https://docs.openhands.dev/sdk",
+  "license": "MIT",
+  "evidence_level_policy": {
+    "E0": "prior/model knowledge",
+    "E1": "community signal",
+    "E2": "repo/source evidence",
+    "E3": "official documentation",
+    "E4": "official docs + implementation/tests",
+    "E5": "LabLaunchPad reproduction/benchmark"
+  },
+  "target_user": "software engineer / coding agent builder",
+  "application_type": "software engineering agent",
+  "execution": ["local", "ephemeral remote", "managed cloud"],
+  "short_vs_long": "short to long running",
+  "core": [
+    "Agent",
+    "Conversation",
+    "Event",
+    "Workspace",
+    "Tool",
+    "Skill",
+    "SecurityPolicy"
+  ],
+  "status": "DOCUMENTED_NOT_REPRODUCED",
+  "claim_ledger": [
+    {
+      "claim": "SDK overview / local or ephemeral workspace",
+      "source": "https://github.com/OpenHands/software-agent-sdk/blob/main/README.md",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Docs index: Agent Server, Docker Sandbox, skills, persistence, MCP, observability",
+      "source": "https://github.com/OpenHands/docs/blob/main/llms.txt",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Agent reasoning-action loop",
+      "source": "https://github.com/OpenHands/docs/blob/main/sdk/arch/agent.mdx",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Security analyzer + confirmation policy",
+      "source": "https://docs.openhands.dev/sdk/guides/security",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Conversation persistence",
+      "source": "https://docs.openhands.dev/sdk/guides/convo-persistence",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Skills / trigger activation / MCP integration",
+      "source": "https://docs.openhands.dev/sdk/arch/skill",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Docker sandbox",
+      "source": "https://docs.openhands.dev/sdk/guides/agent-server/docker-sandbox",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Event model",
+      "source": "https://docs.openhands.dev/sdk/arch/events",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Development/testing structure",
+      "source": "https://github.com/OpenHands/software-agent-sdk/blob/main/DEVELOPMENT.md",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "MIT license",
+      "source": "https://github.com/OpenHands/software-agent-sdk/blob/main/LICENSE",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    }
+  ],
+  "lablaunchpad_decisions": {
+    "ADOPT": "action-boundary policy hooks; explicit event log; resumable runs; workspace abstraction; approval as a state transition; machine-readable skills.",
+    "ADAPT": "security analyzers into deterministic policy rails under the loop; goal completion into proof-bearing completion.",
+    "REJECT": "treating LLM security classification as the sole security control; monolithic Agent abstraction that hides runtime/workspace semantics.",
+    "DEFER": "cloud-specific workspace inheritance until multi-tenant runtime needs are proven.",
+    "INVESTIGATE": "whether forkable conversations and task sub-agents materially improve outcomes after coordination cost is measured."
+  },
+  "reproduction_required": true,
+  "code_reuse": false
+}

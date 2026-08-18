@@ -1,0 +1,435 @@
+# NOW
+
+The single current objective. If you are working on something not described
+here, stop and reconcile before continuing.
+
+## Phase
+
+**Phase 2 — Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)** (spec-prep
+complete, implementation LOCKED). Was: **Phase 1B — Architecture
+Reconciliation & ADR Freeze** (complete). Before that: **P1A — OKF v0.2
+Adoption + Gap Audit**, Workstream B (research), installment 3
+
+## Phase 2 — Kernel Constitution + E5-02 (complete for its scoped gates)
+
+**Objective**: convert the 8 ADRs bound in Phase 1B into one coherent,
+testable kernel-primitive specification, then execute the single
+highest-leverage E5 that spec depends on (`UNKNOWN_OUTCOME`/side-effect
+reconciliation) via a SIMULATED harness, since no real capability/side-
+effect implementation exists yet.
+
+**Result**: `docs/architecture/KERNEL-CONSTITUTION.md` (6 sections: state
+machine algebra, operation/side-effect state machine, durability,
+capability/policy, evidence/verdict, agent/workflow boundary) synthesizes
+ADR-0006 and ADR-0009 through ADR-0016 with **zero new ADRs required** —
+mirrored machine-readable at `.context/specs/kernel.json`.
+`benchmarks/e5-02-unknown-outcome/` executed the 12-step minimum
+UNKNOWN_OUTCOME scenario plus 8 of 15 named adversarial cases for real
+(not fabricated) — **9/9 executed cases pass**, after fixing 4 real bugs/
+flakes found while running the harness (a missing-table edge case, a
+stale-sentinel-file false positive, an undetected corruption technique
+corrected to a reliably-detected one, and a genuine timing flake in the
+"response lost" case, fixed the same way `E5-DURABLE-RESTART` fixed its
+own timing problem — by widening the window, not by hiding the flake).
+7/15 adversarial cases logged `NOT_EXECUTED` with named reasons (all
+require a real Guard/Event-log/Capability/Policy implementation this
+phase deliberately does not build). `.context/scenarios/kernel-core.json`
+maps all 15 cases to constitution sections — sections 5 (Evidence/Verdict)
+and 6 (Agent/workflow boundary) have no dedicated adversarial case, a real
+logged gap, not silently claimed as covered.
+
+Also resolved this phase, folded in without expanding scope: a real
+`.context/state/*.json` phase-contradiction (four files disagreeing about
+whether the repo was on P1A or P00), flagged by a user-supplied Socratic-
+planning-coverage review; a second user-supplied TS7-graph-first
+methodology document was reviewed and found not to require action (the
+`TYPESCRIPT_7_REVISIT` gate in ADR-0003 stays unmet — no stable
+programmatic API yet). Neither triggered new research or new ADRs — see
+`docs/agent/DECISIONS.md`'s corresponding entries.
+
+**Gates** (`.context/research/reconciliation/phase-gate.json`'s
+`phase_2_gates`): `GATE_A_SPEC` PASS · `GATE_B_E5_02` PASS_SIMULATED ·
+`GATE_C_HARNESS` PARTIAL (the sections 5/6 coverage gap above) ·
+`GATE_D_GOVERNANCE` PASS. Structured 10-field receipt:
+`.context/evidence/phase-2-kernel-receipt.json`.
+
+**`lock_state_after_this_phase`**: `PHASE_2_SPEC_PREP:
+COMPLETE_FOR_THE_7_SCOPED_MODULES`, `PHASE_2_IMPLEMENTATION: LOCKED`,
+`BROAD_RESEARCH: LOCKED`, `NEW_ADR_CREATION: TRIGGER_ONLY`. No
+`@lablaunchpad/*` runtime package was created or should be inferred as
+started from this phase's work.
+
+## Phase 1B (complete, for context)
+
+## Objective
+
+Determine strongest proven patterns for a local-first Agent SDK with rich
+built-in capabilities, via evidence-gated primary-source research across the
+current agent-ecosystem, plus licensing/legal review — see
+`docs/agent/DECISIONS.md` for the scope reconciliation note below.
+
+## Scope reconciliation (explicit, not silent)
+
+Workstream A's plan sketched Workstream B abstractly as a "90-dimension
+self-audit (1A-1) then targeted research (1A-2)." A subsequent, far more
+detailed operating prompt specified Workstream B concretely instead: a
+local-first scorecard, built-in-capability matrix, licensing matrix,
+pattern library and contradiction matrix across ~17 named sources
+(OpenAI Agents SDK, Microsoft Agent Framework, LangGraph, PydanticAI,
+Mastra, Qwen-Agent, Tencent Youtu-Agent, Volcengine AgentKit, Baidu
+AppBuilder, Kimi Agent SDK, MCP, A2A, Agent Skills).
+
+**This detailed prompt is adopted as the operative Workstream B design**,
+superseding the abstract 90-dimension sketch — recorded here per AGENTS.md's
+"do not silently replace an architectural decision" rule, not swapped
+without a trace. The abstract 90-dimension audit's underlying goal (find
+what the plan still misses) is preserved; the concrete research structure
+just replaces the abstract classification exercise as the mechanism.
+
+## In scope (installments 1-3, complete)
+
+Real primary-source research (WebSearch/WebFetch, evidence level E3/E4) for
+8 of ~17 named sources plus one full protocol special audit. Installment 1:
+OpenAI Agents SDK, Microsoft Agent Framework, PydanticAI, Kimi Agent SDK.
+Installment 2: Qwen-Agent, Tencent Youtu-Agent — the operating prompt's own
+named "high-priority local-first references." Installment 3: LangGraph,
+Mastra, and the MCP 2026-07-28 special audit (moved up in priority per the
+user's explicit instruction that the current spec materially changed the
+protocol's architecture). Produced across all three: per-framework OKF
+concept docs, local-first scorecard, capability matrix, licensing matrix,
+7 extracted patterns/precedents (`knowledge/patterns/` +
+`.context/research/decisions.json` candidates), 5 contradiction-matrix
+entries, machine-facing `.context/research/*.json` summaries.
+
+**Self-correction within installment 3**: LangGraph's local-first verdict
+and Mastra's licensing tier count were both corrected after further
+evidence review — LangGraph's checkpointer was initially mischaracterized
+as requiring PostgreSQL/Redis for production (corrected to `LOCAL_CAPABLE`:
+in-memory/SQLite are first-class, not a fallback), and Mastra's licensing
+was initially recorded as a simple two-way split (corrected to three
+distinguishable tiers: framework/platform/enterprise). Both corrections are
+recorded explicitly in the affected files, not silently overwritten — the
+same evidence-discipline rule applied to the Youtu-Agent correction in
+installment 2 applies symmetrically here, including to steers from any
+source, human included: re-verify against primary evidence, don't accept a
+characterization on assertion.
+
+**Notable installment 2 finding**: Youtu-Agent, despite being named
+high-priority for local-first relevance in the operating prompt itself, was
+found to be cloud-configured by default on direct evidence — recorded as a
+correction (`research/contradictions/priority-list-not-infallible.md`), not
+smoothed over. Qwen-Agent, by contrast, is the strongest local-first
+reference found across all frameworks researched so far.
+
+**Notable installment 3 findings**: (1) LangGraph and Mastra both split
+their license by directory (core permissive, server/enterprise component
+restricted) — found independently in both, promoted to a standing
+due-diligence rule (`research/contradictions/license-split-by-directory.md`).
+(2) MCP's 2026-07-28 revision removes protocol-level sessions entirely,
+pushing state ownership onto the application layer — motivates an explicit
+PROTOCOL/APPLICATION/AGENT STATE distinction, recorded as a decision
+candidate for Phase 18, not an ADR yet (`research/protocols/mcp-2026-07-28.md`).
+(3) LangGraph's checkpointer had a real, disclosed SQL-injection/deserialization
+vulnerability — a concrete argument for applying this repository's own
+Policy Gate to state/checkpoint query paths, not only tool invocation.
+
+## Supplementary corpus import (explicit scope expansion, not silent)
+
+The user supplied a prior, external research pass covering **5 frameworks
+not named in the original 17-source brief**: OpenHands Software Agent SDK,
+Letta, Google Agent Development Kit (ADK), Browser Use, and CrewAI —
+85 per-dimension files, 13 cross-framework comparison matrices, and 6
+machine-facing JSON summaries. This is a genuine scope expansion beyond the
+17-source list, recorded here explicitly rather than folded silently into
+the "8 of 17" figure above. Integrated into `research/frameworks/{name}/`,
+`research/comparison/`, `research/imported-corpus/SOURCE-RECEIPT.md`, and
+`.context/research/{gaps,decisions,local-first,licensing,capabilities}.json`
+plus the 5 new per-framework `.context/research/{name}.json` files.
+
+**Provenance discipline applied**: this corpus is real, URL-cited E3/E4
+evidence, but it was **not independently re-fetched or re-verified via
+WebSearch/WebFetch in this session**. Every imported file carries an
+explicit `x_provenance` frontmatter field saying so, and every reference to
+it in the master matrices is tagged `IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED`
+rather than `FACT` or `VERIFIED` — the same evidence-level discipline
+applied throughout installments 1-3, extended to a case where the _research_
+itself (not just a framework's own claims) was not performed by this
+session. Six new decision candidates were recorded from it in
+`.context/research/decisions.json`, none auto-adopted into architecture —
+the imported receipt's own 6 ADR-CANDIDATEs and 10 proposed benchmarks have
+**not** been reconciled against the existing locked architecture; that
+reconciliation is future work.
+
+## Supplementary corpus import, batch 2 (second scope expansion, not silent)
+
+The user supplied a **second** prior external research pass ("next wave")
+covering **9 more frameworks not named in the original 17-source brief**:
+Strands Agents, Hugging Face smolagents, AG2, LlamaIndex, Llama Agents +
+Workflows, Haystack, DSPy, Microsoft AutoGen, and Microsoft Semantic
+Kernel — 9 framework overviews, 11 comparison matrices, 6
+`ADR-CANDIDATE-*.md` files, a `LICENSE-REVIEW.md`, and 6 machine-facing
+delta JSON files (`source-index`, `gap-delta`, `benchmark-delta`,
+`dimension-coverage`, `spec-delta`, `next-wave`). Combined with batch 1,
+this is **14 imported frameworks total, beyond the 17-source brief** —
+recorded explicitly as a second, distinct scope expansion, not merged
+silently into batch 1's figures. Integrated into
+`research/frameworks/{name}/overview.md`, `research/comparison/NEXT-WAVE-*.md`
+(prefixed to avoid colliding with batch 1's filenames — `CAPABILITY-MATRIX.md`
+would otherwise have collided), `research/decisions/ADR-CANDIDATE-*.md`,
+`research/sources/LICENSE-REVIEW.md`, `research/imported-corpus/SOURCE-RECEIPT-2.md`,
+`.context/research/{name}.json` (9 files) and `.context/research/next-wave/*.json`
+(6 meta-delta files), plus updates to
+`.context/research/{gaps,decisions,local-first,licensing,capabilities}.json`.
+
+**Same provenance discipline as batch 1**: real, URL-cited E4 evidence,
+`DOCUMENTED_NOT_REPRODUCED` per the source corpus's own vocabulary, not
+independently re-fetched via WebFetch/WebSearch in this session. Two of
+the nine (AutoGen, Semantic Kernel) are explicitly migration-era research
+whose documented successor is Microsoft Agent Framework, already
+researched live in installment 1 — not double-counted as independent new
+framework coverage. Six more ADR-CANDIDATEs were recorded as decision
+candidates (none auto-adopted); **both imported corpora's ADR-CANDIDATEs
+(12 total) remain unreconciled against the existing locked architecture**
+— now the standing follow-up item across both batches, not just one.
+
+## "Current wave" import — mixed: one real gap closure, plus refresh/topics (not silent)
+
+A fourth corpus, distinct in kind from batches 1-2: not purely new
+frameworks. It contained (1) **A2A** — genuinely new, the first evidence
+for one of the original 17-source brief's 4 remaining `UNKNOWN` sources.
+Unlike every other imported framework/protocol so far, this session
+**independently re-verified A2A live** via WebSearch/WebFetch rather than
+trusting the import — the imported okf.md was thin (a lead, not a final
+record) and A2A was important enough to warrant the same live-research
+discipline as installments 1-3. Result: `research/protocols/a2a-1.0.1.md`,
+9 of 17 original-brief sources now researched live (was 8), 3 remaining
+(was 4). (2) **Refresh/delta checks** on 3 sources already live-researched
+this session (OpenAI Agents SDK, Microsoft Agent Framework, MCP) —
+appended as short, dated "External refresh check" sections to the
+existing canonical files, not duplicated as competing new files; one
+genuinely actionable lead surfaced (Microsoft Agent Framework's latest
+Python release reportedly adds local/Docker shell support — not
+independently confirmed, recorded as a lead in the local-first scorecard).
+(3) Two new cross-cutting topics, `research/topics/sandbox-execution.md`
+and `research/topics/security-2026.md` (new directory — neither
+framework- nor protocol-shaped). 7 more ADR-CANDIDATEs recorded, several
+now showing 3-4-way independent convergence across separate corpora (most
+notably `UNKNOWN_OUTCOME`-as-first-class-state and source-to-sink
+security, both promoted to `ACTION_REQUIRED` given the evidence density —
+still not ADRs, but no longer single-source candidates either). See
+`research/imported-corpus/SOURCE-RECEIPT-3.md` and
+`.context/research/gaps.json`'s `imported_corpus_batch_3_current_wave`
+entry for the full breakdown — **the A2A closure and the beyond-brief
+additions are recorded separately, not conflated into one figure.**
+
+## Post-commit operations bundle import (out of Workstream B scope, tracked separately)
+
+The user also supplied a third corpus, different in kind from the two
+research imports above: a **post-commit operations protocol** for this
+repository's own git/PR/CI/deploy lifecycle (not research about external
+agent frameworks). Stored at `docs/operations/post-commit-ops/` —
+outside `research/` and outside Workstream B's scope entirely. SHA-256
+verified against the user-provided hash and the bundle's own internal
+manifest before use. One systematic OKF non-conformance was fixed
+(`verified: documented`, a bare string, renamed to
+`x_verification_state`) since `docs/` isn't in `okf.json`'s validated
+scopes but consistency was still worth the trivial fix. **Recorded as
+CANDIDATE, not adopted** — not wired into `AGENTS.md` or CI; see
+`docs/operations/post-commit-ops/PROVENANCE.md` and
+`docs/agent/DECISIONS.md`'s 2026-08-17 entry. One genuine cross-corpus
+convergence worth flagging: this bundle's UNKNOWN_OUTCOME/RECONCILING
+states for merges and deployments independently converge with research
+batch 2's ADR-CANDIDATE-006 (Operation ID + UNKNOWN_OUTCOME side-effect
+model) — two unrelated corpora landing on the same "never blindly retry
+an operation with an unknown side-effect outcome" rule.
+
+## "Wave1" import — fifth research corpus, mostly reinforcement + new benchmark categories (not silent)
+
+A fifth corpus (`research_run_id: llp-rsch-2026-08-17-wave1`, self-checksummed,
+54/54 files verified). Mostly another independent MCP/A2A/OpenAI Agents SDK
+pass — reinforcing, not contradicting, this session's own findings (MCP
+version agreement across all 3 sources that researched it; A2A's opaque
+trust model corroborated) — plus genuinely new content: 3 formally-numbered
+`WAVE1-ADR-*.md` decision proposals (MCP baseline, semantic portability,
+durability boundary), 3 new cross-cutting topics
+(`research/topics/{durability-exactly-once,e5-evidence-levels,capability-aware-routing}.md`),
+and 7 new benchmark-plan categories extending `research/benchmarks/` (all
+explicitly `NOT_RUN`, 0/14 E5 executed, no fabricated results). Its own
+`drift-report.json` flagged A2A version drift as HIGH impact — this
+session's follow-up live WebSearch confirmed the drift was real but that
+wave1's own "0.3.0 official latest" claim was itself the stale data point
+(see `research/protocols/a2a-1.0.1.md`'s "Version drift" section and
+`research/canonical/CONSOLIDATION-REPORT.md` Section C). Despite the
+source's confident "ADR-001"/"ADOPT" naming, all 3 proposals are recorded
+in `.context/research/decisions.json` at `CANDIDATE` status, same as every
+other imported decision — naming confidence in a source does not confer
+this repository's actual architectural authority.
+
+## Canonical multi-corpus consolidation (`research/canonical/`)
+
+At the user's explicit request, all 6 research/governance corpora
+integrated so far (this session's own live research + batches 1-3 +
+post-commit-ops + wave1) were consolidated into one deduplicated,
+evidence-graded knowledge graph per a user-supplied
+`LabLaunchPad.ResearchCanonical` schema — see `research/canonical/index.md`
+for the entry point. **Explicitly supplementary, not authoritative**: it
+does not replace `.context/research/{gaps,decisions}.json` or the OKF
+markdown tree (ADR-0007 remains in force); recorded as such in
+`.context/research/decisions.json`'s
+`canonical-research-graph-is-supplementary-not-authoritative` entry. Its
+main net-new contribution is cross-corpus contradiction/version-drift
+detection (the A2A resolution above) and a first `delete_test` pass over
+25 candidate architecture boundaries against `docs/architecture/PACKAGE-MAP.md`,
+surfacing 3 evidenced-but-unplanned `ADD_CANDIDATE` boundaries
+(`WorkspaceEngine`, `SandboxEngine`, `SideEffectEngine`) — flagged for a
+future ADR, **not** added to the package map by this consolidation itself.
+Status recorded honestly as `PARTIAL`: E5 reproduction remains 0/14 across
+every corpus combined.
+
+## Phase 1B — Architecture Reconciliation & ADR Freeze (complete)
+
+The audit delivered earlier this session found a specific, verifiable
+state: research accumulation was no longer the bottleneck — 44 recorded
+decisions and 27 delete-tested architecture boundaries existed, and zero
+had been converted into a binding ADR since Phase 0's original 8. The user
+requested this exact next phase: freeze further broad research, convert
+the backlog into a minimal binding ADR set, triage every open action item,
+close only decision-relevant research gaps, run a first real E5, decide
+the dormant `post-commit-ops` bundle, and gate Phase 2 behind all of it.
+
+**Result**: 8 binding ADRs (`ADR-0009`–`ADR-0016`), consolidating 22 of the
+44 decisions directly or as duplicate corroboration — not one ADR per
+decision. All 27 boundaries dispositioned (14 `KEEP`, 4 `ADAPT`, 1
+`EXTERNALIZE`, 3 promoted from `ADD_CANDIDATE` to bound contract additions
+on existing packages — zero new top-level packages created, all failed
+the creation rule's dependency-cut test — 4 `DEFER` with named revisit
+triggers, 1 `N/A`). All 12 `ACTION_REQUIRED` items resolved, 0 remaining.
+Agent Skills researched live (closing the original brief's last fully-
+`UNKNOWN` gap besides Volcengine/Baidu, deliberately not researched this
+phase per the operating prompt's own budget rule — no pending ADR needed
+them). `post-commit-ops` resolved to `DEFER` (not adopted, not rejected) —
+see `research/reconciliation/POST-COMMIT-OPS-DECISION.md`. First real E5
+executed (`E5-DURABLE-RESTART`): 6/6 genuine mid-transaction kills rolled
+back cleanly, 4/4 post-commit controls committed cleanly, zero corruption
+across 11 trials — converts `GAP-E5-ZERO` from 0/14+ to a genuine but
+partial 1/14+, not closed. A 7th validator (`research-integrity`) was
+added and wired into CI, closing a real gap it found immediately: 4 broken
+ID references inside `research/canonical/canonical-research.json` itself
+(`versions[].ecosystem` using plain names instead of `ECO-`-prefixed IDs)
+— caught and fixed the same session the check was built. CI was also
+found to be silently missing the `okf-conformance` validator entirely
+since Workstream A added it; fixed alongside.
+
+**Phase gate** (`.context/research/reconciliation/phase-gate.json`):
+`ADR_GATE` PASS · `BOUNDARY_GATE` PASS · `ACTION_GATE` PASS · `E5_GATE`
+PARTIAL (first E5 done, satisfies the literal Phase 2 entry condition;
+`GAP-E5-ZERO` itself is not closed — 9 more named benchmarks remain
+`NOT_RUN`) · `CONTEXT_GATE` PASS · `SPEC_GATE` PARTIAL (spec-preparation
+work may begin; full architectural confidence stays gated on further E5
+execution as implementation surfaces come online).
+
+**Sharpened on external review** (the PASS/PARTIAL language above risked
+being read as "Phase 2 may begin" = "start coding the kernel" — it does
+not): `lock_state` in the same `phase-gate.json` now states this
+precisely — `PHASE_2_SPEC_PREP: UNLOCKED`, `PHASE_2_IMPLEMENTATION:
+LOCKED`, `BROAD_RESEARCH: LOCKED`, `NEW_ADR_CREATION: TRIGGER_ONLY`. Full
+detail:
+`research/reconciliation/` (`CURRENT-STATE-RECONCILIATION.md`,
+`DECISION-CONSOLIDATION.md`, `BOUNDARY-RECONCILIATION.md`,
+`ACTION-REQUIRED-TRIAGE.md`, `RESEARCH-REOPEN-GATES.md`,
+`ARCHITECTURE-FREEZE-CANDIDATE.md`, `POST-COMMIT-OPS-DECISION.md`).
+
+## Volcengine AgentKit / Baidu AppBuilder SDK closed (2026-08-18)
+
+The original 17-source brief is now **17/17 researched or explicitly
+resolved**. Volcengine AgentKit and Baidu AppBuilder SDK were the last
+two — closed via independent WebFetch/WebSearch verification (local-
+first/licensing/model-coupling dimensions only), **after** a user-
+commissioned external research pass on both frameworks was found to have
+disqualifying evidentiary defects (unverifiable bare-bracketed citations
+with no bibliography, fabricated checksum placeholders, no zip actually
+produced) and was not imported as-is — see
+`research/imported-corpus/SOURCE-RECEIPT-5.md` for the full defect
+record and `research/frameworks/{volcengine-agentkit,baidu-appbuilder-sdk}/overview.md`
+for what this session actually verified and adopted. Both classified
+`CLOUD_ONLY`. One external claim was corrected (Baidu AppBuilder is not
+ERNIE-exclusive), one was checked and rejected (Volcengine's "99% token
+savings" claim did not corroborate). The Kimi Agent SDK local-first
+`UNKNOWN` from installment 1 was also resolved this pass (`CLOUD_ONLY`,
+confirmed via Moonshot's own docs), and PydanticAI's multi-agent/state
+model was deepened (native "Agent delegation" pattern, no built-in
+memory). Two new comparative audits added:
+`research/comparison/{TOKEN-CONTEXT-EFFICIENCY,UX-DX-AUDIT}.md`.
+
+## Phase 8/9 prep: Policy/Capability spec depth + SIMULATED E5-08 (2026-08-18)
+
+`docs/architecture/KERNEL-CONSTITUTION.md` section 4 (Capability/Policy)
+deepened — elaboration, not a new decision — with two new subsections:
+**4.1** the Capability lifecycle (`ISSUED → ACTIVE → EXPIRED | REVOKED`)
+and a precise stale-authorization rule (a capability checked at
+`AUTHORIZED` must be re-checked at `DISPATCHED`, never assumed valid from
+the earlier check); **4.2** the Policy evaluation model
+(`(Identity, Action, Object, Context) → ALLOW|DENY|CONDITIONAL`) and a
+precise policy-freshness rule (a `PolicyDecision` bound to a superseded
+policy version must be re-evaluated, never trusted stale). Both
+elaborations exist specifically to make `.context/scenarios/kernel-core.json`'s
+`ADV-12`/`ADV-13`/`ADV-14` — previously `NOT_EXECUTED`, "no real
+Capability/Policy enforcement boundary exists yet" — actually testable.
+
+`benchmarks/e5-08-policy-capability/` (throwaway, package-external,
+`node:sqlite`, exact precedent of `benchmarks/e5-02-unknown-outcome/`)
+built and executed for real: a SIMULATED Capability/Policy enforcement
+layer exercising `ADV-12` (stale-authorization), `ADV-13` (capability-
+escalation), `ADV-14` (policy-bypass), plus a positive control and a
+revocation case — **5/5 pass, stable across 5 consecutive re-runs, no
+flake** (unlike E5-02's first attempt). `kernel-core.json` updated:
+11/15 cases now `EXECUTED` (was 8/15). `GATE_C_HARNESS` moves from
+"8/15, sections 5/6 uncovered" to "11/15, sections 5/6 still uncovered" —
+narrowed, not closed. `E5-08`'s own named trigger in `E5-LADDER.md` was
+"Phase 8/9 PolicyEngine/CapabilityEngine exists" — a SIMULATED one
+doesn't fully satisfy that, recorded as `PASS_SIMULATED`, not a full
+close. `GAP-E5-ZERO` is now 3/14+. See
+`research/benchmarks/E5-08-RESULT.md`.
+
+Also: `research/methodology/FRAMEWORK-RESEARCH-DEPTH-CHECKLIST.md` — the
+40-dimension checklist deferred since installment 3, built as a reusable
+tool (7 categories, 5-tag precision scheme) with its own explicit
+statement that the full 8-framework backfill remains deferred as a
+`BROAD_RESEARCH`-locked item, not silently implied done by the
+checklist's existence.
+
+## Explicitly deferred (installment 4+)
+
+Full per-framework 40-dimension depth
+(state, memory, context, security, evaluation, DX, UX, plus the
+DOCUMENTED/OBSERVED-IN-SOURCE/OBSERVED-IN-TESTS/REPRODUCED-BY-US/UNKNOWN
+precision scheme) for all 8 already-researched frameworks — installments
+1-3 covered local-first, capabilities and licensing only, plus one
+protocol-architecture special audit for MCP. Also deferred: the
+comparative network-disabled test, the token/context-efficiency audit file,
+the UX/DX audit file, and deepening passes for PydanticAI and Kimi Agent
+SDK specifically flagged as shallow. See `.context/research/gaps.json` for
+the complete remaining list and prioritization.
+
+## Out of scope
+
+Any Agent SDK product implementation — this is a research phase per the
+operating prompt's own "NO IMPLEMENTATION... STOP after producing the final
+audit" rule. No code in `packages/` changes as part of this installment.
+
+## Architecture status (explicit, corrected wording)
+
+"No architecture changes required" from installments 1-2 does **not** mean
+the architecture is validated. It means: **no change is justified yet from
+partial evidence.** The architecture (docs/architecture/PACKAGE-MAP.md,
+existing ADRs) remains **PROVISIONAL** until the fuller research corpus and
+cross-source contradiction matrix are complete. This distinction was an
+explicit correction to earlier receipt wording — recorded here so it is not
+re-lost in a future summary.
+
+## Definition of done (installments 1-3)
+
+Real evidence (not model-knowledge recall) for every claim; evidence level
+recorded per claim; `UNKNOWN` used honestly rather than inferred; all new
+knowledge OKF-conformant (validated); no fabricated coverage of
+unresearched sources. **Status: met** — see the installment receipt.

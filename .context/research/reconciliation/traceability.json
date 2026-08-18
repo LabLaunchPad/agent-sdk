@@ -1,0 +1,37 @@
+{
+  "adr_to_boundary": {
+    "ADR-0009": ["MCPAdapter", "A2AAdapter"],
+    "ADR-0010": ["DurabilityEngine", "StateEngine"],
+    "ADR-0011": ["SideEffectEngine", "StateEngine"],
+    "ADR-0012": ["WorkspaceEngine", "SandboxEngine", "CapabilityEngine"],
+    "ADR-0013": ["SecurityEngine", "PolicyEngine", "CapabilityEngine"],
+    "ADR-0014": ["ModelCapabilityRegistry", "RoutingEngine", "ModelRegistry"],
+    "ADR-0015": ["HumanControlLayer", "WorkflowEngine"],
+    "ADR-0016": ["Runtime"]
+  },
+  "adr_to_spec": {
+    "ADR-0010": ["specs/persistence/STORE-INTERFACES.md"],
+    "ADR-0011": ["specs/persistence/STORE-INTERFACES.md"]
+  },
+  "adr_to_canonical_claim": {
+    "ADR-0009": ["CLM-MCP-001", "CLM-MCP-004", "CLM-A2A-002", "VER-MCP-001"],
+    "ADR-0010": ["CLM-LANGGRAPH-001", "CLM-LANGGRAPH-002"],
+    "ADR-0011": ["CTR-UNKNOWN-OUTCOME-CONVERGENCE"],
+    "ADR-0012": ["CTR-WORKSPACE-CONVERGENCE", "CLM-MASTRA-002"],
+    "ADR-0013": ["CLM-OPENHANDS-001", "CLM-MCP-004"],
+    "ADR-0014": ["CLM-QWEN-001"],
+    "ADR-0015": ["CLM-MAF-001", "CLM-MAF-004"],
+    "ADR-0016": ["CLM-PAI-001"]
+  },
+  "adr_to_e5": {
+    "ADR-0010": ["E5-DURABLE-RESTART"]
+  },
+  "gap_to_closure": {
+    "GAP-AGENTSKILLS": "research/protocols/agent-skills.md (this phase)",
+    "GAP-VOLCENGINE": "not closed this phase - deliberate, see RESEARCH-REOPEN-GATES.md",
+    "GAP-BAIDU": "not closed this phase - deliberate, see RESEARCH-REOPEN-GATES.md",
+    "GAP-ARCHITECTURE-RECONCILIATION": "closed this phase - see DECISION-CONSOLIDATION.md, BOUNDARY-RECONCILIATION.md",
+    "GAP-E5-ZERO": "partially addressed - first E5 (E5-DURABLE-RESTART) executed this phase, 13 of 14 named benchmarks in the corpus remain NOT_RUN"
+  },
+  "generated_at": "2026-08-17T00:00:00Z"
+}

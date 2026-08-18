@@ -1,0 +1,26 @@
+{
+  "openai_agents_python": {
+    "observed_version": "0.17.4 release page; 0.19.0 in current release notes",
+    "status": "VERSION_SURFACE_DRIFT"
+  },
+  "openai_agents_js": {
+    "observed_version": "0.11.6 repo page",
+    "status": "documented"
+  },
+  "microsoft_agent_framework_python": {
+    "observed_version": "1.6.0",
+    "status": "documented"
+  },
+  "microsoft_agent_framework_dotnet": {
+    "observed_version": "1.10.0",
+    "status": "documented"
+  },
+  "a2a": {
+    "observed_version": "1.0.1",
+    "status": "documented"
+  },
+  "mcp": {
+    "observed_spec": "2026-07-28",
+    "status": "documented"
+  }
+}

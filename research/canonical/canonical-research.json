@@ -1,0 +1,1702 @@
+{
+  "meta": {
+    "schema": "LabLaunchPad.ResearchCanonical",
+    "schema_version": "1.0",
+    "research_run_id": "lablaunchpad-agent-sdk-consolidation-2026-08-17",
+    "generated_at": "2026-08-17T00:00:00Z",
+    "source_zip_count": 5,
+    "source_corpus_count": 6,
+    "source_file_count_approx": 320,
+    "status": "PARTIAL",
+    "scoping_decision": "Full atomic-claim treatment applied to the 4 sources every corpus touches (MCP, A2A, OpenAI Agents SDK, Microsoft Agent Framework), where the actual dedup/contradiction/version-drift value is concentrated. One-claim-per-major-finding granularity applied to every other ecosystem, referencing this repository's existing per-source overview.md files as the evidence record rather than re-deriving every sentence into a separate claim object. A full atomic-claim graph across every fact in every source (300+ records) was judged unachievable in one pass without degrading into padded or fabricated records, which this task's own governing instructions explicitly forbid.",
+    "not_covered": "This session's own repository (its git history, .context state, decisions.json) was never mounted into any of the 6 imported corpora's own generation environments - every corpus's own 'prior corpus audit' check is BLOCKED for the same reason. This canonical graph is the first artifact that actually reads the whole prior state together; it is built FROM this repository, not received as an external input like the other 5 corpora."
+  },
+  "sources": [
+    {
+      "source_id": "SRC-SESSION",
+      "source_type": "live_research",
+      "title": "This session's own live-researched installments 1-3",
+      "repository": "LabLaunchPad/agent-sdk",
+      "commit_range": "1b6c2ca..b9ff726",
+      "retrieved_at": "2026-08-16/2026-08-17",
+      "evidence_level": "E3-E4",
+      "origin_locator": "research/frameworks/{openai-agents-sdk,microsoft-agent-framework,pydantic-ai,kimi-agent-sdk,qwen-agent,tencent-youtu-agent,langgraph,mastra}/overview.md, research/protocols/{mcp-2026-07-28,a2a-1.0.1}.md"
+    },
+    {
+      "source_id": "SRC-BATCH1",
+      "source_type": "imported_corpus",
+      "title": "Supplementary corpus batch 1 (5 frameworks)",
+      "origin_zip": "LabLaunchPadexpandedagentsdkresearch.zip",
+      "retrieved_at": "2026-08-17",
+      "evidence_level": "E3-E4, DOCUMENTED_NOT_REPRODUCED",
+      "origin_locator": "research/frameworks/{openhands,letta,google-adk,browser-use,crewai}/*.md, research/imported-corpus/SOURCE-RECEIPT.md"
+    },
+    {
+      "source_id": "SRC-BATCH2",
+      "source_type": "imported_corpus",
+      "title": "Supplementary corpus batch 2 'next wave' (9 frameworks)",
+      "origin_zip": "LabLaunchPadnextagentsdkresearch20260817.zip",
+      "retrieved_at": "2026-08-17",
+      "evidence_level": "E4, DOCUMENTED_NOT_REPRODUCED",
+      "origin_locator": "research/frameworks/{strands-agents,smolagents,ag2,llama-index,llama-agents,haystack,dspy,autogen,semantic-kernel}/overview.md, research/imported-corpus/SOURCE-RECEIPT-2.md"
+    },
+    {
+      "source_id": "SRC-BATCH3",
+      "source_type": "imported_corpus_plus_live",
+      "title": "'Current wave' corpus (A2A live-researched by this session + 3 refresh checks + 2 topics)",
+      "origin_zip": "LabLaunchPadAgentSDKCurrentWave.zip",
+      "retrieved_at": "2026-08-17",
+      "evidence_level": "E3-E4 for A2A (live); E4 imported for refresh checks/topics",
+      "origin_locator": "research/protocols/a2a-1.0.1.md, research/topics/{sandbox-execution,security-2026}.md, research/imported-corpus/SOURCE-RECEIPT-3.md"
+    },
+    {
+      "source_id": "SRC-POSTCOMMIT",
+      "source_type": "imported_governance_corpus",
+      "title": "Post-commit operations OKF bundle (not framework research - proposed operational protocol)",
+      "origin_zip": "LabLaunchPadAIAgentNativePostCommitOperationsOKF20260817.zip",
+      "retrieved_at": "2026-08-17",
+      "evidence_level": "E3 (cites GitHub/Google eng-practices docs), CANDIDATE governance, not adopted",
+      "origin_locator": "docs/operations/post-commit-ops/"
+    },
+    {
+      "source_id": "SRC-WAVE1",
+      "source_type": "imported_corpus",
+      "title": "'wave1' research corpus (research_run_id llp-rsch-2026-08-17-wave1)",
+      "origin_zip": "LabLaunchPadAgentSDKResearchOKFv0.1wave1.zip",
+      "corpus_version": "0.1-wave1",
+      "retrieved_at": "2026-08-17",
+      "evidence_level": "E3, DOCUMENTED_NOT_REPRODUCED, self-checksummed (54/54 files verified)",
+      "origin_locator": "research/{decisions/WAVE1-*,benchmarks/WAVE1-*,comparison/WAVE1-*,topics/{durability-exactly-once,e5-evidence-levels,capability-aware-routing}}.md, .context/research/wave1/*.json"
+    }
+  ],
+  "versions": [
+    {
+      "version_id": "VER-MCP-001",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "status": "CURRENT",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "currentness": "CURRENT",
+      "note": "All three sources that researched MCP agree on this exact version - the one ecosystem with zero version drift across corpora."
+    },
+    {
+      "version_id": "VER-A2A-001",
+      "ecosystem": "ECO-A2A",
+      "version": "1.0.1 (batch3) / v0.2.5 (session live-fetch, stale archived path) / 0.3.0 (wave1, claimed 'official latest')",
+      "status": "CONTRADICTED_THEN_RESOLVED",
+      "source_ids": ["SRC-BATCH3", "SRC-SESSION", "SRC-WAVE1"],
+      "currentness": "CURRENT",
+      "note": "Resolved via a second live WebSearch during this consolidation: A2A reached v1.0 in early 2026 and v1.2 by late March 2026. wave1's own 'official latest: 0.3.0' claim (in its own drift-report.json, ironically a drift-detection artifact) is itself stale. See CTR-A2A-VERSION below."
+    },
+    {
+      "version_id": "VER-OAI-001",
+      "ecosystem": "ECO-OAI",
+      "version": "VERSION_UNPINNED",
+      "status": "VERSION_UNPINNED",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "currentness": "UNKNOWN_CURRENTNESS",
+      "note": "batch3's own refresh check found the SDK's own documentation surfaces internally disagree: Python docs vs GitHub release page (v0.17.4) vs main branch release notes (0.19.0) vs TypeScript repo (v0.11.6). wave1 independently marked this VERSION_UNPINNED rather than picking one. Two independent corpora agree the version is genuinely unpinned/inconsistent, not that this consolidation failed to find it."
+    },
+    {
+      "version_id": "VER-MAF-001",
+      "ecosystem": "ECO-MAF",
+      "version": "Python 1.6.0 / .NET 1.10.0 (batch3 observation); VERSION_UNPINNED (wave1)",
+      "status": "PARTIALLY_PINNED",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "currentness": "CURRENT_LEANING",
+      "note": "Not a contradiction - batch3 found specific release numbers, wave1 didn't pin one; treat batch3's numbers as the better-evidenced data point but neither independently re-verified by this session."
+    }
+  ],
+  "ecosystems": [
+    {
+      "ecosystem_id": "ECO-OAI",
+      "name": "OpenAI Agents SDK",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ref": "research/frameworks/openai-agents-sdk/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-MAF",
+      "name": "Microsoft Agent Framework",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ref": "research/frameworks/microsoft-agent-framework/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-PAI",
+      "name": "PydanticAI",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/pydantic-ai/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-KIMI",
+      "name": "Kimi Agent SDK",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/kimi-agent-sdk/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-QWEN",
+      "name": "Qwen-Agent",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/qwen-agent/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-YOUTU",
+      "name": "Tencent Youtu-Agent",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/tencent-youtu-agent/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-LANGGRAPH",
+      "name": "LangGraph",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/langgraph/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-MASTRA",
+      "name": "Mastra",
+      "category": "framework",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ref": "research/frameworks/mastra/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-MCP",
+      "name": "MCP",
+      "category": "protocol",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ref": "research/protocols/mcp-2026-07-28.md"
+    },
+    {
+      "ecosystem_id": "ECO-A2A",
+      "name": "A2A",
+      "category": "protocol",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ref": "research/protocols/a2a-1.0.1.md"
+    },
+    {
+      "ecosystem_id": "ECO-OPENHANDS",
+      "name": "OpenHands Software Agent SDK",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ref": "research/frameworks/openhands/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-LETTA",
+      "name": "Letta",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ref": "research/frameworks/letta/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-GOOGLEADK",
+      "name": "Google Agent Development Kit",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ref": "research/frameworks/google-adk/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-BROWSERUSE",
+      "name": "Browser Use",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ref": "research/frameworks/browser-use/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-CREWAI",
+      "name": "CrewAI",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ref": "research/frameworks/crewai/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-STRANDS",
+      "name": "Strands Agents",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/strands-agents/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-SMOLAGENTS",
+      "name": "Hugging Face smolagents",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/smolagents/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-AG2",
+      "name": "AG2",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/ag2/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-LLAMAINDEX",
+      "name": "LlamaIndex",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/llama-index/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-LLAMAAGENTS",
+      "name": "Llama Agents + Workflows",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/llama-agents/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-HAYSTACK",
+      "name": "Haystack",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/haystack/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-DSPY",
+      "name": "DSPy",
+      "category": "framework",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/dspy/overview.md"
+    },
+    {
+      "ecosystem_id": "ECO-AUTOGEN",
+      "name": "Microsoft AutoGen",
+      "category": "framework_migration_era",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/autogen/overview.md",
+      "note": "successor is ECO-MAF"
+    },
+    {
+      "ecosystem_id": "ECO-SEMKERNEL",
+      "name": "Microsoft Semantic Kernel",
+      "category": "framework_migration_era",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ref": "research/frameworks/semantic-kernel/overview.md",
+      "note": "successor is ECO-MAF"
+    },
+    {
+      "ecosystem_id": "ECO-SANDBOX",
+      "name": "Sandbox/Workspace execution (topic)",
+      "category": "topic",
+      "source_ids": ["SRC-BATCH3"],
+      "evidence_ref": "research/topics/sandbox-execution.md"
+    },
+    {
+      "ecosystem_id": "ECO-SEC2026",
+      "name": "Agent Security 2026 (topic)",
+      "category": "topic",
+      "source_ids": ["SRC-BATCH3"],
+      "evidence_ref": "research/topics/security-2026.md"
+    },
+    {
+      "ecosystem_id": "ECO-DURABILITY",
+      "name": "Scoped exactly-once semantics (topic)",
+      "category": "topic",
+      "source_ids": ["SRC-WAVE1"],
+      "evidence_ref": "research/topics/durability-exactly-once.md"
+    },
+    {
+      "ecosystem_id": "ECO-E5LEVELS",
+      "name": "E5 evidence levels (topic)",
+      "category": "topic",
+      "source_ids": ["SRC-WAVE1"],
+      "evidence_ref": "research/topics/e5-evidence-levels.md"
+    },
+    {
+      "ecosystem_id": "ECO-ROUTING",
+      "name": "Capability-aware routing (topic)",
+      "category": "topic",
+      "source_ids": ["SRC-WAVE1"],
+      "evidence_ref": "research/topics/capability-aware-routing.md"
+    },
+    {
+      "ecosystem_id": "ECO-POSTCOMMIT",
+      "name": "Post-commit operations lifecycle (governance, not a framework)",
+      "category": "governance",
+      "source_ids": ["SRC-POSTCOMMIT"],
+      "evidence_ref": "docs/operations/post-commit-ops/"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-MCP-001",
+      "claim": "MCP's 2026-07-28 revision removes protocol-level sessions from the core (no initialize/notifications/initialized handshake, no Mcp-Session-Id header, per-request self-description via _meta)",
+      "type": "architecture",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ids": ["EVD-MCP-001"],
+      "evidence_level": "E4",
+      "status": "VERIFIED_ACROSS_3_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session", "llp-rsch-2026-08-17-wave1"]
+    },
+    {
+      "id": "CLM-MCP-002",
+      "claim": "MCP 2026-07-28 requires ttlMs/cacheScope on list-result endpoints (tools/list, resources/list, prompts/list) for cacheable, prompt-cache-friendly discovery",
+      "type": "architecture",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MCP-002"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-MCP-003",
+      "claim": "MCP Tasks moved from core to the io.modelcontextprotocol/tasks extension; polling (tasks/get, tasks/update) replaces blocking tasks/result; tasks/list removed",
+      "type": "architecture",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MCP-003"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-MCP-004",
+      "claim": "MCP's own spec states tool behavior descriptions/annotations are not inherently trusted; user consent and explicit authorization are implementation responsibilities",
+      "type": "security",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "source_ids": ["SRC-WAVE1", "SRC-BATCH3"],
+      "evidence_ids": ["EVD-MCP-004"],
+      "evidence_level": "E4",
+      "status": "VERIFIED_ACROSS_2_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["llp-rsch-2026-08-17-wave1"]
+    },
+    {
+      "id": "CLM-MCP-005",
+      "claim": "SSE stream resumability (Last-Event-ID) was removed from Streamable HTTP - a broken response stream now loses the in-flight request; clients must re-issue as a new request",
+      "type": "architecture",
+      "ecosystem": "ECO-MCP",
+      "version": "2026-07-28",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MCP-005"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-A2A-001",
+      "claim": "A2A defines 4 primitives: Agent Card (discovery/capability JSON), Task (stateful unit of work), Message (role-tagged exchange), Artifact (task output)",
+      "type": "architecture",
+      "ecosystem": "ECO-A2A",
+      "version": "current (v1.x)",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3"],
+      "evidence_ids": ["EVD-A2A-001"],
+      "evidence_level": "E4",
+      "status": "VERIFIED_ACROSS_2_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-A2A-002",
+      "claim": "A2A remote agents are explicitly documented as opaque black-box systems - internal workings, memory, tools not exposed across the client/agent boundary",
+      "type": "security",
+      "ecosystem": "ECO-A2A",
+      "version": "current (v1.x)",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-A2A-002"],
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-A2A-003",
+      "claim": "A2A is governed by the Linux Foundation (donated by Google, June 2025), multi-vendor TSC (AWS, Cisco, Google, IBM, Microsoft, Salesforce, SAP, ServiceNow), 150+ supporting orgs, Apache-2.0",
+      "type": "licensing_governance",
+      "ecosystem": "ECO-A2A",
+      "version": "current (v1.x)",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-A2A-003"],
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-A2A-004",
+      "claim": "A2A transport is HTTP(S) + JSON-RPC 2.0, with SSE streaming and server-initiated push notifications to a client webhook for long-running/disconnected tasks",
+      "type": "architecture",
+      "ecosystem": "ECO-A2A",
+      "version": "current (v1.x)",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-A2A-001"],
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-OAI-001",
+      "claim": "OpenAI Agents SDK keeps a small primitive core (Agents, agents-as-tools/handoffs, guardrails) and layers sessions, tracing, MCP, sandbox execution around it",
+      "type": "architecture",
+      "ecosystem": "ECO-OAI",
+      "version": "VERSION_UNPINNED",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3"],
+      "evidence_ids": ["EVD-OAI-001"],
+      "evidence_level": "E3",
+      "status": "VERIFIED_ACROSS_2_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-OAI-002",
+      "claim": "OpenAI Agents SDK Session interface has one local implementation (MemorySession) and one cloud implementation (OpenAIConversationsSession) behind the same interface",
+      "type": "capability",
+      "ecosystem": "ECO-OAI",
+      "version": "VERSION_UNPINNED",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-OAI-002"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-OAI-003",
+      "claim": "Sandbox agents (workspace/session/snapshot surfaces) are a beta feature of the OpenAI Agents SDK Python docs",
+      "type": "capability",
+      "ecosystem": "ECO-OAI",
+      "version": "VERSION_UNPINNED",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "evidence_ids": ["EVD-OAI-003"],
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["llp-rsch-2026-08-17-wave1"]
+    },
+    {
+      "id": "CLM-MAF-001",
+      "claim": "Microsoft Agent Framework distinguishes Agent (open-ended), Harness (long multi-step work), and Workflow (graph-based, type-safe routing, checkpointing, HITL) as three layers",
+      "type": "architecture",
+      "ecosystem": "ECO-MAF",
+      "version": "Python 1.6.0 / .NET 1.10.0",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH3"],
+      "evidence_ids": ["EVD-MAF-001"],
+      "evidence_level": "E3",
+      "status": "VERIFIED_ACROSS_2_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-MAF-002",
+      "claim": "Microsoft Agent Framework is the direct successor to AutoGen and Semantic Kernel",
+      "type": "ecosystem_relationship",
+      "ecosystem": "ECO-MAF",
+      "version": "current",
+      "source_ids": ["SRC-SESSION", "SRC-BATCH2", "SRC-BATCH3"],
+      "evidence_ids": ["EVD-MAF-002"],
+      "evidence_level": "E3",
+      "status": "VERIFIED_ACROSS_3_SOURCES",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"],
+      "note": "3-way independent convergence - the single most-corroborated claim in this whole corpus by source count."
+    },
+    {
+      "id": "CLM-MAF-003",
+      "claim": "Microsoft Agent Framework's latest Python release adds local and Docker shell support",
+      "type": "capability",
+      "ecosystem": "ECO-MAF",
+      "version": "Python 1.6.0",
+      "source_ids": ["SRC-BATCH3"],
+      "evidence_ids": ["EVD-MAF-003"],
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["llp-rsch-2026-08-17-current-wave"],
+      "note": "Single-source, unverified lead - would upgrade MAF's local-first scorecard verdict from UNKNOWN if independently confirmed."
+    },
+    {
+      "id": "CLM-MAF-004",
+      "claim": "Microsoft Agent Framework checkpointing is SDK-provided via pluggable storage; CosmosCheckpointStorage is the one confirmed reference implementation, and it is cloud-backed",
+      "type": "capability",
+      "ecosystem": "ECO-MAF",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MAF-004"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-PAI-001",
+      "claim": "PydanticAI's durable-execution capability is an attachable capability over Temporal/DBOS/Prefect; the three backends do not behave identically for mid-execution backend swap (Temporal rejects it, DBOS/Prefect are looser) per the maintainers' own open issue #5477",
+      "type": "architecture",
+      "ecosystem": "ECO-PAI",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-PAI-001"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-KIMI-001",
+      "claim": "Kimi Agent SDK local-first status could not be determined even after a direct fetch - genuinely UNKNOWN, not inferred",
+      "type": "local_first",
+      "ecosystem": "ECO-KIMI",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-KIMI-001"],
+      "evidence_level": "E3",
+      "status": "UNKNOWN",
+      "confidence": "n/a",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-QWEN-001",
+      "claim": "Qwen-Agent documents a first-party local model execution path: vLLM (GPU) and Ollama (CPU+GPU) self-hosted, alongside DashScope hosted option - the strongest local-first model-execution signal found across all researched ecosystems",
+      "type": "local_first",
+      "ecosystem": "ECO-QWEN",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-QWEN-001"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-YOUTU-001",
+      "claim": "Tencent Youtu-Agent is CLOUD_ONLY as configured by default despite being named a 'high-priority local-first reference' by the original research brief - the brief's own framing was not confirmed by direct evidence",
+      "type": "local_first",
+      "ecosystem": "ECO-YOUTU",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-YOUTU-001"],
+      "evidence_level": "E3",
+      "status": "CONTRADICTS_PRIOR_ASSUMPTION",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-LANGGRAPH-001",
+      "claim": "LangGraph's Checkpointer is a backend-agnostic interface; in-memory and SQLite are first-class local options, not a degraded fallback behind Postgres/Mongo",
+      "type": "local_first",
+      "ecosystem": "ECO-LANGGRAPH",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-LANGGRAPH-001"],
+      "evidence_level": "E3",
+      "status": "VERIFIED_CORRECTED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"],
+      "note": "First draft of this claim was wrong (implied Postgres/Redis required); corrected after re-reading the interface directly."
+    },
+    {
+      "id": "CLM-LANGGRAPH-002",
+      "claim": "LangGraph has no built-in checkpoint retention/archival policy (unbounded table growth) or state-schema migration mechanism - two open, currently-unsolved upstream issues (#1138, #536)",
+      "type": "architecture_gap",
+      "ecosystem": "ECO-LANGGRAPH",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-LANGGRAPH-002"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-LANGGRAPH-003",
+      "claim": "LangGraph core is MIT; langgraph-api (deployment server) is Elastic License 2.0 - a genuine license split within one framework",
+      "type": "licensing",
+      "ecosystem": "ECO-LANGGRAPH",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-LANGGRAPH-003"],
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-MASTRA-001",
+      "claim": "Mastra licensing has three tiers: framework (Apache-2.0), platform/Studio (commercially metered, self-hostable or hosted), Enterprise Edition (separate license) - not a simple two-way split",
+      "type": "licensing",
+      "ecosystem": "ECO-MASTRA",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MASTRA-001"],
+      "evidence_level": "E4",
+      "status": "VERIFIED_CORRECTED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["session"]
+    },
+    {
+      "id": "CLM-MASTRA-002",
+      "claim": "Mastra Workspace bundles filesystem/command-execution/search/skills as independently-configurable capabilities with per-tool approval gating (requireApproval, requireReadBeforeWrite)",
+      "type": "capability",
+      "ecosystem": "ECO-MASTRA",
+      "version": "current",
+      "source_ids": ["SRC-SESSION"],
+      "evidence_ids": ["EVD-MASTRA-002"],
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["session"],
+      "note": "Strongest match across all ecosystems researched to LabLaunchPad's own planned adapters/tools boundary."
+    },
+    {
+      "id": "CLM-OPENHANDS-001",
+      "claim": "OpenHands' own docs state its LLM-based security analyzer is explicitly not a complete prompt-injection solution; execute_tool() bypasses conversation analyzers/confirmation entirely",
+      "type": "security",
+      "ecosystem": "ECO-OPENHANDS",
+      "version": "current",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ids": ["EVD-OPENHANDS-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["batch1"]
+    },
+    {
+      "id": "CLM-LETTA-001",
+      "claim": "Letta treats durable AgentState, Memory, Session, and Knowledge as distinct concepts, self-hosted via Docker/PostgreSQL",
+      "type": "architecture",
+      "ecosystem": "ECO-LETTA",
+      "version": "current",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ids": ["EVD-LETTA-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["batch1"]
+    },
+    {
+      "id": "CLM-GOOGLEADK-001",
+      "claim": "Google ADK's local/container execution exists but platform services (Agent Runtime/Cloud Run/GKE) materially expand the surface beyond a pure local core",
+      "type": "local_first",
+      "ecosystem": "ECO-GOOGLEADK",
+      "version": "current",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ids": ["EVD-GOOGLEADK-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch1"]
+    },
+    {
+      "id": "CLM-BROWSERUSE-001",
+      "claim": "Browser Use is a deliberately minimal, thin task+environment abstraction with a local OSS browser as the default execution path",
+      "type": "architecture",
+      "ecosystem": "ECO-BROWSERUSE",
+      "version": "current",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ids": ["EVD-BROWSERUSE-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch1"]
+    },
+    {
+      "id": "CLM-CREWAI-001",
+      "claim": "CrewAI separates the open-source framework from the managed AMP platform explicitly",
+      "type": "licensing",
+      "ecosystem": "ECO-CREWAI",
+      "version": "current",
+      "source_ids": ["SRC-BATCH1"],
+      "evidence_ids": ["EVD-CREWAI-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["batch1"]
+    },
+    {
+      "id": "CLM-STRANDS-001",
+      "claim": "Strands Agents documents an Ollama provider for local invocation, streaming, and tool/function calling",
+      "type": "local_first",
+      "ecosystem": "ECO-STRANDS",
+      "version": "v1.36.0",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-STRANDS-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-SMOLAGENTS-001",
+      "claim": "smolagents defaults to local/HF/provider model support with agent memory local by default",
+      "type": "local_first",
+      "ecosystem": "ECO-SMOLAGENTS",
+      "version": "v1.26.0",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-SMOLAGENTS-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-AG2-001",
+      "claim": "AG2's license is split by code provenance: Apache-2.0 for fork modifications, MIT retained for original pre-fork AutoGen code - a third license-split variant distinct from LangGraph's by-directory and Mastra's by-tier splits",
+      "type": "licensing",
+      "ecosystem": "ECO-AG2",
+      "version": "v0.13.2",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-AG2-001"],
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-LLAMAINDEX-001",
+      "claim": "LlamaIndex core repository is MIT; individual integrations may vary in license - explicit variance flagged by the source itself",
+      "type": "licensing",
+      "ecosystem": "ECO-LLAMAINDEX",
+      "version": "v0.14.22",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-LLAMAINDEX-001"],
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-LLAMAAGENTS-001",
+      "claim": "Llama Agents + Workflows local-first status is HYBRID, depending on selected model/deployment",
+      "type": "local_first",
+      "ecosystem": "ECO-LLAMAAGENTS",
+      "version": "llama-agents v0.12.5 / workflows v2.22.2",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-LLAMAAGENTS-001"],
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "medium",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-HAYSTACK-001",
+      "claim": "Haystack documents HF local, llama.cpp, and Ollama model providers - the strongest local-model-provider breadth of batch 2; its own repository also flags an unreviewed license-header file",
+      "type": "local_first",
+      "ecosystem": "ECO-HAYSTACK",
+      "version": "v2.29.0",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-HAYSTACK-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "MEDIUM",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-DSPY-001",
+      "claim": "DSPy is architecturally a programming/optimization framework over an LM adapter (prompt/program compilation), not an agent runtime with tools/memory/workflow in the usual sense - a category difference from every other researched framework",
+      "type": "architecture",
+      "ecosystem": "ECO-DSPY",
+      "version": "v3.2.1",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-DSPY-001"],
+      "evidence_level": "E4",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high",
+      "currentness": "CURRENT",
+      "reproduction": "NONE",
+      "decision_impact": "HIGH",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-AUTOGEN-001",
+      "claim": "Microsoft AutoGen is migration-era research; its documented successor is Microsoft Agent Framework",
+      "type": "ecosystem_relationship",
+      "ecosystem": "ECO-AUTOGEN",
+      "version": "Python v0.7.5",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-MAF-002"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "HISTORICAL",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["batch2"]
+    },
+    {
+      "id": "CLM-SEMKERNEL-001",
+      "claim": "Microsoft Semantic Kernel is migration-era research; its documented successor is Microsoft Agent Framework 1.0, which explicitly supports Ollama",
+      "type": "ecosystem_relationship",
+      "ecosystem": "ECO-SEMKERNEL",
+      "version": "migration-era",
+      "source_ids": ["SRC-BATCH2"],
+      "evidence_ids": ["EVD-MAF-002"],
+      "evidence_level": "E3",
+      "status": "VERIFIED",
+      "confidence": "high",
+      "currentness": "HISTORICAL",
+      "reproduction": "NONE",
+      "decision_impact": "LOW",
+      "research_run_ids": ["batch2"]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EVD-MCP-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MCP-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MCP-003",
+      "source_id": "SRC-SESSION",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MCP-004",
+      "source_id": "SRC-WAVE1",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17",
+      "note": "cited independently by both SRC-WAVE1 and SRC-BATCH3"
+    },
+    {
+      "evidence_id": "EVD-MCP-005",
+      "source_id": "SRC-SESSION",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-A2A-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://a2a-protocol.org/latest/topics/key-concepts/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-A2A-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://a2a-protocol.org/latest/topics/key-concepts/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-A2A-003",
+      "source_id": "SRC-SESSION",
+      "url": "https://insights.linuxfoundation.org/project/agent2agent-a2a-protocol",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-OAI-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://openai.github.io/openai-agents-python/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-OAI-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://openai.github.io/openai-agents-python/sessions/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-OAI-003",
+      "source_id": "SRC-WAVE1",
+      "url": "https://openai.github.io/openai-agents-python/sandbox_agents/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MAF-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/overview/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-MAF-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/migration-guide/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-MAF-003",
+      "source_id": "SRC-BATCH3",
+      "url": "https://github.com/microsoft/agent-framework/releases",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MAF-004",
+      "source_id": "SRC-SESSION",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/overview/",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-PAI-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://github.com/pydantic/pydantic-ai/issues/5477",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-KIMI-001",
+      "source_id": "SRC-SESSION",
+      "url": "research/frameworks/kimi-agent-sdk/overview.md",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-QWEN-001",
+      "source_id": "SRC-SESSION",
+      "url": "research/frameworks/qwen-agent/overview.md",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-YOUTU-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://github.com/TencentCloudADP/youtu-agent",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-16"
+    },
+    {
+      "evidence_id": "EVD-LANGGRAPH-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://generativeai.pub/attach-external-postgres-and-redis-server-to-self-host-langgraph-apis-1455a5cfb054",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-LANGGRAPH-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://github.com/langchain-ai/langgraphjs/issues/1138",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-LANGGRAPH-003",
+      "source_id": "SRC-SESSION",
+      "url": "https://github.com/langchain-ai/langgraph/blob/main/LICENSE",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MASTRA-001",
+      "source_id": "SRC-SESSION",
+      "url": "https://mastra.ai/docs/community/licensing",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-MASTRA-002",
+      "source_id": "SRC-SESSION",
+      "url": "https://mastra.ai/docs/workspace/overview",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-OPENHANDS-001",
+      "source_id": "SRC-BATCH1",
+      "url": "https://docs.openhands.dev/sdk/guides/security",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-LETTA-001",
+      "source_id": "SRC-BATCH1",
+      "url": "research/frameworks/letta/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-GOOGLEADK-001",
+      "source_id": "SRC-BATCH1",
+      "url": "research/frameworks/google-adk/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-BROWSERUSE-001",
+      "source_id": "SRC-BATCH1",
+      "url": "research/frameworks/browser-use/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-CREWAI-001",
+      "source_id": "SRC-BATCH1",
+      "url": "research/frameworks/crewai/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-STRANDS-001",
+      "source_id": "SRC-BATCH2",
+      "url": "https://strandsagents.com/docs/api/python/strands.models.ollama/",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-SMOLAGENTS-001",
+      "source_id": "SRC-BATCH2",
+      "url": "research/frameworks/smolagents/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-AG2-001",
+      "source_id": "SRC-BATCH2",
+      "url": ".context/research/source-index.json",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-LLAMAINDEX-001",
+      "source_id": "SRC-BATCH2",
+      "url": ".context/research/source-index.json",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-LLAMAAGENTS-001",
+      "source_id": "SRC-BATCH2",
+      "url": "research/frameworks/llama-agents/overview.md",
+      "evidence_level": "E3",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-HAYSTACK-001",
+      "source_id": "SRC-BATCH2",
+      "url": "research/frameworks/haystack/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    },
+    {
+      "evidence_id": "EVD-DSPY-001",
+      "source_id": "SRC-BATCH2",
+      "url": "research/frameworks/dspy/overview.md",
+      "evidence_level": "E4",
+      "retrieved_at": "2026-08-17"
+    }
+  ],
+  "benchmarks": [
+    {
+      "benchmark_id": "BEN-DURABLE-RESTART",
+      "name": "Durable restart (kill/resume at checkpoint boundary)",
+      "status": "EXECUTED_PARTIAL",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "named E5-A (wave1) / BM-DURABLE-001 (batch3) - executed in Phase 1B as E5-DURABLE-RESTART (research/benchmarks/E5-RESULT.md): 6/6 genuine mid-transaction kills rolled back cleanly, 4/4 post-commit controls committed cleanly, zero corruption across 11 trials. Single run, stated limitations (no WAL-mode test, no repetition, no concurrent-reader test) - EXECUTED_PARTIAL, not fully closed."
+    },
+    {
+      "benchmark_id": "BEN-MULTIAGENT-ECONOMICS",
+      "name": "Multi-agent value vs coordination cost",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-B (wave1) / BM-MULTI-001 (batch3)"
+    },
+    {
+      "benchmark_id": "BEN-CONTEXT-COMPRESSION",
+      "name": "Context efficiency across full/summarized/retrieved/compressed/progressive-disclosure",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-C (wave1) / BM-CONTEXT-001 (batch3)"
+    },
+    {
+      "benchmark_id": "BEN-TOOL-INJECTION",
+      "name": "Malicious tool-output injection, expected policy preservation",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-D (wave1) / BM-SEC-001 (batch3)"
+    },
+    {
+      "benchmark_id": "BEN-OFFLINE-LOCAL",
+      "name": "Network-disabled end-to-end execution",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-E (wave1) / BM-LOCAL-001 (batch3) - this repository's own gaps.json also names this as 'comparative network-disabled test - not performed for any source', a 4-way convergence on the same missing benchmark"
+    },
+    {
+      "benchmark_id": "BEN-MODEL-PORTABILITY",
+      "name": "Identical tasks across model/provider pairs",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-F (wave1) / BM-PORT-001 (batch3)"
+    },
+    {
+      "benchmark_id": "BEN-SANDBOX-BOUNDARY",
+      "name": "Filesystem/process/network/secret/symlink/package adversarial sandbox tests",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-BATCH3", "SRC-WAVE1"],
+      "note": "E5-G (wave1) / BM-SEC-001 overlap (batch3); wave1's own dedicated SANDBOX-SECURITY.md names the fixture set explicitly: filesystem escape, process escape, host socket access, environment secret access, network exfiltration, symlink escape, path traversal, package-install escape, persistent process, cleanup failure"
+    },
+    {
+      "benchmark_id": "BEN-CICD-LIFECYCLE",
+      "name": "Injected failures through implementation-to-deploy lifecycle",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-WAVE1"],
+      "note": "E5-H - overlaps conceptually with docs/operations/post-commit-ops/'s CI failure/verification runbooks (SRC-POSTCOMMIT), but that corpus proposes a governance PROCESS, not a benchmark; genuinely complementary, not redundant"
+    },
+    {
+      "benchmark_id": "BEN-A2A-INTEROP",
+      "name": "LabLaunchPad agent to independent A2A implementation interoperability",
+      "status": "BLOCKED",
+      "source_ids": ["SRC-WAVE1"],
+      "note": "blocked on a runnable LabLaunchPad implementation plus an independent test peer"
+    },
+    {
+      "benchmark_id": "BEN-MCP-COMPATIBILITY",
+      "name": "MCP wire-level compatibility across the 2026-07-28 revision",
+      "status": "NOT_RUN",
+      "source_ids": ["SRC-WAVE1"]
+    }
+  ],
+  "security": [
+    {
+      "attack": "prompt_injection_via_tool_descriptions_or_output",
+      "asset": "agent control flow / capability grants",
+      "trust_boundary": "tool/MCP-server boundary",
+      "sink": "capability-granting decision points (file write, shell exec, network call)",
+      "expected": "constrained impact at the sink regardless of injection success",
+      "actual": "UNKNOWN - not independently tested by this session or any of the 6 corpora",
+      "evidence_ids": ["EVD-OPENHANDS-001", "EVD-MCP-004"],
+      "status": "DOCUMENTED",
+      "note": "3-way independent convergence (OpenHands's own docs, MCP's own 2026-07-28 spec, and the security-2026 topic's OpenAI citation) all reach the same conclusion: source-to-sink capability containment, not prompt-text classification, is the load-bearing control. Promoted to ACTION_REQUIRED in .context/research/decisions.json given the evidence density."
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-VOLCENGINE",
+      "gap": "Volcengine AgentKit not researched by any corpus",
+      "priority": "P1",
+      "closure_method": "Live WebSearch/WebFetch, same discipline as A2A closure"
+    },
+    {
+      "gap_id": "GAP-BAIDU",
+      "gap": "Baidu AppBuilder SDK not researched by any corpus",
+      "priority": "P1",
+      "closure_method": "Live WebSearch/WebFetch, same discipline as A2A closure"
+    },
+    {
+      "gap_id": "GAP-AGENTSKILLS",
+      "gap": "Agent Skills specification not researched by any corpus (though Mastra's Workspace and this repository's own decisions.json reference Agent Skills as a cross-framework spec)",
+      "priority": "P1",
+      "closure_method": "Live WebSearch/WebFetch"
+    },
+    {
+      "gap_id": "GAP-E5-ZERO",
+      "gap": "Zero E5 reproductions across all 6 corpora combined (0/14 wave1, 0/10 batch3, none claimed by batch1/batch2) - every benchmark in the benchmarks[] array above is NOT_RUN or BLOCKED",
+      "priority": "P0",
+      "closure_method": "Requires a runnable, pinned LabLaunchPad implementation and isolated test environment - not achievable via desk research by any future imported corpus either"
+    },
+    {
+      "gap_id": "GAP-ARCHITECTURE-RECONCILIATION",
+      "gap": "3 research corpora (batch1: 6 ADR-CANDIDATEs, batch2: 6 ADR-CANDIDATEs + spec-delta, batch3: 7 ADR-CANDIDATEs + spec-delta, wave1: 3 formal-named ADRs) plus 1 governance corpus (post-commit-ops) have proposed architecture/process decisions never reconciled against docs/architecture/PACKAGE-MAP.md or each other for redundancy",
+      "priority": "P0",
+      "closure_method": "See research/canonical/ARCHITECTURE-DECISIONS.md in this same consolidation - a first pass at this reconciliation, still not a formal ADR-writing pass"
+    }
+  ],
+  "contradictions": [
+    {
+      "contradiction_id": "CTR-A2A-VERSION",
+      "topic": "A2A current version number",
+      "claim_a": "1.0.1, released 2026-05-26",
+      "claim_b": "0.3.0, asserted as 'official latest' in wave1's own drift-report.json",
+      "evidence_a": ["EVD-A2A-001"],
+      "evidence_b": [],
+      "resolution": "A second live WebSearch during this consolidation confirms A2A reached v1.0 in early 2026 and v1.2 by late March 2026 - claim_b (wave1's) is stale, not claim_a's lineage.",
+      "resolution_status": "RESOLVED",
+      "architecture_impact": "LOW - the protocol-level facts (Agent Card/Task/Message/Artifact, opaque trust boundary) are stable across the disputed version range",
+      "revisit_trigger": "Any future A2A research should independently re-check the version number rather than trusting any single corpus, this consolidation's own resolution included."
+    },
+    {
+      "contradiction_id": "CTR-LICENSE-SPLIT-PATTERN",
+      "topic": "Whether a framework's root LICENSE file is sufficient due diligence",
+      "claim_a": "Installments 1-2's own methodology: fetch and quote the root LICENSE file, treat as the framework's licensing status",
+      "claim_b": "LangGraph (core MIT / langgraph-api Elastic 2.0), Mastra (framework Apache-2.0 / platform metered / Enterprise separate), and AG2 (Apache-2.0 for fork changes / MIT for pre-fork code) each split their license in a DIFFERENT way - by directory, by commercial tier, and by code provenance respectively",
+      "evidence_a": [],
+      "evidence_b": ["EVD-LANGGRAPH-003", "EVD-MASTRA-001"],
+      "resolution": "claim_a is false as a general assumption, confirmed 3 separate ways across 8 directly-researched frameworks. Whole-tree/whole-offering checks are now a standing rule, not applied retroactively to the 5 frameworks researched under the old methodology (research/licensing/MATRIX.md's Whole tree checked? column is honestly \"No\" for those five).",
+      "resolution_status": "RESOLVED",
+      "architecture_impact": "MEDIUM - affects any future LabLaunchPad dependency-review process",
+      "revisit_trigger": "Formalizing a dependency-review gate for this repository."
+    },
+    {
+      "contradiction_id": "CTR-LANGGRAPH-LOCAL-FIRST",
+      "topic": "Whether LangGraph requires PostgreSQL/Redis for local operation",
+      "claim_a": "First draft of this repository's own LangGraph research: \"PostgreSQL + Redis are the documented requirement for durable, multi-process production use\", verdict HYBRID",
+      "claim_b": "Direct re-reading of LangGraph's Checkpointer interface: in-memory and SQLite are first-class local options, not a degraded fallback; Postgres/Mongo are optional swappable backends",
+      "evidence_a": [],
+      "evidence_b": ["EVD-LANGGRAPH-001"],
+      "resolution": "claim_a conflated one deployment guide's production recommendation with a hard SDK requirement. Corrected to LOCAL_CAPABLE.",
+      "resolution_status": "RESOLVED",
+      "architecture_impact": "LOW - correction of this repository's own error, not an external contradiction",
+      "revisit_trigger": "n/a - self-correction already applied"
+    },
+    {
+      "contradiction_id": "CTR-UNKNOWN-OUTCOME-CONVERGENCE",
+      "topic": "Whether side effects with ambiguous remote outcomes need a first-class UNKNOWN_OUTCOME state",
+      "claim_a": "Not addressed in this repository's Phase 0 architecture (no explicit UNKNOWN_OUTCOME concept in docs/architecture/PACKAGE-MAP.md as materialized)",
+      "claim_b": "3 independently-supplied corpora (batch2's ADR-CANDIDATE-006; the post-commit-ops governance bundle's MERGE_UNKNOWN/DEPLOY_UNKNOWN/RECONCILING states; wave1's own concept file on scoped exactly-once semantics plus its E5-A durable-restart benchmark plan) all independently propose the same requirement",
+      "evidence_a": [],
+      "evidence_b": [],
+      "resolution": "Not a contradiction in the adversarial sense (nothing says UNKNOWN_OUTCOME modeling is wrong) - a convergence-strength finding: this is the single most corroborated architectural gap across all 6 corpora combined.",
+      "resolution_status": "PARTIAL",
+      "architecture_impact": "HIGH - directly informs the @lablaunchpad/state and @lablaunchpad/task package designs (Phase 3-4)",
+      "revisit_trigger": "When Phase 3/4 (core, task, state packages) design begins."
+    },
+    {
+      "contradiction_id": "CTR-WORKSPACE-CONVERGENCE",
+      "topic": "Whether workspace/sandbox needs to be an explicit, named architectural boundary",
+      "claim_a": "docs/architecture/PACKAGE-MAP.md's planned packages do not currently name a WorkspaceEngine or SandboxEngine boundary",
+      "claim_b": "4 independent sources (OpenHands/Browser Use/Letta via batch1; Mastra's Workspace via this session's own live research; Youtu-Agent's Environment via this session's own live research; and the sandbox-execution topic's Docker/Firecracker/Wasmtime tradeoff analysis via batch3) all independently converge on workspace/sandbox as a first-class, explicit contract",
+      "evidence_a": [],
+      "evidence_b": ["EVD-MASTRA-002"],
+      "resolution": "Not a contradiction - a genuine gap in the current package map, evidenced strongly enough to flag explicitly in ARCHITECTURE-DECISIONS.md below.",
+      "resolution_status": "PARTIAL",
+      "architecture_impact": "HIGH",
+      "revisit_trigger": "Phase 19 (SandboxProvider) design, or earlier if a WorkspaceEngine/SandboxEngine package is proposed before then."
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "DEC-REF-SESSION",
+      "note": "This repository's own live-decided candidates are the authoritative record and are NOT duplicated here - see .context/research/decisions.json for the full list (33 entries as of this consolidation). This array cross-references, not replaces, that file."
+    },
+    {
+      "decision_id": "DEC-BATCH1-REF",
+      "note": "See .context/research/decisions.json entries: adopt-tool-boundary-guardrails, confirm-agent-harness-workflow-layering, confirm-thin-sdk-strategy, adopt-runtime-and-sandbox-as-explicit-contracts, adopt-durable-state-distinct-from-memory, adopt-context-broker-progressive-disclosure, reject-llm-only-security-judgement, defer-default-multiagent-hierarchy"
+    },
+    {
+      "decision_id": "DEC-BATCH2-REF",
+      "note": "See research/decisions/ADR-CANDIDATE-{001..006}.md and .context/research/decisions.json entries adr-candidate-001 through 006"
+    },
+    {
+      "decision_id": "DEC-BATCH3-REF",
+      "note": "See research/decisions/ADR-CANDIDATE-001-to-007.md and .context/research/decisions.json entries current-wave-cw-001 through 007"
+    },
+    {
+      "decision_id": "DEC-WAVE1-REF",
+      "note": "See research/decisions/WAVE1-ADR-{001,002,003}-*.md: ADR-001 MCP baseline (ADOPT version-aware adapter, no protocol session state in kernel), ADR-002 Semantic Portability (ADOPT - never equate adapter/API compatibility with semantic portability, publish TESTED_SEMANTIC_PORTABILITY per tested task class only), ADR-003 Replaceable Durability Boundary (ADOPT - keep durability replaceable with explicit per-backend guarantees, no universal exactly-once abstraction without scoped semantics). Despite the confident 'ADR-00X'/'ADOPT' naming, these carry the SAME CANDIDATE status as every other imported decision in this repository's own tracking - the source's own numbering convention does not confer this repository's actual architectural authority."
+    },
+    {
+      "decision_id": "DEC-POSTCOMMIT-REF",
+      "note": "See docs/operations/post-commit-ops/ - CANDIDATE governance protocol, not adopted, not wired into AGENTS.md or CI."
+    }
+  ],
+  "architecture": [
+    {
+      "boundary": "AgentKernel",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/agent",
+      "delete_test_result": "KEEP",
+      "why": "Every ecosystem researched has some form of agent-loop primitive; this repository's own package map already plans for it at layer 2."
+    },
+    {
+      "boundary": "CapabilityEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/capabilities",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 8); reinforced by Mastra's Workspace, wave1's ADR-002 semantic portability, and current-wave's model-capability-matrix-as-release-artifact finding."
+    },
+    {
+      "boundary": "PolicyEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/policy",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 9); the source-to-sink security convergence (3 independent sources) makes this the primary control surface, not optional."
+    },
+    {
+      "boundary": "ContextEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/context",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 6); reinforced by every corpus's own context-efficiency/progressive-disclosure findings."
+    },
+    {
+      "boundary": "KnowledgeEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "DEFER",
+      "why": "NOT currently in docs/architecture/PACKAGE-MAP.md. Strong cross-corpus evidence for State/Memory/Context/Knowledge/Evidence/Transcript as six distinct concepts (Letta, batch2's ADR-CANDIDATE-002, this repository's own adopt-durable-state-distinct-from-memory decision) - but 'Knowledge' specifically (external/reference material for retrieval, distinct from Memory) has less direct evidence than the other five. DEFER rather than propose a new package now; revisit when @lablaunchpad/memory (Phase 7) is actually designed and Knowledge's boundary with Memory can be tested against a real use case."
+    },
+    {
+      "boundary": "Runtime",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/runtime-core",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 17)."
+    },
+    {
+      "boundary": "StateEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/state",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 4); LangGraph's persistence-lifecycle gap (CLM-LANGGRAPH-002) and the UNKNOWN_OUTCOME convergence (CTR-UNKNOWN-OUTCOME-CONVERGENCE) are both direct, actionable inputs to this package's spec."
+    },
+    {
+      "boundary": "MemoryEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/memory",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 7)."
+    },
+    {
+      "boundary": "EventModel",
+      "exists_in_package_map": false,
+      "delete_test_result": "DEFER",
+      "why": "No dedicated package currently named. The evidence-ledger concept (post-commit-ops bundle) and this repository's own event/audit needs likely fold into StateEngine or ObservabilityEngine rather than warranting a standalone package - genuinely unclear from evidence alone, DEFER pending Phase 4/20 design."
+    },
+    {
+      "boundary": "WorkflowEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/workflow",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 12); reinforced by LangGraph/Mastra's core-not-attached workflow finding, Microsoft Agent Framework's explicit graph-workflow layer, and wave1's ADR-001 recommendation to isolate legacy-protocol/session assumptions behind adapters rather than the kernel."
+    },
+    {
+      "boundary": "DurabilityEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADAPT",
+      "why": "No standalone package; wave1's ADR-003 explicitly recommends AGAINST a universal durability abstraction ('Keep durability as a replaceable boundary with explicit guarantees per backend. Do not create a universal exactly-once abstraction without scoped semantics') - this matches ADR-0006's own deferred persistence-interface stance. ADAPT: fold into @lablaunchpad/state's CheckpointStore contract with per-backend guarantee documentation, not a separate package."
+    },
+    {
+      "boundary": "WorkspaceEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADD_CANDIDATE",
+      "why": "Absent from the current package map. This is the boundary with the STRONGEST cross-corpus evidence density of any candidate not already planned: 4 independent sources (OpenHands/Browser Use/Letta, Mastra's Workspace, Youtu-Agent's Environment, the sandbox-execution topic) converge on workspace-as-explicit-contract (see CTR-WORKSPACE-CONVERGENCE). Recommend raising this as an explicit ADR-CANDIDATE for a genuinely new planned package, adapters/tools/workspace or a promoted @lablaunchpad/workspace, at whatever phase currently owns adapters/tools/{filesystem,sandbox} - NOT silently added to PACKAGE-MAP.md by this consolidation itself, since that would be exactly the kind of undiscussed architecture change this repository's own rules forbid."
+    },
+    {
+      "boundary": "SandboxEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADD_CANDIDATE",
+      "why": "Same evidence base as WorkspaceEngine, closely related but conceptually distinct (isolation mechanism vs. capability surface). The sandbox-execution topic's 3-way tradeoff (Docker seccomp/rootless vs. Firecracker microVMs vs. Wasmtime/WASI) is a genuine menu LabLaunchPad's own SandboxProvider spec (Phase 19, already a known gap per docs/agent/NEXT.md) should be built against. Same ADD_CANDIDATE recommendation and same caveat as WorkspaceEngine - not silently added here."
+    },
+    {
+      "boundary": "ProtocolAdapters",
+      "exists_in_package_map": true,
+      "package_ref": "adapters/protocols (layer 4)",
+      "delete_test_result": "KEEP",
+      "why": "Already planned; now backed by real MCP and A2A research instead of being an abstract placeholder."
+    },
+    {
+      "boundary": "MCPAdapter",
+      "exists_in_package_map": true,
+      "package_ref": "adapters/protocols",
+      "delete_test_result": "KEEP",
+      "why": "Directly informed by research/protocols/mcp-2026-07-28.md - version-aware, stateless-core-respecting adapter per wave1's ADR-001 and this repository's own protocol-application-agent-state-distinction decision candidate."
+    },
+    {
+      "boundary": "A2AAdapter",
+      "exists_in_package_map": true,
+      "package_ref": "adapters/protocols",
+      "delete_test_result": "KEEP",
+      "why": "Directly informed by research/protocols/a2a-1.0.1.md - opaque-remote-agent trust boundary, no internal-state sharing."
+    },
+    {
+      "boundary": "ModelRegistry",
+      "exists_in_package_map": true,
+      "package_ref": "adapters/models (layer 4)",
+      "delete_test_result": "KEEP",
+      "why": "Already planned."
+    },
+    {
+      "boundary": "ModelCapabilityRegistry",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADAPT",
+      "why": "Not a distinct package, but current-wave's CW-ADR-006 (model capability matrix as a release artifact, not just an abstract interface) is a concrete refinement of ModelRegistry / the existing adopt-local-model-gateway-pattern decision - fold into the Phase 16 Model Gateway spec as a requirement, not a new package."
+    },
+    {
+      "boundary": "RoutingEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADAPT",
+      "why": "wave1's capability-aware-routing topic (provider/model routing should account for parameter support, privacy, fallback policy) is a real requirement but fits inside the Model Gateway (Phase 16) rather than a standalone package."
+    },
+    {
+      "boundary": "EvaluationEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/evaluation",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 21); reinforced by wave1's e5-evidence-levels topic and this repository's own evidence-hierarchy discipline, which independently arrived at a near-identical E0-E5 scale before any corpus was imported."
+    },
+    {
+      "boundary": "ReplayEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "DEFER",
+      "why": "No dedicated package; likely overlaps EvaluationEngine + StateEngine (checkpoint replay). DEFER pending a concrete use case rather than speculating a boundary now."
+    },
+    {
+      "boundary": "ObservabilityEngine",
+      "exists_in_package_map": true,
+      "package_ref": "@lablaunchpad/observability",
+      "delete_test_result": "KEEP",
+      "why": "Already planned (Phase 20)."
+    },
+    {
+      "boundary": "SecurityEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "EXTERNALIZE",
+      "why": "No standalone package - and should not become one. The strongest evidence (3-way source-to-sink convergence) argues security is enforced AT the PolicyEngine/CapabilityEngine boundary, not as a separate subsystem that could be bypassed if a caller skips it. Confirmed folding, not a gap."
+    },
+    {
+      "boundary": "SideEffectEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADD_CANDIDATE",
+      "why": "The single most corroborated gap across all 6 corpora (see CTR-UNKNOWN-OUTCOME-CONVERGENCE - batch2, post-commit-ops, and wave1 all independently proposed the same UNKNOWN_OUTCOME/Operation-ID reconciliation model). Recommend this becomes an explicit requirement on @lablaunchpad/state or @lablaunchpad/task's contract (operation identity survives provider timeout with an unknown remote outcome) rather than its own package - the delete-test answer is 'the kernel cannot work without this concept once external side effects exist,' but it can be a contract addition, not a new boundary."
+    },
+    {
+      "boundary": "HumanControlLayer",
+      "exists_in_package_map": false,
+      "delete_test_result": "ADAPT",
+      "why": "HITL is documented as workflow semantics by Microsoft Agent Framework (checkpointing + HITL together) - fold into @lablaunchpad/workflow's contract rather than a separate package."
+    },
+    {
+      "boundary": "InstructionSkillEngine",
+      "exists_in_package_map": false,
+      "delete_test_result": "DEFER",
+      "why": "Agent Skills (the cross-framework spec Mastra implements) remains one of this repository's own 3 remaining original-brief gaps (see gaps[] GAP-AGENTSKILLS) - DEFER any package decision until that research exists; deciding a boundary from zero direct evidence would be exactly the kind of unsupported architecture claim this consolidation's own governing rules forbid."
+    },
+    {
+      "boundary": "RepositoryAgentContract",
+      "exists_in_package_map": false,
+      "delete_test_result": "N/A",
+      "why": "This is not an SDK package boundary - it is this repository's own AGENTS.md/docs/agent/ governance layer, which already exists and predates every imported corpus. Listed for completeness per the candidate-boundary list, not because it needs a package."
+    }
+  ],
+  "migrations": [
+    {
+      "from": "AutoGen",
+      "to": "Microsoft Agent Framework",
+      "evidence_ids": ["EVD-MAF-002"],
+      "note": "3-way independently confirmed (session, batch2, batch3)"
+    },
+    {
+      "from": "Semantic Kernel",
+      "to": "Microsoft Agent Framework",
+      "evidence_ids": ["EVD-MAF-002"],
+      "note": "3-way independently confirmed (session, batch2, batch3)"
+    }
+  ],
+  "licenses": [
+    {
+      "ecosystem": "ECO-LANGGRAPH",
+      "license": "SPLIT: core MIT, langgraph-api Elastic License 2.0",
+      "whole_tree_checked": true
+    },
+    {
+      "ecosystem": "ECO-MASTRA",
+      "license": "THREE-TIER: framework Apache-2.0, platform commercially metered, Enterprise separate license",
+      "whole_tree_checked": true
+    },
+    {
+      "ecosystem": "ECO-AG2",
+      "license": "SPLIT by provenance: Apache-2.0 fork changes, MIT pre-fork AutoGen code",
+      "whole_tree_checked": false
+    },
+    {
+      "ecosystem": "ECO-A2A",
+      "license": "Apache-2.0, Linux Foundation governed",
+      "whole_tree_checked": false,
+      "note": "copyright holder for the in-force header not independently isolated from Apache-2.0 template boilerplate"
+    },
+    {
+      "ecosystem": "ECO-HAYSTACK",
+      "license": "Apache-2.0, but repository itself flags an unreviewed license-header file",
+      "whole_tree_checked": false
+    }
+  ],
+  "unknowns": [
+    {
+      "unknown_id": "UNK-MAF-LOCAL-SHELL",
+      "type": "UNKNOWN_OPERATIONAL_BEHAVIOR",
+      "why_unknown": "Single-source (batch3) unverified lead that Microsoft Agent Framework's latest Python release adds local/Docker shell support",
+      "evidence_search_scope": "Official MSFT Agent Framework Python release notes and changelog",
+      "architecture_impact": "Would upgrade MAF's local-first scorecard verdict from UNKNOWN if confirmed",
+      "closure_method": "Direct WebFetch of the release notes",
+      "revisit_trigger": "Next MAF research pass"
+    },
+    {
+      "unknown_id": "UNK-VOLCENGINE",
+      "type": "UNKNOWN_SOURCE",
+      "why_unknown": "Not researched by any of the 6 corpora or this session",
+      "evidence_search_scope": "Volcengine AgentKit official docs",
+      "architecture_impact": "Unknown until researched",
+      "closure_method": "Live WebSearch/WebFetch",
+      "revisit_trigger": "Next Workstream B installment"
+    },
+    {
+      "unknown_id": "UNK-BAIDU",
+      "type": "UNKNOWN_SOURCE",
+      "why_unknown": "Not researched by any of the 6 corpora or this session",
+      "evidence_search_scope": "Baidu AppBuilder SDK official docs",
+      "architecture_impact": "Unknown until researched",
+      "closure_method": "Live WebSearch/WebFetch",
+      "revisit_trigger": "Next Workstream B installment"
+    },
+    {
+      "unknown_id": "UNK-AGENTSKILLS",
+      "type": "UNKNOWN_SOURCE",
+      "why_unknown": "Not researched by any of the 6 corpora or this session, despite being referenced indirectly (Mastra implements it)",
+      "evidence_search_scope": "Agent Skills specification, whatever its canonical source is",
+      "architecture_impact": "Directly relevant to InstructionSkillEngine architecture decision (DEFERred above specifically because of this gap)",
+      "closure_method": "Live WebSearch/WebFetch",
+      "revisit_trigger": "Next Workstream B installment"
+    },
+    {
+      "unknown_id": "UNK-E5-ALL",
+      "type": "UNKNOWN_REPRODUCIBILITY",
+      "why_unknown": "No corpus, including this session, has a runnable pinned LabLaunchPad environment to execute any of the 10 benchmarks[] entries",
+      "evidence_search_scope": "n/a - requires implementation, not research",
+      "architecture_impact": "HIGH - every architecture decision in this graph rests on E3/E4 documentation evidence, never E5 reproduction",
+      "closure_method": "Phase 2+ implementation followed by a dedicated benchmark execution pass",
+      "revisit_trigger": "First runnable LabLaunchPad implementation milestone"
+    }
+  ],
+  "traceability": {
+    "decision_to_claim": {
+      "DEC-WAVE1-REF": ["CLM-MCP-001", "CLM-A2A-001"],
+      "DEC-BATCH1-REF": ["CLM-OPENHANDS-001", "CLM-LETTA-001"]
+    },
+    "claim_to_evidence": {
+      "CLM-MCP-001": ["EVD-MCP-001"],
+      "CLM-A2A-002": ["EVD-A2A-002"],
+      "CLM-MAF-002": ["EVD-MAF-002"]
+    },
+    "evidence_to_source": {
+      "EVD-MCP-004": ["SRC-WAVE1"],
+      "EVD-MAF-003": ["SRC-BATCH3"]
+    },
+    "claim_to_benchmark": {
+      "CLM-LANGGRAPH-002": ["BEN-DURABLE-RESTART"]
+    },
+    "decision_to_benchmark": {},
+    "gap_to_evidence": {
+      "GAP-E5-ZERO": []
+    }
+  }
+}

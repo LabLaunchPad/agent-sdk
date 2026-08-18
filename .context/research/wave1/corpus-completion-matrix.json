@@ -1,0 +1,41 @@
+[
+  {
+    "concept": "Existing LabLaunchPad research corpus",
+    "source": "UNKNOWN",
+    "version": "UNKNOWN",
+    "existing_evidence": "BLOCKED",
+    "evidence_level": "UNKNOWN",
+    "reproduced": false,
+    "decision_impact": "HIGH",
+    "currentness": "UNKNOWN",
+    "gap": "GAP-001",
+    "priority": "P0",
+    "next_action": "Mount/provide repository snapshot."
+  },
+  {
+    "concept": "MCP protocol baseline",
+    "source": "Official MCP",
+    "version": "2026-07-28",
+    "existing_evidence": "Not assessed against prior corpus",
+    "evidence_level": "E3",
+    "reproduced": false,
+    "decision_impact": "HIGH",
+    "currentness": "CURRENT",
+    "gap": "GAP-003",
+    "priority": "P0",
+    "next_action": "Run conformance/interoperability suite."
+  },
+  {
+    "concept": "A2A protocol baseline",
+    "source": "Official A2A",
+    "version": "0.3.0",
+    "existing_evidence": "Not assessed against prior corpus",
+    "evidence_level": "E3",
+    "reproduced": false,
+    "decision_impact": "HIGH",
+    "currentness": "CURRENT",
+    "gap": "GAP-004",
+    "priority": "P0",
+    "next_action": "Run independent interop tests."
+  }
+]

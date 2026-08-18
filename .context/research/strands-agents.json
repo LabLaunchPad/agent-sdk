@@ -1,0 +1,90 @@
+{
+  "source": "Strands Agents",
+  "version": "v1.36.0 (latest surfaced release; 2026-04-17)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "Apache-2.0",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Model-driven simple agent loop, broad provider support including Ollama, custom providers; repository and docs agree.",
+      "url": "https://github.com/strands-agents/sdk-python"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Session persistence exists; persistence occurs on lifecycle events and session manager is not thread-safe. Security warning around symlink-following in trusted storage.",
+      "url": "https://strandsagents.com/docs/user-guide/concepts/agents/session-management/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Official evaluation SDK supports output, trajectory, tool-use, interaction, deterministic and LLM-judge evaluation, trace-based evaluation and experiment serialization.",
+      "url": "https://strandsagents.com/docs/user-guide/evals-sdk/quickstart/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Ollama provider supports local invocation, streaming and tool/function calling.",
+      "url": "https://strandsagents.com/docs/api/python/strands.models.ollama/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Repo documents mirrored unit/integration tests and explicit testing patterns.",
+      "url": "https://github.com/strands-agents/sdk-python/blob/main/AGENTS.md"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "model-driven agent loop",
+    "tool/plugin capability model",
+    "provider adapter layer",
+    "session persistence",
+    "dedicated evaluation SDK"
+  ],
+  "state": [
+    "session persistence",
+    "lifecycle-triggered persistence",
+    "session manager concurrency caveat"
+  ],
+  "context": [
+    "context token telemetry surfaced in releases",
+    "tool catalog injected through model interaction"
+  ],
+  "memory": [
+    "session/message history",
+    "persistence store; not equivalent to long-term memory"
+  ],
+  "runtime": ["Python local runtime", "Ollama local provider", "remote providers"],
+  "security": [
+    "session storage permissions matter",
+    "symlink behavior in trusted session directory is a documented risk",
+    "tool trust must be externalized"
+  ],
+  "ux": ["simple agent creation", "trajectory/evaluation visibility"],
+  "dx": [
+    "AGENTS.md with unit/integration testing conventions",
+    "provider mocking fixtures"
+  ],
+  "portability": [
+    "Ollama, OpenAI, Anthropic, Gemini, Bedrock, LiteLLM, Llama, Writer and custom providers"
+  ],
+  "efficiency": [
+    "simple loop reduces framework overhead",
+    "context-token telemetry and tool-result truncation improvements surfaced in releases"
+  ],
+  "patterns": [
+    "small model-driven loop",
+    "explicit optional session persistence",
+    "first-class trajectory evaluation"
+  ],
+  "contradictions": [
+    "model intelligence vs explicit workflow durability",
+    "local model vs managed observability"
+  ],
+  "unknowns": [
+    "full exact state schema across all session managers",
+    "cross-provider behavioral parity",
+    "E5 performance"
+  ],
+  "decisions": ["ADOPT small loop pattern", "ADAPT session contract", "ADOPT eval port"]
+}

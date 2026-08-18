@@ -1,0 +1,19 @@
+node_modules/
+dist/
+# Test fixtures ship a checked-in dist/ on purpose: package-exports fixtures
+# must look like built packages to the validator. Without this negation the
+# fixture passes locally, where the file exists untracked, and fails in CI,
+# where it was never committed.
+!tests/fixtures/**/dist/
+coverage/
+*.tsbuildinfo
+.vitest/
+*.tgz
+tmp/
+.tmp/
+.DS_Store
+*.log
+
+# Run-time evidence fixtures: created inside the worktree so `git cat-file`
+# can resolve real revisions, removed by the test that creates them.
+tests/fixtures/evidence/.runtime-*/

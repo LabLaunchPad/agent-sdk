@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "bundle": "lablaunchpad-agent-native-post-commit-ops",
+  "states": [
+    "DRAFT",
+    "IMPLEMENTING",
+    "LOCAL_VERIFIED",
+    "COMMITTED",
+    "PUSHED",
+    "PR_OPEN",
+    "REVIEWING",
+    "CHANGES_REQUESTED",
+    "CI_RUNNING",
+    "CI_RED",
+    "CI_UNKNOWN",
+    "CI_GREEN",
+    "MERGE_READY",
+    "MERGING",
+    "MERGE_UNKNOWN",
+    "MERGED",
+    "POST_MERGE_VERIFY",
+    "DEPLOYING",
+    "DEPLOY_UNKNOWN",
+    "DEPLOYED",
+    "POST_DEPLOY_VERIFY",
+    "COMPLETE",
+    "BLOCKED",
+    "ESCALATE",
+    "RECONCILING",
+    "FAILED"
+  ],
+  "terminal_states": ["COMPLETE", "ESCALATE"],
+  "invariants": [
+    "No merge without current required checks and required approvals",
+    "No bypass of branch/review/CI governance",
+    "No declaration stronger than available evidence",
+    "Unknown side-effect outcome requires reconciliation before retry",
+    "Post-merge verification is mandatory",
+    "Post-deploy runtime verification is mandatory when deployment occurs"
+  ]
+}

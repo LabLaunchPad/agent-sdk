@@ -1,0 +1,70 @@
+{
+  "experiment_id": "E5-02-UNKNOWN-OUTCOME",
+  "status": "EXECUTED",
+  "harness": "benchmarks/e5-02-unknown-outcome/",
+  "result_doc": "research/benchmarks/E5-02-RESULT.md",
+  "supports_adr": "ADR-0011",
+  "elaborates_spec": ".context/specs/kernel.json#sections.2_operation_side_effect_state_machine",
+  "closes_gap_e5_zero": false,
+  "raw_run_output": {
+    "experiment_id": "E5-02-UNKNOWN-OUTCOME",
+    "environment": {
+      "node": "v24.19.0",
+      "platform": "linux",
+      "arch": "x64"
+    },
+    "harness_type": "SIMULATED",
+    "harness_type_note": "The external side-effect service (service.mjs) is SIMULATED - a local child process with its own SQLite durable log, not a real remote system. No real capability/policy implementation exists yet (Phase 8/9 unstarted), so authorization is recorded but not enforced.",
+    "executed_cases": 9,
+    "not_executed_cases": 7,
+    "all_executed_pass": true,
+    "results": [
+      {
+        "case": "primary-12-step-unknown-outcome-reconciliation",
+        "pass": true,
+        "finalOperationState": "ACKED"
+      },
+      { "case": "duplicate-operation", "pass": true },
+      { "case": "timeout-after-real-side-effect", "pass": true },
+      { "case": "response-lost-after-real-side-effect", "pass": true },
+      { "case": "kill-before-checkpoint", "pass": true },
+      {
+        "case": "kill-after-checkpoint",
+        "pass": true,
+        "limitation": "REJECTED trustworthy only because the SIMULATED service has a reliable status check; a real system without one must degrade to MANUAL_REVIEW"
+      },
+      {
+        "case": "checkpoint-corruption",
+        "pass": true,
+        "note": "detected via unreadable-file (header corruption), not via PRAGMA integrity_check on a subtler corruption - see E5-02-RESULT.md Corrections"
+      },
+      { "case": "replay-determinism", "pass": true },
+      { "case": "concurrent-state-mutation", "pass": true }
+    ],
+    "not_executed": [
+      "illegal-transition",
+      "duplicate-event",
+      "reordered-event",
+      "stale-authorization",
+      "capability-escalation",
+      "policy-bypass",
+      "schema-version-mismatch"
+    ]
+  },
+  "corruption_criteria_measured": ["schema_violation"],
+  "corruption_criteria_not_measured": [
+    "invalid_event_order",
+    "duplicate_committed_operation",
+    "impossible_transition",
+    "missing_evidence_linkage",
+    "checkpoint_references_nonexistent_state",
+    "authorization_decision_changes_without_cause"
+  ],
+  "corrections_made_during_run": [
+    "service_log table missing on never-dispatched service DB - fixed with CREATE TABLE IF NOT EXISTS at query time",
+    "stale sentinel files from a prior invocation caused a false-positive premature kill - fixed by sweeping sentinels per trial",
+    "checkpoint-corruption case initially undetected (mid-file byte corruption landed in unallocated page space) - fixed by corrupting the SQLite header magic bytes instead",
+    "response-lost-after-real-side-effect flaked once out of 3 initial runs (kill lost the race against the SIMULATED service's own synchronous exit) - fixed by widening the post-commit window to 60ms; 5 consecutive re-runs clean after the fix"
+  ],
+  "generated_at": "2026-08-17T00:00:00Z"
+}

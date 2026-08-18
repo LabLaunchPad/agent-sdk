@@ -1,0 +1,66 @@
+[
+  {
+    "ecosystem": "MCP",
+    "version": "2026-07-28",
+    "status": "CURRENT",
+    "source": "Official MCP release post",
+    "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "A2A",
+    "version": "0.3.0",
+    "status": "CURRENT",
+    "source": "Official A2A specification",
+    "url": "https://a2a-protocol.org/v0.3.0/specification/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "OpenAI Agents SDK",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs/release notes",
+    "url": "https://openai.github.io/openai-agents-python/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "Microsoft Agent Framework",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs",
+    "url": "https://learn.microsoft.com/en-us/agent-framework/overview/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "DBOS",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs",
+    "url": "https://docs.dbos.dev/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "Restate",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs",
+    "url": "https://docs.restate.dev/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "Cloudflare Workflows",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs",
+    "url": "https://developers.cloudflare.com/workflows/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  },
+  {
+    "ecosystem": "Inspect",
+    "version": "UNPINNED",
+    "status": "VERSION_UNPINNED",
+    "source": "Official docs",
+    "url": "https://inspect.aisi.org.uk/",
+    "retrieved_at": "2026-08-17T04:28:42.332446+00:00"
+  }
+]

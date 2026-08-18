@@ -1,0 +1,62 @@
+{
+  "experiment_id": "E5-08-POLICY-CAPABILITY-BYPASS",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "harness_type": "SIMULATED",
+  "harness_type_note": "The Capability/Policy enforcement layer (store.mjs) is a minimal deterministic rule evaluator, not a real PolicyEngine/CapabilityEngine (Phase 8/9 unstarted). Proves the enforcement logic for ADV-12/13/14, not that a real implementation behaves identically.",
+  "executed_cases": 5,
+  "all_executed_pass": true,
+  "results": [
+    {
+      "case": "ADV-12-stale-authorization",
+      "executed": "EXECUTED (SIMULATED)",
+      "authorizedSuccessfully": true,
+      "serviceCalled": false,
+      "finalState": "REJECTED",
+      "outcome": "CAPABILITY_EXPIRED_AT_DISPATCH",
+      "pass": true
+    },
+    {
+      "case": "ADV-13-capability-escalation",
+      "executed": "EXECUTED (SIMULATED)",
+      "authorizedSuccessfully": true,
+      "serviceCalled": false,
+      "finalState": "REJECTED",
+      "outcome": "CAPABILITY_SCOPE_MISMATCH",
+      "pass": true
+    },
+    {
+      "case": "ADV-14-policy-bypass",
+      "executed": "EXECUTED (SIMULATED)",
+      "authorizedSuccessfully": true,
+      "serviceCalled": false,
+      "finalState": "REJECTED",
+      "outcome": "POLICY_STALE_REEVALUATION_DENIED",
+      "note": "PolicyDecision at authorize time was ALLOW under policy v1; v2 (denying) became active before dispatch. Dispatch correctly re-evaluated at the current version instead of trusting the cached v1 ALLOW.",
+      "pass": true
+    },
+    {
+      "case": "control-valid-dispatch",
+      "executed": "EXECUTED (SIMULATED)",
+      "authorizedSuccessfully": true,
+      "serviceCalled": true,
+      "finalState": "ACKED",
+      "outcome": "ACKED",
+      "note": "Positive control - unexpired capability, unchanged scope, unchanged policy. Must succeed, proving the 3 rejections above are the gate working, not everything being rejected unconditionally.",
+      "pass": true
+    },
+    {
+      "case": "capability-revocation",
+      "executed": "EXECUTED (SIMULATED)",
+      "authorizedSuccessfully": true,
+      "serviceCalled": false,
+      "finalState": "REJECTED",
+      "outcome": "CAPABILITY_REVOKED",
+      "note": "Extra case beyond the 3 named ADV cases - revocation is independent of the expiry clock (section 4.1). Not one of ADV-12/13/14 but the same enforcement point.",
+      "pass": true
+    }
+  ]
+}

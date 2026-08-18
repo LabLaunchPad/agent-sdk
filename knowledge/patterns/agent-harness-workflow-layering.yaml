@@ -1,0 +1,59 @@
+pattern:
+  id: agent-harness-workflow-layering
+  name: Agent / Harness / Workflow as three separable layers
+  problem: >
+    A single monolithic "Agent" abstraction forces every consumer to pay for
+    the complexity of the most demanding use case (multi-step orchestration,
+    memory, permissions, middleware) even when they only need a minimal
+    reasoning loop. Conversely, keeping the agent loop too minimal leaves
+    teams building the same batteries (planning, approvals, context
+    management) independently for every project.
+  observed_solution: >
+    Microsoft Agent Framework separates three layers: the Agent loop
+    (core reason-act-observe cycle), the Harness (surrounding runtime
+    capabilities — tools, context, memory, planning, middleware,
+    permissions), and Workflow (structured multi-step orchestration —
+    sequential flows, handoffs, author/critic loops) for scenarios needing
+    predictable, explicit control flow. Each layer is independently
+    optional and composable.
+  source:
+    framework: Microsoft Agent Framework
+    resource: https://commandline.microsoft.com/agent-framework-layered-sdk-loops-workflows-harnesses/
+    evidence_level: E3
+  strengths:
+    - A minimal consumer can use only the Agent loop and pay none of the
+      Harness/Workflow complexity cost.
+    - Batteries-included behaviour (planning, memory, approvals) is
+      centralized in Harness rather than reimplemented per project.
+    - Workflow's explicit control flow is available for cases where the
+      process is known in advance, without forcing every agent through a
+      workflow engine.
+  weaknesses:
+    - The framework's own documentation does not explicitly confirm whether
+      Harness can be used with zero Workflow, or Agent with zero Harness —
+      the layering is asserted by design narrative more than demonstrated by
+      an explicit compatibility statement. Recorded as INFERENCE, not FACT.
+  applicability: >
+    This is independent confirmation, from a second production system, of
+    the exact three-layer boundary LabLaunchPad had already recorded in
+    docs/architecture/PACKAGE-MAP.md (layer "composition": agent, harness,
+    workflow). Two independent designs converging on the same boundary for
+    materially the same reason is a meaningfully stronger signal than either
+    design alone — though still not proof the boundary is correct.
+  lablaunchpad_adaptation: >
+    No architectural change required — this pattern confirms rather than
+    revises the existing Phase 10-12 plan (Minimal Agent -> Harness ->
+    Workflow, in that gated order). Record this as supporting evidence in
+    the Phase 10 comprehension-gate answer to research question P90 ("Is
+    this design supported by current official ecosystem evidence?").
+  benchmark: >
+    Not applicable yet — this is a structural/architectural pattern, not a
+    runtime behaviour to benchmark. Will become benchmarkable once Phase
+    10-12 are implemented, via the DX benchmark family (time-to-first-agent
+    should not require touching Harness or Workflow code).
+  status: CANDIDATE
+  # Not VALIDATED: this is external E3 documentation evidence corroborating
+  # an existing architectural decision, not a result of LabLaunchPad's own
+  # experiment/benchmark loop. Per the Learning Gate, VALIDATED requires
+  # REPEATED confirmation through our own verification, which has not
+  # happened yet for this pattern.

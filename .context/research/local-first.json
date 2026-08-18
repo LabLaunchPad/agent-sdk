@@ -1,0 +1,100 @@
+{
+  "coverage": "8 of 17 sources named in the research brief",
+  "researched": [
+    "openai-agents-sdk",
+    "microsoft-agent-framework",
+    "pydantic-ai",
+    "kimi-agent-sdk",
+    "qwen-agent",
+    "tencent-youtu-agent",
+    "langgraph",
+    "mastra"
+  ],
+  "not_yet_researched": [
+    "volcengine-agentkit",
+    "baidu-appbuilder-sdk",
+    "a2a",
+    "agent-skills"
+  ],
+  "protocol_researched_separately": {
+    "mcp": {
+      "note": "not a runtime, local-first axis does not apply the same way - see research/protocols/mcp-2026-07-28.md",
+      "evidence": "research/protocols/mcp-2026-07-28.md"
+    }
+  },
+  "findings": {
+    "openai-agents-sdk": {
+      "verdict": "local-capable via explicit opt-in, not local-first by default",
+      "evidence": "research/frameworks/openai-agents-sdk/overview.md"
+    },
+    "microsoft-agent-framework": {
+      "verdict": "UNKNOWN - insufficient evidence",
+      "evidence": "research/frameworks/microsoft-agent-framework/overview.md"
+    },
+    "pydantic-ai": {
+      "verdict": "UNKNOWN - insufficient evidence, durable execution backends typically self-hostable",
+      "evidence": "research/frameworks/pydantic-ai/overview.md"
+    },
+    "kimi-agent-sdk": {
+      "verdict": "UNKNOWN - genuinely unresolved after direct fetch",
+      "evidence": "research/frameworks/kimi-agent-sdk/overview.md"
+    },
+    "qwen-agent": {
+      "verdict": "strongest local-first signal so far - first-party vLLM/Ollama self-hosted model path",
+      "evidence": "research/frameworks/qwen-agent/overview.md"
+    },
+    "tencent-youtu-agent": {
+      "verdict": "CORRECTION to brief's framing: NOT confirmed local-first, cloud-configured by default",
+      "evidence": "research/frameworks/tencent-youtu-agent/overview.md"
+    },
+    "langgraph": {
+      "verdict": "LOCAL_CAPABLE (corrected) - the Checkpointer interface is genuinely local-native (in-memory/SQLite first-class, not a degraded fallback); Postgres/Mongo are optional production backends, not a mandatory dependency. Real caveats: langgraph-api is separately licensed (Elastic 2.0), and persistence-lifecycle (retention, schema migration) is unresolved independent of backend choice",
+      "evidence": "research/frameworks/langgraph/overview.md",
+      "correction_note": "first draft incorrectly framed Postgres/Redis as a production requirement implied by the SDK; corrected on user feedback with direct re-reading of the checkpointer interface"
+    },
+    "mastra": {
+      "verdict": "LOCAL_CAPABLE - strongest combined storage-plus-tools local-first story researched (LibSQL local file DB + Workspace filesystem/command-execution/search, both local-native with per-tool approval gating); model-execution local-first status remains UNKNOWN",
+      "evidence": "research/frameworks/mastra/overview.md"
+    }
+  },
+  "installment_3_observation": "local-first is not one axis; LangGraph and Mastra are each strong on checkpointing/storage-plus-tools and unresolved on model execution - per-capability columns are load-bearing, not the single verdict. LangGraph's more precise finding is persistence LIFECYCLE risk (retention, schema migration), not a local-vs-cloud backend gap.",
+  "imported_supplementary_corpus": {
+    "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+    "provenance": "beyond the original 17-source brief; user-supplied, not independently re-verified via WebFetch/WebSearch in this session - see individual .context/research/{name}.json files and research/imported-corpus/SOURCE-RECEIPT.md",
+    "verdicts": {
+      "openhands": "LOCAL_CAPABLE - local/ephemeral Agent Server workspace, Cloud also available; local mount can expose writable host files (named caveat)",
+      "letta": "LOCAL_CAPABLE - self-hostable via Docker/PostgreSQL, or managed cloud; needs Postgres, not zero-infra",
+      "google-adk": "LOCAL_CAPABLE, platform-adjacent - local/container execution exists but platform services (Agent Runtime/Cloud Run/GKE) materially expand the surface",
+      "browser-use": "LOCAL_NATIVE for the core loop - deliberately minimal thin task+environment abstraction, OSS local browser is the default",
+      "crewai": "LOCAL_CAPABLE - open-source framework and the managed AMP platform are explicitly different things"
+    }
+  },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "beyond the original 17-source brief; second user-supplied 'next wave' corpus, not independently re-verified via WebFetch/WebSearch in this session - see research/comparison/NEXT-WAVE-RUNTIME-LOCAL-FIRST.md",
+    "verdicts": {
+      "strands-agents": "LOCAL_CAPABLE - Ollama provider documented",
+      "smolagents": "LOCAL_CAPABLE - local/HF/provider model support, agent memory local by default",
+      "ag2": "LOCAL_CAPABLE - Ollama native client documented",
+      "llama-index": "LOCAL_CAPABLE - strong local data stack, explicit disk persistence",
+      "llama-agents": "HYBRID - depends on selected model/deployment",
+      "haystack": "LOCAL_NATIVE/LOCAL_CAPABLE - HF local, llama.cpp, and Ollama all documented; strongest local-model breadth of batch 2",
+      "dspy": "RUNTIME-AGNOSTIC - optimization framework over any LM adapter, not itself a local/cloud commitment",
+      "autogen": "LEGACY/HYBRID - migration-era, successor is microsoft-agent-framework",
+      "semantic-kernel": "LEGACY/HYBRID - migration-era, successor is microsoft-agent-framework, successor explicitly supports Ollama"
+    },
+    "proposed_local_first_capability_contract": "CloudAccount=optional, Network=denyable, ModelProvider=local/remote interchangeable, Storage=filesystem/sqlite/embedded selectable, Tools=explicit capability grants, Observability=local sink required, Evaluation=runnable offline - see ADR-CANDIDATE-004, not yet reconciled against this file's own LOCAL_NATIVE/LOCAL_WITH_ADAPTER/CLOUD_ONLY enum"
+  },
+  "source": "research/local-first/SCORECARD.md",
+  "generated_at": "2026-08-17T00:00:00Z"
+}

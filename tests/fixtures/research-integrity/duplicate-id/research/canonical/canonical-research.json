@@ -1,0 +1,4 @@
+{
+  "sources": [{ "source_id": "SRC-A" }, { "source_id": "SRC-A" }],
+  "evidence": [{ "evidence_id": "EVD-A-001", "source_id": "SRC-A" }]
+}

@@ -1,0 +1,39 @@
+{
+  "experiment_id": "E5-08-POLICY-CAPABILITY-BYPASS",
+  "status": "EXECUTED",
+  "harness": "benchmarks/e5-08-policy-capability/",
+  "result_doc": "research/benchmarks/E5-08-RESULT.md",
+  "supports_adr": "ADR-0013",
+  "elaborates_spec": ".context/specs/kernel.json#sections.4_capability_policy",
+  "closes_gap_e5_zero": false,
+  "raw_run_output": {
+    "experiment_id": "E5-08-POLICY-CAPABILITY-BYPASS",
+    "environment": { "node": "v24.19.0", "platform": "linux", "arch": "x64" },
+    "harness_type": "SIMULATED",
+    "harness_type_note": "The Capability/Policy enforcement layer (store.mjs) is a minimal deterministic rule evaluator, not a real PolicyEngine/CapabilityEngine (Phase 8/9 unstarted). Proves the enforcement logic for ADV-12/13/14, not that a real implementation behaves identically.",
+    "executed_cases": 5,
+    "all_executed_pass": true,
+    "results": [
+      {
+        "case": "ADV-12-stale-authorization",
+        "pass": true,
+        "outcome": "CAPABILITY_EXPIRED_AT_DISPATCH"
+      },
+      {
+        "case": "ADV-13-capability-escalation",
+        "pass": true,
+        "outcome": "CAPABILITY_SCOPE_MISMATCH"
+      },
+      {
+        "case": "ADV-14-policy-bypass",
+        "pass": true,
+        "outcome": "POLICY_STALE_REEVALUATION_DENIED"
+      },
+      { "case": "control-valid-dispatch", "pass": true, "outcome": "ACKED" },
+      { "case": "capability-revocation", "pass": true, "outcome": "CAPABILITY_REVOKED" }
+    ]
+  },
+  "adv_cases_closed": ["ADV-12", "ADV-13", "ADV-14"],
+  "stability": "5/5 consecutive re-runs clean, no flake observed (unlike E5-02's first attempt)",
+  "generated_at": "2026-08-18T00:00:00Z"
+}

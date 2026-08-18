@@ -1,0 +1,285 @@
+{
+  "scenario_set_id": "SCEN-KERNEL-CORE-001",
+  "title": "Kernel core adversarial matrix",
+  "note": "Every element in docs/architecture/KERNEL-CONSTITUTION.md sections 1-6 must correspond to at least one case here (the document's own Testability rule). 15 cases total, per the Phase-2 one-shot spec's required minimum: 8 EXECUTED/SIMULATED this phase via benchmarks/e5-02-unknown-outcome/, 7 NOT_EXECUTED with stated reasons. A case with no corresponding test is not yet a tested part of the constitution, regardless of how precisely it is described in prose.",
+  "cases": [
+    {
+      "id": "ADV-01",
+      "name": "duplicate-operation",
+      "constitution_section": "2_operation_side_effect_state_machine",
+      "expected_state": "Second dispatch with the same idempotency key never re-performs the effect; operation resolves ACKED from the first attempt's evidence.",
+      "expected_evidence": "Service-side dispatch_attempts counter increments without a new committed_at.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "N/A - no crash involved, purely a duplicate-call path.",
+      "must_never_happen": "The effect is performed twice.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseDuplicateOperation",
+      "actual_result": "pass: true - service deduped, committed_at unchanged, dispatch_attempts incremented once",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-02",
+      "name": "timeout-after-real-side-effect",
+      "constitution_section": "2_operation_side_effect_state_machine",
+      "expected_state": "DISPATCHED -> UNKNOWN_OUTCOME (never REJECTED) when the kernel stops waiting on a still-running dispatch.",
+      "expected_evidence": "No ACKED/REJECTED evidence exists at the moment of timeout classification.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "Reconciliation later resolves ACKED once the service's own log catches up.",
+      "must_never_happen": "A timeout is silently treated as REJECTED (the exact failure mode ADR-0011 exists to prevent).",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseTimeoutAfterRealSideEffect",
+      "actual_result": "pass: true - classified UNKNOWN_OUTCOME while service still running, resolved ACKED after",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-03",
+      "name": "response-lost-after-real-side-effect",
+      "constitution_section": "2_operation_side_effect_state_machine",
+      "expected_state": "DISPATCHED -> UNKNOWN_OUTCOME -> RECONCILING -> ACKED, isolated from the primary 12-step composite.",
+      "expected_evidence": "Service log shows the effect committed; kernel never observed a response.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "Reconciliation queries the service's own durable log directly.",
+      "must_never_happen": "Reconciliation re-dispatches instead of querying first.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseResponseLostAfterRealSideEffect",
+      "actual_result": "pass: true - sideEffectCommitted true, responseObserved false, resolved ACKED; flaked once during development (see E5-02-RESULT.md Corrections #4), fixed and reconfirmed clean across 5 re-runs",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-04",
+      "name": "kill-before-checkpoint",
+      "constitution_section": "3_durability",
+      "expected_state": "Crash between AUTHORIZED and the DISPATCHED checkpoint leaves the operation at AUTHORIZED, never DISPATCHED.",
+      "expected_evidence": "No service log entry exists for the operation's idempotency key.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "Safe to dispatch fresh - no ambiguity, no reconciliation needed.",
+      "must_never_happen": "The operation is treated as UNKNOWN_OUTCOME when no dispatch was ever checkpointed.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseKillBeforeCheckpoint",
+      "actual_result": "pass: true - stateOnRestart AUTHORIZED, serviceHasRecordOfEffect false",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-05",
+      "name": "kill-after-checkpoint",
+      "constitution_section": "3_durability",
+      "expected_state": "DISPATCHED checkpoint is durable but the service call never actually reached the service.",
+      "expected_evidence": "No service log entry found on reconciliation.",
+      "expected_verdict": "SUPPORTED, with a named limitation",
+      "expected_recovery": "Classify UNKNOWN_OUTCOME, then reconcile to REJECTED given no evidence.",
+      "must_never_happen": "REJECTED is assumed safe by default against a real external system with no reliable status check - it is not; this case's REJECTED result is trustworthy only because the SIMULATED service happens to offer one.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseKillAfterCheckpoint",
+      "actual_result": "pass: true - classified UNKNOWN_OUTCOME, resolved REJECTED, serviceEvidenceFound false",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-06",
+      "name": "checkpoint-corruption",
+      "constitution_section": "3_durability",
+      "expected_state": "A corrupted kernel database is detected on open/read, never silently trusted.",
+      "expected_evidence": "PRAGMA integrity_check or an open failure signals the corruption.",
+      "expected_verdict": "SUPPORTED, narrowly - see limitation",
+      "expected_recovery": "Route to MANUAL_REVIEW (detection only in this harness; no repair/quarantine path implemented).",
+      "must_never_happen": "Corrupted state is read and acted on as if valid.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseCheckpointCorruption",
+      "actual_result": "pass: true after correction - first corruption technique (mid-file byte overwrite) went UNDETECTED by PRAGMA integrity_check (an honest miss, corrected not hidden); header-magic-byte corruption reliably detected via threwOnOpen. Only corruption criterion 1 (schema violation) measured, not 2/3/5/6/7 (E5-RESULT.md's 7-criteria definition).",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-07",
+      "name": "replay-determinism",
+      "constitution_section": "1_state_machine_algebra",
+      "expected_state": "The same persisted state, reconciled twice from independent snapshots, produces byte-identical resulting state/outcome.",
+      "expected_evidence": "Two independent DB snapshots taken from the same source, reconciled separately.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "N/A - determinism check, not a crash scenario.",
+      "must_never_happen": "Two replays of identical input produce different classifications (violates the determinism invariant in section 1).",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseReplayDeterminism",
+      "actual_result": "pass: true - replayA and replayB identical (state ACKED, outcome ACKED)",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-08",
+      "name": "concurrent-state-mutation",
+      "constitution_section": "3_durability",
+      "expected_state": "Two independently spawned reconciliation workers race on the same UNKNOWN_OUTCOME operation; exactly one wins the guarded transition.",
+      "expected_evidence": "Optimistic-concurrency version check rejects the loser's write (0 rows affected).",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "The losing worker detects the loss and does not retry blindly within this harness.",
+      "must_never_happen": "Both workers succeed, or a duplicate dispatch is triggered by the race.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-02-unknown-outcome/run-e5-02.mjs#caseConcurrentStateMutation + reconcile-worker.mjs",
+      "actual_result": "pass: true - exactlyOneWon true, noDuplicateDispatchTriggered true (2 real spawned processes, not simulated in-process)",
+      "result_doc": "research/benchmarks/E5-02-RESULT.md"
+    },
+    {
+      "id": "ADV-09",
+      "name": "illegal-transition",
+      "constitution_section": "1_state_machine_algebra",
+      "expected_state": "A Guard rejects a transition attempt outside the legal state graph; this is a defined outcome, not a kernel failure.",
+      "expected_evidence": "N/A - not executed.",
+      "expected_verdict": "NOT_EXECUTED",
+      "expected_recovery": "N/A",
+      "must_never_happen": "N/A",
+      "status": "NOT_EXECUTED",
+      "reason": "This harness's transition() guard rejects any fromStates mismatch mechanically, but there is no real Guard/Context model (section 1) to mount an actually adversarial illegal-transition attempt against - only the one legal path per case was exercised, never a deliberate illegal one.",
+      "trigger": "A real state-machine implementation with an explicit Guard/Context model exists (Phase 4+)."
+    },
+    {
+      "id": "ADV-10",
+      "name": "duplicate-event",
+      "constitution_section": "1_state_machine_algebra",
+      "expected_state": "An Event replayed twice (same Event identity) is detected as a duplicate, not applied twice.",
+      "expected_evidence": "N/A - not executed.",
+      "expected_verdict": "NOT_EXECUTED",
+      "expected_recovery": "N/A",
+      "must_never_happen": "N/A",
+      "status": "NOT_EXECUTED",
+      "reason": "No Event identity/log exists in this harness (section 1's Event carries its own identity) - only Operation-level idempotency was exercised, a distinct mechanism from Event-level deduplication.",
+      "trigger": "A real Event log/identity mechanism exists (Phase 4+)."
+    },
+    {
+      "id": "ADV-11",
+      "name": "reordered-event",
+      "constitution_section": "1_state_machine_algebra",
+      "expected_state": "Events applied out of persisted order are detected or rejected, not silently accepted in the wrong order.",
+      "expected_evidence": "N/A - not executed.",
+      "expected_verdict": "NOT_EXECUTED",
+      "expected_recovery": "N/A",
+      "must_never_happen": "N/A",
+      "status": "NOT_EXECUTED",
+      "reason": "Same reason as duplicate-event: no persisted Event log exists in this harness to reorder.",
+      "trigger": "A real Event log/identity mechanism exists (Phase 4+)."
+    },
+    {
+      "id": "ADV-12",
+      "name": "stale-authorization",
+      "constitution_section": "4_capability_policy",
+      "expected_state": "A Capability grant past its expiry is rejected at enforcement time, not honored because it was valid at authorization time.",
+      "expected_evidence": "A dispatch-time re-check of the capability finds it past expires_at; the SIMULATED service is never called.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "N/A - rejection is the correct terminal outcome, no recovery needed.",
+      "must_never_happen": "A stale, expired capability is honored because it was valid at the earlier authorize-time check.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-08-policy-capability/run-e5-08.mjs#caseStaleAuthorization",
+      "actual_result": "pass: true - capability valid at authorize time, expired before dispatch, re-checked at dispatch (source-to-sink) and rejected with CAPABILITY_EXPIRED_AT_DISPATCH; SIMULATED service never called",
+      "result_doc": "research/benchmarks/E5-08-RESULT.md"
+    },
+    {
+      "id": "ADV-13",
+      "name": "capability-escalation",
+      "constitution_section": "4_capability_policy",
+      "expected_state": "An attempt to act beyond a granted Capability's scope is rejected at the source-to-sink enforcement point.",
+      "expected_evidence": "A dispatch-time capability check finds the requested action/object does not match what the held capability actually grants.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "N/A - rejection is the correct terminal outcome, no recovery needed.",
+      "must_never_happen": "An action outside a capability's granted scope is permitted because the principal holds some other valid capability.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-08-policy-capability/run-e5-08.mjs#caseCapabilityEscalation",
+      "actual_result": "pass: true - principal held a valid, unexpired capability for one action, requested a different action; rejected with CAPABILITY_SCOPE_MISMATCH, SIMULATED service never called",
+      "result_doc": "research/benchmarks/E5-08-RESULT.md"
+    },
+    {
+      "id": "ADV-14",
+      "name": "policy-bypass",
+      "constitution_section": "4_capability_policy",
+      "expected_state": "An Operation cannot dispatch without an independently-evaluated, current Policy decision - a stale or absent PolicyDecision blocks dispatch.",
+      "expected_evidence": "The active policy version at dispatch time differs from the version the cached PolicyDecision was bound to; re-evaluation at the current version returns DENY.",
+      "expected_verdict": "SUPPORTED",
+      "expected_recovery": "N/A - rejection is the correct terminal outcome, no recovery needed.",
+      "must_never_happen": "A dispatch proceeds on a PolicyDecision bound to a policy version that has since been superseded, without re-evaluating against the current version.",
+      "status": "EXECUTED",
+      "harness": "benchmarks/e5-08-policy-capability/run-e5-08.mjs#casePolicyBypass",
+      "actual_result": "pass: true - PolicyDecision ALLOW was bound to policy v1 at authorize time; policy v2 (denying) became active before dispatch; dispatch re-evaluated at the current version and rejected with POLICY_STALE_REEVALUATION_DENIED rather than trusting the stale cached ALLOW",
+      "result_doc": "research/benchmarks/E5-08-RESULT.md"
+    },
+    {
+      "id": "ADV-15",
+      "name": "schema-version-mismatch",
+      "constitution_section": "3_durability",
+      "expected_state": "A Checkpoint written by schema version N remains readable by version N+1 (or fails explicitly with a migration path, never silently misreads).",
+      "expected_evidence": "N/A - not executed.",
+      "expected_verdict": "NOT_EXECUTED",
+      "expected_recovery": "N/A",
+      "must_never_happen": "N/A",
+      "status": "NOT_EXECUTED",
+      "reason": "This harness runs a single schema version throughout its whole run - no second real schema version exists yet to test migration/mismatch against (ADR-0010's schema migration invariant is a Phase 4 concern).",
+      "trigger": "Phase 4 CheckpointStore exists with a second real schema version to migrate against."
+    }
+  ],
+  "summary": {
+    "total_cases": 15,
+    "executed": 11,
+    "simulated_of_executed": 11,
+    "not_executed": 4,
+    "all_executed_pass": true,
+    "sections_covered": [
+      "1_state_machine_algebra",
+      "2_operation_side_effect_state_machine",
+      "3_durability",
+      "4_capability_policy"
+    ],
+    "sections_not_covered_by_any_case": [
+      "5_evidence_verdict",
+      "6_agent_workflow_boundary"
+    ],
+    "sections_not_covered_note": "Sections 5 and 6 are structural/organizational (Evidence/Verdict field shapes; layer ownership table) rather than state-transition behavior - no case in the one-shot spec's 15 targets them directly. Every EXECUTED case does produce Evidence and reach a Verdict-labeled terminal state as a side effect of running, but no case exists whose specific purpose is to adversarially test section 5 or 6's own rules (e.g. 'a Verdict with no cited Evidence is malformed' is asserted in the spec but never deliberately violated and checked in this harness). Logged here rather than silently left uncovered - a real gap for a future E5, not claimed as tested."
+  },
+  "validator_coverage_check": {
+    "note": "Confirms every CLI validator has a positive fixture, a negative fixture, and CI wiring - the closing half of the CONTROL-COVERAGE loop scripts/repo-tools/test/ci-coverage.unit.test.ts enforces mechanically for CI wiring; positive/negative fixture presence is confirmed here by direct inspection, not yet by its own automated check.",
+    "validators": [
+      {
+        "name": "schema-contract",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "package-boundary",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "context-staleness",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "package-exports",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "repository-policy",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "okf-conformance",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true
+      },
+      {
+        "name": "research-integrity",
+        "positive_fixture": true,
+        "negative_fixture": true,
+        "ci_wired": true,
+        "sub_rules": ["broken-link", "broken-reference", "duplicate-id"]
+      }
+    ],
+    "all_wired": true,
+    "verified_by": "scripts/repo-tools/test/ci-coverage.unit.test.ts (asserts VALIDATOR_NAMES coverage in CI) + scripts/repo-tools/test/validators.adversarial.test.ts (asserts each negative fixture is actually rejected)"
+  },
+  "generated": {
+    "by": "process:claude-code-session",
+    "at": "2026-08-17"
+  }
+}

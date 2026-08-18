@@ -1,0 +1,21 @@
+{
+  "name": "@lablaunchpad/repo-tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private repository validators. Built with tsc and executed from dist/, which makes this package live proof that the build emits loadable ESM.",
+  "license": "Apache-2.0",
+  "bin": {
+    "repo-tools": "./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "yaml": "2.9.0"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "source": "Llama Agents + Workflows",
+  "version": "llama-agents v0.12.5 surfaced; workflows v2.22.2 surfaced",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "MIT",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Execution model is event-driven, async-first and step-based.",
+      "url": "https://github.com/run-llama/llama-agents"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "llamactl supports local development, deployment, headless workflow services, MCP servers and full-stack apps.",
+      "url": "https://github.com/run-llama/llama-agents"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Release feed exposes separate server, client, control-plane and workflow packages, indicating deployment/control-plane modularization.",
+      "url": "https://github.com/run-llama/llama-agents/releases"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "event-driven",
+    "async-first",
+    "step-based workflows",
+    "deployable agent services",
+    "control plane"
+  ],
+  "state": ["event/step workflow state", "deployment/control-plane state"],
+  "context": ["workflow step inputs/events"],
+  "memory": ["not core in cited repository description"],
+  "runtime": ["local hot-reload path", "deployable services", "MCP server mode"],
+  "security": ["deployment dependent; service boundary"],
+  "ux": ["control-plane/deployment workflow", "headless and full-stack modes"],
+  "dx": ["step/event primitives", "llamactl"],
+  "portability": ["own infra or managed deployments", "MCP interoperability"],
+  "efficiency": [
+    "async-first can parallelize independent waits",
+    "workflow overhead justified by explicit control"
+  ],
+  "patterns": ["durable workflow layer", "event-driven execution"],
+  "contradictions": ["explicit execution control vs kernel complexity"],
+  "unknowns": [
+    "exact checkpoint/replay semantics across packages",
+    "cross-deployment parity"
+  ],
+  "decisions": ["ADAPT DurableWorkflowPort", "DEFER mandatory control plane"]
+}

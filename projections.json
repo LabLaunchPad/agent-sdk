@@ -1,0 +1,32 @@
+{
+  "$comment": "Projection registry for derived-projection-consistency-validator. A generated region is a control artifact ONLY if its file is registered here and the fact id is declared for that file. Registering a fact also makes its region MANDATORY: deleting the region fails the gate. Coverage is closed in BOTH directions - every marker-bearing file discovered on disk must appear either in `projections` or in `exclusions`, so an unregistered projection cannot exist silently (see docs/agent/FAILURES.md F008, REC-CONTROL-SELF-EXEMPTION).",
+  "exclusions": [
+    {
+      "file": "docs/audit/REPOSITORY-INTEGRITY-AUDIT.md",
+      "reason": "Documentation that explains the marker convention and therefore quotes it. Prose about the mechanism is not a claim about the repository. Excluding it explicitly is what lets the document describe the mechanism accurately instead of being reworded to satisfy it - the F006 failure."
+    }
+  ],
+  "projections": [
+    {
+      "id": "context-index",
+      "file": ".context/index.md",
+      "facts": [
+        "phase_id",
+        "research_brief_status",
+        "adr_list",
+        "benchmark_run_count",
+        "validator_count"
+      ]
+    },
+    {
+      "id": "readme",
+      "file": "README.md",
+      "facts": ["phase_id", "validator_count"]
+    },
+    {
+      "id": "agent-state",
+      "file": "docs/agent/STATE.md",
+      "facts": ["phase_id", "research_brief_status", "validator_count"]
+    }
+  ]
+}

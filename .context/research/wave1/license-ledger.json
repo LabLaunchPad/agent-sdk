@@ -1,0 +1,27 @@
+[
+  {
+    "ecosystem": "MCP",
+    "status": "NOT_REVIEWED_IN_DEPTH",
+    "source": "https://modelcontextprotocol.io/"
+  },
+  {
+    "ecosystem": "A2A",
+    "status": "NOT_REVIEWED_IN_DEPTH",
+    "source": "https://a2a-protocol.org/"
+  },
+  {
+    "ecosystem": "OpenAI Agents SDK",
+    "status": "NOT_REVIEWED_IN_DEPTH",
+    "source": "https://openai.github.io/openai-agents-python/"
+  },
+  {
+    "ecosystem": "Microsoft Agent Framework",
+    "status": "NOT_REVIEWED_IN_DEPTH",
+    "source": "https://learn.microsoft.com/en-us/agent-framework/"
+  },
+  {
+    "ecosystem": "OpenRouter",
+    "status": "NOT_REVIEWED_IN_DEPTH",
+    "source": "https://openrouter.ai/docs/"
+  }
+]

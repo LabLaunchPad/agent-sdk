@@ -1,0 +1,1 @@
+{"receipt_id":"R3","provenance":{"claim_scope":"HISTORICAL","producer":{"kind":"CI","id":"x"},"repository":{"sha":"0123456789abcdef0123456789abcdef01234567","ref":"main"},"toolchain":{"node":"24.19.0"},"recorded_at":"2026-08-18"}}

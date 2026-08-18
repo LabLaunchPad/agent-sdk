@@ -1,0 +1,65 @@
+{
+  "source": "Microsoft Semantic Kernel",
+  "version": "migration-era / successor is Microsoft Agent Framework 1.0",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "MIT",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Microsoft's current repository states Semantic Kernel is now Microsoft Agent Framework and that Agent Framework is the enterprise-ready successor.",
+      "url": "https://github.com/microsoft/semantic-kernel"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Migration guide identifies simplified agent creation, unified agent type model, session/thread mapping, and package decomposition changes.",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Agent Framework overview explicitly says it combines Semantic Kernel enterprise state/type-safety/filter/telemetry features with AutoGen patterns and adds explicit workflows/state management.",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/overview/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Semantic Kernel repository is MIT licensed.",
+      "url": "https://github.com/microsoft/semantic-kernel"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "kernel/plugins/functions",
+    "agent framework",
+    "typed enterprise abstractions",
+    "filters/telemetry"
+  ],
+  "state": ["session/thread model", "successor adds robust state"],
+  "context": ["kernel/functions/tool definitions"],
+  "memory": ["memory/vector integrations historically broad"],
+  "runtime": ["multi-provider", "successor explicitly supports Ollama"],
+  "security": [
+    "typed tools/filters provide control points",
+    "still requires capability boundary"
+  ],
+  "ux": ["enterprise orchestration model", "migration guide documents simplification"],
+  "dx": [
+    "dependency injection",
+    "typed function/plugin model",
+    "successor consolidates agent types"
+  ],
+  "portability": ["provider ecosystem", "A2A/MCP in successor"],
+  "efficiency": ["migration guide claims better object creation/memory usage"],
+  "patterns": ["middleware/filters", "typed capabilities", "telemetry"],
+  "contradictions": ["kernel-centric abstraction vs simpler unified agent API"],
+  "unknowns": [
+    "current SK-only trajectory post-successor",
+    "local integrations not revalidated in this pass"
+  ],
+  "decisions": [
+    "ADOPT type/telemetry/filter lessons",
+    "REJECT central kernel coupling",
+    "USE only as migration evidence"
+  ]
+}

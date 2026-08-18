@@ -1,0 +1,31 @@
+{
+  "name": "post_commit_agent_contract",
+  "version": "1.0",
+  "inputs": [
+    "repository_state",
+    "task_intent",
+    "git_state",
+    "pull_request_state",
+    "ci_state",
+    "deployment_state"
+  ],
+  "outputs": ["state_transition", "evidence_ledger_entry", "decision", "next_action"],
+  "forbidden": [
+    "bypass_required_checks",
+    "dismiss_blocking_review_without_authority",
+    "blind_retry_unknown_side_effect",
+    "declare_success_without_evidence"
+  ],
+  "completion_states": ["COMPLETE"],
+  "escalation_states": ["ESCALATE"],
+  "required_evidence_before_merge": [
+    "scope",
+    "review",
+    "current_checks",
+    "security",
+    "tests",
+    "policy"
+  ],
+  "required_evidence_after_merge": ["main_sha", "post_merge_ci"],
+  "required_evidence_after_deploy": ["deployment_id", "runtime_health", "smoke_test"]
+}

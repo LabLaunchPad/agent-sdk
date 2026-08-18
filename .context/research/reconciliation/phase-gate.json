@@ -1,0 +1,94 @@
+{
+  "phase": "Phase 1B \u2014 Architecture Reconciliation & ADR Freeze",
+  "lock_state": {
+    "PHASE_2_SPEC_PREP": "UNLOCKED",
+    "PHASE_2_IMPLEMENTATION": "LOCKED",
+    "BROAD_RESEARCH": "LOCKED",
+    "NEW_ADR_CREATION": "TRIGGER_ONLY",
+    "note": "Added on external adjudication of this phase's own PASS/PARTIAL gate language, which risked being read as 'Phase 2 may begin' = 'start coding the kernel'. These four fields are the precise statement: SPEC_GATE's PARTIAL status means spec-preparation (specs, contracts, invariants, a throwaway/simulated E5 harness) is unlocked; writing @lablaunchpad/* implementation code is not. BROAD_RESEARCH stays LOCKED per the M01-M20 module registry's own governance rule (research/modules/MODULE-MAP.md) - reopen only on a named trigger firing. NEW_ADR_CREATION is TRIGGER_ONLY: amend an existing ADR when a genuine ambiguity surfaces; open a new one only for a genuinely new, evidenced architectural question, not to document synthesis."
+  },
+  "gates": {
+    "ADR_GATE": {
+      "status": "PASS",
+      "reason": "8 binding ADRs written (ADR-0009 through ADR-0016), each using the repository's existing template (Context/Decision/Adversarial review/Alternatives/Consequences/Revisit trigger/Evidence). Minimal complete set, not one-per-decision.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "BOUNDARY_GATE": {
+      "status": "PASS",
+      "reason": "All 27 delete-tested boundaries dispositioned: 14 KEEP, 4 ADAPT, 1 EXTERNALIZE, 3 promoted from ADD_CANDIDATE to bound contract additions, 4 DEFER (each with a named revisit trigger), 1 N/A. Zero left undispositioned.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "ACTION_GATE": {
+      "status": "PASS",
+      "reason": "All 12 ACTION_REQUIRED/ACTION_REQUIRED_AT_PHASE_18 entries triaged and resolved - 0 remaining in .context/research/decisions.json.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "E5_GATE": {
+      "status": "PARTIAL",
+      "reason": "First real E5 (E5-DURABLE-RESTART) executed and clean - 6/6 genuine mid-transaction kills rolled back cleanly, 4/4 post-commit controls committed cleanly, zero corruption. Satisfies docs/agent/NEXT.md's literal 'first high-leverage E5 completed' entry condition. Does NOT close GAP-E5-ZERO: only 1 of 10+ named benchmarks across all corpora has been run, single-run only (no repetition), and the harness's own stated limitations (no WAL mode, no concurrent-reader test, kill-signal-only) mean this is real but partial evidence.",
+      "impact": "Every architecture decision this phase made still rests primarily on E3/E4 documentation evidence, not E5 reproduction - consistent with every corpus's own honest self-assessment throughout this project.",
+      "blocker": "None blocking Phase 2 entry specifically (the literal 'first E5' criterion is met) - but a real evidence gap remains for architecture confidence beyond that literal bar.",
+      "next_action": "Run BEN-TOOL-INJECTION and BEN-SANDBOX-BOUNDARY (or their successors) once Phase 8/9 implementation exists to test against - both explicitly deferred this phase for exactly that reason, not forgotten."
+    },
+    "CONTEXT_GATE": {
+      "status": "PASS",
+      "reason": "Minimum viable deterministic verification harness added (research-integrity-validator, 7th validator): ID cross-reference integrity in research/canonical/canonical-research.json and relative markdown link resolution across all OKF-scoped directories. Running clean against the real repository (36 links, 248 ID references checked, 0 findings) after catching and fixing 4 real broken references this phase introduced (versions[].ecosystem using plain names instead of ECO- prefixed IDs).",
+      "impact": null,
+      "blocker": null,
+      "next_action": "Distinct, unresolved by this gate: the OKF 'verified' trust-tier percentage remains 0% (ADR-0008) - a human-review-cadence question, not a missing-mechanism question. See docs/agent/NEXT.md's Operational tracking section, unchanged by this phase."
+    },
+    "SPEC_GATE": {
+      "status": "PARTIAL",
+      "reason": "ADR_GATE, BOUNDARY_GATE, ACTION_GATE, and CONTEXT_GATE all PASS. E5_GATE is PARTIAL. Phase 2 spec-preparation work (specs, contracts, invariants - not implementation) may reasonably begin using the 8 ADRs as its base, per docs/agent/NEXT.md's literal entry condition, but full architectural confidence remains gated on further E5 execution as implementation surfaces become available.",
+      "impact": "Phase 2 is not fully unconditionally unblocked - it is unblocked for spec/contract preparation, gated for anything depending on E5-level confidence beyond the durability claim this phase tested.",
+      "blocker": "E5_GATE's PARTIAL status.",
+      "next_action": "Begin Phase 2 spec-preparation work referencing ADR-0009 through ADR-0016 directly. Continue closing E5_GATE opportunistically as Phase 8/9/12/16/17/19 implementation surfaces come online."
+    }
+  },
+  "generated_at": "2026-08-17T00:00:00Z",
+  "phase_2_gates": {
+    "phase": "Phase 2 - Kernel Constitution + E5-02 (UNKNOWN_OUTCOME)",
+    "note": "Added without altering the Phase 1B record above - that record stays as the receipt for the phase that produced it. These are the one-shot spec's own 4 named acceptance gates (A Spec, B E5-02, C Harness, D Governance), each scored explicitly rather than asserted as a blanket PASS.",
+    "GATE_A_SPEC": {
+      "status": "PASS",
+      "reason": "docs/architecture/KERNEL-CONSTITUTION.md written (6 sections: state machine algebra, operation/side-effect state machine, durability, capability/policy, evidence/verdict, agent/workflow boundary), synthesizing ADR-0006/0009-0016 with zero new ADRs required. Machine mirror .context/specs/kernel.json written.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "GATE_B_E5_02": {
+      "status": "PASS_SIMULATED",
+      "reason": "benchmarks/e5-02-unknown-outcome/ built and executed for real (not fabricated): 9/9 executed cases pass (primary 12-step scenario + 8 of 15 named adversarial cases), 7/15 explicitly NOT_EXECUTED with stated reasons. Harness type is SIMULATED throughout - no real external system, no real Capability/Policy enforcement.",
+      "impact": "Supports ADR-0011 and KERNEL-CONSTITUTION.md section 2's design against a well-behaved simulated service; does not prove behavior against real network/API failure modes.",
+      "blocker": null,
+      "next_action": "Re-run against a real capability/side-effect implementation once Phase 8/9 exists (research/benchmarks/E5-LADDER.md E5-04/E5-08)."
+    },
+    "GATE_C_HARNESS": {
+      "status": "PARTIAL",
+      "reason": ".context/scenarios/kernel-core.json's 15-case adversarial matrix: 11/15 EXECUTED (all SIMULATED, all pass) after this pass added ADV-12/13/14 (stale-authorization, capability-escalation, policy-bypass) via benchmarks/e5-08-policy-capability/ - was 8/15 at Phase 2's original close. 4/15 remain NOT_EXECUTED (ADV-09/10/11 need a real Guard/Event-log model per section 1; ADV-15 needs Phase 4's second schema version). All 7 CLI validators confirmed to have positive fixture + negative fixture + CI wiring, verified by scripts/repo-tools/test/ci-coverage.unit.test.ts.",
+      "impact": "Sections 5 (Evidence/Verdict) and 6 (Agent/workflow boundary) of the constitution still have no adversarial case whose specific purpose is to test them - unchanged from Phase 2's original close, still a real logged gap, not silently claimed as covered.",
+      "blocker": null,
+      "next_action": "Close ADV-09/10/11 when a real state-machine Guard/Event-log model exists (Phase 4+); close ADV-15 when a second real schema version exists to migrate against (Phase 4). Add cases targeting sections 5/6 directly when a real implementation exists to test them against meaningfully."
+    },
+    "GATE_D_GOVERNANCE": {
+      "status": "PASS",
+      "reason": "Zero new ADRs created (constitution is pure synthesis, as required). .context/state/*.json phase contradiction repaired. Two further user-supplied inputs (TS7 graph-first methodology, Socratic planning coverage) reviewed and folded in without scope expansion - logged in docs/agent/DECISIONS.md, no broad research triggered. .context/evidence/phase-2-kernel-receipt.json holds the required 10-field structured receipt with claims labeled VERIFIED/SUPPORTED/INFERRED/UNKNOWN/NOT_EXECUTED.",
+      "impact": null,
+      "blocker": null,
+      "next_action": null
+    },
+    "lock_state_after_this_phase": {
+      "PHASE_2_SPEC_PREP": "COMPLETE_FOR_THE_7_SCOPED_MODULES",
+      "PHASE_2_IMPLEMENTATION": "LOCKED",
+      "BROAD_RESEARCH": "LOCKED",
+      "NEW_ADR_CREATION": "TRIGGER_ONLY",
+      "note": "Spec preparation for M01/M02/M03/M04/M05/M15/M16 is done to the depth this phase's kernel spec + E5-02 required. Implementation of @lablaunchpad/* kernel code stays LOCKED - no runtime package was created or should be inferred as started from this phase's work."
+    }
+  }
+}

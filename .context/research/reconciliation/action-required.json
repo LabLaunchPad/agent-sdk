@@ -1,0 +1,70 @@
+{
+  "note": "Full narrative in research/reconciliation/ACTION-REQUIRED-TRIAGE.md",
+  "total_triaged": 12,
+  "items": [
+    {
+      "id": "reject-uniform-runtime-swap-assumption",
+      "resolution": "BOUND",
+      "adr": "ADR-0016"
+    },
+    { "id": "reject-local-always-cheaper", "resolution": "BOUND", "adr": "ADR-0016" },
+    {
+      "id": "protocol-application-agent-state-distinction",
+      "resolution": "BOUND",
+      "adr": "ADR-0009"
+    },
+    {
+      "id": "reject-root-license-file-sufficiency",
+      "resolution": "RECORDED",
+      "adr": null,
+      "reason": "methodology rule, self-enforcing, not an SDK architecture decision"
+    },
+    {
+      "id": "reject-checkpointer-solves-persistence",
+      "resolution": "BOUND",
+      "adr": "ADR-0010"
+    },
+    {
+      "id": "reject-llm-only-security-judgement",
+      "resolution": "BOUND",
+      "adr": "ADR-0013"
+    },
+    {
+      "id": "imported-corpus-not-yet-reconciled-with-architecture",
+      "resolution": "BOUND",
+      "adr": null,
+      "reason": "closed as a side effect of this reconciliation existing"
+    },
+    {
+      "id": "batch-2-corpus-not-yet-reconciled-with-architecture",
+      "resolution": "BOUND",
+      "adr": null,
+      "reason": "closed as a side effect of this reconciliation existing"
+    },
+    {
+      "id": "post-commit-ops-bundle-not-yet-adopted",
+      "resolution": "DEFERRED",
+      "adr": null,
+      "reason": "see POST-COMMIT-OPS-DECISION.md"
+    },
+    {
+      "id": "current-wave-cw-005-source-to-sink-security",
+      "resolution": "BOUND",
+      "adr": "ADR-0013"
+    },
+    {
+      "id": "current-wave-corpus-not-yet-reconciled-with-architecture",
+      "resolution": "BOUND",
+      "adr": null,
+      "reason": "closed as a side effect of this reconciliation existing"
+    },
+    {
+      "id": "wave1-corpus-not-yet-reconciled-with-architecture",
+      "resolution": "BOUND",
+      "adr": null,
+      "reason": "closed as a side effect of this reconciliation existing"
+    }
+  ],
+  "remaining_action_required_count": 0,
+  "generated_at": "2026-08-17T00:00:00Z"
+}

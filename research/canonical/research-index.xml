@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LabLaunchPad.ResearchCanonical — thin XML control layer.
+
+  This file carries semantic/structural boundaries only. It does NOT
+  duplicate any fact, claim, evidence record, or ID already present in
+  canonical-research.json — every element below is a pointer
+  (json_ref = JSON Pointer, RFC 6901, relative to that file's root),
+  not a copy. If a fact needs to change, change it once, in the JSON.
+
+  Read canonical-research.json alongside this file: json_ref values
+  resolve against it exclusively.
+-->
+<research
+    schema="LabLaunchPad.ResearchCanonical"
+    schema_version="0.1"
+    research_run_id="lablaunchpad-agent-sdk-consolidation-2026-08-17"
+    status="PARTIAL"
+    json_source="canonical-research.json">
+
+  <!-- Run metadata: scope, corpora covered, honest scoping decision -->
+  <meta json_ref="/meta"/>
+
+  <!-- WHO: the 6 corpora this graph consolidates -->
+  <sources json_ref="/sources" count_ref="/sources/length"/>
+
+  <!-- WHEN: version identifiers and version-drift resolutions -->
+  <versions json_ref="/versions"/>
+
+  <!-- WHAT-DOMAIN: every framework/protocol/topic touched, deduplicated -->
+  <ecosystems json_ref="/ecosystems"/>
+
+  <!-- Evidence graph core -->
+  <claims json_ref="/claims">
+    <!--
+      Full atomic-claim depth only for the 4 sources every corpus
+      independently touches (MCP, A2A, OpenAI Agents SDK, Microsoft
+      Agent Framework) — see meta.scoping_decision. All other claims
+      are one-per-major-finding.
+    -->
+  </claims>
+  <evidence json_ref="/evidence"/>
+  <benchmarks json_ref="/benchmarks">
+    <!-- Every entry status is NOT_RUN or BLOCKED. E5 = 0/14 across all corpora. -->
+  </benchmarks>
+  <security json_ref="/security"/>
+
+  <!-- Findings requiring attention -->
+  <gaps json_ref="/gaps"/>
+  <contradictions json_ref="/contradictions"/>
+  <unknowns json_ref="/unknowns"/>
+
+  <!-- Decisions: cross-references only — the authoritative record stays
+       .context/research/decisions.json. This array does not duplicate
+       those 33+ entries, it points at them and flags cross-corpus
+       naming risk (e.g. wave1's "ADR-001"/"ADOPT" naming vs. its actual
+       CANDIDATE status). -->
+  <decisions json_ref="/decisions" authoritative_source=".context/research/decisions.json"/>
+
+  <!-- Original synthesis: delete_test applied to docs/architecture/PACKAGE-MAP.md -->
+  <architecture json_ref="/architecture" authoritative_source="docs/architecture/PACKAGE-MAP.md">
+    <!--
+      This array does not change PACKAGE-MAP.md. ADD_CANDIDATE entries
+      (WorkspaceEngine, SandboxEngine, SideEffectEngine) require a real
+      ADR before promotion — see ARCHITECTURE-DECISIONS.md.
+    -->
+  </architecture>
+
+  <migrations json_ref="/migrations"/>
+  <licenses json_ref="/licenses"/>
+
+  <!-- Sample cross-reference maps (not exhaustive — see traceability in JSON) -->
+  <traceability json_ref="/traceability"/>
+
+  <!-- Human-readable companions, not duplicated here -->
+  <reports>
+    <report name="CONSOLIDATION-REPORT" path="CONSOLIDATION-REPORT.md"
+      covers="merge, contradictions, version-drift, gap-closure, unknowns, next-wave requirements"/>
+    <report name="ARCHITECTURE-DECISIONS" path="ARCHITECTURE-DECISIONS.md"
+      covers="delete_test narrative over the architecture[] array"/>
+    <report name="INDEX" path="index.md" covers="human entry point"/>
+  </reports>
+</research>

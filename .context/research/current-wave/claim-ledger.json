@@ -1,0 +1,93 @@
+[
+  {
+    "claim": "OpenAI Agents SDK uses a small primitive set and adds sessions, tracing, MCP, guardrails and sandbox surfaces.",
+    "source": "https://openai.github.io/openai-agents-python/",
+    "version": "current docs",
+    "date": "2026",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Version surfaces are not perfectly aligned.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "Microsoft Agent Framework treats agents and workflows as distinct programming modes and provides checkpointing/HITL for workflows.",
+    "source": "https://learn.microsoft.com/en-us/agent-framework/overview/",
+    "version": "current docs",
+    "date": "2026",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Cross-language parity not fully checked.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "MCP 2026-07-28 introduced a stateless protocol core and additional routing/caching/MRTR features.",
+    "source": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+    "version": "2026-07-28",
+    "date": "2026-07-28",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Detailed full-spec verification remains a follow-up.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "A2A 1.0.1 defines Agent Cards, Tasks, Messages, Artifacts, streaming and push notifications.",
+    "source": "https://a2a-protocol.org/latest/topics/key-concepts/",
+    "version": "1.0.1",
+    "date": "2026-05-26",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Interop breadth not benchmarked.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "External content prompt injection should be handled as a source-to-sink security problem, not merely input filtering.",
+    "source": "https://openai.com/index/designing-agents-to-resist-prompt-injection/",
+    "version": "2026",
+    "date": "2026-03-11",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Defense effectiveness depends on concrete capability architecture.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "OWASP 2026 identifies memory/context poisoning and insecure inter-agent communication among major agentic threats.",
+    "source": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+    "version": "2026",
+    "date": "2025-12-09",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Threat taxonomy, not exploit probability ranking for LabLaunchPad.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  },
+  {
+    "claim": "OpenAI provider adapters explicitly have feature differences and require validation for structured output, tool calling and usage reporting.",
+    "source": "https://openai.github.io/openai-agents-python/models/",
+    "version": "current docs",
+    "date": "2026",
+    "retrieved_at": "2026-08-17",
+    "evidence_level": "E4",
+    "documented_behavior": "yes",
+    "observed_behavior": "not independently reproduced",
+    "limitations": "Exact differences vary by provider.",
+    "confidence": "high",
+    "status": "DOCUMENTED_NOT_REPRODUCED"
+  }
+]

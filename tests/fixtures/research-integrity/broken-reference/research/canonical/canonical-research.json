@@ -1,0 +1,11 @@
+{
+  "sources": [{ "source_id": "SRC-A" }],
+  "evidence": [{ "evidence_id": "EVD-A-001", "source_id": "SRC-A" }],
+  "claims": [
+    {
+      "id": "CLM-A-001",
+      "source_ids": ["SRC-A"],
+      "evidence_ids": ["EVD-A-001", "EVD-DOES-NOT-EXIST"]
+    }
+  ]
+}

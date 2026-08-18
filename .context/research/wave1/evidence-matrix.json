@@ -1,0 +1,137 @@
+[
+  {
+    "claim_id": "CLM-MCP-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Model Context Protocol",
+    "version": "2026-07-28",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-MCP-002",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Model Context Protocol",
+    "version": "2026-07-28",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-MCP-003",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Model Context Protocol",
+    "version": "2026-07-28",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-A2A-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "A2A Protocol",
+    "version": "0.3.0",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-A2A-002",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "A2A Protocol",
+    "version": "0.3.0",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-OPENAI-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "OpenAI Agents SDK",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-OPENAI-002",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "OpenAI Agents SDK",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-MS-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Microsoft Agent Framework",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-MS-002",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Microsoft Agent Framework",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-DBOS-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "DBOS",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-RESTATE-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Restate",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-CF-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Cloudflare Workflows",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-ROUTE-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "OpenRouter",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-ROUTE-002",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "OpenRouter",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  },
+  {
+    "claim_id": "CLM-INSPECT-001",
+    "evidence_level": "E3",
+    "status": "VERIFIED",
+    "source": "Inspect",
+    "version": "Current docs as retrieved 2026-08-17",
+    "reproduction": "NOT_EXECUTED",
+    "research_run_id": "llp-rsch-2026-08-17-wave1"
+  }
+]

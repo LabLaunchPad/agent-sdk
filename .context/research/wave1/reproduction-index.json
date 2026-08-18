@@ -1,0 +1,62 @@
+{
+  "research_run_id": "llp-rsch-2026-08-17-wave1",
+  "e5_results": [],
+  "not_run": [
+    {
+      "benchmark": "E5-A",
+      "reason": "No runnable LabLaunchPad repo/runtime supplied"
+    },
+    {
+      "benchmark": "E5-B",
+      "reason": "No benchmark harness and model credentials/environment supplied"
+    },
+    {
+      "benchmark": "E5-C",
+      "reason": "No corpus/runtime supplied"
+    },
+    {
+      "benchmark": "E5-D",
+      "reason": "No tool runtime supplied"
+    },
+    {
+      "benchmark": "E5-E",
+      "reason": "No offline-capable target environment supplied"
+    },
+    {
+      "benchmark": "E5-F",
+      "reason": "No matched model/provider environment supplied"
+    },
+    {
+      "benchmark": "E5-G",
+      "reason": "No sandbox test harness supplied"
+    },
+    {
+      "benchmark": "E5-H",
+      "reason": "No CI/CD target repo supplied"
+    },
+    {
+      "benchmark": "E5-I",
+      "reason": "No A2A implementation under test supplied"
+    },
+    {
+      "benchmark": "E5-J",
+      "reason": "No MCP implementation under test supplied"
+    },
+    {
+      "benchmark": "E5-K",
+      "reason": "No browser/computer-use runtime supplied"
+    },
+    {
+      "benchmark": "E5-L",
+      "reason": "No LabLaunchPad repo supplied"
+    },
+    {
+      "benchmark": "E5-M",
+      "reason": "No model gateway harness supplied"
+    },
+    {
+      "benchmark": "E5-N",
+      "reason": "No side-effect test harness supplied"
+    }
+  ]
+}

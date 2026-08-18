@@ -1,0 +1,14 @@
+{
+  "note": "Full per-ID classification in research/reconciliation/DECISION-CONSOLIDATION.md",
+  "total_decisions_in": 44,
+  "adrs_out": 8,
+  "classification_counts": {
+    "bound_to_adr_directly_or_as_duplicate": 22,
+    "already_satisfied_no_new_adr_D1_D3": 16,
+    "deferred_D8": 1,
+    "resolved_via_non_adr_decision_analysis_D7": 1,
+    "closed_as_reconciliation_side_effect_D7_meta": 4
+  },
+  "counts_sum_check": "22 + 16 + 1 + 1 + 4 = 44",
+  "generated_at": "2026-08-17T00:00:00Z"
+}

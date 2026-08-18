@@ -1,0 +1,1 @@
+{ "projections": [ { "id": "p", "file": "projection.md", "facts": ["validator_count","adr_count"] } ] }

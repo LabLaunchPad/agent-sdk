@@ -1,0 +1,92 @@
+{
+  "source": "Haystack",
+  "version": "v2.29.0 (latest surfaced release; 2026-05-12)",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "Apache-2.0; repository notes an unknown license-header file that should be reviewed",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Agent is an iterative loop component with dynamic tool selection, runtime state schema and configurable exit conditions.",
+      "url": "https://docs.haystack.deepset.ai/docs/agent"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Pipelines support explicit loops and AsyncPipeline parallel execution.",
+      "url": "https://docs.haystack.deepset.ai/docs/pipelines"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Pipeline serialization is explicit via YAML dump/load.",
+      "url": "https://docs.haystack.deepset.ai/docs/serialization"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Toolset supports grouping/filtering/serialization and dynamic loading from MCP servers.",
+      "url": "https://docs.haystack.deepset.ai/docs/toolset"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "MCPToolset supports streamable HTTP, deprecated SSE, and local stdio subprocess execution.",
+      "url": "https://docs.haystack.deepset.ai/docs/mcptoolset"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "Local model path is strong: Hugging Face local, llama.cpp, Ollama; some evaluators can use local models.",
+      "url": "https://docs.haystack.deepset.ai/docs/choosing-the-right-generator"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "component graph/pipeline",
+    "Agent loop",
+    "Toolset",
+    "MCPToolset",
+    "AsyncPipeline"
+  ],
+  "state": [
+    "Agent state_schema per invocation",
+    "pipeline serialized to YAML",
+    "not same as durable workflow checkpoint"
+  ],
+  "context": [
+    "explicit retriever/generator/prompt components",
+    "toolsets can filter dynamic tools"
+  ],
+  "memory": [
+    "runtime state and conversation messages",
+    "memory externalization possible"
+  ],
+  "runtime": ["Hugging Face local", "llama.cpp", "Ollama", "remote providers"],
+  "security": [
+    "MCP remote/local subprocess boundary",
+    "template sanitization/security fixes"
+  ],
+  "ux": ["explicit pipeline mental model", "transparent dataflow"],
+  "dx": [
+    "component-level testing and serialization",
+    "AGENTS.md and CLAUDE.md repository guidance"
+  ],
+  "portability": ["many generator backends", "MCP tool integration"],
+  "efficiency": [
+    "parallel AsyncPipeline",
+    "retriever fusion",
+    "component-level evaluation"
+  ],
+  "patterns": [
+    "explicit graph with agent loop inside",
+    "serializable pipeline definitions"
+  ],
+  "contradictions": [
+    "explicitness vs setup/boilerplate",
+    "rich pipeline control vs simple task overhead"
+  ],
+  "unknowns": ["full durable workflow resume guarantees", "E5 cost versus simpler loop"],
+  "decisions": [
+    "ADOPT explicit state schema/ports",
+    "ADAPT pipeline layer",
+    "REJECT forcing every task into graph"
+  ]
+}

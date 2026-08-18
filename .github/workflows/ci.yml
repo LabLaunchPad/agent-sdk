@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        # Version comes from the `packageManager` field, so CI and local cannot drift.
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Record toolchain baseline
+        # A green run on the wrong Node version is not evidence. Print what
+        # actually ran so the receipt can cite it.
+        run: |
+          node -v
+          pnpm -v
+          pnpm exec tsc -v
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        # Check only. CI never rewrites source.
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Test
+        run: pnpm test
+
+      # The nine mandatory validators run as separate steps so a red CI names
+      # the failing check without anyone reading the log.
+      - name: 'Validator 1/9 — schema-contract'
+        run: node scripts/repo-tools/dist/cli.js validate schema-contract
+
+      - name: 'Validator 2/9 — package-boundary'
+        run: node scripts/repo-tools/dist/cli.js validate package-boundary
+
+      - name: 'Validator 3/9 — context-staleness'
+        # Mandatory, never advisory. `context refresh` must NOT run here:
+        # auto-refresh would rubber-stamp drift instead of reporting it.
+        run: node scripts/repo-tools/dist/cli.js validate context-staleness
+
+      - name: 'Validator 4/9 — okf-conformance'
+        # Added in Workstream A but never wired into this file until Phase 1B
+        # found the gap: every OKF concept under .context/research/specs/ADR
+        # was unenforced in CI, only checked locally via `pnpm validate`.
+        run: node scripts/repo-tools/dist/cli.js validate okf-conformance
+
+      - name: 'Validator 5/9 — package-exports (publication smoke test)'
+        # Packs the tarball, installs it into a clean consumer, imports by public
+        # package name and executes an export.
+        run: node scripts/repo-tools/dist/cli.js validate package-exports
+
+      - name: 'Validator 6/9 — repository-policy'
+        run: node scripts/repo-tools/dist/cli.js validate repository-policy
+
+      - name: 'Validator 7/9 — research-integrity'
+        # Added in Phase 1B: ID cross-references in research/canonical/
+        # canonical-research.json and relative markdown links across the OKF
+        # scopes actually resolve. okf-conformance-validator is explicitly
+        # required by the OKF v0.2 spec to tolerate broken links, so this is a
+        # separate check under its own rule namespace, not a stricter
+        # okf-conformance.
+        run: node scripts/repo-tools/dist/cli.js validate research-integrity
+
+      - name: 'Validator 8/9 — derived-projection-consistency'
+        # Added after the repository integrity audit (docs/audit/
+        # REPOSITORY-INTEGRITY-AUDIT.md) proved, by mutation, that the prior
+        # seven validators could pass while .context/index.md, README.md and
+        # docs/agent/STATE.md stated facts (validator count, current phase,
+        # ADR inventory, research completion, benchmark count) that
+        # disagreed with the repository's own executable state. Checks every
+        # GENERATED:START/END region against its canonical fact
+        # (scripts/repo-tools/src/lib/facts.ts); never auto-fixes, for the
+        # same reason context-staleness and facts write never run in CI.
+        run: node scripts/repo-tools/dist/cli.js validate derived-projection-consistency
+
+      - name: 'Validator 9/9 — evidence-provenance'
+        # M4: decision-critical receipts under .context/evidence/ must state
+        # which revision, environment and producer their claims came from, and
+        # any revision they name must resolve in this repository. UNKNOWN is a
+        # valid recorded value; an omitted field is not.
+        run: node scripts/repo-tools/dist/cli.js validate evidence-provenance

@@ -1,0 +1,74 @@
+[
+  {
+    "decision_id": "ADR-001",
+    "decision": "Treat MCP 2026-07-28 as the current protocol baseline and design LabLaunchPad MCP integration around version-aware protocol adapters.",
+    "status": "ADOPT",
+    "evidence": ["CLM-MCP-001", "CLM-MCP-002", "CLM-MCP-003"],
+    "evidence_level": "E3",
+    "assumptions": [
+      "Current official 2026-07-28 release remains authoritative on 2026-08-17."
+    ],
+    "counterexamples": [
+      "Legacy servers/clients may still require older session-based revisions."
+    ],
+    "tradeoffs": "Higher adapter complexity during migration; avoids baking obsolete session semantics into the kernel.",
+    "reversibility": "R2",
+    "benchmark": "E5-J MCP compatibility",
+    "acceptance_criteria": "Version negotiation, routing, tools/list cache behavior, Tasks, auth and legacy compatibility tests pass per targeted revisions.",
+    "what_would_change_our_mind": "A newer official revision or conformance evidence materially changes the lifecycle/transport model.",
+    "decision_date": "2026-08-17",
+    "validated_at": "2026-08-17T04:28:42.332446+00:00",
+    "next_review_at": "2026-09-30",
+    "trigger_events": ["MCP spec revision", "major SDK release", "conformance failure"]
+  },
+  {
+    "decision_id": "ADR-002",
+    "decision": "Do not claim protocol or model portability from adapter presence alone; require matched semantic tests.",
+    "status": "ADOPT",
+    "evidence": ["CLM-ROUTE-001", "CLM-ROUTE-002", "CLM-OPENAI-001"],
+    "evidence_level": "E3",
+    "assumptions": [
+      "Different providers can expose materially different semantics despite common API shapes."
+    ],
+    "counterexamples": [
+      "Narrow task classes may be equivalent across a small model set."
+    ],
+    "tradeoffs": "More benchmark work; substantially reduces false portability claims.",
+    "reversibility": "R1",
+    "benchmark": "E5-F Model Portability",
+    "acceptance_criteria": "Publish TESTED_SEMANTIC_PORTABILITY by capability dimension and task class.",
+    "what_would_change_our_mind": "Independent benchmark evidence shows equivalent semantics across the defined scope.",
+    "decision_date": "2026-08-17",
+    "validated_at": "2026-08-17T04:28:42.332446+00:00",
+    "next_review_at": "2026-10-01",
+    "trigger_events": ["New model protocol", "provider semantic change"]
+  },
+  {
+    "decision_id": "ADR-003",
+    "decision": "Keep durability as a replaceable boundary rather than making one durable runtime the LabLaunchPad kernel.",
+    "status": "ADOPT",
+    "evidence": [
+      "CLM-MS-002",
+      "CLM-DBOS-001",
+      "CLM-RESTATE-001",
+      "CLM-CF-001",
+      "CLM-OPENAI-001"
+    ],
+    "evidence_level": "E3",
+    "assumptions": [
+      "Durable runtimes have different state, retry, determinism and hosting semantics."
+    ],
+    "counterexamples": [
+      "A product may standardize on one runtime for operational simplicity."
+    ],
+    "tradeoffs": "Adapter and capability-contract overhead vs preserving replaceability.",
+    "reversibility": "R2",
+    "benchmark": "E5-A Durable Restart; E5-N Side-Effect Reconciliation",
+    "acceptance_criteria": "Common semantic contract covers restart, retry, checkpoint, pause/resume and reconciliation with runtime-specific guarantees explicitly mapped.",
+    "what_would_change_our_mind": "A benchmark shows a single runtime dominates all required deployment profiles without unacceptable coupling.",
+    "decision_date": "2026-08-17",
+    "validated_at": "2026-08-17T04:28:42.332446+00:00",
+    "next_review_at": "2026-10-15",
+    "trigger_events": ["Durability benchmark", "hosting strategy change"]
+  }
+]

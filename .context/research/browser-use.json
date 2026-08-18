@@ -1,0 +1,81 @@
+{
+  "framework": "Browser Use",
+  "snapshot": "2026 current docs/main snapshot",
+  "repo": "https://github.com/browser-use/browser-use",
+  "docs": "https://docs.browser-use.com/",
+  "license": "MIT",
+  "evidence_level_policy": {
+    "E0": "prior/model knowledge",
+    "E1": "community signal",
+    "E2": "repo/source evidence",
+    "E3": "official documentation",
+    "E4": "official docs + implementation/tests",
+    "E5": "LabLaunchPad reproduction/benchmark"
+  },
+  "target_user": "web automation builders",
+  "application_type": "browser agent",
+  "execution": ["local", "managed cloud"],
+  "short_vs_long": "short to long session",
+  "core": ["Agent", "Task", "BrowserSession", "Skill", "Workspace"],
+  "status": "DOCUMENTED_NOT_REPRODUCED",
+  "claim_ledger": [
+    {
+      "claim": "Open-source quickstart and agent surface",
+      "source": "https://docs.browser-use.com/open-source/quickstart",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Cloud SDK / sessions / browsers / workspaces",
+      "source": "https://docs.browser-use.com/cloud/agent/quickstart",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Skills as reusable APIs",
+      "source": "https://docs.browser-use.com/open-source/customize/skills/basics",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Skill creation/execution model",
+      "source": "https://docs.browser-use.com/cloud/legacy/skills",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Browser-native minimal architecture example (BrowserCode)",
+      "source": "https://github.com/browser-use/browsercode",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Browser Use MIT license",
+      "source": "https://github.com/browser-use/browser-use/blob/main/LICENSE",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Cloud SDK repository",
+      "source": "https://github.com/browser-use/sdk",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    }
+  ],
+  "lablaunchpad_decisions": {
+    "ADOPT": "minimal core loop; environment-specific high-power capability; reusable skills as compiled procedures; progressive complexity.",
+    "ADAPT": "skill loading with explicit token budgets and provenance.",
+    "REJECT": "large general-purpose abstraction stack for simple environment tasks.",
+    "DEFER": "broad browser-agent platform until browser security/credential policy is mature.",
+    "INVESTIGATE": "measure whether model-native browser coding primitives reduce framework overhead versus structured action APIs."
+  },
+  "reproduction_required": true,
+  "code_reuse": false
+}

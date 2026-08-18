@@ -1,0 +1,57 @@
+{
+  "source": "Microsoft AutoGen",
+  "version": "Python v0.7.5 surfaced (2025-09-30); migration-era research",
+  "date": "2026-08-17",
+  "license": {
+    "primary": "MIT for code; CC-BY-4.0 for repository documentation",
+    "status": "VERIFY_AT_USE_SITE"
+  },
+  "references": [
+    {
+      "evidence_level": "E4",
+      "claim": "Microsoft states Agent Framework is AutoGen's direct successor and combines AutoGen patterns with Semantic Kernel features, plus workflows and state for long-running/HITL scenarios.",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/overview/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "AutoGen migration guide documents mapping from AutoGen to Agent Framework, including session state, MCP, agent-as-tool and workflow patterns.",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/"
+    },
+    {
+      "evidence_level": "E4",
+      "claim": "AutoGen's code is MIT while documentation is CC-BY-4.0; trademark rights are not granted.",
+      "url": "https://github.com/microsoft/autogen/blob/main/README.md"
+    },
+    {
+      "evidence_level": "E3",
+      "claim": "AutoGenBench shows a benchmark-centered operational pattern with isolated Docker runs and telemetry outputs.",
+      "url": "https://docs.ag2.ai/latest/docs/blog/2024/01/25/AutoGenBench/"
+    }
+  ],
+  "capabilities": [],
+  "architecture": [
+    "multi-agent conversations",
+    "event/runtime patterns",
+    "migration-era agent abstractions"
+  ],
+  "state": [
+    "runtime/conversation state",
+    "successor migration highlights sessions/state"
+  ],
+  "context": ["message-driven agent context"],
+  "memory": ["conversation/state patterns"],
+  "runtime": ["historical provider ecosystem"],
+  "security": ["benchmark isolation patterns via AutoGenBench lineage"],
+  "ux": ["multi-agent orchestration"],
+  "dx": ["legacy migration burden visible in successor guides"],
+  "portability": ["historical broad model clients"],
+  "efficiency": ["coordination and runtime overhead"],
+  "patterns": ["group/multi-agent", "event runtime", "benchmark harness"],
+  "contradictions": ["dynamic coordination vs explicit durable workflow"],
+  "unknowns": ["future support beyond migration track"],
+  "decisions": [
+    "ADOPT historical patterns",
+    "ADAPT benchmark harness",
+    "REJECT new default"
+  ]
+}

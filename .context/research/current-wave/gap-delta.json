@@ -1,0 +1,11 @@
+{
+  "gaps": [
+    "No mounted prior corpus available for direct diff",
+    "No SDK runtime reproduction",
+    "No cross-provider benchmark",
+    "No sandbox escape benchmark",
+    "No full current MCP spec file-level diff after 2026-07-28",
+    "No production A2A interoperability test",
+    "No browser prompt-injection benchmark"
+  ]
+}

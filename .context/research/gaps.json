@@ -1,0 +1,121 @@
+{
+  "gap": "RESOLVED 2026-08-18: the original 17-source research brief is now closed 17/17 - see volcengine_baidu_closure_note below. remaining_primary/remaining_protocols are both empty, which is this field's actual authority (derived-projection-consistency-validator reads those arrays, not this prose field).",
+  "remaining_primary": [],
+  "remaining_protocols": [],
+  "researched_this_installment": ["a2a-1.0.1"],
+  "agent_skills_closure_note": "Agent Skills was the last of the original brief's 4 fully-UNKNOWN sources. Closed in Phase 1B via live WebSearch/WebFetch (research/protocols/agent-skills.md), specifically because it was decision-relevant to the InstructionSkillEngine boundary's DEFER disposition - a bounded, decision-relevant research pass, not a broad research wave. Finding: the spec's own permission model (allowed-tools) is Experimental with inconsistent cross-implementation support, and no concrete LabLaunchPad use case exists yet - InstructionSkillEngine's disposition stays DEFER, now for a concrete evidenced reason rather than absence of research. See research/reconciliation/BOUNDARY-RECONCILIATION.md.",
+  "a2a_closure_note": "A2A was flagged by a user-supplied 'current wave' corpus as a lead (a thin, unverified okf.md extract); this session independently re-verified it via live WebSearch/WebFetch (research/protocols/a2a-1.0.1.md) rather than trusting the import as-is - the only imported framework/protocol treated this way so far, because it was the one import that actually closed an original-brief gap",
+  "researched_previously": [
+    "langgraph",
+    "mastra",
+    "mcp-2026-07-28",
+    "volcengine-agentkit",
+    "baidu-appbuilder-sdk"
+  ],
+  "imported_supplementary_corpus_batch_1": {
+    "sources": ["openhands", "letta", "google-adk", "browser-use", "crewai"],
+    "provenance": "user-supplied research pass, not part of the original 17-source brief; not independently re-verified via WebFetch/WebSearch in this session",
+    "status": "DOCUMENTED_NOT_REPRODUCED per the corpus's own evidence-discipline vocabulary",
+    "location": "research/frameworks/{openhands,letta,google-adk,browser-use,crewai}/*.md, research/comparison/*.md, research/imported-corpus/SOURCE-RECEIPT.md"
+  },
+  "imported_supplementary_corpus_batch_2": {
+    "sources": [
+      "strands-agents",
+      "smolagents",
+      "ag2",
+      "llama-index",
+      "llama-agents",
+      "haystack",
+      "dspy",
+      "autogen",
+      "semantic-kernel"
+    ],
+    "provenance": "second user-supplied research pass ('next wave'), not part of the original 17-source brief; not independently re-verified via WebFetch/WebSearch in this session",
+    "status": "DOCUMENTED_NOT_REPRODUCED per the corpus's own evidence-discipline vocabulary",
+    "note": "autogen and semantic-kernel are migration-era research - both frameworks' documented successor is microsoft-agent-framework, already researched live in installment 1",
+    "location": "research/frameworks/{strands-agents,smolagents,ag2,llama-index,llama-agents,haystack,dspy,autogen,semantic-kernel}/overview.md, research/comparison/NEXT-WAVE-*.md, research/decisions/ADR-CANDIDATE-*.md, research/sources/LICENSE-REVIEW.md, research/imported-corpus/SOURCE-RECEIPT-2.md, .context/research/next-wave/*.json"
+  },
+  "imported_corpus_batch_3_current_wave": {
+    "genuine_gap_closer": {
+      "source": "a2a-1.0.1",
+      "note": "independently re-verified live this session, not merely imported - see research/protocols/a2a-1.0.1.md"
+    },
+    "refresh_checks_on_already_researched_sources": {
+      "sources": ["openai-agents-sdk", "microsoft-agent-framework", "mcp-2026-07-28"],
+      "provenance": "independent external re-research the same day, not diffed against this repo's actual files (source corpus's own README states no LabLaunchPad corpus was mounted)",
+      "status": "IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED",
+      "location": "appended as dated 'External refresh check' sections to the existing canonical files, not duplicated as new files"
+    },
+    "new_cross_cutting_topics": {
+      "sources": ["sandbox-execution", "security-2026"],
+      "provenance": "user-supplied, not independently re-verified via WebFetch/WebSearch in this session",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "location": "research/topics/{sandbox-execution,security-2026}.md (new directory)"
+    },
+    "other_content": {
+      "benchmark_plan": "research/benchmarks/{BENCHMARK-PLAN,BENCHMARK-RESULTS,E5-REPRODUCTIONS}.md - explicitly all say NOT PERFORMED/NOT EXECUTED, no fabricated E5 claims, good discipline preserved on import",
+      "adr_candidates": "research/decisions/ADR-CANDIDATE-001-to-007.md - 7 candidates, numbering restarts at 001, disambiguated from batch 2's own 001-006 in decisions.json",
+      "json_deltas": ".context/research/current-wave/{spec-delta,benchmark-delta,compatibility-matrix,decision-ledger,claim-ledger,gap-delta}.json"
+    },
+    "location": "research/imported-corpus/SOURCE-RECEIPT-3.md"
+  },
+  "imported_corpus_batch_4_wave1": {
+    "research_run_id": "llp-rsch-2026-08-17-wave1",
+    "corpus_version": "0.1-wave1",
+    "validation": "self-checksummed, 54/54 files verified against the corpus's own CHECKSUMS.sha256",
+    "mostly_reinforcement": "primarily another independent MCP/A2A/OpenAI Agents SDK pass, corroborating rather than contradicting this session's own findings (MCP version agreement across all 3 sources that researched it; A2A opaque-trust-model corroboration)",
+    "new_content": {
+      "topics": [
+        "durability-exactly-once",
+        "e5-evidence-levels",
+        "capability-aware-routing"
+      ],
+      "adr_proposals": "research/decisions/WAVE1-ADR-{001-MCP-BASELINE,002-SEMANTIC-PORTABILITY,003-DURABILITY-BOUNDARY}.md - formally numbered, but recorded at CANDIDATE status in decisions.json same as every other import, despite the source's own confident naming",
+      "benchmark_categories": "7 new categories under research/benchmarks/WAVE1-*.md, all NOT_RUN, 0/14 E5 executed, no fabricated results"
+    },
+    "version_drift_flagged_and_resolved": "wave1's own drift-report.json flagged A2A version drift as HIGH impact; a follow-up live WebSearch during the canonical consolidation confirmed the drift was real but that wave1's own '0.3.0 official latest' claim was itself the stale data point - see research/protocols/a2a-1.0.1.md",
+    "status": "IMPORTED CLAIM, DOCUMENTED_NOT_REPRODUCED",
+    "location": "research/imported-corpus/SOURCE-RECEIPT-4.md"
+  },
+  "canonical_consolidation": {
+    "location": "research/canonical/",
+    "status": "PARTIAL",
+    "note": "A supplementary cross-corpus knowledge graph consolidating all 6 research/governance corpora (this session's own live research + batch1 + batch2 + batch3/current-wave + post-commit-ops + wave1). Does NOT replace this file or decisions.json - see .context/research/decisions.json's canonical-research-graph-is-supplementary-not-authoritative entry. Its own gaps[] array names GAP-E5-ZERO and GAP-ARCHITECTURE-RECONCILIATION as P0, both consistent with this file's own remaining-work list below.",
+    "delete_test_result": "25 candidate architecture boundaries evaluated against docs/architecture/PACKAGE-MAP.md; 3 evidenced-but-unplanned ADD_CANDIDATE boundaries surfaced (WorkspaceEngine, SandboxEngine, SideEffectEngine) - flagged for a future ADR, not added to the package map by the consolidation itself. See research/canonical/ARCHITECTURE-DECISIONS.md."
+  },
+  "remaining_dimensions_even_for_researched_frameworks": [
+    "state.md",
+    "memory.md",
+    "context.md",
+    "security.md",
+    "evaluation.md",
+    "dx.md",
+    "ux.md",
+    "runtime deployment matrix",
+    "model portability matrix",
+    "full 40-dimension checklist (DOCUMENTED/OBSERVED-IN-SOURCE/OBSERVED-IN-TESTS/REPRODUCED-BY-US/UNKNOWN precision) - not yet applied to any source",
+    "comparative network-disabled test - not performed for any source",
+    "token/context efficiency audit file - not created",
+    "UX/DX audit file - not created",
+    "PydanticAI deepening (installment 1 was shallow per user feedback)",
+    "Kimi Agent SDK deepening (installment 1 left local-first as UNKNOWN)",
+    "independent re-verification (live WebFetch) of all 14 imported-corpus frameworks across both batches, plus the 3 refresh-check appendices and 2 new topics from batch 3 - currently DOCUMENTED_NOT_REPRODUCED only",
+    "E5 reproduction across identical tasks for all researched frameworks, per all three imported corpora's own recommendations",
+    "formal ADR-writing pass reconciling all 22 accumulated ADR-CANDIDATEs (6 batch-1 + 6 batch-2 + 7 batch-3 + 3 wave1 decisions.json entries, plus the post-commit-ops governance bundle) against the existing locked architecture - a first-pass delete_test now exists at research/canonical/ARCHITECTURE-DECISIONS.md, but no formal ADR has been written from it yet",
+    "Microsoft Agent Framework local-shell-support lead from the current-wave refresh check - not independently confirmed",
+    "E5 reproduction for any of the 10+ benchmark plans accumulated across corpora (GAP-E5-ZERO, P0 in research/canonical/canonical-research.json) - requires a runnable pinned LabLaunchPad implementation, not further desk research"
+  ],
+  "prioritization_for_next_installment": "Volcengine AgentKit and Baidu AppBuilder SDK next (completing the primary local-first-relevant set), then Agent Skills (the last remaining original-brief protocol). The formal ADR-writing pass over research/canonical/ARCHITECTURE-DECISIONS.md's 3 ADD_CANDIDATE boundaries (WorkspaceEngine, SandboxEngine, SideEffectEngine) is the highest-priority architecture-track item, since it is the one item blocking Phase 2 spec work rather than expanding research breadth. Independent re-verification of the 14+ imported-corpus frameworks/topics remains a separate, lower-priority track since it is already real evidence, just not re-fetched by this session.",
+  "knowledge_os_reconciliation_watch_notes": [
+    {
+      "id": "sqlite-file-first-persistence-external-claim",
+      "source": "A user-supplied 'Decision Operating System / Knowledge OS' package's ledgers/canonical-decisions.jsonl (ADR-CORE-004), evaluated in research/reconciliation/KNOWLEDGE-OS-RECONCILIATION.md",
+      "claim": "SQLite/file-first local persistence as the default backend",
+      "status": "WATCH_NOTE_NOT_ADOPTED",
+      "reason": "ADR-0006 explicitly defers persistence-interface decisions to Phase 4/7; this repository has no binding position yet. The external claim is unsourced and compressed (one line in a JSONL ledger), so it is not adopted now - recorded as a candidate to weigh, with the same evidence discipline as every other claim, when ADR-0006's Phase 4/7 revisit trigger fires.",
+      "revisit_trigger": "ADR-0006's own Phase 4/7 persistence-interface specification work begins"
+    }
+  ],
+  "generated_at": "2026-08-17T00:00:00Z",
+  "volcengine_baidu_closure_note": "The original 17-source brief is now fully researched or explicitly resolved (17/17) \u2014 Volcengine AgentKit and Baidu AppBuilder SDK were the last two remaining UNKNOWN entries. Closed 2026-08-18 via independent WebFetch/WebSearch verification, AFTER a user-supplied external research pass on both frameworks was found to have unverifiable citations (bare bracketed reference numbers with no bibliography) and fabricated checksum placeholders in its manifest - see research/imported-corpus/SOURCE-RECEIPT-5.md for the full defect record and research/frameworks/{volcengine-agentkit,baidu-appbuilder-sdk}/overview.md for the independently-verified findings actually adopted. Both classified CLOUD_ONLY. Scope: local-first/licensing/model-coupling only, not full multi-dimension depth."
+}

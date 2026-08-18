@@ -1,0 +1,88 @@
+{
+  "framework": "Letta Agent SDK / Letta",
+  "snapshot": "2026 current docs/main snapshot",
+  "repo": "https://github.com/letta-ai/letta-agent-sdk",
+  "docs": "https://docs.letta.com/",
+  "license": "Apache-2.0",
+  "evidence_level_policy": {
+    "E0": "prior/model knowledge",
+    "E1": "community signal",
+    "E2": "repo/source evidence",
+    "E3": "official documentation",
+    "E4": "official docs + implementation/tests",
+    "E5": "LabLaunchPad reproduction/benchmark"
+  },
+  "target_user": "builders of long-lived stateful agents",
+  "application_type": "general/stateful agents and coding agents",
+  "execution": ["local", "managed", "self-hosted"],
+  "short_vs_long": "long-lived",
+  "core": ["AgentState", "MemoryBlock", "Session", "Tool", "Backend"],
+  "status": "DOCUMENTED_NOT_REPRODUCED",
+  "claim_ledger": [
+    {
+      "claim": "Agent SDK: managed/local/self-hosted and sessions",
+      "source": "https://github.com/letta-ai/letta-agent-sdk",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Memory blocks: persistent, always-visible, agent-editable/read-only",
+      "source": "https://docs.letta.com/guides/core-concepts/memory/memory-blocks",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Context hierarchy: memory blocks/files/archival/external RAG",
+      "source": "https://docs.letta.com/guides/core-concepts/memory/context-hierarchy",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "AgentState persisted in DB",
+      "source": "https://docs.letta.com/api/resources/agents",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Attach/detach blocks at runtime",
+      "source": "https://docs.letta.com/tutorials/attaching-detaching-blocks/",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Docker/self-hosting and provider configuration",
+      "source": "https://docs.letta.com/guides/docker",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Open source repository and Apache-2.0",
+      "source": "https://github.com/letta-ai/letta",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "SDK Apache-2.0",
+      "source": "https://github.com/letta-ai/letta-agent-sdk",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    }
+  ],
+  "lablaunchpad_decisions": {
+    "ADOPT": "explicit DurableAgentState; memory/knowledge/context separation; read-only memory; attach/detach access control; provider/back-end portability.",
+    "ADAPT": "memory blocks into typed, provenance-bearing MemoryBlock contract with TTL/review.",
+    "REJECT": "always-visible memory as a global default for arbitrary-scale data.",
+    "DEFER": "automatic self-modifying memory evolution until poisoning/staleness benchmarks are passed.",
+    "INVESTIGATE": "shared memory as a multi-agent coordination primitive after access isolation is proven."
+  },
+  "reproduction_required": true,
+  "code_reuse": false
+}

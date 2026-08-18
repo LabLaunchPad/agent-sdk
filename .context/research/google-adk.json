@@ -1,0 +1,88 @@
+{
+  "framework": "Google Agent Development Kit (ADK)",
+  "snapshot": "2026 current docs/release snapshot",
+  "repo": "https://github.com/google/adk-python",
+  "docs": "https://adk.dev/",
+  "license": "Apache-2.0",
+  "evidence_level_policy": {
+    "E0": "prior/model knowledge",
+    "E1": "community signal",
+    "E2": "repo/source evidence",
+    "E3": "official documentation",
+    "E4": "official docs + implementation/tests",
+    "E5": "LabLaunchPad reproduction/benchmark"
+  },
+  "target_user": "production agent developers",
+  "application_type": "general agents / workflows",
+  "execution": ["local", "container", "managed runtime", "Cloud Run", "GKE"],
+  "short_vs_long": "short to long running",
+  "core": ["Agent", "Session", "Event", "State", "Workflow", "Runtime", "Evaluation"],
+  "status": "DOCUMENTED_NOT_REPRODUCED",
+  "claim_ledger": [
+    {
+      "claim": "ADK home: languages, graph workflows, runtime, observability, evaluation, A2A",
+      "source": "https://adk.dev/",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Agents / composition model",
+      "source": "https://adk.dev/agents/",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Sessions/services and event/state semantics",
+      "source": "https://google.github.io/adk-docs/sessions/",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Evaluation criteria and trajectory matching",
+      "source": "https://adk.dev/evaluate/",
+      "evidence_level": "E4",
+      "status": "VERIFIED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Deployment options",
+      "source": "https://adk.dev/deploy/",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "ADK models/providers and context management",
+      "source": "https://adk.dev/",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Python Apache-2.0 + current release",
+      "source": "https://github.com/google/adk-python",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    },
+    {
+      "claim": "Go variant Apache-2.0",
+      "source": "https://github.com/google/adk-go",
+      "evidence_level": "E3",
+      "status": "DOCUMENTED_NOT_REPRODUCED",
+      "confidence": "high"
+    }
+  ],
+  "lablaunchpad_decisions": {
+    "ADOPT": "staged complexity, graph/deterministic workflow option, session/event contract, trajectory evaluation, context services, machine-readable agent docs.",
+    "ADAPT": "graph workflows into optional Workflow/Harness layer.",
+    "REJECT": "provider/platform assumptions in core contracts.",
+    "DEFER": "multi-language parity until semantics stabilize.",
+    "INVESTIGATE": "exact runtime/context compression efficiency against OpenHands-style event logs."
+  },
+  "reproduction_required": true,
+  "code_reuse": false
+}

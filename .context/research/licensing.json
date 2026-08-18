@@ -1,0 +1,98 @@
+{
+  "coverage": "7 of 17 sources",
+  "licenses": {
+    "openai-agents-sdk": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "OpenAI, 2025",
+      "whole_tree_checked": false
+    },
+    "microsoft-agent-framework": {
+      "license": "MIT",
+      "status": "INFERENCE_NOT_FACT",
+      "note": "confirmed for Samples repo, not primary repo LICENSE file - LICENSE_UNKNOWN pending re-verification",
+      "whole_tree_checked": false
+    },
+    "pydantic-ai": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "Pydantic Services Inc., 2024-present",
+      "whole_tree_checked": false
+    },
+    "kimi-agent-sdk": {
+      "license": "Apache-2.0",
+      "status": "FACT (license identity); copyright holder is INFERENCE",
+      "whole_tree_checked": false
+    },
+    "qwen-agent": {
+      "license": "Apache-2.0",
+      "status": "FACT (type); copyright holder UNFILLED in source LICENSE file",
+      "whole_tree_checked": false
+    },
+    "tencent-youtu-agent": {
+      "license": "MIT",
+      "status": "FACT",
+      "copyright": "Tencent, 2025",
+      "whole_tree_checked": false
+    },
+    "langgraph": {
+      "license": "SPLIT - core (langgraph, langchain-core, model integrations) MIT; langgraph-api Elastic License 2.0",
+      "status": "FACT",
+      "copyright": "LangChain, Inc., 2024",
+      "whole_tree_checked": true,
+      "note": "see research/contradictions/license-split-by-directory.md"
+    },
+    "mastra": {
+      "license": "THREE-TIER (corrected from an initial two-way split) - (1) core framework Apache-2.0; (2) platform layer (Studio/observability/Memory Gateway) self-hostable or hosted, commercially metered; (3) Enterprise Edition under a separate Mastra Enterprise Edition License",
+      "status": "FACT",
+      "copyright": "Kepler Software (Mastra maintainers)",
+      "whole_tree_checked": true,
+      "note": "see research/contradictions/license-split-by-directory.md",
+      "correction_note": "first draft recorded only a two-way core/ee split; the platform layer is a distinguishable third tier, not covered by either the Apache-2.0 grant or the ee/ Enterprise License alone"
+    }
+  },
+  "governing_rule": "License permission and LabLaunchPad's own reuse policy are two separate gates. Pattern-only extraction by default regardless of upstream license permissiveness.",
+  "installment_3_rule": "Check the whole tree, not just the root LICENSE file - confirmed necessary by two independent frameworks (LangGraph, Mastra) both splitting license by directory/package.",
+  "imported_supplementary_corpus": {
+    "coverage": "5 additional frameworks beyond the original 17-source brief, license TYPE credibly sourced but status is IMPORTED CLAIM / DOCUMENTED_NOT_REPRODUCED, not FACT - see research/licensing/MATRIX.md's imported-corpus rows",
+    "licenses": {
+      "openhands": { "license": "MIT", "whole_tree_checked": false },
+      "letta": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "google-adk": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "browser-use": { "license": "MIT", "whole_tree_checked": false },
+      "crewai": { "license": "MIT", "whole_tree_checked": false }
+    },
+    "caveat": "given installment 3's finding that 2 of 7 directly-researched frameworks split their license by directory/tier, do not assume these five are uniformly licensed without a direct whole-tree check"
+  },
+  "imported_supplementary_corpus_batch_2": {
+    "coverage": "9 additional frameworks beyond the original 17-source brief and beyond batch 1, license TYPE credibly sourced but status is IMPORTED CLAIM / DOCUMENTED_NOT_REPRODUCED, not FACT",
+    "licenses": {
+      "strands-agents": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "smolagents": { "license": "Apache-2.0", "whole_tree_checked": false },
+      "ag2": {
+        "license": "SPLIT - Apache-2.0 for fork modifications, original AutoGen code retained under MIT",
+        "whole_tree_checked": false,
+        "note": "a third variant of license-split found this session: by code provenance (pre-fork vs post-fork), not by directory (LangGraph) or by tier (Mastra)"
+      },
+      "llama-index": {
+        "license": "MIT core; individual integrations may vary",
+        "whole_tree_checked": false
+      },
+      "llama-agents": { "license": "MIT", "whole_tree_checked": false },
+      "haystack": {
+        "license": "Apache-2.0",
+        "whole_tree_checked": false,
+        "note": "source corpus itself flags an unknown/unreviewed license-header file in the repository - flagged for review, not resolved"
+      },
+      "dspy": { "license": "MIT", "whole_tree_checked": false },
+      "autogen": {
+        "license": "SPLIT - MIT for code, CC-BY-4.0 for repository documentation",
+        "whole_tree_checked": false
+      },
+      "semantic-kernel": { "license": "MIT", "whole_tree_checked": false }
+    },
+    "caveat": "3 of 9 batch-2 frameworks (AG2, Haystack, AutoGen) already show licensing nuance beyond a single clean label - reinforces the standing rule to check the whole tree/offering before any reuse decision"
+  },
+  "source": "research/licensing/MATRIX.md",
+  "generated_at": "2026-08-17T00:00:00Z"
+}

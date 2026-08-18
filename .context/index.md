@@ -105,7 +105,7 @@ None recorded. There is no behaviour to measure until Phase 3.
 | Package                    | Layer     | Role                              |
 | -------------------------- | --------- | --------------------------------- |
 | `@lablaunchpad/contracts`  | contracts | Placeholder — schema harness only |
-| `@lablaunchpad/repo-tools` | tooling   | The six validators                |
+| `@lablaunchpad/repo-tools` | tooling   | The seven validators              |
 
 ## Recent changes
 

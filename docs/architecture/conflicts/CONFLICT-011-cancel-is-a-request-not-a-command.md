@@ -1,7 +1,7 @@
 # CONFLICT-011 — Cancellation is modelled as a command but behaves as a request
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-057 (Cancellation), ADR-088 (Heartbeats), ADR-089 (Dead Worker Recovery), ADR-056 (Ownership)
+**Affected ADR:** `UNVERIFIED` — cited ADR-057 (Cancellation), ADR-088 (Heartbeats), ADR-089 (Dead Worker Recovery), ADR-056 (Ownership); none exist in this repository, and neither does ADR-076 (Device Federation), referenced in the body below. Related but not equivalent: [ADR-0010](../../../ADR/0010-durability-checkpoint-boundary.md) supplies the durable-checkpoint contract that a persisted cancel request would use. This conflict's premise is restated below on its own terms. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

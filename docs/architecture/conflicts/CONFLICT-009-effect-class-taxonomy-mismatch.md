@@ -1,7 +1,7 @@
 # CONFLICT-009 — Effect-class taxonomy mismatch defeats the no-widening invariant
 
 **Tags:** `SECURITY-CRITICAL` `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-048 (Transaction Boundary), ADR-030/031 (Policy), plus the locked M0 security requirement
+**Affected ADR:** [ADR-0013](../../../ADR/0013-security-at-policy-capability-boundary.md) (Security at the Policy/Capability Boundary) — remapped from ADR-030/031 (Policy). **ADR-0013 already decides half of this conflict:** *"Tool output is treated as data, never authority — a tool's own description, annotations, or returned content must never be trusted to self-report its safety or grant capability access."* That is the model-assertion rule below, already locked; only the **lattice** remains open. `UNVERIFIED` for ADR-048 (Transaction Boundary) and for "the locked M0 security requirement", neither of which exists here. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

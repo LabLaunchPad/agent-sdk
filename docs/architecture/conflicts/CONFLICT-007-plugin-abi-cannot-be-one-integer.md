@@ -1,7 +1,7 @@
 # CONFLICT-007 — One `plugin_abi` integer cannot version eight plugin classes
 
 **Tags:** `ABI-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-004 (Plugin Architecture), ADR-080 (Versioning), ADR-044 (Plugin Lifecycle)
+**Affected ADR:** [ADR-0012](../../../ADR/0012-workspace-sandbox-boundaries.md) (Workspace / Sandbox Boundaries) — **partial** remap from ADR-004 (Plugin Architecture) and ADR-044 (Plugin Lifecycle): ADR-0012 fixes the isolation *mechanism* as swappable (Docker / Firecracker / Wasmtime) but says nothing about a plugin ABI, so the ABI question below is genuinely undecided rather than merely mis-cited. [ADR-0010](../../../ADR/0010-durability-checkpoint-boundary.md) partially covers ADR-080 (Versioning) for persisted schemas only. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

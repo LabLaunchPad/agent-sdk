@@ -1,7 +1,7 @@
 # CONFLICT-003 — The 12-phase run machine is over-modelled
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-007 (State Machine)
+**Affected ADR:** `UNVERIFIED` — cited ADR-007 (State Machine); does not exist in this repository. This conflict's premise is restated below on its own terms. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

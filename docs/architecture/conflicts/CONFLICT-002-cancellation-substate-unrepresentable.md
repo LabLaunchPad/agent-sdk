@@ -1,7 +1,7 @@
 # CONFLICT-002 — Two state machines, only one enumerated
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-007 (State Machine), ADR-057 (Cancellation)
+**Affected ADR:** `UNVERIFIED` — cited ADR-007 (State Machine) and ADR-057 (Cancellation); neither exists in this repository. This conflict's premise is restated below on its own terms. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

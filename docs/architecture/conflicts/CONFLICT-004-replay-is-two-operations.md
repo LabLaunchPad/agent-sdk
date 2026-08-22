@@ -1,7 +1,7 @@
 # CONFLICT-004 — "Replay" names two incompatible operations
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-008 (Event Sourcing), ADR-046 (Determinism), ADR-039 (Replay)
+**Affected ADR:** `UNVERIFIED` — cited ADR-008 (Event Sourcing), ADR-046 (Determinism), ADR-039 (Replay); none exist in this repository. This conflict's premise is restated below on its own terms. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

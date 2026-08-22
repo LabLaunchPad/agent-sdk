@@ -1,7 +1,7 @@
 # CONFLICT-001 — Policy TRANSFORM permits privilege escalation
 
 **Tags:** `SECURITY-CRITICAL` `BLOCKING`
-**Affected ADR:** ADR-030 (Policy Engine), ADR-031 (Capability Security)
+**Affected ADR:** [ADR-0013](../../../ADR/0013-security-at-policy-capability-boundary.md) (Security at the Policy/Capability Boundary) — remapped from ADR-030 (Policy Engine) and ADR-031 (Capability Security); see the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

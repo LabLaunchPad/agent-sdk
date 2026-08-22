@@ -1,7 +1,7 @@
 # CONFLICT-005 — Canonical encoding unspecified but signing assumed
 
 **Tags:** `SCHEMA-AFFECTING` `ABI-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-009 (Checkpointing), ADR-075 (Identity), ADR-008 (Event Sourcing)
+**Affected ADR:** [ADR-0010](../../../ADR/0010-durability-checkpoint-boundary.md) (Durability / Checkpoint Boundary) — remapped from ADR-009 (Checkpointing); its schema-versioning-and-migration clause is what a non-canonical encoding silently breaks. `UNVERIFIED` for ADR-075 (Identity) and ADR-008 (Event Sourcing), which do not exist here. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

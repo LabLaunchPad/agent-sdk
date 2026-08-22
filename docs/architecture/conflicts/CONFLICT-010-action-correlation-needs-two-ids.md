@@ -1,7 +1,7 @@
 # CONFLICT-010 — Action correlation needs two identifiers, one is modelled
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-054 (Agent Communication), ADR-008 (Event Sourcing), ADR-071 (Trace Context)
+**Affected ADR:** [ADR-0009](../../../ADR/0009-protocol-application-agent-state-distinction.md) (Protocol / Application / Agent State Distinction) — remapped from ADR-054 (Agent Communication). **ADR-0009 already decides the core of this conflict:** *"no adapter may treat a protocol/application-layer identifier as if it were LabLaunchPad's own state primitive."* `tool_call_id` is exactly such an identifier, so its prohibition as an ownership key is an existing decision, not a new one. `UNVERIFIED` for ADR-008 (Event Sourcing) and ADR-071 (Trace Context). See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

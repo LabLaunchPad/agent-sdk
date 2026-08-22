@@ -1,7 +1,7 @@
 # CONFLICT-006 — Idempotency keys defeat their own purpose under replay
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-047 (Idempotency), ADR-008 (Event Sourcing), ADR-049 (Failure Recovery)
+**Affected ADR:** [ADR-0011](../../../ADR/0011-unknown-outcome-side-effect-state.md) (Unknown-Outcome Side-Effect State) — remapped from ADR-047 (Idempotency) and ADR-049 (Failure Recovery); its requirement that *"every side-effect-capable capability must expose an operation identity stable enough to support reconciliation"* is precisely the key-derivation requirement at issue. `UNVERIFIED` for ADR-008 (Event Sourcing). See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 

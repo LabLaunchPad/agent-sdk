@@ -1,7 +1,7 @@
 # CONFLICT-008 — `Environment` is OS-shaped but browser is a first-class target
 
 **Tags:** `SCHEMA-AFFECTING` `BLOCKING`
-**Affected ADR:** ADR-010 (Environment as First-Class Object), ADR-003 (WASM Strategy), ADR-002 (Runtime Model)
+**Affected ADR:** `UNVERIFIED` — cited ADR-010 (Environment as First-Class Object), ADR-003 (WASM Strategy), ADR-002 (Runtime Model); none exist in this repository. Related but not equivalent: [ADR-0001](../../../ADR/0001-typescript-canonical-language.md) carries the runtime-surface reach argument (*"local desktop, browser, Node, edge/worker runtimes"*) that makes browser-as-first-class a real constraint, so the tension below survives the loss of its cited ADRs. See the [provenance note](README.md#citation-provenance)
 
 ## Current Decision
 
